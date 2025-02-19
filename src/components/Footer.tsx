@@ -4,7 +4,7 @@ function Footer() {
     {/* ############################
     #             FOOTER           #
     ############################ */}
-      <footer>
+      <footer className="bg-dark text-light">
             <div className="row">
                 <div className="col-3">
                     <p>© 2025 CurRentCar, Inc. <br />

@@ -11,7 +11,7 @@ function Reg() {
         ############################ */}
       <form action="/register">
         <div className="form">
-          <div className="form-box">
+          <div className="form-box bg-green">
             <h1>Regisztráció</h1>
 
 
@@ -54,7 +54,7 @@ function Reg() {
             {/* SUBMIT GOMB */}
             <button type="submit" onClick={register()} className="btn btn-dark mt-4 w-100">Regisztráció</button>
 
-            <p className="text-center text-light mt-4">Ha már regisztrált akkor <a href="/login" className="text-info">jelentkezzen be!</a></p>
+            <p className="text-center text-light mt-4">Ha már regisztrált akkor <a href="/login" className="login-button">jelentkezzen be!</a></p>
           </div>
         </div>
       </form>

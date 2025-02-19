@@ -11,7 +11,7 @@ function Login() {
         ############################ */}
       <form action="/login">
         <div className="form">
-          <div className="form-box">
+          <div className="form-box bg-green">
             <h1>Bejelentkezés</h1>
 
 
@@ -29,7 +29,7 @@ function Login() {
 
             {/* SUBMIT GOMB */}
             <button type="submit" onClick={login()} className="btn btn-dark mt-4 w-100">Bejelentkezés</button>
-            <p className="text-center text-light mt-4">Ha még nem jelentkezett be akkor <a href="/register" className="text-info">regisztráljon!</a></p>
+            <p className="text-center text-light mt-4">Ha még nem jelentkezett be akkor <a href="/register" className="login-button">regisztráljon!</a></p>
           </div>
         </div>
       </form>

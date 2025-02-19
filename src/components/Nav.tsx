@@ -28,7 +28,7 @@ function Nav() {
                     <a className="nav-link active" aria-current="page" href="/kovetelmenyek">Követelmények</a>
                 </li>
                 </ul>
-                <div className="me-5 second-nav">
+                <div className="me-5 second-nav d-flex justify-content-start">
                     <button className="btn" type="button" id="lang">HU</button>
                     <a href="/register" className="btn">Regisztráció</a>
                 </div>
