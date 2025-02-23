@@ -31,9 +31,11 @@ function Reg() {
   }, [user, loading, navigate]);
 
   return (
+    <>
+    <main>
     <form onSubmit={handleSubmit}>
       <div className="form">
-        <div className="form-box bg-green">
+        <div className="form-box bg-dark text-light">
           <h1>Regisztráció</h1>
 
           {/* FELHASZNÁLÓNÉV */}
@@ -46,7 +48,7 @@ function Reg() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="form-control"
-              placeholder="pl.: Nagy Sándor"
+              placeholder="Mi a neve?"
               required
             />
           </div>
@@ -61,7 +63,7 @@ function Reg() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
-              placeholder="Jelszó"
+              placeholder="Adja meg a jelszavát!"
               required
             />
           </div>
@@ -76,7 +78,7 @@ function Reg() {
               value={passwordAgain}
               onChange={(e) => setPasswordAgain(e.target.value)}
               className="form-control"
-              placeholder="Jelszó"
+              placeholder="Adja meg újra a jelszavát!"
               required
             />
           </div>
@@ -91,7 +93,7 @@ function Reg() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              placeholder="pl.: pelda@domain.hu"
+              placeholder="pelda@domain.hu"
               required
             />
           </div>
@@ -111,7 +113,7 @@ function Reg() {
           </div>
 
           {/* SUBMIT GOMB */}
-          <button type="submit" className="btn btn-dark mt-4 w-100" disabled={loading}>
+          <button type="submit" className="btn btn-success mt-5 w-100" disabled={loading}>
             {loading ? "Regisztráció..." : "Regisztráció"}
           </button>
 
@@ -123,6 +125,8 @@ function Reg() {
         </div>
       </div>
     </form>
+    </main>
+    </>
   );
 }
 

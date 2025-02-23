@@ -56,7 +56,9 @@
     }
 
     footer {
-        text-align: center;
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
     }
 
     footer .col-3 {
@@ -67,6 +69,16 @@
     .second-nav {
         margin-left: -13px;
     }
+
+    .data-list, .data-list p, .data-list a{
+        width: fit-content;
+        padding: 0 2rem;
+    }
+
+    .profile-nav {
+        display: none;
+    }
+
     }
 
     @media (max-width: 576px) {
@@ -89,5 +101,8 @@
         font-size: 1.2rem;
         background-color: rgba(0, 0, 0, 0) !important;
         border: none !important;
+    }
+    .data-list, .data-list p, .data-list a{
+        padding: 0 0.3rem;
     }
 }

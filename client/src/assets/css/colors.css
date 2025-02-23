@@ -1,18 +1,23 @@
 /* Szöveg szín   */
 .text-dark {
-    color: #3C3D37;
+    color: #3C3D37 !important;
+}
+
+.off-link .text-dark:hover {
+    color: #51534b;
 }
 
 .text-blue {
-    color: #C5D3E8;
-}
-
-.text-light {
-    color: #fff;
+    color: #C5D3E8 !important;
 }
 
 .text-gray {
     color: #dddddd;
+}
+
+.off-link .text-light:hover {
+    color: #c4c4c4;
+    transition: 300ms;
 }
 
 footer a {
@@ -34,22 +39,20 @@ footer a:hover {
     color:rgb(33, 170, 221);
 }
 
-
+.off-link {
+    text-decoration: none;
+    color: inherit;
+}
 
 
 /* Háttér szín */
 .bg-dark {
-    background-color: #1E201E;
+    background-color: #1E201E !important;
 }
 
 .bg-green {
     background-color: #697565;
 }
-
-.bg-light {
-    background-color: #fff;
-}
-
 
 /* Egyéb */
 .shadow {

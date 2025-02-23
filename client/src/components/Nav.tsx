@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
+import profil from "../assets/img/profile.jpg";
 
 function Nav() {
     const { user } = useUser();
@@ -34,7 +35,7 @@ function Nav() {
                             <button className="btn" type="button" id="lang">HU</button>
                             {
                                 user && user.id ?
-                                    <a onClick={() => navigate('/profil')} className="btn">{user.username}</a>
+                                    <a onClick={() => navigate('/profil')} className="btn off-link text-light">{user.username}<img src={profil} alt="" className='profile profile-nav' /></a>
                                     :
                                     <a onClick={() => navigate('/register')} className="btn">Regisztráció</a>
                             }
