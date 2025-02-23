@@ -12,7 +12,8 @@ export interface IDBConnection {
 }
 
 class DB implements IDBConnection {
-  private pool: mysql.Pool;
+  private static instance: DB;
+  public pool: mysql.Pool;
 
   constructor() {
     this.pool = mysql.createPool({
@@ -23,8 +24,15 @@ class DB implements IDBConnection {
     });
   }
 
-  async query<T = unknown>(sql: string, options?: unknown): Promise<T[]> {
-    const [rows] = await this.pool.execute(sql, options);
+  static getInstance(): DB {
+    if (!DB.instance) {
+      DB.instance = new DB();
+    }
+    return DB.instance;
+  }
+
+  async query<T = unknown>(sql: string, options: any[] = []): Promise<T[]> {
+    const [rows] = await this.pool.execute<mysql.RowDataPacket[]>(sql, options);
     return rows as T[];
   }
 
@@ -33,7 +41,7 @@ class DB implements IDBConnection {
   }
 }
 
-const db = new DB();
+const db = DB.getInstance();
 export default db;
 
 // pool.getConnection()

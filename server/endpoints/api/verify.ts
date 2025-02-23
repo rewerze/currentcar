@@ -24,11 +24,10 @@ export const verifyHandler = async (
 
     const [user] = await db.query<
       { id: number; email: string; username: string }[]
-    >("SELECT * FROM users WHERE id = ? AND email = ? AND username = ?", [
-      id,
-      email,
-      username,
-    ]);
+    >(
+      "SELECT * FROM user WHERE user_id = ? AND user_email = ? AND user_name = ?",
+      [id, email, username]
+    );
 
     if (!user || user.length === 0) {
       res.status(401).json({ error: "Invalid authentication" });
