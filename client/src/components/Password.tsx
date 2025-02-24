@@ -13,17 +13,13 @@ function Password() {
     async function changePassword(e: React.FormEvent) {
         e.preventDefault();
 
-        if (password !== passwordAgain) {
-            alert("A két jelszó nem egyezik!")
-            return;
-        }
 
-        await resetPass(oldPassword, password)
+        await resetPass(oldPassword, password, passwordAgain)
     }
 
     useEffect(() => {
         if (!loading && !user) {
-            navigate('/')
+            navigate('/login')
         }
     }, [user, loading, navigate])
 
@@ -42,7 +38,7 @@ function Password() {
                                 type="password"
                                 name="password"
                                 id="password"
-                                // value={passwordOld}
+                                value={oldPassword}
                                 onChange={(e) => setOldPassword(e.target.value)}
                                 className="form-control w-100"
                                 placeholder="Adja meg a régi jelszavát"
@@ -57,7 +53,7 @@ function Password() {
                                 type="password"
                                 name="password"
                                 id="password"
-                                // value={password}
+                                value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="form-control w-100"
                                 placeholder="Mi legyen az új jelszava?"
@@ -72,7 +68,7 @@ function Password() {
                                 type="password"
                                 name="password-confirmation"
                                 id="password-confirmation"
-                                // value={passwordAgain}
+                                value={passwordAgain}
                                 onChange={(e) => setPasswordAgain(e.target.value)}
                                 className="form-control w-100"
                                 placeholder="Írd be mégegyszer!"

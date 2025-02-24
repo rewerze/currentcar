@@ -25,7 +25,7 @@ export type UserContextType = {
     logout: () => void;
     register: (username: string, password: string, email: string, bornDate: string) => void;
     login: (email: string, password: string) => void;
-    resetPass: (oldPassword: string, newPassword: string) => Promise<void>;
+    resetPass: (oldPassword: string, newPassword: string, passwordAgain: string) => Promise<void>;
     setError: (message: string | null) => void;
 };
 
@@ -109,14 +109,15 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }
 
-    const resetPass = async (oldPassword: string, newPassword: string) => {
+    const resetPass = async (oldPassword: string, newPassword: string, passwordAgain: string) => {
         setLoading(true)
         setError(null)
 
         try {
             const response = await axios.post(buildApiUrl("/auth/reset-password"), {
                 oldPassword,
-                newPassword
+                newPassword,
+                passwordAgain
             }, {
                 withCredentials: true
             })

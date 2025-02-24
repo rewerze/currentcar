@@ -26,7 +26,7 @@ export const loginHandler = async (
     );
 
     if (userRows.length === 0) {
-      res.status(400).json({ error: "Invalid credentials" });
+      res.status(400).json({ error: "Hibás adatok" });
       return;
     }
 
@@ -35,7 +35,7 @@ export const loginHandler = async (
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      res.status(400).json({ error: "Invalid credentials" });
+      res.status(400).json({ error: "Hibás adatok" });
       return;
     }
 
