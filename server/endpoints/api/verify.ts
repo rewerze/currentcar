@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import db from "../../db/connection";
 import jwt from "jsonwebtoken";
+import { User } from "../../interfaces/User";
 
 export const verifyHandler = async (
   req: Request,
@@ -22,23 +23,28 @@ export const verifyHandler = async (
       username: string;
     };
 
-    const [user] = await db.query<
-      { id: number; email: string; username: string }[]
-    >(
+    const userRows = await db.query<User>(
       "SELECT * FROM user WHERE user_id = ? AND user_email = ? AND user_name = ?",
       [id, email, username]
     );
 
-    if (!user || user.length === 0) {
+    if (!userRows || userRows.length === 0) {
       res.status(401).json({ error: "Invalid authentication" });
       return;
     }
 
+    const user = userRows[0];
+
     res.status(200).json({
       user: {
-        id,
-        email,
-        username,
+        id: user.user_id,
+        email: user.user_email,
+        username: user.user_name,
+        born_date: user.born_at,
+        phone_number: user.phone_number,
+        role: user.user_role,
+        jogositvany_szam: user.driver_license_number,
+        jogositvany_lejarat: user.driver_license_expiry,
       },
     });
   } catch (error) {

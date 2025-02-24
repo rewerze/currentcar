@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "../../db/connection";
 import mysql from "mysql2";
+import { User } from "../../interfaces/User";
 
 export const registerHandler = async (
   req: Request,
@@ -16,12 +17,10 @@ export const registerHandler = async (
   }
 
   try {
-    const existingUsers = await db.query<
-      { id: number; email: string; username: string }[]
-    >("SELECT * FROM user WHERE user_email = ? OR user_name = ?", [
-      email,
-      username,
-    ]);
+    const existingUsers = await db.query<User[]>(
+      "SELECT * FROM user WHERE user_email = ? OR user_name = ?",
+      [email, username]
+    );
 
     if (existingUsers.length > 0) {
       res.status(400).json({ error: "Email or username is already taken" });
@@ -45,9 +44,34 @@ export const registerHandler = async (
 
     const id = result.insertId;
 
-    const token = jwt.sign({ id, email, username }, process.env.SECRET_KEY!, {
-      expiresIn: "24h",
-    });
+    const userRows = await db.query<User>(
+      "SELECT * FROM user WHERE user_email = ?",
+      [email]
+    );
+
+    if (userRows.length === 0) {
+      res.status(400).json({ error: "Invalid credentials" });
+      return;
+    }
+
+    const user = userRows[0];
+
+    const token = jwt.sign(
+      {
+        id: user.user_id,
+        email: user.user_email,
+        username: user.user_name,
+        born_date: user.born_at,
+        phone_number: user.phone_number,
+        role: user.user_role,
+        jogositvany_szam: user.driver_license_number,
+        jogositvany_lejarat: user.driver_license_expiry,
+      },
+      process.env.SECRET_KEY!,
+      {
+        expiresIn: "24h",
+      }
+    );
 
     res.cookie("auth_token", token, {
       domain: process.env.NODE_ENV === "production" ? "beniary.com" : "",
@@ -59,9 +83,14 @@ export const registerHandler = async (
 
     res.status(200).json({
       user: {
-        id,
-        email,
-        username,
+        id: user.user_id,
+        email: user.user_email,
+        username: user.user_name,
+        born_date: user.born_at,
+        phone_number: user.phone_number,
+        role: user.user_role,
+        jogositvany_szam: user.driver_license_number,
+        jogositvany_lejarat: user.driver_license_expiry,
       },
       token,
     });
