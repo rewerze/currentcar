@@ -15,9 +15,9 @@
     color: #dddddd;
 }
 
-.off-link .text-light:hover {
-    color: #c4c4c4;
-    transition: 300ms;
+.off-link a:hover, .off-link .btn:hover {
+    color: #b1b1b1 !important;
+    transition: 450ms;
 }
 
 footer a {
@@ -26,6 +26,7 @@ footer a {
 
 footer a:hover {
     color: #c0c0c0;
+    transition: 450ms;
 }
 
 .login-button {
@@ -42,6 +43,11 @@ footer a:hover {
 .off-link {
     text-decoration: none;
     color: inherit;
+}
+
+.btn {
+    --bs-border-width: "0px";
+    --bs-btn-border-width: var(--bs-border-width);
 }
 
 

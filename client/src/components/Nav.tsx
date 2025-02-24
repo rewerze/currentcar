@@ -31,11 +31,11 @@ function Nav() {
                                 <a className="nav-link active" aria-current="page" href="/kovetelmenyek">Követelmények</a>
                             </li>
                         </ul>
-                        <div className="me-5 second-nav d-flex justify-content-start">
-                            <button className="btn" type="button" id="lang">HU</button>
+                        <div className="me-5 second-nav d-flex justify-content-start off-link">
+                            <button className="btn text-light" type="button" id="lang">HU</button>
                             {
                                 user && user.id ?
-                                    <a onClick={() => navigate('/profil')} className="btn off-link text-light">{user.username}<img src={profil} alt="" className='profile profile-nav' /></a>
+                                    <a onClick={() => navigate('/profil')} className="btn text-light">{user.username}<img src={profil} alt="" className='profile profile-nav' /></a>
                                     :
                                     <a onClick={() => navigate('/register')} className="btn">Regisztráció</a>
                             }
