@@ -9,6 +9,7 @@ import { verifyHandler } from "./endpoints/api/verify";
 import { loginHandler } from "./endpoints/api/login";
 import { verifyAuthTokenMiddleware } from "./middlewares/authToken";
 import { logoutHandler } from "./endpoints/api/logout";
+import { resetPasswordHandler } from "./endpoints/api/reset-password";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -43,6 +44,7 @@ app.get("/", (req, res) => {
 app.post("/api/auth/register", [limiter], registerHandler);
 app.post("/api/auth/login", [limiter], loginHandler);
 app.post("/api/auth/logout", [verifyAuthTokenMiddleware], logoutHandler);
+app.post("/api/auth/reset-password", [limiter, verifyAuthTokenMiddleware], resetPasswordHandler)
 
 app.get("/api/auth/verify", verifyHandler);
 

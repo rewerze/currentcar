@@ -1,18 +1,36 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useUser } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Password() {
+    const { resetPass, loading, error, user } = useUser();
+    const [oldPassword, setOldPassword] = useState("");
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
+    const navigate = useNavigate();
 
-    function changePassword() {
-        // implementation majd később
+    async function changePassword(e: React.FormEvent) {
+        e.preventDefault();
+
+        if (password !== passwordAgain) {
+            alert("A két jelszó nem egyezik!")
+            return;
+        }
+
+        await resetPass(oldPassword, password)
     }
+
+    useEffect(() => {
+        if (!loading && !user) {
+            navigate('/')
+        }
+    }, [user, loading, navigate])
 
     return (
         <>
             <main>
-                <form action="/jelszo-modositas" className="form">
+                <form onSubmit={changePassword} className="form">
                     <div className="form-box bg-dark text-light">
                         <h1>Jelszó módosítás</h1>
                         <hr />
@@ -25,7 +43,7 @@ function Password() {
                                 name="password"
                                 id="password"
                                 // value={passwordOld}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setOldPassword(e.target.value)}
                                 className="form-control w-100"
                                 placeholder="Adja meg a régi jelszavát"
                                 required
@@ -66,6 +84,7 @@ function Password() {
                             <button className="btn btn-warning w-100 mt-5" type="submit">Jelszó módosítása</button>
                             <a className="btn btn-danger w-100 mt-5" href="/profil">Mégse</a>
                         </div>
+                        {error && <p className="text-danger text-center mt-2">{error}</p>}
                     </div>
                 </form>
             </main>

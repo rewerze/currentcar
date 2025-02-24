@@ -25,6 +25,8 @@ export type UserContextType = {
     logout: () => void;
     register: (username: string, password: string, email: string, bornDate: string) => void;
     login: (email: string, password: string) => void;
+    resetPass: (oldPassword: string, newPassword: string) => Promise<void>;
+    setError: (message: string | null) => void;
 };
 
 const buildApiUrl = (endpoint: string) => {
@@ -103,13 +105,34 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUser(response.data.user)
         } catch (err: any) {
             setLoading(false)
-            setError(err.response?.data?.message || "Login failed. Please try again.")
+            setError(err.response?.data?.error || "Login failed. Please try again.")
+        }
+    }
+
+    const resetPass = async (oldPassword: string, newPassword: string) => {
+        setLoading(true)
+        setError(null)
+
+        try {
+            const response = await axios.post(buildApiUrl("/auth/reset-password"), {
+                oldPassword,
+                newPassword
+            }, {
+                withCredentials: true
+            })
+
+            setLoading(false)
+            setUser(response.data.user)
+            await logout()
+        } catch (err: any) {
+            setLoading(false)
+            setError(err.response?.data?.error || "Password reset failed. Please try again.")
         }
     }
 
 
     return (
-        <UserContext.Provider value={{ user, loading, error, setUser, logout, register, login }}>
+        <UserContext.Provider value={{ user, loading, error, setUser, logout, register, login, resetPass, setError }}>
             {children}
         </UserContext.Provider>
     );
