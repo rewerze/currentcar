@@ -35,9 +35,9 @@ function Profile() {
                                 <a className='mt-2 text-light' href="/profil-kep-csere"><b>Profilkép csere</b></a>
                             </div>
                             <div className="col data-list end">
-                                <p>{user?.username}</p>
-                                <p>{user?.email}</p>
-                                <p>N/a</p>
+                                <p>{user?.user_name}</p>
+                                <p>{user?.user_email}</p>
+                                <p>{user?.born_at}</p>
                                 <p>N/a</p>
                                 <p>N/a</p>
                                 <p>N/a</p>

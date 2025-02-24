@@ -71,7 +71,7 @@
     }
 
     .data-list, .data-list p, .data-list a{
-        width: fit-content;
+        width: max-content;
         padding: 0 2rem;
     }
 
