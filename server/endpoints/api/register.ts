@@ -27,7 +27,6 @@ export const registerHandler = async (
       return;
     }
 
-    console.log("Hashing " + password);
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const formattedDate = new Date(bornDate)
