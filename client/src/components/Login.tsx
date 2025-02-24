@@ -30,12 +30,13 @@ function Login() {
           <div className="form">
             <div className="form-box bg-dark text-light">
               <h1>Bejelentkezés</h1>
+              <hr />
 
 
               {/* EMAIL CÍM */}
               <div className="form-content mt-2">
                 <label htmlFor="email" className="form-label">Email cím:</label>
-                <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="pelda@domain.hu" />
+                <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Adj meg az email címét!" />
               </div>
 
               {/* JELSZÓ */}

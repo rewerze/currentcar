@@ -37,6 +37,7 @@ function Reg() {
           <div className="form">
             <div className="form-box bg-dark text-light">
               <h1>Regisztráció</h1>
+              <hr />
 
               {/* FELHASZNÁLÓNÉV */}
               <div className="form-content mt-2">
@@ -93,7 +94,7 @@ function Reg() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="form-control"
-                  placeholder="pelda@domain.hu"
+                  placeholder="Adj meg az email címét!"
                   required
                 />
               </div>
