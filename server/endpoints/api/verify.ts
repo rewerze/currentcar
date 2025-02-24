@@ -41,7 +41,7 @@ export const verifyHandler = async (
         email: user.user_email,
         username: user.user_name,
         born_date: user.born_at,
-        phone_number: user.phone_number,
+        phone_number: user.u_phone_number,
         role: user.user_role,
         jogositvany_szam: user.driver_license_number,
         jogositvany_lejarat: user.driver_license_expiry,

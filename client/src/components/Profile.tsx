@@ -33,13 +33,13 @@ function Profile() {
                                 <a className='mt-2 text-light' href="/profil-kep-csere"><b>Profilkép csere</b></a>
                             </div>
                             <div className="col data-list end">
-                                <p>{user?.username}</p>
-                                <p>{user?.email}</p>
-                                <p>{user?.born_date ? new Date(user.born_date).toLocaleString('hu-HU') : 'N/a'}</p>
-                                <p>N/a</p>
-                                <p>N/a</p>
-                                <p>N/a</p>
-                                <p>N/a</p>
+                                <p>{user?.username ? new String(user.username) : "N/a"}</p>
+                                <p>{user?.email ? new String(user.email) : "N/a"}</p>
+                                <p>{user?.born_date ? new Date(user.born_date).toLocaleString('hu-HU') : "N/a"}</p>
+                                <p>{user?.phone_number ? new String(user.phone_number) : "N/a"}</p>
+                                <p>{user?.role == "user" ? "Felhasználó" : "Admin"}</p>
+                                <p>{user?.jogositvany_szam ? new String(user.jogositvany_szam) : "N/a"}</p>
+                                <p>{user?.jogositvany_lejarat ? new Date(user.jogositvany_lejarat).toLocaleString('hu-HU') : "N/a"}</p>
                             </div>
                         </div>
 

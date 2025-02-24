@@ -13,7 +13,8 @@ export type User = {
     born_date: string;
     role: UserRole;
     jogositvany_szam: string;
-    jogositvyany_lejarat: number;
+    jogositvany_lejarat: number;
+    phone_number: string;
 };
 
 export type UserContextType = {
