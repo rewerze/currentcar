@@ -28,7 +28,7 @@ input::placeholder {
 font-size: large;
 }
 
-label {
+.form-box label {
 font-size: 120%;
 }
 
@@ -200,4 +200,11 @@ color: #dddddd;
     flex-direction: column;
     justify-content: start;
     align-items: end;
+}
+
+.search {
+    border: 1px solid black;
+    margin: auto 15rem;
+    padding: 2rem;
+    border-radius: 15px;
 }

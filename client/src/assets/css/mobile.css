@@ -79,6 +79,20 @@
         display: none;
     }
 
+    .search {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .search div {
+        display: flex;
+        flex-direction: column;
+        width: 95% !important;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
     }
 
     @media (max-width: 576px) {

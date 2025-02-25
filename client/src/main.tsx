@@ -10,6 +10,7 @@ import { UserProvider } from './contexts/UserContext.tsx'
 import Logout from './components/Logout.tsx'
 import Profil from './components/Profile.tsx'
 import Password from './components/Password.tsx'
+import AllCar from './components/AllCar.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,12 +18,13 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path='/' element={<App />} />
-          <Route path="/register" element={<Reg />} />
-          <Route path="/login" element={<Login />} />
-          <Route path='/logout' element={<Logout />} />
-          <Route path='/profil' element={<Profil />} />
-          <Route path='/jelszo-modositas' element={<Password />} />
+          <Route path='/' element={<App />} />                       {/* FŐOLDAL */}
+          <Route path="/register" element={<Reg />} />               {/*  REGISZTRÁCIÓ */}
+          <Route path="/login" element={<Login />} />                {/*  BEJELENTKEZÉS */}
+          <Route path='/logout' element={<Logout />} />              {/*  KIJELENTKEZÉS */}
+          <Route path='/profil' element={<Profil />} />              {/*  FELHASZNÁLÓ PROFILJA */}
+          <Route path='/jelszo-modositas' element={<Password />} />  {/*  JELSZÓ MÓDOSÍTÁS */}
+          <Route path='/osszesauto' element={<AllCar />} />          {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
         </Routes>
         <Footer />
       </BrowserRouter>
