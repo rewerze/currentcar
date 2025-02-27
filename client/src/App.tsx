@@ -59,24 +59,24 @@ function App() {
         <section id="nepszeru">
             <h1 className="right">Legnépszerűbb autóink</h1>
             <div className="row d-flex justify-content-center">
-                <div className="col col-md-4 autok bg-green">
-                    <a href="/adatlap" className="text-dark">
+                <div className="col col-md-4 autok bg-dark">
+                    <a href="/adatlap" className='off-link'>
                         <p><img src={nepszeru} alt="" /></p>
                         <hr />
                         <h2>XYZ autó</h2>
                         <p>További információkért kattints a képre</p>
                     </a>
                 </div>
-                <div className="col col-md-4 autok bg-green">
-                    <a href="/adatlap" className="text-dark">
+                <div className="col col-md-4 autok bg-dark">
+                    <a href="/adatlap" className='off-link'>
                         <p><img src={nepszeru} alt="" /></p>
                         <hr />
                         <h2>XYZ autó</h2>
                         <p>További információkért kattints a képre</p>
                     </a>
                 </div>
-                <div className="col col-md-4 autok bg-green">
-                    <a href="/adatlap" className="text-dark">
+                <div className="col col-md-4 autok bg-dark">
+                    <a href="/adatlap" className='off-link'>
                       <p><img src={nepszeru} alt="" /></p>
                       <hr />
                       <h2>XYZ autó</h2>

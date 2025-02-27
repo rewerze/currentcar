@@ -54,10 +54,7 @@ footer a:hover {
 /* Háttér szín */
 .bg-dark {
     background-color: #1E201E !important;
-}
-
-.bg-green {
-    background-color: #697565;
+    color: #fff;
 }
 
 /* Egyéb */

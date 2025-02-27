@@ -208,3 +208,21 @@ color: #dddddd;
     padding: 2rem;
     border-radius: 15px;
 }
+
+.cars {
+    margin: auto 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.car-box {
+    width: 20%;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+.car-image {
+    width: 50%;
+}
