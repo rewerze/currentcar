@@ -80,6 +80,7 @@ function AllCar() {
 
         <div className="cars mt-5">
             <div className="car-box bg-dark">
+                <a href="/adatlap" className="off-link">
                 <div>
                     <p className="text-center">
                         <img src={car} alt="car" className="car-image"/>
@@ -89,83 +90,7 @@ function AllCar() {
                     <h3>Car name</h3>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                 </div>
-            </div>
-            <div className="car-box bg-dark">
-                <div>
-                    <p className="text-center">
-                        <img src={car} alt="car" className="car-image"/>
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h3>Car name</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-            </div>
-            <div className="car-box bg-dark">
-                <div>
-                    <p className="text-center">
-                        <img src={car} alt="car" className="car-image"/>
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h3>Car name</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-            </div>
-            <div className="car-box bg-dark">
-                <div>
-                    <p className="text-center">
-                        <img src={car} alt="car" className="car-image"/>
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h3>Car name</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-            </div>
-            <div className="car-box bg-dark">
-                <div>
-                    <p className="text-center">
-                        <img src={car} alt="car" className="car-image"/>
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h3>Car name</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-            </div>
-            <div className="car-box bg-dark">
-                <div>
-                    <p className="text-center">
-                        <img src={car} alt="car" className="car-image"/>
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h3>Car name</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-            </div>
-            <div className="car-box bg-dark">
-                <div>
-                    <p className="text-center">
-                        <img src={car} alt="car" className="car-image"/>
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h3>Car name</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-            </div>
-            <div className="car-box bg-dark">
-                <div>
-                    <p className="text-center">
-                        <img src={car} alt="car" className="car-image"/>
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h3>Car name</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
+                </a>
             </div>
         </div>
 

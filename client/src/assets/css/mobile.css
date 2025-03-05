@@ -101,6 +101,14 @@
         width: 100%;
     }
 
+    .col-md h2 {
+        margin-top: 1rem;
+    }
+
+    th {
+        width: 50%;
+    }
+
     }
 
     @media (max-width: 576px) {

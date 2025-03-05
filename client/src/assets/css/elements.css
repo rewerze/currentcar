@@ -226,3 +226,25 @@ color: #dddddd;
 .car-image {
     width: 50%;
 }
+
+.adatlap-table, tr, td {
+    border: solid 1px black;
+    width: 80%;
+}
+
+.adatlap-table, td, th {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.adatlap-table td {
+    text-align: justify;
+}
+
+.adatlap-table th {
+    width: 25%;
+}
+
+.adatlap-table-alatt button{
+    width: 80%;
+}
