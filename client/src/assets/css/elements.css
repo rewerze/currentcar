@@ -235,6 +235,8 @@ color: #dddddd;
 .adatlap-table, td, th {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
 }
 
 .adatlap-table td {
@@ -247,4 +249,8 @@ color: #dddddd;
 
 .adatlap-table-alatt button{
     width: 80%;
+}
+
+main {
+    overflow-x:hidden;
 }

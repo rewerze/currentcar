@@ -5,10 +5,10 @@ function CarData() {
         <>
         <main className="nav-gap">
             <div className="row">
-                <div className="col-md">
+                <div className="col-lg-5">
                     <img src={car} alt="" className="w-100" />
                 </div>
-                <div className="col-md">
+                <div className="col-lg-7">
                     <h2 className="text-center display-5">Tulajdonságai</h2>
                     <div className="d-flex justify-content-center">
                         <table className="table adatlap-table">

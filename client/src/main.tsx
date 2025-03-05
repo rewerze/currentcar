@@ -12,6 +12,7 @@ import Profil from './components/Profile.tsx'
 import Password from './components/Password.tsx'
 import AllCar from './components/AllCar.tsx'
 import CarData from './components/CarData.tsx'
+import CarUpload from './components/CarUpload.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -26,7 +27,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path='/profil' element={<Profil />} />              {/*  FELHASZNÁLÓ PROFILJA */}
           <Route path='/jelszo-modositas' element={<Password />} />  {/*  JELSZÓ MÓDOSÍTÁS */}
           <Route path='/osszesauto' element={<AllCar />} />          {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
-          <Route path='/adatlap' element={<CarData />} />          {/*  AUTÓK ADATLAPJAI */}
+          <Route path='/adatlap' element={<CarData />} />            {/*  AUTÓK ADATLAPJAI */}
+          <Route path='/auto-feltoltes' element={<CarUpload />} />   {/*  AUTÓ FELTÖLTÉS */}
         </Routes>
         <Footer />
       </BrowserRouter>
