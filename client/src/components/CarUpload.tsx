@@ -50,6 +50,10 @@ function CarUpload() {
                         </div>
 
                         <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                            <input type="file" name="car_picture" id="formFileMultiple" className="form-control form-control-lg" multiple />
+                        </div>
+
+                        <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                             <textarea name="description" id="description" placeholder="Leírás az autóhoz!" className="form-control" rows={10}></textarea>
                         </div>
 
