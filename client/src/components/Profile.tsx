@@ -35,7 +35,7 @@ function Profile() {
                             <div className="col data-list end">
                                 <p>{user?.username ? new String(user.username) : "N/a"}</p>
                                 <p>{user?.email ? new String(user.email) : "N/a"}</p>
-                                <p>{user?.born_date ? new Date(user.born_date).toLocaleString('hu-HU') : "N/a"}</p>
+                                <p>{user?.born_date ? new Date(user.born_date).toLocaleString('hu-HU', {year: "numeric", month: 'numeric', day:'numeric'}) : "N/a"}</p>
                                 <p>{user?.phone_number ? new String(user.phone_number) : "N/a"}</p>
                                 <p>{user?.role == "user" ? "Felhasználó" : "Admin"}</p>
                                 <p>{user?.jogositvany_szam ? new String(user.jogositvany_szam) : "N/a"}</p>
@@ -44,10 +44,10 @@ function Profile() {
                         </div>
 
                         <div className='d-flex justify-content-center gap-3 mt-5'>
-                            {/* <a href="/profil-modositas" className='btn btn-primary'>Adatok módosítása</a> */}
+                            <a href="profil/modositas" className='btn btn-primary'>Adatok módosítása</a>
                             <a href="/logout" className='btn btn-light text-center'>Kijelentkezés</a>
                             <a href="/jelszo-modositas" className='btn btn-warning'>Jelszó módosítás</a>
-                            <a href="/profil-torles" className='btn btn-danger'>Profil törlés</a>
+                            <a href="/profil/torles" className='btn btn-danger'>Profil törlés</a>
                         </div>
                     </div>
                 </div>

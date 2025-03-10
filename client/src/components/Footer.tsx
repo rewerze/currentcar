@@ -22,7 +22,7 @@ function Footer() {
                     <a href="/berles">Autó bérlés</a>
                     <a href="/feladas">Autó feladása</a>
                     <a href="/biztonsag">Biztonság</a>
-                    <a href="/faq">Gyakori kérdések</a>
+                    <a href="/gyik">Gyakori kérdések</a>
                 </div>
                 <div className="col-3">
                     <p><b>Vedd fel velünk a kapcsolatot</b></p>
