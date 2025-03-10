@@ -27,7 +27,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='/profil' element={<Profil />} />              {/*  FELHASZNÁLÓ PROFILJA */}
           <Route path='/jelszo-modositas' element={<Password />} />  {/*  JELSZÓ MÓDOSÍTÁS */}
           <Route path='/osszesauto' element={<AllCar />} />          {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
-          <Route path='/adatlap' element={<CarData />} />            {/*  AUTÓK ADATLAPJAI */}
+          <Route path='/adatlap/:id' element={<CarData />} />            {/*  AUTÓK ADATLAPJAI */}
           <Route path='/auto-feltoltes' element={<CarUpload />} />   {/*  AUTÓ FELTÖLTÉS */}
         </Routes>
         <Footer />
