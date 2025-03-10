@@ -30,7 +30,7 @@ function Profile() {
                                 <p><b>Hozzáférésed: </b></p>
                                 <p><b>Jogosítvány szám: </b></p>
                                 <p><b>Jogosítvány lejárati dátuma: </b></p>
-                                <a className='mt-2 text-light' href="/profil-kep-csere"><b>Profilkép csere</b></a>
+                                <a className='mt-2 text-light' href="/profil/kepcsere"><b>Profilkép csere</b></a>
                             </div>
                             <div className="col data-list end">
                                 <p>{user?.username ? new String(user.username) : "N/a"}</p>
