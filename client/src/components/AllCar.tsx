@@ -128,7 +128,7 @@ function AllCar() {
             <div className="search">
 
                 {/* KERESÉS */}
-                <div className="d-flex justify-content-center mb-3 mx-auto">
+                <div className="d-flex justify-content-center mb-3 mx-auto gap-3">
                     <input 
                         type="text" 
                         id="search-box" 
@@ -138,6 +138,7 @@ function AllCar() {
                         value={filters.search}
                         onChange={handleSearchChange}
                     />
+                    <button className='btn btn-danger'>Szűrés törlése</button>
                 </div>
 
                 {/* SZŰRÉS */}
