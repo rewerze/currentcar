@@ -32,7 +32,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/login" element={<Login />} />                     {/*  BEJELENTKEZÉS */}
           <Route path='/logout' element={<Logout />} />                   {/*  KIJELENTKEZÉS */}
           <Route path='/profil' element={<Profil />} />                   {/*  FELHASZNÁLÓ PROFILJA */}
-          <Route path='/jelszo-modositas' element={<Password />} />       {/*  JELSZÓ MÓDOSÍTÁS */}
+          <Route path='/profil/jelszo-modositas' element={<Password />} />       {/*  JELSZÓ MÓDOSÍTÁS */}
           <Route path='/osszesauto' element={<AllCar />} />               {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
           <Route path='/adatlap' element={<CarData />} />                 {/*  AUTÓK ADATLAPJAI */}
           <Route path='/feladas' element={<CarUpload />} />               {/*  AUTÓ FELTÖLTÉS */}
