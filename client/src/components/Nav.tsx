@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import profil from "../assets/img/profile.jpg";
+import brand from "../assets/img/brand.png"
 
 function Nav() {
     const { user } = useUser();
@@ -10,11 +11,11 @@ function Nav() {
     return (
         <>
             {/* ############################
-        #            NAVBAR            #
-        ############################ */}
+            #            NAVBAR            #
+            ############################ */}
             <nav className="navbar navbar-expand-lg bg-body-tertiary w-100" data-bs-theme="dark">
                 <div className="container-fluid mx-5">
-                    <a href="/" className="navbar-brand">CurRentCar</a>
+                    <a href="/" className="navbar-brand"><img src={brand} alt="" className="brand-img" /> CurRentCar</a>
 
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

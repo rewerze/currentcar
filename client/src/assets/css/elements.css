@@ -254,3 +254,8 @@ color: #dddddd;
 main {
     overflow-x:hidden;
 }
+
+.brand-img {
+    width: 35px;
+    height: 100%;
+}
