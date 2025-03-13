@@ -13,7 +13,7 @@ function Nav() {
             {/* ############################
             #            NAVBAR            #
             ############################ */}
-            <nav className="navbar navbar-expand-lg bg-body-tertiary w-100" data-bs-theme="dark">
+            <nav className="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark">
                 <div className="container-fluid mx-5">
                     <a href="/" className="navbar-brand"><img src={brand} alt="" className="brand-img" /> CurRentCar</a>
 
