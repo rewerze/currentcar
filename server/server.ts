@@ -12,6 +12,7 @@ import { logoutHandler } from "./endpoints/api/logout";
 import { resetPasswordHandler } from "./endpoints/api/reset-password";
 import { carsHandler } from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
+import { carHandler } from "./endpoints/api/getCar";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -46,9 +47,14 @@ app.get("/", (req, res) => {
 app.post("/api/auth/register", [limiter], registerHandler);
 app.post("/api/auth/login", [limiter], loginHandler);
 app.post("/api/auth/logout", [verifyAuthTokenMiddleware], logoutHandler);
-app.post("/api/auth/reset-password", [limiter, verifyAuthTokenMiddleware], resetPasswordHandler)
-app.get("/api/cars", [verifyAuthTokenMiddleware], carsHandler)
-app.get("/api/cars/search", [verifyAuthTokenMiddleware], carsSearchHandler)
+app.post(
+  "/api/auth/reset-password",
+  [limiter, verifyAuthTokenMiddleware],
+  resetPasswordHandler
+);
+app.get("/api/cars", [verifyAuthTokenMiddleware], carsHandler);
+app.get("/api/cars/search", [verifyAuthTokenMiddleware], carsSearchHandler);
+app.get("/api/car", [verifyAuthTokenMiddleware], carHandler);
 
 app.get("/api/auth/verify", verifyHandler);
 
