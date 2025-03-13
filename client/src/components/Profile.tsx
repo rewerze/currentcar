@@ -44,9 +44,9 @@ function Profile() {
                         </div>
 
                         <div className='d-flex justify-content-center gap-3 mt-5'>
-                            <a href="profil/modositas" className='btn btn-primary'>Adatok módosítása</a>
+                            <a href="/profil/modositas" className='btn btn-primary'>Adatok módosítása</a>
                             <a href="/logout" className='btn btn-light text-center'>Kijelentkezés</a>
-                            <a href="/jelszo-modositas" className='btn btn-warning'>Jelszó módosítás</a>
+                            <a href="/profil/jelszo-modositas" className='btn btn-warning'>Jelszó módosítás</a>
                             <a href="/profil/torles" className='btn btn-danger'>Profil törlés</a>
                         </div>
                     </div>
