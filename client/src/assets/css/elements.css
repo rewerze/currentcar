@@ -227,12 +227,15 @@ color: #dddddd;
     width: 50%;
 }
 
-.adatlap-table, tr, td {
-    border: solid 1px black;
+table, td, tr, th {
+    border: solid 1px black
+}
+
+.adatlap-table, .adatlap-table tr,.adatlap-table  td {
     width: 80%;
 }
 
-.adatlap-table, td, th {
+.adatlap-table, .adatlap-table td, .adatlap-table th {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     padding-top: 0.2rem;
