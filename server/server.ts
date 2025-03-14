@@ -52,9 +52,9 @@ app.post(
   [limiter, verifyAuthTokenMiddleware],
   resetPasswordHandler
 );
-app.get("/api/cars", [verifyAuthTokenMiddleware], carsHandler);
-app.get("/api/cars/search", [verifyAuthTokenMiddleware], carsSearchHandler);
-app.get("/api/car", [verifyAuthTokenMiddleware], carHandler);
+app.get("/api/cars", carsHandler);
+app.get("/api/cars/search", carsSearchHandler);
+app.get("/api/car", carHandler);
 
 app.get("/api/auth/verify", verifyHandler);
 

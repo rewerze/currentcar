@@ -6,6 +6,7 @@ import {
 } from "../enums/Car";
 
 export interface CarInfo {
+  image: string;
   car_id: number;
   car_price: string;
   car_active: boolean;

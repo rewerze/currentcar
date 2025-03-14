@@ -3,11 +3,18 @@ import { useUser } from "../contexts/UserContext";
 import profil from "../assets/img/profile.jpg";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect } from "react";
 
 function Nav() {
   const { user } = useUser();
-  const { t } = useLanguage();
+  const { t, loadedNamespaces, loadNamespace } = useLanguage();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loadedNamespaces.includes("navbar")) {
+      loadNamespace("navbar");
+    }
+  }, [loadedNamespaces, loadNamespace]);
 
   return (
     <>
@@ -20,7 +27,7 @@ function Nav() {
       >
         <div className="container-fluid mx-5">
           <a href="/" className="navbar-brand">
-            CurRentCard
+            CurRentCar
           </a>
           <button
             className="navbar-toggler"
@@ -41,7 +48,7 @@ function Nav() {
                   aria-current="page"
                   href="/utiterv"
                 >
-                  Úti terv
+                  {t("itinerary", "navbar")}
                 </a>
               </li>
               <li className="nav-item">
@@ -50,7 +57,7 @@ function Nav() {
                   aria-current="page"
                   href="/osszesauto"
                 >
-                  Összes autó
+                  {t("allcars", "navbar")}
                 </a>
               </li>
               <li className="nav-item">
@@ -59,7 +66,7 @@ function Nav() {
                   aria-current="page"
                   href="/kovetelmenyek"
                 >
-                  Követelmények
+                  {t("requirements", "navbar")}
                 </a>
               </li>
             </ul>
@@ -75,7 +82,7 @@ function Nav() {
                 </a>
               ) : (
                 <a onClick={() => navigate("/register")} className="btn">
-                  Regisztráció
+                  {t("register", "navbar")}
                 </a>
               )}
             </div>

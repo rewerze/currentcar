@@ -56,7 +56,9 @@ function CarData() {
             />
           </div>
           <div className="col-lg-7">
-            <h2 className="text-center display-5">Tulajdonságai</h2>
+            <h2 className="text-center display-5">
+              {t("properties", "CarDetail")}
+            </h2>
             <div className="d-flex justify-content-center">
               <table className="table adatlap-table">
                 <tbody>

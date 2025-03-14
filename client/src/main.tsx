@@ -21,6 +21,7 @@ import Security from "./components/Security.tsx";
 import Requirements from "./components/Requirements.tsx";
 import EditProfile from "./components/EditProfile.tsx";
 import { LanguageProvider } from "./contexts/LanguageContext.tsx";
+import NotFound from "./components/404.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -56,7 +57,7 @@ createRoot(document.getElementById("root")!).render(
             {/*  KÖVETELMENYEK */}
             <Route path="/profil/modositas" element={<EditProfile />} />{" "}
             {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
-            <Route path="*" element={<App />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </BrowserRouter>

@@ -1,0 +1,26 @@
+export const translations = {
+  sedan: "Sedan",
+  suv: "SUV",
+  hatchback: "Hatchback",
+  convertible: "Convertible",
+  coupe: "Coupe",
+  wagon: "Wagon",
+  pickup: "Pickup",
+  minivan: "Minivan",
+
+  new: "New",
+  excellent: "Excellent",
+  good: "Good",
+  fair: "Fair",
+  poor: "Poor",
+
+  petrol: "Petrol",
+  diesel: "Diesel",
+  electric: "Electric",
+  hybrid: "Hybrid",
+  gas: "Gas",
+  automatic: "Automatic",
+  manual: "Manual",
+  "semi-automatic": "Semi-Automatic",
+  CVT: "CVT",
+};
