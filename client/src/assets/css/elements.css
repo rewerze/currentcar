@@ -267,3 +267,7 @@ main {
 .notfound {
     font-size: 70px;
 }
+
+.req-table {
+    width: 50%;
+}
