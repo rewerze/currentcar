@@ -20,9 +20,8 @@ function Nav() {
       >
         <div className="container-fluid mx-5">
           <a href="/" className="navbar-brand">
-            CurRentCar
+            CurRentCard
           </a>
-
           <button
             className="navbar-toggler"
             type="button"

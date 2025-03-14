@@ -28,9 +28,10 @@ function EditProfile() {
                         <input type="text" name="user_name" id="user_name" className="form-control" />
                         
                         <div className="d-flex justify-content-center mt-5 gap-3">
-                            <a href="/profil/kepcsere" className="btn btn-light">Profilkép csere</a>
-                            <button type="submit" className="btn btn-success">Adatok mentése</button>
-                            <a href="/profil/jelszo-modositas" className="btn btn-warning">Jelszó módosítása</a>
+                            <a href="/profil/kepcsere" className="btn btn-light w-25">Profilkép csere</a>
+                            <a href="/profil/jelszo-modositas" className="btn btn-warning w-25">Jelszó módosítása</a>
+                            <button type="submit" className="btn btn-success w-25">Adatok mentése</button>
+                        <a href="./" className="btn btn-danger w-25">Elvetés</a>
                         </div>
                     </div>
                 </form>
