@@ -15,6 +15,10 @@ function EditProfile() {
                         <label htmlFor="user_name" className="form-label mt-3">E-mail cím:</label>
                         <input type="text" name="user_name" id="user_name" className="form-control" />
                         
+                        {/* SZÜLETÉSI DÁTUM */}
+                        <label htmlFor="user_name" className="form-label mt-3">Születési dátum:</label>
+                        <input type="text" name="user_name" id="user_name" className="form-control" disabled value="2005-01-01" />
+                        
                         {/* TELEFONSZÁM */}
                         <label htmlFor="user_name" className="form-label mt-3">Telefonszám:</label>
                         <input type="text" name="user_name" id="user_name" className="form-control" />
@@ -25,6 +29,10 @@ function EditProfile() {
                         
                         {/* Jogosítvány lejárati dátuma */}
                         <label htmlFor="user_name" className="form-label mt-3">Jogosítvány lejárati dátuma:</label>
+                        <input type="text" name="user_name" id="user_name" className="form-control" />
+
+                        {/* IBAN SZÁM */}
+                        <label htmlFor="user_name" className="form-label mt-3">IBAN:</label>
                         <input type="text" name="user_name" id="user_name" className="form-control" />
                         
                         <div className="d-flex justify-content-center mt-5 gap-3">

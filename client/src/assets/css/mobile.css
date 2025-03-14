@@ -24,6 +24,11 @@
 
 
 @media only screen and (max-width: 992px) {
+
+    .req-table {
+        width: 80% !important;
+    }
+
     .form-box {
         width: 100%;
         padding: 1rem;
@@ -158,5 +163,9 @@
 
     .car-box {
         width: 100%;
+    }
+
+    .req-table {
+        width: 100% !important;
     }
 }
