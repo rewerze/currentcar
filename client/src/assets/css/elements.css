@@ -271,3 +271,14 @@ main {
 .req-table {
     width: 50%;
 }
+
+.card {
+    width: 18%;
+}
+
+.car-rent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+}

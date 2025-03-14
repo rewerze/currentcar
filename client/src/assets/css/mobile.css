@@ -19,11 +19,17 @@
     .search input, .search select{
         width: 100% !important;
     }
+
+    .card {
+        width: 30%;
+    }
 }
 
-
-
 @media only screen and (max-width: 992px) {
+
+    .card {
+        width: 80%;
+    }
 
     .req-table {
         width: 80% !important;
@@ -133,6 +139,17 @@
     .upload-form select {        
         padding-top: 0.7rem !important;
         padding-bottom: 0.7rem !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .car-rent {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .card {
+        width: 80%;
     }
 }
 
