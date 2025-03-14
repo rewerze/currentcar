@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     `driver_license_number` varchar(40) NOT NULL,
     `driver_license_expiry` date NOT NULL,
     `profile_picture` varchar(255) NOT NULL,
+    `user_iban` varchar(255) default null,
     PRIMARY KEY (`user_id`)
 );
 
