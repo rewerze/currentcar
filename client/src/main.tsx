@@ -24,6 +24,24 @@ import { LanguageProvider } from "./contexts/LanguageContext.tsx";
 import NotFound from "./components/404.tsx";
 import { Toaster } from "@/components/ui/sonner"
 
+const ToasterWrapper = () => {
+  return (
+    <div style={{ position: 'fixed', bottom: '4rem', right: '1rem', zIndex: 9999, pointerEvents: 'none' }}>
+      <Toaster 
+        theme="light"
+        className="bg-white pointer-events-auto"
+        toastOptions={{
+          className: "bg-white border border-gray-200 shadow-md",
+          style: {
+            background: "white",
+            color: "black",
+          },
+        }} 
+      />
+    </div>
+  );
+};
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <LanguageProvider defaultNamespaces={["common"]}>
@@ -60,16 +78,8 @@ createRoot(document.getElementById("root")!).render(
             {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Toaster theme="light"
-            className="bg-white"
-            toastOptions={{
-              className: "bg-white border border-gray-200 shadow-md",
-              style: {
-                background: "white",
-                color: "black",
-              },
-            }} />
           <Footer />
+          <ToasterWrapper />
         </BrowserRouter>
       </UserProvider>
     </LanguageProvider>
