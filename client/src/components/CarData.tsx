@@ -3,6 +3,7 @@ import carImage from "../assets/img/nepszeru_auto.png";
 import { useParams } from "react-router-dom";
 import { CarInfo } from "./interfaces/Car";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 
 function CarData() {
   const { t, loadNamespace, language, loadedNamespaces } = useLanguage();
@@ -41,7 +42,8 @@ function CarData() {
   }
 
   function onPurchase(): void {
-    throw new Error("Function not implemented.");
+    console.log("asd")
+    toast(t("purchaseSuccess", "CarDetail"))
   }
 
   return (
@@ -123,7 +125,7 @@ function CarData() {
             </div>
             <div className="d-flex justify-content-center adatlap-table-alatt">
               <button className="btn btn-success" onClick={onPurchase}>
-                Vásárlás
+                {t("purchase", "CarDetail")}
               </button>
             </div>
           </div>

@@ -38,6 +38,7 @@ const translations = {
   manual: "manuális",
   "semi-automatic": "félautomata",
   CVT: "fokozatmentes",
+  purchaseSuccess: "Sikeres vásárlás!",
 };
 
 export default translations;

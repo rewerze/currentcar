@@ -38,6 +38,7 @@ const translations = {
   manual: "manual",
   "semi-automatic": "semi-automatic",
   CVT: "continuously variable",
+  purchaseSuccess: "Purchase successful!",
 };
 
 export default translations;

@@ -2,6 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function Reg() {
   const { register, user, loading, error } = useUser();
@@ -13,11 +15,18 @@ function Reg() {
   const [username, setUsername] = useState("");
   const [bornDate, setBornDate] = useState("");
 
+  const { t, loadedNamespaces, loadNamespace } = useLanguage();
+
+  useEffect(() => {
+    if (!loadedNamespaces.includes("auth"))
+      loadNamespace("auth");
+  }, [loadedNamespaces]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password !== passwordAgain) {
-      alert("A két jelszó nem egyezik!");
+      toast("A két jelszó nem egyezik!");
       return;
     }
 
@@ -36,12 +45,12 @@ function Reg() {
         <form onSubmit={handleSubmit}>
           <div className="form">
             <div className="form-box bg-dark text-light">
-              <h1>Regisztráció</h1>
+              <h1>{t('register', 'auth')}</h1>
               <hr />
 
               {/* FELHASZNÁLÓNÉV */}
               <div className="form-content mt-2">
-                <label htmlFor="name" className="form-label">Felhasználónév:</label>
+                <label htmlFor="name" className="form-label">{t('username', 'auth')}:</label>
                 <input
                   type="text"
                   name="name"
@@ -49,14 +58,14 @@ function Reg() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="form-control"
-                  placeholder="Mi a neve?"
+                  placeholder={t('whats_your_name', 'auth')}
                   required
                 />
               </div>
 
               {/* JELSZÓ */}
               <div className="form-content mt-2">
-                <label htmlFor="password" className="form-label">Jelszó:</label>
+                <label htmlFor="password" className="form-label">{t('password', 'auth')}:</label>
                 <input
                   type="password"
                   name="password"
@@ -64,14 +73,14 @@ function Reg() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="form-control"
-                  placeholder="Adja meg a jelszavát!"
+                  placeholder={t('whats_your_password', 'auth')}
                   required
                 />
               </div>
 
               {/* JELSZÓ ISMÉTLÉSE */}
               <div className="form-content mt-2">
-                <label htmlFor="password-confirmation" className="form-label">Jelszó ismétlése:</label>
+                <label htmlFor="password-confirmation" className="form-label">{t('repeat_password', 'auth')}:</label>
                 <input
                   type="password"
                   name="password-confirmation"
@@ -79,14 +88,14 @@ function Reg() {
                   value={passwordAgain}
                   onChange={(e) => setPasswordAgain(e.target.value)}
                   className="form-control"
-                  placeholder="Adja meg újra a jelszavát!"
+                  placeholder={t('repeat_your_password', 'auth')}
                   required
                 />
               </div>
 
               {/* EMAIL CÍM */}
               <div className="form-content mt-2">
-                <label htmlFor="email" className="form-label">Email cím:</label>
+                <label htmlFor="email" className="form-label">{t('email', 'auth')}:</label>
                 <input
                   type="email"
                   name="email"
@@ -94,14 +103,14 @@ function Reg() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="form-control"
-                  placeholder="Adj meg az email címét!"
+                  placeholder={t('whats_your_email', 'auth')}
                   required
                 />
               </div>
 
               {/* SZÜLETÉSI DÁTUM */}
               <div className="form-content mt-2">
-                <label htmlFor="date" className="form-label">Születési dátum:</label>
+                <label htmlFor="date" className="form-label">{t('born_date', 'auth')}:</label>
                 <input
                   type="date"
                   name="date"
@@ -115,13 +124,12 @@ function Reg() {
 
               {/* SUBMIT GOMB */}
               <button type="submit" className="btn btn-success mt-5 w-100" disabled={loading}>
-                {loading ? "Regisztráció..." : "Regisztráció"}
+                {loading ? t('register', 'auth') + "..." : t('register', 'auth')}
               </button>
 
               {error && <p className="text-danger text-center mt-2">{error}</p>}
 
-              <p className="text-center text-light mt-4">
-                Ha már regisztrált, akkor <a href="/login" className="login-button">jelentkezzen be!</a>
+              <p className="text-center text-light mt-4" dangerouslySetInnerHTML={{ __html: t('already_registered', 'auth') }}>
               </p>
             </div>
           </div>

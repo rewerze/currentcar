@@ -1,0 +1,21 @@
+export default {
+    "requirements": "Követelmények",
+    "editData": "Minden adatot a profilodban, az \"Adatok módosítása\" menü pontban kitölthető / módosítható! <a href='/profil/modositas'>Menjünk oda.</a>",
+    data: "Adat",
+    description: "Leírás",
+    priority: "Prioritás",
+    validLicense: "Érvényes jogosítvány",
+    validLicenseDescription: "Szeretnénk biztosítani az utakon közlekedőknek is, a biztonságos vezetés élményét.",
+    validLicensePriority: "NAGYON FONTOS",
+    contact: "Elérhetőség",
+    contactDescription: "E-mail cím és telefonszám minden esetben elérhető kell, hogy legyen számunkra.",
+    contactPriority: "NAGYON FONTOS",
+    iban: "IBAN",
+    ibanDescription: "IBAN száma a pénz utalásához szükséges, ha esetleg Ön töltött fel autót.",
+    ibanPriority: "TERVEZD BE",
+    age: "Életkor",
+    ageDescription: "Az életkorodnak, muszáj betöltenie a 17-et!",
+    agePriority: "NAGYON FONTOS",
+    success: "Ön megfelel minden követelménynek, hogy kölcsönözhessen nálunk!",
+    fail: "Sajnos Ön még nem felel meg, hogy kölcsönözhessen nálunk!"
+}

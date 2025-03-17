@@ -3,13 +3,14 @@ import carDefaultImage from "../assets/img/nepszeru_auto.png";
 import { FilterState } from "./interfaces/FilterState";
 import { CarInfo as Car } from "./interfaces/Car";
 import { useLanguage } from "@/contexts/LanguageContext";
+import translations from "./translations/API";
 
 function AllCar() {
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
 
   useEffect(() => {
-    if (!loadedNamespaces.includes("allcar")) {
-      loadNamespace("allcar");
+    if (!loadedNamespaces.includes("AllCar")) {
+      loadNamespace("AllCar");
     }
   }, [loadedNamespaces, loadNamespace]);
   const [cars, setCars] = useState<Car[]>([]);
@@ -24,6 +25,9 @@ function AllCar() {
     fuel: "Összes",
     year: "Összes",
   });
+  const filterKeys = ["search", "brand", "type", "condition", "transmission", "fuel", "year"] as const;
+  const defaultValues = ["Összes", "All"];
+  type FilterKey = (typeof filterKeys)[number];
 
   const buildApiUrl = (endpoint: string) => {
     const baseUrl =
@@ -31,6 +35,21 @@ function AllCar() {
         ? "http://localhost:3000"
         : window.location.origin;
     return `${baseUrl}/api${endpoint}`;
+  };
+
+  const getTranslatedFilterValue = (category: keyof typeof translations, value: string) => {
+    if (filterKeys.includes(category as FilterKey)) {
+      const key = category as FilterKey;
+      const filterValue = filters[key];
+
+      if (!filterValue) return value;
+
+      const translationCategory = translations[category] as { [key: string]: string };
+      if (translationCategory && typeof translationCategory === "object" && filterValue in translationCategory) {
+        return translationCategory[filterValue];
+      }
+    }
+    return value;
   };
 
   useEffect(() => {
@@ -45,29 +64,13 @@ function AllCar() {
           queryParams.append("q", filters.search);
         }
 
-        if (filters.brand !== "Összes") {
-          queryParams.append("brand", filters.brand);
-        }
+        Object.entries(filters).forEach(([key, value]) => {
+          if (!defaultValues.includes(value)) {
+            queryParams.append(key, getTranslatedFilterValue(key as keyof typeof translations, value));
+          }
+        });
 
-        if (filters.type !== "Összes") {
-          queryParams.append("type", filters.type);
-        }
-
-        if (filters.condition !== "Összes") {
-          queryParams.append("condition", filters.condition);
-        }
-
-        if (filters.transmission !== "Összes") {
-          queryParams.append("transmission", filters.transmission);
-        }
-
-        if (filters.fuel !== "Összes") {
-          queryParams.append("fuel", filters.fuel);
-        }
-
-        if (filters.year !== "Összes") {
-          queryParams.append("year", filters.year);
-        }
+        console.log(queryParams.toString());
 
         const queryString = queryParams.toString();
         const endpoint = queryString ? `/cars/search?${queryString}` : `/cars`;
@@ -93,7 +96,6 @@ function AllCar() {
     fetchCars();
   }, [filters]);
 
-  // Handle filter changes
   const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
@@ -102,7 +104,6 @@ function AllCar() {
     }));
   };
 
-  // Handle search input
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -130,7 +131,7 @@ function AllCar() {
   return (
     <>
       <main className="nav-gap">
-        <h1 className="text-center">Összes autó</h1>
+        <h1 className="text-center">{t('allCars', 'AllCar')}</h1>
 
         <form
           action="/osszesauto"
@@ -144,17 +145,27 @@ function AllCar() {
                 id="search-box"
                 name="search"
                 className="form-control w-50"
-                placeholder="Keresés"
+                placeholder={t('search', 'AllCar') + "..."}
                 value={filters.search}
                 onChange={handleSearchChange}
               />
-              <button className="btn btn-danger">Szűrés törlése</button>
+              <button className="btn btn-danger" onClick={() => {
+                setFilters(({
+                  search: "",
+                  brand: "Összes",
+                  type: "Összes",
+                  condition: "Összes",
+                  transmission: "Összes",
+                  fuel: "Összes",
+                  year: "Összes",
+                }));
+              }}>{t('clear', 'AllCar')}</button>
             </div>
 
             {/* SZŰRÉS */}
             <div className="filter d-flex justify-content-center gap-2 w-100 mx-auto">
               <div className="w-25">
-                <label htmlFor="brand">Autó márkája</label>
+                <label htmlFor="brand">{t('brand', 'AllCar')}</label>
                 <select
                   name="brand"
                   id="brand"
@@ -162,7 +173,7 @@ function AllCar() {
                   value={filters.brand}
                   onChange={handleFilterChange}
                 >
-                  <option>Összes</option>
+                  <option>{t('all', 'AllCar')}</option>
                   {getUniqueOptions("car_brand").map((brand, index) => (
                     <option key={index} value={brand}>
                       {brand}
@@ -171,7 +182,7 @@ function AllCar() {
                 </select>
               </div>
               <div className="w-25">
-                <label htmlFor="type">Autó típusa</label>
+                <label htmlFor="type">{t('type', 'AllCar')}</label>
                 <select
                   name="type"
                   id="type"
@@ -179,7 +190,7 @@ function AllCar() {
                   value={filters.type}
                   onChange={handleFilterChange}
                 >
-                  <option>Összes</option>
+                  <option>{t("all", 'AllCar')}</option>
                   {getUniqueOptions("car_type").map((type, index) => (
                     <option key={index} value={type}>
                       {t(type, "AllCar")}
@@ -188,7 +199,7 @@ function AllCar() {
                 </select>
               </div>
               <div className="w-25">
-                <label htmlFor="condition">Autó minősége</label>
+                <label htmlFor="condition">{t('condition', 'AllCar')}</label>
                 <select
                   name="condition"
                   id="condition"
@@ -196,7 +207,7 @@ function AllCar() {
                   value={filters.condition}
                   onChange={handleFilterChange}
                 >
-                  <option>Összes</option>
+                  <option>{t('all', 'AllCar')}</option>
                   {getUniqueOptions("car_condition").map((condition, index) => (
                     <option key={index} value={condition}>
                       {t(condition, "AllCar")}
@@ -208,7 +219,7 @@ function AllCar() {
 
             <div className="filter d-flex justify-content-center gap-2 w-100 mt-2 mx-auto">
               <div className="w-25">
-                <label htmlFor="transmission">Sebességváltó típusa</label>
+                <label htmlFor="transmission">{t('transmission', 'AllCar')}</label>
                 <select
                   name="transmission"
                   id="transmission"
@@ -216,7 +227,7 @@ function AllCar() {
                   value={filters.transmission}
                   onChange={handleFilterChange}
                 >
-                  <option>Összes</option>
+                  <option>{t('all', 'AllCar')}</option>
                   {getUniqueOptions("transmission_type").map(
                     (transmission, index) => (
                       <option key={index} value={transmission}>
@@ -227,7 +238,7 @@ function AllCar() {
                 </select>
               </div>
               <div className="w-25">
-                <label htmlFor="fuel">Üzemanyag típusa</label>
+                <label htmlFor="fuel">{t('fuel', 'AllCar')}</label>
                 <select
                   name="fuel"
                   id="fuel"
@@ -235,16 +246,16 @@ function AllCar() {
                   value={filters.fuel}
                   onChange={handleFilterChange}
                 >
-                  <option>Összes</option>
+                  <option>{t('all', 'AllCar')}</option>
                   {getUniqueOptions("fuel_type").map((fuel, index) => (
                     <option key={index} value={fuel}>
-                      {t(fuel, "fuel_type")}
+                      {t(fuel, "AllCar")}
                     </option>
                   ))}
                 </select>
               </div>
               <div className="w-25">
-                <label htmlFor="year">Autó évjárata</label>
+                <label htmlFor="year">{t('year', 'AllCar')}</label>
                 <select
                   name="year"
                   id="year"
@@ -252,7 +263,7 @@ function AllCar() {
                   value={filters.year}
                   onChange={handleFilterChange}
                 >
-                  <option>Összes</option>
+                  <option>{t('all', 'AllCar')}</option>
                   {getUniqueOptions("car_year").map((year, index) => (
                     <option key={index} value={year}>
                       {year}
@@ -266,11 +277,11 @@ function AllCar() {
 
         {loading ? (
           <div className="text-center mt-5">
-            <p>Autók betöltése...</p>
+            <p>{t('loading', 'AllCar')}...</p>
           </div>
         ) : error ? (
           <div className="text-center mt-5">
-            <p>Hiba történt: {error}</p>
+            <p>{t('error', 'AllCar')}: {error}</p>
           </div>
         ) : (
           <div className="cars mt-5 d-flex flex-wrap justify-content-center gap-4">
@@ -307,7 +318,7 @@ function AllCar() {
 
                       <div className="d-flex justify-content-between mt-2">
                         <span className="badge bg-success">
-                          {t("fuel_type", car.fuel_type)}
+                          {t(car.fuel_type, "AllCar")}
                         </span>
                         <span className="badge bg-warning text-dark">
                           {t(car.transmission_type, "AllCar")}
@@ -315,8 +326,8 @@ function AllCar() {
                       </div>
 
                       <div className="d-flex justify-content-between align-items-center mt-3">
-                        <small>Ülések: {car.seats}</small>
-                        <small>Ajtók: {car.number_of_doors}</small>
+                        <small>{t('seats', 'AllCar')}: {car.seats}</small>
+                        <small>{t('doors', 'AllCar')}: {car.number_of_doors}</small>
                         <small>{car.mileage.toLocaleString()} km</small>
                       </div>
 
@@ -326,11 +337,11 @@ function AllCar() {
                         <div className="text-start">
                           <div>
                             <small>
-                              Óra: {formatPrice(car.price_per_hour)}
+                              {t('hour', 'AllCar')}: {formatPrice(car.price_per_hour)}
                             </small>
                           </div>
                           <div>
-                            <small>Nap: {formatPrice(car.price_per_day)}</small>
+                            <small>{t('day', 'AllCar')}: {formatPrice(car.price_per_day)}</small>
                           </div>
                         </div>
                         <div className="text-end">
@@ -345,7 +356,7 @@ function AllCar() {
               ))
             ) : (
               <div className="text-center w-100">
-                <p>Nincs a keresésnek megfelelő autó</p>
+                <p>{t('noResults', 'AllCar')}</p>
               </div>
             )}
           </div>

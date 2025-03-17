@@ -61,7 +61,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
         [namespace]: module.default,
       }));
 
-      setLoadedNamespaces((prev) => [...prev, namespace]);
+      setLoadedNamespaces((prev) => {
+        if (prev.includes(namespace)) return prev;
+        return [...prev, namespace];
+      });
     } catch (error) {
       console.error(
         `Failed to load translations for namespace: ${namespace}`,

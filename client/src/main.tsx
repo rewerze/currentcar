@@ -22,6 +22,7 @@ import Requirements from "./components/Requirements.tsx";
 import EditProfile from "./components/EditProfile.tsx";
 import { LanguageProvider } from "./contexts/LanguageContext.tsx";
 import NotFound from "./components/404.tsx";
+import { Toaster } from "@/components/ui/sonner"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -59,6 +60,15 @@ createRoot(document.getElementById("root")!).render(
             {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Toaster theme="light"
+            className="bg-white"
+            toastOptions={{
+              className: "bg-white border border-gray-200 shadow-md",
+              style: {
+                background: "white",
+                color: "black",
+              },
+            }} />
           <Footer />
         </BrowserRouter>
       </UserProvider>
