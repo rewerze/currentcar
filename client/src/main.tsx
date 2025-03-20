@@ -23,6 +23,7 @@ import EditProfile from "./components/EditProfile.tsx";
 import { LanguageProvider } from "./contexts/LanguageContext.tsx";
 import NotFound from "./components/404.tsx";
 import { Toaster } from "@/components/ui/sonner"
+import ProfilePicture from "./components/ProfilePicture.tsx";
 
 const ToasterWrapper = () => {
   return (
@@ -76,6 +77,8 @@ createRoot(document.getElementById("root")!).render(
             {/*  KÖVETELMENYEK */}
             <Route path="/profil/modositas" element={<EditProfile />} />{" "}
             {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
+            <Route path="/profil/profilkep" element={<ProfilePicture />} />{" "}
+            {/*  PROFILKÉP MÓDOSÍTÁS */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

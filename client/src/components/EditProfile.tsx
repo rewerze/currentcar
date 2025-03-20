@@ -97,7 +97,7 @@ function EditProfile() {
             />
 
             <div className="d-flex justify-content-center mt-5 gap-3">
-              <a href="/profil/kepcsere" className="btn btn-light w-25">
+              <a href="/profil/profilkep" className="btn btn-light w-25">
                 Profilkép csere
               </a>
               <a

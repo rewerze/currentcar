@@ -286,3 +286,16 @@ main {
     justify-content: center;
     gap: 5rem;
 }
+
+.drop-zone {
+    border: 5px dotted black;
+    border-radius: 10px;
+    padding: 10rem 1rem;
+    width: max-content;
+    margin: 0 auto 0 auto;
+}
+
+.drop-zone img {
+    width: 20%;
+    height: 100%;
+}

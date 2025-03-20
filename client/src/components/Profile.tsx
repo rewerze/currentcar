@@ -50,7 +50,7 @@ function Profile() {
                 <p>
                   <b>Jogosítvány lejárati dátuma: </b><span className="badge bg-secondary">{user?.jogositvany_lejarat ? new Date(user.jogositvany_lejarat).toLocaleString("hu-HU") : "N/a"}</span>
                 </p>
-                <a className="mt-2 text-light" href="/profil/kepcsere">
+                <a className="mt-2 text-light" href="/profil/profilkep">
                   <b>Profilkép csere</b>
                 </a>
               </div>
