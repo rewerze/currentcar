@@ -26,7 +26,6 @@
 }
 
 @media only screen and (max-width: 992px) {
-
     .card {
         width: 80%;
     }
@@ -106,11 +105,6 @@
         margin-left: -13px;
     }
 
-    .data-list, .data-list p, .data-list a{
-        width: fit-content;
-        padding: 0 2rem;
-    }
-
     .profile-nav {
         display: none;
     }
@@ -154,6 +148,11 @@
 }
 
 @media only screen and (max-width: 576px) {
+    .profile-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
     nav {
         font-size: 1rem;
         height: auto;
@@ -174,9 +173,6 @@
         background-color: rgba(0, 0, 0, 0) !important;
         border: none !important;
     }
-    .data-list, .data-list p, .data-list a{
-        padding: 0 0.3rem;
-    }
 
     .car-box {
         width: 100%;
@@ -184,5 +180,21 @@
 
     .req-table {
         width: 100% !important;
+    }
+
+    .data-list p, .data-list a {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .data-list span {
+        font-size: 0.9rem;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

@@ -174,8 +174,6 @@ align-items: center;
 }
 
 .form-box {
-margin-top: 7rem;
-margin-bottom: 5rem;
 padding: 2.5rem 3.5rem 2rem 2.5rem;
 border-radius: 15px;
 box-shadow: 5px 5px 10px 0 rgb(0, 0, 0, 0.25);
@@ -191,7 +189,13 @@ color: #dddddd;
     padding-bottom: 6rem;
 }
 
+.data-list span {
+    margin-bottom: 0.3rem;
+}
+
 .data-list p {
+    display: flex;
+    justify-content: space-between;
     margin: 0;
 }
 

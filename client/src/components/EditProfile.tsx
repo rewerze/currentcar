@@ -20,7 +20,7 @@ function EditProfile() {
 
             {/* FELHASZNÁLÓNÉV */}
             <label htmlFor="user_name" className="form-label">
-              Felhasználó név:
+              Felhasználónév:
             </label>
             <input
               type="text"
@@ -50,7 +50,6 @@ function EditProfile() {
               id="user_name"
               className="form-control"
               disabled
-              value="2005-01-01"
             />
 
             {/* TELEFONSZÁM */}

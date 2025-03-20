@@ -275,6 +275,8 @@ function AllCar() {
           </div>
         </form>
 
+        
+        {/* AUTÓK */}
         {loading ? (
           <div className="text-center mt-5">
             <p>{t('loading', 'AllCar')}...</p>
@@ -311,7 +313,7 @@ function AllCar() {
                         <span className="badge bg-secondary">
                           {t(car.car_type, "car_type")}
                         </span>
-                        <span className="badge bg-info">
+                        <span className="badge bg-info text-dark">
                           {t(car.car_condition, "AllCar")}
                         </span>
                       </div>
