@@ -1,20 +1,67 @@
 import { useUser } from "@/contexts/UserContext";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function EditProfile() {
   const { user, loading } = useUser();
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    born_at: new Date(),
+    u_phone_number: "",
+    driver_license_number: "",
+    driver_license_expiry: new Date(),
+    user_iban: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        user_name: user.user_name || "",
+        user_email: user.user_email || "",
+        born_at: user.born_at || "",
+        u_phone_number: user.u_phone_number || "",
+        driver_license_number: user.driver_license_number || "",
+        driver_license_expiry: user.driver_license_expiry || "",
+        user_iban: user.user_iban || "",
+      });
+    }
+  }, [user]);
+
   useEffect(() => {
     if (!user && !loading) {
       navigate("/register");
     }
   }, [user, loading, navigate]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // update user
+
+    
+
+    navigate("/profil");
+  };
+
+  if (loading || !user) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <main className="nav-gap">
-        <form action="/profil/modositas" method="post" className="form">
+        <form onSubmit={handleSubmit} className="form">
           <div className="form-box bg-dark">
             <h1>Felhasználói adatok módosítása</h1>
 
@@ -26,73 +73,90 @@ function EditProfile() {
               type="text"
               name="user_name"
               id="user_name"
+              value={formData.user_name}
+              onChange={handleChange}
               className="form-control"
             />
 
             {/* EMAIL CÍM */}
-            <label htmlFor="user_name" className="form-label mt-3">
+            <label htmlFor="user_email" className="form-label mt-3">
               E-mail cím:
             </label>
             <input
               type="text"
-              name="user_name"
-              id="user_name"
+              name="user_email"
+              id="user_email"
+              value={formData.user_email}
+              onChange={handleChange}
               className="form-control"
             />
 
             {/* SZÜLETÉSI DÁTUM */}
-            <label htmlFor="user_name" className="form-label mt-3">
+            <label htmlFor="born_at" className="form-label mt-3">
               Születési dátum:
             </label>
             <input
               type="text"
-              name="user_name"
-              id="user_name"
-              className="form-control"
+              name="born_at"
+              id="born_at"
+              value={formData.born_at ? new Date(formData.born_at).toLocaleString("hu-HU", {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+              }) : ""}
               disabled
+              className="form-control"
             />
 
             {/* TELEFONSZÁM */}
-            <label htmlFor="user_name" className="form-label mt-3">
+            <label htmlFor="u_phone_number" className="form-label mt-3">
               Telefonszám:
             </label>
             <input
               type="text"
-              name="user_name"
-              id="user_name"
+              name="u_phone_number"
+              id="u_phone_number"
+              value={formData.u_phone_number}
+              onChange={handleChange}
               className="form-control"
             />
 
             {/* Jogosítvány szám */}
-            <label htmlFor="user_name" className="form-label mt-3">
+            <label htmlFor="driver_license_number" className="form-label mt-3">
               Jogosítvány szám:
             </label>
             <input
               type="text"
-              name="user_name"
-              id="user_name"
+              name="driver_license_number"
+              id="driver_license_number"
+              value={formData.driver_license_number}
+              onChange={handleChange}
               className="form-control"
             />
 
             {/* Jogosítvány lejárati dátuma */}
-            <label htmlFor="user_name" className="form-label mt-3">
+            <label htmlFor="driver_license_expiry" className="form-label mt-3">
               Jogosítvány lejárati dátuma:
             </label>
             <input
               type="text"
-              name="user_name"
-              id="user_name"
+              name="driver_license_expiry"
+              id="driver_license_expiry"
+              value={formData.driver_license_expiry ? new Date(formData.driver_license_expiry).toLocaleString("hu-HU") : ""}
+              onChange={handleChange}
               className="form-control"
             />
 
             {/* IBAN SZÁM */}
-            <label htmlFor="user_name" className="form-label mt-3">
+            <label htmlFor="user_iban" className="form-label mt-3">
               IBAN:
             </label>
             <input
               type="text"
-              name="user_name"
-              id="user_name"
+              name="user_iban"
+              id="user_iban"
+              value={formData.user_iban}
+              onChange={handleChange}
               className="form-control"
             />
 
@@ -100,10 +164,7 @@ function EditProfile() {
               <a href="/profil/profilkep" className="btn btn-light w-25">
                 Profilkép csere
               </a>
-              <a
-                href="/profil/jelszo-modositas"
-                className="btn btn-warning w-25"
-              >
+              <a href="/profil/jelszo-modositas" className="btn btn-warning w-25">
                 Jelszó módosítása
               </a>
               <button type="submit" className="btn btn-success w-25">

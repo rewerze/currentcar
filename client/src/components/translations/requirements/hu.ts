@@ -14,7 +14,7 @@ export default {
     ibanDescription: "IBAN száma a pénz utalásához szükséges, ha esetleg Ön töltött fel autót.",
     ibanPriority: "TERVEZD BE",
     age: "Életkor",
-    ageDescription: "Az életkorodnak, muszáj betöltenie a 17-et!",
+    ageDescription: "Az életkorodnak muszáj betöltenie a 17-et!",
     agePriority: "NAGYON FONTOS",
     success: "Ön megfelel minden követelménynek, hogy kölcsönözhessen nálunk!",
     fail: "Sajnos Ön még nem felel meg, hogy kölcsönözhessen nálunk!"

@@ -23,32 +23,55 @@ function Profile() {
             <div className="row d-flex justify-content-center">
               <div className="col data-list">
                 <p>
-                  <b>Felhasználónév: </b><span className="badge bg-secondary">{user?.username ? new String(user.username) : "N/a"}</span>
+                  <b>Felhasználónév: </b>
+                  <span className="badge bg-secondary">
+                    {user?.user_name ? new String(user.user_name) : "N/a"}
+                  </span>
                 </p>
                 <p>
-                  <b>Email cím: </b><span className="badge bg-secondary">{user?.email ? new String(user.email) : "N/a"}</span>
+                  <b>Email cím: </b>
+                  <span className="badge bg-secondary">
+                    {user?.user_email ? new String(user.user_email) : "N/a"}
+                  </span>
                 </p>
 
                 <p>
-                  <b>Születési dátum: </b><span className="badge bg-secondary">{user?.born_date
-                    ? new Date(user.born_date).toLocaleString("hu-HU", {
-                        year: "numeric",
-                        month: "numeric",
-                        day: "numeric",
-                      })
-                    : "N/a"}</span>
+                  <b>Születési dátum: </b>
+                  <span className="badge bg-secondary">
+                    {user?.born_at
+                      ? new Date(user.born_at).toLocaleString("hu-HU", {
+                          year: "numeric",
+                          month: "numeric",
+                          day: "numeric",
+                        })
+                      : "N/a"}
+                  </span>
                 </p>
                 <p>
-                  <b>Telefon szám: </b><span className="badge bg-secondary">{user?.phone_number ? new String(user.phone_number) : "N/a"}</span>
+                  <b>Telefon szám: </b>
+                  <span className="badge bg-secondary">
+                    {user?.u_phone_number ? new String(user.u_phone_number) : "N/a"}
+                  </span>
                 </p>
                 <p>
-                  <b>Hozzáférésed: </b><span className="badge bg-secondary">{user?.role == "user" ? "Felhasználó" : "Admin"}</span>
+                  <b>Hozzáférésed: </b>
+                  <span className="badge bg-secondary">
+                    {user?.user_role === "user" ? "Felhasználó" : "Admin"}
+                  </span>
                 </p>
                 <p>
-                  <b>Jogosítvány szám: </b><span className="badge bg-secondary">{user?.jogositvany_szam ? new String(user.jogositvany_szam) : "N/a"}</span>
+                  <b>Jogosítvány szám: </b>
+                  <span className="badge bg-secondary">
+                    {user?.driver_license_number ? new String(user.driver_license_number) : "N/a"}
+                  </span>
                 </p>
                 <p>
-                  <b>Jogosítvány lejárati dátuma: </b><span className="badge bg-secondary">{user?.jogositvany_lejarat ? new Date(user.jogositvany_lejarat).toLocaleString("hu-HU") : "N/a"}</span>
+                  <b>Jogosítvány lejárati dátuma: </b>
+                  <span className="badge bg-secondary">
+                    {user?.driver_license_expiry
+                      ? new Date(user.driver_license_expiry).toLocaleString("hu-HU")
+                      : "N/a"}
+                  </span>
                 </p>
                 <a className="mt-2 text-light" href="/profil/profilkep">
                   <b>Profilkép csere</b>
@@ -70,9 +93,8 @@ function Profile() {
                 Profil törlés
               </a>
             </div>
-            </div>
-            
           </div>
+        </div>
       </main>
     </>
   );

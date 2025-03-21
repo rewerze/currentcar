@@ -4,17 +4,24 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-type UserRole = "admin" | "user"
+type UserRole = "admin" | "user";
 
 export type User = {
-    id: number;
-    email: string;
-    username: string;
-    born_date: string;
-    role: UserRole;
-    jogositvany_szam: string;
-    jogositvany_lejarat: number;
-    phone_number: string;
+    user_id: number; // user_id (Primary Key, AUTO_INCREMENT, int(11))
+    user_email: string; // user_email (varchar(50))
+    user_name: string; // user_name (varchar(35))
+    password: string; // password (varchar(70))
+    born_at: Date; // born_at (datetime)
+    created_at: Date; // created_at (datetime)
+    updated_at: Date; // updated_at (datetime)
+    user_active: boolean; // user_active (tinyint(1), default: 1)
+    u_phone_number: string; // u_phone_number (varchar(20))
+    user_areacode: number; // user_areacode (int(11))
+    user_role: UserRole; // user_role (enum('admin', 'user'))
+    driver_license_number: string; // driver_license_number (varchar(40))
+    driver_license_expiry: Date; // driver_license_expiry (date)
+    profile_picture: string; // profile_picture (varchar(255))
+    user_iban: string; // user_iban (varchar)
 };
 
 export type UserContextType = {

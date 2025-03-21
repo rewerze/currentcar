@@ -72,12 +72,12 @@ function Nav() {
             </ul>
             <div className="me-5 second-nav d-flex justify-content-start off-link">
               <LanguageSwitcher />
-              {user && user.id ? (
+              {user && user.user_id ? (
                 <a
                   onClick={() => navigate("/profil")}
                   className="btn text-light"
                 >
-                  {user.username}
+                  {user.user_name}
                   <img src={profil} alt="" className="profile profile-nav" />
                 </a>
               ) : (
