@@ -41,7 +41,7 @@ function Reg() {
 
   return (
     <>
-      <main>
+      <main className="nav-gap">
         <form onSubmit={handleSubmit}>
           <div className="form">
             <div className="form-box bg-dark text-light">

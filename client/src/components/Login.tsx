@@ -33,7 +33,7 @@ function Login() {
       {/* ############################
         #              Login           #
         ############################ */}
-      <main>
+      <main className="nav-gap">
         <form action="/login" onSubmit={handleSubmit}>
           <div className="form">
             <div className="form-box bg-dark text-light">
