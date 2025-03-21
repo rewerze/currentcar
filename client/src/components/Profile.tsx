@@ -3,6 +3,12 @@ import { useUser } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
+import delete_icon from "../assets/img/delete.svg";
+import logout_icon from "../assets/img/logout.svg";
+import edit_icon from "../assets/img/edit.svg";
+import password_icon from "../assets/img/password.svg";
+import notification_icon from "../assets/img/message.svg";
+
 function Profile() {
   const { user, loading } = useUser();
   const navigate = useNavigate();
@@ -17,7 +23,7 @@ function Profile() {
     <>
       <main className="nav-gap">
         <div className="profile-form">
-          <div className="bg-dark profile-form-box text-light w-100">
+          <div className="bg-dark profile-form-box text-light profile-data">
             <h1 className="text-center">Profilod</h1>
             <hr />
             <div className="row d-flex justify-content-center">
@@ -78,42 +84,62 @@ function Profile() {
                 </a>
               </div>
             </div>
-
-            <div className="d-flex justify-content-center gap-3 mt-5 profile-buttons">
-              <a href="/profil/modositas" className="btn btn-primary">
-                Adatok módosítása
-              </a>
-              <a href="/logout" className="btn btn-light text-center">
-                Kijelentkezés
-              </a>
-              <a href="/profil/jelszo-modositas" className="btn btn-warning">
-                Jelszó módosítás
-              </a>
-              <a href="/profil/torles" className="btn btn-danger">
-                Profil törlés
-              </a>
-            </div>
           </div>
-        </div>
 
-        <div className="profile-form">
+          {/* PROFIL GOMBOK */}
               <div className="profile-form-box bg-dark text-light mx-1">
                 <div className="profile-buttons">
-                  <a href="/profil/modositas" className="btn btn-primary">
+
+                  {/* EDIT */}
+                  <div>
+                  <a href="/profil/modositas" className="btn btn-primary w-100">
+                  <span><img src={edit_icon} className="icon mx-2" /></span>
+                  <b>
                     Adatok módosítása
+                  </b>
                   </a>
-                  <a href="/logout" className="btn btn-light">
+                  </div>
+
+                  {/* LOGOUT */}
+                  <div>
+                  <a href="/logout" className="btn btn-light w-100">
+                  <span><img src={logout_icon} className="icon mx-2" /></span>
+                  <b>
                     Kijelentkezés
+                  </b>
                   </a>
-                  <a href="/profil/jelszo-modositas" className="btn btn-warning">
+                  </div>
+
+
+                  {/* PASS MOD */}
+                  <div>
+                  <a href="/profil/jelszo-modositas" className="btn btn-warning w-100">
+                  <span><img src={password_icon} className="icon mx-2" /></span>
+                  <b>
                     Jelszó módosítás
+                  </b>
                   </a>
-                  <a href="/profil/torles" className="btn btn-danger">
+                  </div>
+
+                  {/* DELETE */}
+                  <div>
+                  <a href="/profil/torles" className="btn btn-danger w-100">
+                  <span><img src={delete_icon} className="icon mx-2" /></span>
+                  <b>
                     Profil törlés
+                  </b>
                   </a>
-                  <a href="/profil/torles" className="btn btn-info">
+                  </div>
+
+                  {/* NOTIFICATION */}
+                  <div>
+                  <a href="/profil/ertesitesek" className="btn btn-info w-100">
+                  <span><img src={notification_icon} className="icon mx-2" /></span>
+                  <b>
                     Értesítések
+                  </b>
                   </a>
+                  </div>
                 </div>
               </div>
             </div>

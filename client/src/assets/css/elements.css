@@ -299,3 +299,40 @@ main {
     width: 20%;
     height: 100%;
 }
+
+.notification {
+    position: absolute;
+    top: -13px !important;
+    left: 40px;
+}
+
+.profile-form {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-data {
+    width: 40%;
+}
+
+.profile-form-box {
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.profile-buttons {
+    display: flex;
+    justify-content: space-between !important;
+    flex-direction: column;
+    margin: 0;
+    height: 100%;
+}
+
+.icon {
+    height: 100%;
+    width: 30px;
+}
+
+.profile-buttons a {
+    text-align: start !important;
+}

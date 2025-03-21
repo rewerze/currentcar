@@ -139,7 +139,7 @@ function EditProfile() {
               Jogosítvány lejárati dátuma:
             </label>
             <input
-              type="text"
+              type="date"
               name="driver_license_expiry"
               id="driver_license_expiry"
               value={formData.driver_license_expiry ? new Date(formData.driver_license_expiry).toLocaleString("hu-HU") : ""}

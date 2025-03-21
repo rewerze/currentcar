@@ -26,6 +26,28 @@
 }
 
 @media only screen and (max-width: 992px) {
+    .profile-form {
+        display: flex;
+        width: 90% !important;
+        flex-direction: column;
+        margin: auto;
+        gap: 6px;
+    }
+    .profile-data {
+        width: 100%;
+    }
+
+    .profile-buttons {
+        gap: 10px;
+    }
+
+
+    .notification {
+        position: absolute;
+        top: -8px !important;
+        left: 2px;
+    }
+
     .card {
         width: 80%;
     }
