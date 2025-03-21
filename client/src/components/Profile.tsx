@@ -16,8 +16,8 @@ function Profile() {
   return (
     <>
       <main className="nav-gap">
-        <div className="form">
-          <div className="bg-dark form-box text-light">
+        <div className="profile-form">
+          <div className="bg-dark profile-form-box text-light w-100">
             <h1 className="text-center">Profilod</h1>
             <hr />
             <div className="row d-flex justify-content-center">
@@ -95,6 +95,28 @@ function Profile() {
             </div>
           </div>
         </div>
+
+        <div className="profile-form">
+              <div className="profile-form-box bg-dark text-light mx-1">
+                <div className="profile-buttons">
+                  <a href="/profil/modositas" className="btn btn-primary">
+                    Adatok módosítása
+                  </a>
+                  <a href="/logout" className="btn btn-light">
+                    Kijelentkezés
+                  </a>
+                  <a href="/profil/jelszo-modositas" className="btn btn-warning">
+                    Jelszó módosítás
+                  </a>
+                  <a href="/profil/torles" className="btn btn-danger">
+                    Profil törlés
+                  </a>
+                  <a href="/profil/torles" className="btn btn-info">
+                    Értesítések
+                  </a>
+                </div>
+              </div>
+            </div>
       </main>
     </>
   );

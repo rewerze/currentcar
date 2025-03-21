@@ -79,6 +79,7 @@ function Nav() {
                 >
                   {user.user_name}
                   <img src={profil} alt="" className="profile profile-nav" />
+                  <span className="badge bg-danger notification">110</span>
                 </a>
               ) : (
                 <a onClick={() => navigate("/register")} className="btn">
