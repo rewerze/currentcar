@@ -2,6 +2,11 @@ import { useUser } from "@/contexts/UserContext";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import cancel_icon from "../assets/img/cancel.svg";
+import password_icon from "../assets/img/password.svg";
+import save_icon from "../assets/img/save.svg";
+import upload_icon from "../assets/img/upload.svg";
+
 function EditProfile() {
   const { user, loading } = useUser();
   const navigate = useNavigate();
@@ -161,15 +166,19 @@ function EditProfile() {
 
             <div className="d-flex justify-content-center mt-5 gap-3">
               <a href="/profil/profilkep" className="btn btn-light w-25">
+                <span><img src={upload_icon} className="icon icon-small" /></span>
                 Profilkép csere
               </a>
               <a href="/profil/jelszo-modositas" className="btn btn-warning w-25">
+              <span><img src={password_icon} className="icon icon-small" /></span>
                 Jelszó módosítása
               </a>
               <button type="submit" className="btn btn-success w-25">
+              <span><img src={save_icon} className="icon icon-small" /></span>
                 Adatok mentése
               </button>
               <a href="./" className="btn btn-danger w-25">
+              <span><img src={cancel_icon} className="icon icon-small" /></span>
                 Elvetés
               </a>
             </div>
