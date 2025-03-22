@@ -164,22 +164,18 @@ function EditProfile() {
               className="form-control"
             />
 
-            <div className="d-flex justify-content-center mt-5 gap-3">
+            <div className="d-flex justify-content-center mt-5 gap-3 icon-left">
               <a href="/profil/profilkep" className="btn btn-light w-25">
-                <span><img src={upload_icon} className="icon icon-small" /></span>
-                Profilkép csere
+                <span><img src={upload_icon} className="icon icon-small" /></span><span>Profilkép csere</span>
               </a>
               <a href="/profil/jelszo-modositas" className="btn btn-warning w-25">
-              <span><img src={password_icon} className="icon icon-small" /></span>
-                Jelszó módosítása
+              <span><img src={password_icon} className="icon icon-small" /></span><span>Jelszó módosítása</span>
               </a>
               <button type="submit" className="btn btn-success w-25">
-              <span><img src={save_icon} className="icon icon-small" /></span>
-                Adatok mentése
+              <span><img src={save_icon} className="icon icon-small" /></span><span>Adatok mentése</span>
               </button>
               <a href="./" className="btn btn-danger w-25">
-              <span><img src={cancel_icon} className="icon icon-small" /></span>
-                Elvetés
+              <span><img src={cancel_icon} className="icon icon-small" /></span><span>Elvetés</span>
               </a>
             </div>
           </div>

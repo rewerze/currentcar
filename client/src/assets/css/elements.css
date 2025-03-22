@@ -342,3 +342,10 @@ main {
 .profile-buttons a {
     text-align: start !important;
 }
+
+.icon-left a, .icon-left button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+}
