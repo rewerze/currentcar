@@ -23,9 +23,27 @@
     .card {
         width: 30%;
     }
+
+    .profile-car-card {
+        width: 35%;
+    }
+
+    .profile-car {
+        gap: 5px;
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width: 992px) {
+    .profile-car-card {
+        width: 40%;
+    }
+
+    .profile-car {
+        gap: 5px;
+        width: 100%;
+    }
+
     .profile-form {
         display: flex;
         width: 90% !important;
@@ -170,6 +188,15 @@
 }
 
 @media only screen and (max-width: 576px) {
+    .profile-car-card {
+        width: 85%;
+    }
+
+    .profile-car {
+        gap: 5px;
+        width: 100%;
+    }
+
     .profile-buttons {
         display: flex;
         flex-direction: column;

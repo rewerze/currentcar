@@ -67,10 +67,19 @@ body {
 }
 
 table {
-    background-color: #f6efe6;
+    background-color: #f6efe6 !important;
+}
+
+.adatlap-table, .adatlap-table td, .adatlap-table th {
+    background-color: #f6efe6 !important;
 }
 
 input:disabled {
     background-color: #e0e0e0 !important;
     border: 1px solid #e0e0e0;
+}
+
+input, select {
+    background-color: #f6efe6 !important;
+    border: 1px solid #000000 !important;
 }

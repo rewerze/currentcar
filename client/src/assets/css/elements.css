@@ -215,10 +215,6 @@ color: #dddddd;
 
 .cars {
     margin: auto 2rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .car-box {
@@ -348,4 +344,27 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content:space-between;
+}
+
+.profile-car {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    margin: 10px auto;
+    gap: 5px;
+    width: 60%;
+}
+
+.profile-car-card {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+}
+
+
+.profile-car-card-body {
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
 }

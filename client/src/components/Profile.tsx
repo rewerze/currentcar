@@ -9,6 +9,8 @@ import edit_icon from "../assets/img/edit.svg";
 import password_icon from "../assets/img/password.svg";
 import notification_icon from "../assets/img/message.svg";
 
+import car from "../assets/img/nepszeru_auto.png";
+
 function Profile() {
   const { user, loading } = useUser();
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ function Profile() {
   return (
     <>
       <main className="nav-gap">
+        <div className="profile-center">
         <div className="profile-form">
           <div className="bg-dark profile-form-box text-light profile-data">
             <h1 className="text-center">Profilod</h1>
@@ -143,6 +146,51 @@ function Profile() {
                 </div>
               </div>
             </div>
+            <div className="profile-car gap-2">
+              <div className="profile-car-card">
+                <div className="profile-car-card-body bg-dark">
+                      <img src={car} />
+                      <h3 className="text-center">car name</h3>
+                      <p>lorem ipsum</p>
+                </div>
+              </div>
+              <div className="profile-car-card">
+                <div className="profile-car-card-body bg-dark">
+                      <img src={car} />
+                      <h3 className="text-center">car name</h3>
+                      <p>lorem ipsum</p>
+                </div>
+              </div>
+              <div className="profile-car-card">
+                <div className="profile-car-card-body bg-dark">
+                      <img src={car} />
+                      <h3 className="text-center">car name</h3>
+                      <p>lorem ipsum</p>
+                </div>
+              </div>
+              <div className="profile-car-card">
+                <div className="profile-car-card-body bg-dark">
+                      <img src={car} />
+                      <h3 className="text-center">car name</h3>
+                      <p>lorem ipsum</p>
+                </div>
+              </div>
+              <div className="profile-car-card">
+                <div className="profile-car-card-body bg-dark">
+                      <img src={car} />
+                      <h3 className="text-center">car name</h3>
+                      <p>lorem ipsum</p>
+                </div>
+              </div>
+              <div className="profile-car-card">
+                <div className="profile-car-card-body bg-dark">
+                      <img src={car} />
+                      <h3 className="text-center">car name</h3>
+                      <p>lorem ipsum</p>
+                </div>
+              </div>
+            </div>        
+        </div>
       </main>
     </>
   );
