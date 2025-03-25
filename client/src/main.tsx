@@ -54,31 +54,19 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/register" element={<Reg />} /> {/*  REGISZTRÁCIÓ */}
             <Route path="/login" element={<Login />} /> {/*  BEJELENTKEZÉS */}
             <Route path="/logout" element={<Logout />} /> {/*  KIJELENTKEZÉS */}
-            <Route path="/profil" element={<Profil />} />{" "}
-            {/*  FELHASZNÁLÓ PROFILJA */}
-            <Route
-              path="/profil/jelszo-modositas"
-              element={<Password />}
-            />{" "}
-            {/*  JELSZÓ MÓDOSÍTÁS */}
-            <Route path="/osszesauto" element={<AllCar />} />{" "}
-            {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
-            <Route path="/adatlap/:id" element={<CarData />} />{" "}
-            {/*  AUTÓK ADATLAPJAI */}
-            <Route path="/feladas" element={<CarUpload />} />{" "}
-            {/*  AUTÓ FELTÖLTÉS */}
+            <Route path="/profil" element={<Profil />} /> {/*  FELHASZNÁLÓ PROFILJA */}
+            <Route path="/profil/jelszo-modositas" element={<Password />} />{" "} {/*  JELSZÓ MÓDOSÍTÁS */}
+            <Route path="/osszesauto" element={<AllCar />} />{" "} {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
+            <Route path="/adatlap/:id" element={<CarData />} />{" "} {/*  AUTÓK ADATLAPJAI */}
+            <Route path="/feladas" element={<CarUpload />} />{" "} {/*  AUTÓ FELTÖLTÉS */}
             <Route path="/kapcsolat" element={<Contact />} /> {/*  KAPCSOLAT */}
             <Route path="/rolunk" element={<AboutUs />} /> {/*  RÓLUNK */}
             <Route path="/berles" element={<CarRent />} /> {/*  AUTÓ BÉRLÉS */}
             <Route path="/gyik" element={<FAQ />} /> {/*  GYAKORI KÉRDÉSEK */}
-            <Route path="/biztonsag" element={<Security />} />{" "}
-            {/*  BIZTONSÁG */}
-            <Route path="/kovetelmenyek" element={<Requirements />} />{" "}
-            {/*  KÖVETELMENYEK */}
-            <Route path="/profil/modositas" element={<EditProfile />} />{" "}
-            {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
-            <Route path="/profil/profilkep" element={<ProfilePicture />} />{" "}
-            {/*  PROFILKÉP MÓDOSÍTÁS */}
+            <Route path="/biztonsag" element={<Security />} />{" "} {/*  BIZTONSÁG */}
+            <Route path="/kovetelmenyek" element={<Requirements />} />{" "} {/*  KÖVETELMENYEK */}
+            <Route path="/profil/modositas" element={<EditProfile />} />{" "} {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
+            <Route path="/profil/profilkep" element={<ProfilePicture />} />{" "} {/*  PROFILKÉP MÓDOSÍTÁS */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

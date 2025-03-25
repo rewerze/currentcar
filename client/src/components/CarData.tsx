@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { CarInfo } from "./interfaces/Car";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
+import  profile  from "../assets/img/profile.jpg";
 
 function CarData() {
   const { t, loadNamespace, language, loadedNamespaces } = useLanguage();
@@ -129,6 +130,45 @@ function CarData() {
               </button>
             </div>
           </div>
+        </div>
+
+
+        <div className="car-comment mt-5 w-50 mx-auto">
+            <h2 className="text-center">Vélemények</h2>
+            <hr />
+
+            <div className="my-2 mt-5">
+              <div className="row">
+                <div className="col-md">
+                <a href="/profil">
+                <img src={profile} alt="" className="profile-sm" />
+                </a>
+                <span>★★★★★</span> {/* IDEIGLENES MEGOLDÁS */}
+                </div>
+                <div className="col-md">
+                  <select name="comment_category" id="comment_category" className="form-select car-comment-select">
+                    <option value="">értékelés típus</option>
+                    <option value="">értékelés típus</option>
+                    <option value="">értékelés típus</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+            <textarea name="comment" id="comment" className="w-100 form-control" rows={3} placeholder="Írd meg te is a véleményed!"></textarea>
+            <button className="btn btn-primary mt-2 py-2 w-25">Küldés</button>
+
+            <div className="comment-section">
+                <div className="comment-box bg-light">
+                    <div className="comment-content">
+                        <img src={profile} alt="" className='profile' />
+                        <div className="comment-text">
+                            <h5><span><b>{t('name', 'MainPage')}</b></span> <span>★★★★★</span> {/* IDEIGLENES MEGOLDÁS */}<br />vélemény típus</h5>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
       </main>
     </>

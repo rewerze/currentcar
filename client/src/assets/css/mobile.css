@@ -185,6 +185,18 @@
     .card {
         width: 80%;
     }
+    
+    .car-comment-select {
+        margin-top: 0.5rem;
+    }
+
+    .car-comment {
+        width: 90% !important;
+    }
+
+    .car-comment button {
+        width: 100% !important;
+    }
 }
 
 @media only screen and (max-width: 576px) {

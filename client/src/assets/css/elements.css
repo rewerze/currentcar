@@ -105,6 +105,13 @@ position:static;
 top: 15px;
 }
 
+.profile-sm {
+    width: 48px;
+    height: 48px;
+    border-radius: 90px;
+    margin-right: 1rem;
+    }
+
 .profile-nav {
     margin-left: 1rem;
     width: 32px;
@@ -367,4 +374,17 @@ main {
     border-radius: 10px;
     padding: 1rem;
     width: 100%;
+}
+
+.comment-section {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.comment-section .comment-box {
+    width: 100%;
+    border-radius: 8px;
 }
