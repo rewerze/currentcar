@@ -137,6 +137,7 @@ function CarData() {
             <h2 className="text-center">Vélemények</h2>
             <hr />
 
+            <form action="/adatlap">
             <div className="my-2 mt-5">
               <div className="row">
                 <div className="col-md">
@@ -157,6 +158,7 @@ function CarData() {
             </div>
             <textarea name="comment" id="comment" className="w-100 form-control" rows={3} placeholder="Írd meg te is a véleményed!"></textarea>
             <button className="btn btn-primary mt-2 py-2 w-25">Küldés</button>
+            </form>
 
             <div className="comment-section">
                 <div className="comment-box bg-light">
