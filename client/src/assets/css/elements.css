@@ -290,16 +290,24 @@ main {
     gap: 5rem;
 }
 
+.card {
+    position: none !important;
+}
+
 .drop-zone {
     border: 5px dotted black;
     border-radius: 10px;
     padding: 10rem 1rem;
-    width: max-content;
+    width: 40%;
     margin: 0 auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .drop-zone img {
-    width: 20%;
+    width: 30%;
     height: 100%;
 }
 

@@ -32,6 +32,11 @@
         gap: 5px;
         width: 90%;
     }
+
+    .car-rent {
+        width: 90%;
+        margin: auto;
+    }
 }
 
 @media only screen and (max-width: 992px) {
@@ -180,6 +185,7 @@
     .car-rent {
         flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
     .card {

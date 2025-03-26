@@ -67,7 +67,7 @@ body {
 }
 
 table {
-    background-color: #f6efe6 !important;
+    background-color: #fef8f1 !important;
 }
 
 .adatlap-table, .adatlap-table td, .adatlap-table th {
@@ -79,7 +79,15 @@ input:disabled {
     border: 1px solid #e0e0e0;
 }
 
-input, select {
-    background-color: #f6efe6 !important;
+input, select, textarea {
+    background-color: #fef8f1 !important;
     border: 1px solid #000000 !important;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    display: none;
+}
+
+input::placeholder, select, textarea::placeholder {
+    color: #000000 !important;
 }
