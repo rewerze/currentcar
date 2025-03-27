@@ -396,3 +396,48 @@ main {
     width: 100%;
     border-radius: 8px;
 }
+
+.notif {
+    width: 70%;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.notif .col-md-4 {
+    border-right: 1px solid white;
+    height: 50vh;
+    overflow-y: auto;
+}
+
+.notif-card {
+    white-space: nowrap; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.notif-card-content {
+    padding: 0.1rem 0.6rem;
+    border-radius: 20px;
+}
+
+.notif-card-content h3 {
+    text-align: start;
+}
+
+.notif-message button {
+    visibility: hidden;
+}
+
+.notif-message p {
+    text-align: justify;
+}
+
+button {
+    background-color:#ffffff00;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
