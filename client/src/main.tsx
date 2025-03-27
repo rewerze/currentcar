@@ -24,6 +24,7 @@ import { LanguageProvider } from "./contexts/LanguageContext.tsx";
 import NotFound from "./components/404.tsx";
 import { Toaster } from "@/components/ui/sonner"
 import ProfilePicture from "./components/ProfilePicture.tsx";
+import Notification from "./components/Notification.tsx";
 
 const ToasterWrapper = () => {
   return (
@@ -67,6 +68,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/kovetelmenyek" element={<Requirements />} />{" "} {/*  KÖVETELMENYEK */}
             <Route path="/profil/modositas" element={<EditProfile />} />{" "} {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
             <Route path="/profil/profilkep" element={<ProfilePicture />} />{" "} {/*  PROFILKÉP MÓDOSÍTÁS */}
+            <Route path="/profil/ertesitesek" element={<Notification />} />{" "} {/* ÉRTESÍTÉSEK */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
