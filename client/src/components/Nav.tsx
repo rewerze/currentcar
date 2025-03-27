@@ -3,12 +3,20 @@ import { useUser } from "../contexts/UserContext";
 import profil from "../assets/img/profile.jpg";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNotifications } from "@/contexts/NotificationContext";
 
 function Nav() {
   const { user } = useUser();
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
   const navigate = useNavigate();
+  const { notifications } = useNotifications();
+
+  const [notificationCount, setNotificationCount] = useState<Number>(0);
+
+  useEffect(() => {
+    setNotificationCount(notifications.length);
+  }, [notifications]);
 
   useEffect(() => {
     if (!loadedNamespaces.includes("navbar")) {
@@ -79,7 +87,9 @@ function Nav() {
                 >
                   {user.user_name}
                   <img src={profil} alt="" className="profile profile-nav" />
-                  <span className="badge bg-danger notification">110</span>
+                  <span className="badge bg-danger notification">
+                    {notificationCount.toString()}
+                  </span>
                 </a>
               ) : (
                 <a onClick={() => navigate("/register")} className="btn">

@@ -54,8 +54,6 @@ function EditProfile() {
 
     // update user
 
-    
-
     navigate("/profil");
   };
 
@@ -104,11 +102,15 @@ function EditProfile() {
               type="text"
               name="born_at"
               id="born_at"
-              value={formData.born_at ? new Date(formData.born_at).toLocaleString("hu-HU", {
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-              }) : ""}
+              value={
+                formData.born_at
+                  ? new Date(formData.born_at).toLocaleString("hu-HU", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                    })
+                  : ""
+              }
               disabled
               className="form-control"
             />
@@ -166,16 +168,31 @@ function EditProfile() {
 
             <div className="d-flex justify-content-center mt-5 gap-3 icon-left">
               <a href="/profil/profilkep" className="btn btn-light w-25">
-                <span><img src={upload_icon} className="icon icon-small" /></span><span>Profilkép csere</span>
+                <span>
+                  <img src={upload_icon} className="icon icon-small" />
+                </span>
+                <span>Profilkép csere</span>
               </a>
-              <a href="/profil/jelszo-modositas" className="btn btn-warning w-25">
-              <span><img src={password_icon} className="icon icon-small" /></span><span>Jelszó módosítása</span>
+              <a
+                href="/profil/jelszo-modositas"
+                className="btn btn-warning w-25"
+              >
+                <span>
+                  <img src={password_icon} className="icon icon-small" />
+                </span>
+                <span>Jelszó módosítása</span>
               </a>
               <button type="submit" className="btn btn-success w-25">
-              <span><img src={save_icon} className="icon icon-small" /></span><span>Adatok mentése</span>
+                <span>
+                  <img src={save_icon} className="icon icon-small" />
+                </span>
+                <span>Adatok mentése</span>
               </button>
               <a href="./" className="btn btn-danger w-25">
-              <span><img src={cancel_icon} className="icon icon-small" /></span><span>Elvetés</span>
+                <span>
+                  <img src={cancel_icon} className="icon icon-small" />
+                </span>
+                <span>Elvetés</span>
               </a>
             </div>
           </div>

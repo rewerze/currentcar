@@ -7,6 +7,7 @@ import {
 
 export interface CarInfo {
   image: string;
+  images?: string;
   car_id: number;
   car_price: string;
   car_active: boolean;

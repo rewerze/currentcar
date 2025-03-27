@@ -12,7 +12,11 @@ import { logoutHandler } from "./endpoints/api/logout";
 import { resetPasswordHandler } from "./endpoints/api/reset-password";
 import { carsHandler } from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
-import { carHandler } from "./endpoints/api/getCar";
+import { carHandler, getCars } from "./endpoints/api/getCar";
+import {
+  getNotification,
+  readNotification,
+} from "./endpoints/api/notifications";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -55,8 +59,17 @@ app.post(
 app.get("/api/cars", carsHandler);
 app.get("/api/cars/search", carsSearchHandler);
 app.get("/api/car", carHandler);
+app.get("/api/getCars", [verifyAuthTokenMiddleware], getCars);
 
 app.get("/api/auth/verify", verifyHandler);
+
+app.get("/api/notifications", [verifyAuthTokenMiddleware], getNotification);
+
+app.put(
+  "/api/notifications/:notificationId/read",
+  [verifyAuthTokenMiddleware],
+  readNotification
+);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

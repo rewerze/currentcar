@@ -22,13 +22,22 @@ import Requirements from "./components/Requirements.tsx";
 import EditProfile from "./components/EditProfile.tsx";
 import { LanguageProvider } from "./contexts/LanguageContext.tsx";
 import NotFound from "./components/404.tsx";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 import ProfilePicture from "./components/ProfilePicture.tsx";
+import { NotificationProvider } from "./contexts/NotificationContext.tsx";
 
 const ToasterWrapper = () => {
   return (
-    <div style={{ position: 'fixed', bottom: '4rem', right: '1rem', zIndex: 9999, pointerEvents: 'none' }}>
-      <Toaster 
+    <div
+      style={{
+        position: "fixed",
+        bottom: "4rem",
+        right: "1rem",
+        zIndex: 9999,
+        pointerEvents: "none",
+      }}
+    >
+      <Toaster
         theme="light"
         className="bg-white pointer-events-auto"
         toastOptions={{
@@ -37,7 +46,7 @@ const ToasterWrapper = () => {
             background: "white",
             color: "black",
           },
-        }} 
+        }}
       />
     </div>
   );
@@ -47,31 +56,51 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <LanguageProvider defaultNamespaces={["common"]}>
       <UserProvider>
-        <BrowserRouter>
-          <Nav />
-          <Routes>
-            <Route path="/" element={<App />} /> {/* FŐOLDAL */}
-            <Route path="/register" element={<Reg />} /> {/*  REGISZTRÁCIÓ */}
-            <Route path="/login" element={<Login />} /> {/*  BEJELENTKEZÉS */}
-            <Route path="/logout" element={<Logout />} /> {/*  KIJELENTKEZÉS */}
-            <Route path="/profil" element={<Profil />} /> {/*  FELHASZNÁLÓ PROFILJA */}
-            <Route path="/profil/jelszo-modositas" element={<Password />} />{" "} {/*  JELSZÓ MÓDOSÍTÁS */}
-            <Route path="/osszesauto" element={<AllCar />} />{" "} {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
-            <Route path="/adatlap/:id" element={<CarData />} />{" "} {/*  AUTÓK ADATLAPJAI */}
-            <Route path="/feladas" element={<CarUpload />} />{" "} {/*  AUTÓ FELTÖLTÉS */}
-            <Route path="/kapcsolat" element={<Contact />} /> {/*  KAPCSOLAT */}
-            <Route path="/rolunk" element={<AboutUs />} /> {/*  RÓLUNK */}
-            <Route path="/berles" element={<CarRent />} /> {/*  AUTÓ BÉRLÉS */}
-            <Route path="/gyik" element={<FAQ />} /> {/*  GYAKORI KÉRDÉSEK */}
-            <Route path="/biztonsag" element={<Security />} />{" "} {/*  BIZTONSÁG */}
-            <Route path="/kovetelmenyek" element={<Requirements />} />{" "} {/*  KÖVETELMENYEK */}
-            <Route path="/profil/modositas" element={<EditProfile />} />{" "} {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
-            <Route path="/profil/profilkep" element={<ProfilePicture />} />{" "} {/*  PROFILKÉP MÓDOSÍTÁS */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-          <ToasterWrapper />
-        </BrowserRouter>
+        <NotificationProvider>
+          <BrowserRouter>
+            <Nav />
+            <Routes>
+              <Route path="/" element={<App />} /> {/* FŐOLDAL */}
+              <Route path="/register" element={<Reg />} /> {/*  REGISZTRÁCIÓ */}
+              <Route path="/login" element={<Login />} /> {/*  BEJELENTKEZÉS */}
+              <Route path="/logout" element={<Logout />} />{" "}
+              {/*  KIJELENTKEZÉS */}
+              <Route path="/profil" element={<Profil />} />{" "}
+              {/*  FELHASZNÁLÓ PROFILJA */}
+              <Route
+                path="/profil/jelszo-modositas"
+                element={<Password />}
+              />{" "}
+              {/*  JELSZÓ MÓDOSÍTÁS */}
+              <Route path="/osszesauto" element={<AllCar />} />{" "}
+              {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
+              <Route path="/adatlap/:id" element={<CarData />} />{" "}
+              {/*  AUTÓK ADATLAPJAI */}
+              <Route path="/feladas" element={<CarUpload />} />{" "}
+              {/*  AUTÓ FELTÖLTÉS */}
+              <Route path="/kapcsolat" element={<Contact />} />{" "}
+              {/*  KAPCSOLAT */}
+              <Route path="/rolunk" element={<AboutUs />} /> {/*  RÓLUNK */}
+              <Route path="/berles" element={<CarRent />} />{" "}
+              {/*  AUTÓ BÉRLÉS */}
+              <Route path="/gyik" element={<FAQ />} /> {/*  GYAKORI KÉRDÉSEK */}
+              <Route path="/biztonsag" element={<Security />} />{" "}
+              {/*  BIZTONSÁG */}
+              <Route path="/kovetelmenyek" element={<Requirements />} />{" "}
+              {/*  KÖVETELMENYEK */}
+              <Route path="/profil/modositas" element={<EditProfile />} />{" "}
+              {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
+              <Route
+                path="/profil/profilkep"
+                element={<ProfilePicture />}
+              />{" "}
+              {/*  PROFILKÉP MÓDOSÍTÁS */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+            <ToasterWrapper />
+          </BrowserRouter>
+        </NotificationProvider>
       </UserProvider>
     </LanguageProvider>
   </StrictMode>
