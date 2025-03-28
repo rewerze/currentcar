@@ -46,15 +46,10 @@ export const loginHandler = async (
       return;
     }
 
-    const token = jwt.sign(
-      user,
-      process.env.SECRET_KEY,
-      { expiresIn: "24h" }
-    );
+    const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: "24h" });
 
     res.cookie("auth_token", token, {
-      domain:
-        process.env.NODE_ENV === "production" ? "pantheonmacro.store" : "",
+      domain: process.env.NODE_ENV === "production" ? "beniary.com" : "",
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000,

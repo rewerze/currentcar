@@ -17,6 +17,8 @@ import {
   getNotification,
   readNotification,
 } from "./endpoints/api/notifications";
+import { editProfile, uploadProfilePicture } from "./endpoints/api/profile";
+import path from "path";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -48,6 +50,11 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.use(
+  "/uploads/profile-pictures",
+  express.static(path.join(__dirname, "endpoints/uploads/profile-pictures"))
+);
+
 app.post("/api/auth/register", [limiter], registerHandler);
 app.post("/api/auth/login", [limiter], loginHandler);
 app.post("/api/auth/logout", [verifyAuthTokenMiddleware], logoutHandler);
@@ -69,6 +76,14 @@ app.put(
   "/api/notifications/:notificationId/read",
   [verifyAuthTokenMiddleware],
   readNotification
+);
+
+app.put("/api/profile/edit", [verifyAuthTokenMiddleware, limiter], editProfile);
+
+app.post(
+  "/api/upload-profile-picture",
+  [verifyAuthTokenMiddleware, limiter],
+  uploadProfilePicture
 );
 
 app.listen(port, () => {
