@@ -53,42 +53,28 @@ function CarData() {
       <main className="nav-gap">
         <div className="row">
           <div className="col-lg-5">
-          <div id="carouselExampleIndicators" className="carousel slide">
-            <div className="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
+          <div id="carouselExample" className="carousel slide">
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                <img src={carImage} alt={`${car.car_brand} ${car.car_model}`} className="d-block w-100" />
+                </div>
+                <div className="carousel-item">
+                  <img src={carImage} alt={`${car.car_brand} ${car.car_model}`} className="d-block w-100" />
+                </div>
+                <div className="carousel-item">
+                  <img src={carImage} alt={`${car.car_brand} ${car.car_model}`} className="d-block w-100" />
+                </div>
+              </div>
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                src={carImage}
-                alt={`${car.car_brand} ${car.car_model}`}
-                className="d-block w-100"
-              />
-            </div>
-              <div className="carousel-item active">
-                <img
-                src={carImage}
-                alt={`${car.car_brand} ${car.car_model}`}
-                className="d-block w-100"
-              />
-            </div>
-              <div className="carousel-item active">
-                <img
-                src={carImage}
-                alt={`${car.car_brand} ${car.car_model}`}
-                className="d-block w-100"
-              />
-            </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Előző</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Következő</span>
-            </button>
           </div>
           </div>
           <div className="col-lg-7">
@@ -170,6 +156,7 @@ function CarData() {
             <h2 className="text-center">Vélemények</h2>
             <hr />
 
+            <h3 className="text-center text-danger">Bejelentkezés szükséges a vélemény íráshoz!</h3>
             <form action="/adatlap">
             <div className="my-2 mt-5">
               <div className="row">
@@ -177,7 +164,7 @@ function CarData() {
                 <a href="/profil">
                 <img src={profile} alt="" className="profile-sm" />
                 </a>
-                <span className="star-range"><input type="range" name="star" id="star" min={1} max={5} defaultValue={3}/></span> {/* IDEIGLENES MEGOLDÁS */}
+                <span className="star-range"><input type="range" name="star" id="star" min={1} max={5} defaultValue={5}/></span> {/* IDEIGLENES MEGOLDÁS */}
                 </div>
                 <div className="col-md">
                   <select name="comment_category" id="comment_category" className="form-select car-comment-select">
@@ -204,7 +191,6 @@ function CarData() {
                     </div>
                 </div>
             </div>
-        </div>
         </div>
       </main>
     </>
