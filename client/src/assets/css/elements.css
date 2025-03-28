@@ -441,3 +441,34 @@ button {
     padding: 0;
     margin: 0;
 }
+
+.star-range input[type="range"]{
+    width: 12.5rem;
+
+    --s: 40px;
+  
+    height: var(--s);
+    padding-inline: calc(var(--s) / 2);
+    box-sizing: border-box;
+    
+    appearance: none;
+
+    mask-image: url("../img/filled-star.svg");
+    mask-size: var(--s);
+    border: none !important;
+}
+
+.star-range input[type="range"]::-webkit-slider-thumb {
+    width: 1px;
+    height: var(--s);  
+  
+    appearance: none;
+
+    border-image: 
+    linear-gradient(90deg, rgb(255, 208, 0) calc(50% + var(--s) / 2), rgb(189, 184, 160) 0)
+    fill 0 // var(--s) 500px;
+  }
+
+.comment-header {
+    display: flex;
+}
