@@ -99,9 +99,13 @@ function Nav() {
                     alt="Profilkép"
                     className="profile profile-nav"
                   />
-                  <span className="badge bg-danger notification">
-                    {notificationCount.toString()}
-                  </span>
+                  {Number(notificationCount) > 0 ? (
+                    <span className="badge bg-danger notification">
+                      {notificationCount.toString()}
+                    </span>
+                  ) : (
+                    <></>
+                  )}
                 </a>
               ) : (
                 <a onClick={() => navigate("/register")} className="btn">

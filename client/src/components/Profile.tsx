@@ -2,6 +2,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useUser } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 import delete_icon from "../assets/img/delete.svg";
 import logout_icon from "../assets/img/logout.svg";
@@ -15,6 +25,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { CarInfo } from "./interfaces/Car";
 import axios from "axios";
 import { buildApiUrl } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 function Profile() {
   const { user, loading } = useUser();
@@ -23,6 +34,10 @@ function Profile() {
   const navigate = useNavigate();
   const { notifications } = useNotifications();
   const [notificationCount, setNotificationCount] = useState<number>(0);
+
+  const handleDelete = () => {
+    navigate("/profil/torles");
+  };
 
   useEffect(() => {
     if (!loadedNamespaces.includes("Profile")) {
