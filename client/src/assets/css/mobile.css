@@ -221,6 +221,20 @@
         --s: 33px;
       
     }
+
+    .icon-left a, .icon-left button{
+        align-items: center;
+        justify-content:start;
+    }
+
+
+    .edit-buttons {
+        flex-direction: column;
+    }
+
+    .edit-buttons button, .edit-buttons a {
+        width: 100% !important;
+    }
 }
 
 @media only screen and (max-width: 768px) {
