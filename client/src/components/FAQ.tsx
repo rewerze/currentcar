@@ -27,7 +27,7 @@ function FAQ() {
                         <summary className="display-5">Mi van, ha a bérlés ideje alatt autótörés történik?
                     <hr className="w-100" />
                         </summary>
-                        <p>válasz válasz válasz válasz válasz válasz válasz válasz </p>
+                        <p>A bérlő köteles kifizetni minden kárt ami éri a járművet míg az Ő használatában áll.</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
@@ -35,7 +35,7 @@ function FAQ() {
                         <summary className="display-5">Milyen módon tudom fizetni a bérlést?
                         <hr className="w-100" />
                         </summary>
-                        <p>Online és helyszinen egyaránt ki tudod fizetni az autó árát kézpénzben vagy kártyával!</p>
+                        <p>Online és helyszínen egyaránt ki tudod fizetni az autó árát kézpénzben vagy kártyával!</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
@@ -51,7 +51,7 @@ function FAQ() {
                         <summary className="display-5">Mi történik, ha késlekedem a visszavitelkor?
                         <hr className="w-100" />
                         </summary>
-                        <p>válasz válasz válasz válasz válasz válasz válasz válasz </p>
+                        <p>Amennyivel az emberünk túllépi a vissza hozási időt óránként az óránkénti ár 2x-esét kell fizetni!</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
@@ -67,7 +67,7 @@ function FAQ() {
                         <summary className="display-5">Visszavihetem az autót másik depóba, mint ahol átvettem?
                         <hr className="w-100" />
                         </summary>
-                        <p>válasz válasz válasz válasz válasz válasz válasz válasz </p>
+                        <p>Nem. Fontos számunkra, hogy ha az eredeti tulajdonos szeretné vissza az autóját, akkor ne egy távolabbi helyre kelljen elutaznia érte.</p>
                     </details>
                 </div>
             </main>

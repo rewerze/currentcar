@@ -203,6 +203,24 @@
         padding-top: 0.7rem !important;
         padding-bottom: 0.7rem !important;
     }
+
+    .car-comment-select {
+        margin-top: 0.5rem;
+    }
+
+    .car-comment {
+        width: 90% !important;
+    }
+
+    .car-comment button {
+        width: 100% !important;
+    }
+
+    .star-range input[type="range"]{
+    
+        --s: 33px;
+      
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -214,18 +232,6 @@
 
     .card {
         width: 80%;
-    }
-    
-    .car-comment-select {
-        margin-top: 0.5rem;
-    }
-
-    .car-comment {
-        width: 90% !important;
-    }
-
-    .car-comment button {
-        width: 100% !important;
     }
 }
 
