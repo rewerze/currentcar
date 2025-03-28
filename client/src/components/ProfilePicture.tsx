@@ -115,6 +115,9 @@ function ProfilePicture() {
 
   return (
     <main className="nav-gap">
+      {file && 
+        <p className="text-center"><b>Kiválasztva:</b> {file.name}</p>
+      }
       <input
         type="file"
         ref={fileInputRef}
@@ -139,14 +142,13 @@ function ProfilePicture() {
         ) : (
           <>
             <img src={upload} alt="Feltöltés" />
-            <p>Húzz ide egy fájlt vagy válassz ki egyet!</p>
+            <p className="text-center">Húzz ide egy fájlt vagy válassz ki egyet!</p>
           </>
         )}
       </div>
 
       {file && (
-        <div className="file-details">
-          <p>Kiválasztva: {file.name}</p>
+        <div className="file-details mx-auto">
           <button onClick={handleRemoveFile}>Eltávolítás</button>
           <button
             onClick={handleUploadToServer}
