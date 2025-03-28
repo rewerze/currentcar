@@ -6,6 +6,8 @@ import cancel_icon from "../assets/img/cancel.svg";
 import password_icon from "../assets/img/password.svg";
 import save_icon from "../assets/img/save.svg";
 import upload_icon from "../assets/img/upload.svg";
+import { toast } from "sonner";
+import axios from "axios";
 
 function EditProfile() {
   const { user, loading } = useUser();
@@ -49,13 +51,45 @@ function EditProfile() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const buildApiUrl = (endpoint: string) => {
+    const baseUrl =
+      process.env.NODE_ENV !== "production"
+        ? "http://localhost:3000"
+        : window.location.origin;
+    return `${baseUrl}/api${endpoint}`;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // update user
+    if (Object.keys(formData).length === 0) {
+      toast.error('Please provide at least one field to update');
+      return;
+    }
 
-    navigate("/profil");
-  };
+    try {
+      const response = await axios.put(buildApiUrl('/profile/edit'), formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      toast.success(response.data.message || 'Profile updated successfully');
+
+      navigate("/profil")
+
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.error || 'Failed to update profile';
+        toast.error(errorMessage);
+      } else {
+        toast.error('An unexpected error occurred');
+      }
+      
+      console.error('Profile update error:', error);
+    }
+  }
 
   if (loading || !user) {
     return <div>Loading...</div>;
@@ -123,6 +157,7 @@ function EditProfile() {
               type="text"
               name="u_phone_number"
               id="u_phone_number"
+              placeholder="+36xx xxx xxxx"
               value={formData.u_phone_number}
               onChange={handleChange}
               className="form-control"
