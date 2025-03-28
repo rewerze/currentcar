@@ -20,7 +20,7 @@ class DB implements IDBConnection {
       host: "localhost",
       user: "root",
       database: "currentcar",
-      password: "Titkos11",
+      password: "",
     });
   }
 
