@@ -8,6 +8,7 @@ import save_icon from "../assets/img/save.svg";
 import upload_icon from "../assets/img/upload.svg";
 import { toast } from "sonner";
 import axios from "axios";
+import { buildApiUrl } from "@/lib/utils";
 
 function EditProfile() {
   const { user, loading } = useUser();
@@ -51,45 +52,37 @@ function EditProfile() {
     }));
   };
 
-  const buildApiUrl = (endpoint: string) => {
-    const baseUrl =
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:3000"
-        : window.location.origin;
-    return `${baseUrl}/api${endpoint}`;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (Object.keys(formData).length === 0) {
-      toast.error('Please provide at least one field to update');
+      toast.error("Please provide at least one field to update");
       return;
     }
 
     try {
-      const response = await axios.put(buildApiUrl('/profile/edit'), formData, {
+      const response = await axios.put(buildApiUrl("/profile/edit"), formData, {
         withCredentials: true,
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       });
 
-      toast.success(response.data.message || 'Profile updated successfully');
+      toast.success(response.data.message || "Profile updated successfully");
 
-      navigate("/profil")
-
+      navigate("/profil");
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        const errorMessage = error.response?.data?.error || 'Failed to update profile';
+        const errorMessage =
+          error.response?.data?.error || "Failed to update profile";
         toast.error(errorMessage);
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error("An unexpected error occurred");
       }
-      
-      console.error('Profile update error:', error);
+
+      console.error("Profile update error:", error);
     }
-  }
+  };
 
   if (loading || !user) {
     return <div>Loading...</div>;
@@ -201,7 +194,7 @@ function EditProfile() {
               className="form-control"
             />
 
-            <div className="d-flex justify-content-center mt-5 gap-3 icon-left">
+            <div className="d-flex justify-content-center mt-5 gap-3 icon-left edit-buttons">
               <a href="/profil/profilkep" className="btn btn-light w-25">
                 <span>
                   <img src={upload_icon} className="icon icon-small" />

@@ -14,6 +14,7 @@ import { useNotifications } from "@/contexts/NotificationContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { CarInfo } from "./interfaces/Car";
 import axios from "axios";
+import { buildApiUrl } from "@/lib/utils";
 
 function Profile() {
   const { user, loading } = useUser();
@@ -28,14 +29,6 @@ function Profile() {
       loadNamespace("Profile");
     }
   }, [loadedNamespaces, loadNamespace]);
-
-  const buildApiUrl = (endpoint: string) => {
-    const baseUrl =
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:3000"
-        : window.location.origin;
-    return `${baseUrl}/api${endpoint}`;
-  };
 
   useEffect(() => {
     const fetchCars = async () => {

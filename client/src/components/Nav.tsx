@@ -86,7 +86,19 @@ function Nav() {
                   className="btn text-light"
                 >
                   {user.user_name}
-                  <img src={profil} alt="" className="profile profile-nav" />
+                  <img
+                    src={
+                      user.profile_picture
+                        ? `${
+                            import.meta.env.PROD
+                              ? "/api/uploads/profile-pictures/"
+                              : "http://localhost:3000/uploads/profile-pictures/"
+                          }${user.profile_picture}`
+                        : profil
+                    }
+                    alt="Profilkép"
+                    className="profile profile-nav"
+                  />
                   <span className="badge bg-danger notification">
                     {notificationCount.toString()}
                   </span>

@@ -7,6 +7,7 @@ import React, {
   useEffect,
 } from "react";
 import axios from "axios";
+import { buildApiUrl } from "@/lib/utils";
 
 export interface Notification {
   id: string;
@@ -16,14 +17,6 @@ export interface Notification {
   read?: boolean;
   originalId?: string;
 }
-
-const buildApiUrl = (endpoint: string) => {
-  const baseUrl =
-    process.env.NODE_ENV !== "production"
-      ? "http://localhost:3000"
-      : window.location.origin;
-  return `${baseUrl}/api${endpoint}`;
-};
 
 interface NotificationContextType {
   notifications: Notification[];
