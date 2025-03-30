@@ -2,16 +2,10 @@ import { Request, Response } from "express";
 import db from "../../db/connection";
 import validator from "validator";
 import jwt from "jsonwebtoken";
-import { User } from "../../interfaces/User";
+import { AuthenticatedRequest, User } from "../../interfaces/User";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-
-interface AuthenticatedRequest extends Request {
-  user?: {
-    user_id: number;
-  };
-}
 
 interface ProfileUpdateData {
   name?: string;
@@ -25,10 +19,10 @@ interface ProfileUpdateData {
 }
 
 export const editProfile = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response
 ): Promise<void> => {
-  const userId = req.user?.user_id;
+  const userId = (req as AuthenticatedRequest).user?.user_id;
   const {
     name,
     email,
@@ -180,7 +174,7 @@ export const editProfile = async (
 };
 
 const storage = multer.diskStorage({
-  destination: (req: AuthenticatedRequest, file, cb) => {
+  destination: (req: Request, file, cb) => {
     const uploadPath = path.join(__dirname, "../uploads/profile-pictures");
 
     if (!fs.existsSync(uploadPath)) {
@@ -189,11 +183,13 @@ const storage = multer.diskStorage({
 
     cb(null, uploadPath);
   },
-  filename: (req: AuthenticatedRequest, file, cb) => {
+  filename: (req: Request, file, cb) => {
+    const authReq = req as AuthenticatedRequest; // Type casting
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+
     cb(
       null,
-      `profile-${req.user?.user_id}-${uniqueSuffix}${path.extname(
+      `profile-${authReq.user?.user_id}-${uniqueSuffix}${path.extname(
         file.originalname
       )}`
     );
@@ -219,10 +215,7 @@ const upload = multer({
   fileFilter: fileFilter,
   limits: { fileSize: 5 * 1024 * 1024 },
 });
-export const uploadProfilePicture = async (
-  req: AuthenticatedRequest,
-  res: Response
-) => {
+export const uploadProfilePicture = async (req: Request, res: Response) => {
   upload.single("profile_picture")(req, res, async (err) => {
     if (err instanceof multer.MulterError) {
       return res.status(400).json({ error: "File upload error" });
@@ -232,14 +225,14 @@ export const uploadProfilePicture = async (
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
-    if (!req.user?.user_id) {
+    if (!(req as AuthenticatedRequest).user?.user_id) {
       return res.status(401).json({ error: "Unauthorized" });
     }
     try {
       const profilePicturePath = req.file.filename;
       await db.query("UPDATE user SET profile_picture = ? WHERE user_id = ?", [
         profilePicturePath,
-        req.user.user_id,
+        (req as AuthenticatedRequest).user.user_id,
       ]);
       res.json({
         message: "Profile picture uploaded successfully",

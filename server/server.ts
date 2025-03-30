@@ -10,15 +10,21 @@ import { loginHandler } from "./endpoints/api/login";
 import { verifyAuthTokenMiddleware } from "./middlewares/authToken";
 import { logoutHandler } from "./endpoints/api/logout";
 import { resetPasswordHandler } from "./endpoints/api/reset-password";
-import { carsHandler } from "./endpoints/api/cars";
+import { carsHandler, getCarImage } from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
 import { carHandler, getCars } from "./endpoints/api/getCar";
+import { upload } from "./middlewares/upload";
+import { validateCarUpload } from "./middlewares/validators";
+import morgan from "morgan";
 import {
   getNotification,
   readNotification,
 } from "./endpoints/api/notifications";
 import { editProfile, uploadProfilePicture } from "./endpoints/api/profile";
 import path from "path";
+import multer from "multer";
+import { uploadCar } from "./endpoints/api/carUpload";
+import { getComments, postComment } from "./endpoints/api/comments";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -35,6 +41,10 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -54,6 +64,29 @@ app.use(
   "/uploads/profile-pictures",
   express.static(path.join(__dirname, "endpoints/uploads/profile-pictures"))
 );
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads/cars")));
+
+app.use(((err: Error, req: Request, res: Response, next: NextFunction) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_FILE_SIZE") {
+      return res
+        .status(400)
+        .json({ message: "File is too large. Maximum size is 5MB." });
+    }
+    if (err.code === "LIMIT_FILE_COUNT") {
+      return res
+        .status(400)
+        .json({ message: "Too many files. Maximum is 10 files." });
+    }
+  }
+
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Something went wrong!",
+    error: process.env.NODE_ENV === "production" ? {} : err.message,
+  });
+}) as express.ErrorRequestHandler);
 
 app.post("/api/auth/register", [limiter], registerHandler);
 app.post("/api/auth/login", [limiter], loginHandler);
@@ -85,6 +118,23 @@ app.post(
   [verifyAuthTokenMiddleware, limiter],
   uploadProfilePicture
 );
+
+app.post(
+  "/api/upload",
+  upload.any(),
+  validateCarUpload,
+  verifyAuthTokenMiddleware,
+  uploadCar
+);
+
+app.get("/api/getCarImage", verifyAuthTokenMiddleware, getCarImage);
+
+app.get("/api/comments", getComments);
+app.post("/api/comments", verifyAuthTokenMiddleware, postComment);
+
+app.use((req: Request, res: Response) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

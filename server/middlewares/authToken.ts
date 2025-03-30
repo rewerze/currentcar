@@ -1,10 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 
 import jwt from "jsonwebtoken";
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
-
+import { AuthenticatedRequest } from "../interfaces/User";
 export const verifyAuthTokenMiddleware: RequestHandler = async (
   req: Request,
   res: Response,
@@ -20,7 +17,7 @@ export const verifyAuthTokenMiddleware: RequestHandler = async (
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY as string);
-    (req as AuthenticatedRequest).user = decoded;
+    (req as AuthenticatedRequest).user = decoded as any;
     next();
   } catch (error) {
     res.status(401).json({ message: "Invalid or expired token." });

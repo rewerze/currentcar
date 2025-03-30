@@ -39,6 +39,21 @@ const translations = {
   "semi-automatic": "semi-automatic",
   CVT: "continuously variable",
   purchaseSuccess: "Purchase successful!",
+  reviews: "Reviews",
+  loginRequired: "Login required to post a review!",
+  writeReview: "Write your review here...",
+  send: "Send",
+  sending: "Sending...",
+  commentSubmitted: "Your review has been submitted!",
+  errorSubmittingComment: "Failed to submit your review. Please try again.",
+  errorFetchingCar: "Error loading car details",
+  commentRequired: "Please write a comment before submitting",
+  noReviews: "No reviews yet. Be the first to leave a review!",
+  comfort: "Comfort",
+  performance: "Performance",
+  fuel_efficiency: "Fuel Efficiency",
+  safety: "Safety",
+  value_for_money: "Value for Money",
 };
 
 export default translations;

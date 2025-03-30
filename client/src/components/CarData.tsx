@@ -1,18 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import carImage from "../assets/img/nepszeru_auto.png";
 import { useParams } from "react-router-dom";
 import { CarInfo } from "./interfaces/Car";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
-import  profile  from "../assets/img/profile.jpg";
-import star from "../assets/img/filled-star.svg";
+import profile from "../assets/img/profile.jpg";
+import { Comment } from "./interfaces/Comment";
+import { buildApiUrl } from "@/lib/utils";
+import { useUser } from "@/contexts/UserContext";
 
 function CarData() {
+  const { user, loading } = useUser();
   const { t, loadNamespace, language, loadedNamespaces } = useLanguage();
   const { id } = useParams<{ id: string }>();
   const [car, setCarInfo] = useState<CarInfo | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [newComment, setNewComment] = useState({
+    message: "",
+    stars: 5,
+    category: "comfort"
+  });
+  const [loading2, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!loading && user) {
+      setIsLoggedIn(true)
+    }
+  }, [user, loading])
 
   useEffect(() => {
     if (!loadedNamespaces.includes("CarDetail")) {
@@ -22,60 +37,171 @@ function CarData() {
 
   useEffect(() => {
     const fetchCarData = async () => {
-      const response = await fetch(`http://localhost:3000/api/car?id=${id}`, {
-        credentials: "include",
-      });
+      try {
+        const response = await fetch(buildApiUrl(`/car?id=${id}`), {
+          credentials: "include",
+        });
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch car data: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch car data: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setCarInfo(data);
+      } catch (error) {
+        console.error(error);
+        toast.error(t("errorFetchingCar", "CarDetail"));
       }
-
-      const data = await response.json();
-      setCarInfo(data);
-      setError(null);
-      setIsLoading(false);
     };
 
     fetchCarData();
+  }, [id, t]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(buildApiUrl(`/comments?carId=${id}`), {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch comments: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setComments(data);
+      } catch (error) {
+        console.error("Failed to fetch comments:", error);
+      }
+    };
+
+    if (id) {
+      fetchComments();
+    }
   }, [id]);
 
   if (!car) {
-    return <></>;
+    return <div className="nav-gap text-center">Loading...</div>;
   }
 
   function onPurchase(): void {
-    console.log("asd")
-    toast(t("purchaseSuccess", "CarDetail"))
+    toast(t("purchaseSuccess", "CarDetail"));
   }
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNewComment({
+      ...newComment,
+      message: e.target.value
+    });
+  };
+
+  const handleStarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewComment({
+      ...newComment,
+      stars: parseInt(e.target.value)
+    });
+  };
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setNewComment({
+      ...newComment,
+      category: e.target.value
+    });
+  };
+
+  const handleSubmitComment = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!isLoggedIn) {
+      toast.error(t("loginRequired", "CarDetail"));
+      return;
+    }
+
+    if (!newComment.message.trim()) {
+      toast.error(t("commentRequired", "CarDetail"));
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(buildApiUrl("/comments"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          carId: id,
+          message: newComment.message,
+          stars: newComment.stars,
+          ratingCategory: newComment.category
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to submit comment: ${response.status}`);
+      }
+
+      const newCommentData = await response.json();
+
+      setComments([newCommentData, ...comments]);
+
+      setNewComment({
+        message: "",
+        stars: 5,
+        category: "comfort"
+      });
+
+      toast.success(t("commentSubmitted", "CarDetail"));
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+      toast.error(t("errorSubmittingComment", "CarDetail"));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
       <main className="nav-gap">
         <div className="row">
           <div className="col-lg-5">
-          <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
-          <div id="carouselExample" className="carousel slide">
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                <img src={carImage} alt={`${car.car_brand} ${car.car_model}`} className="d-block w-100" />
+            <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
+              <div id="carouselExample" className="carousel slide">
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img src={
+                      car.car_id
+                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                        : carImage
+                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100" />
+                  </div>
+                  <div className="carousel-item">
+                    <img src={
+                      car.car_id
+                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                        : carImage
+                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100" />
+                  </div>
+                  <div className="carousel-item">
+                    <img src={
+                      car.car_id
+                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                        : carImage
+                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100" />
+                  </div>
                 </div>
-                <div className="carousel-item">
-                  <img src={carImage} alt={`${car.car_brand} ${car.car_model}`} className="d-block w-100" />
-                </div>
-                <div className="carousel-item">
-                  <img src={carImage} alt={`${car.car_brand} ${car.car_model}`} className="d-block w-100" />
-                </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Next</span>
+                </button>
               </div>
-              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Next</span>
-              </button>
             </div>
-          </div>
           </div>
           <div className="col-lg-7">
             <h2 className="text-center display-5">
@@ -151,46 +277,106 @@ function CarData() {
           </div>
         </div>
 
-
         <div className="car-comment mt-5 w-50 mx-auto">
-            <h2 className="text-center">Vélemények</h2>
-            <hr />
+          <h2 className="text-center">{t("reviews", "CarDetail")}</h2>
+          <hr />
 
-            <h3 className="text-center text-danger">Bejelentkezés szükséges a vélemény íráshoz!</h3>
-            <form action="/adatlap">
+          {!isLoggedIn && (
+            <h3 className="text-center text-danger">{t("loginRequired", "CarDetail")}</h3>
+          )}
+
+          <form onSubmit={handleSubmitComment}>
             <div className="my-2 mt-5">
               <div className="row">
                 <div className="col-md comment-header">
-                <a href="/profil">
-                <img src={profile} alt="" className="profile-sm" />
-                </a>
-                <span className="star-range"><input type="range" name="star" id="star" min={1} max={5} defaultValue={5}/></span> {/* IDEIGLENES MEGOLDÁS */}
+                  <a href="/profil">
+                    <img src={isLoggedIn ? `${import.meta.env.PROD
+                      ? "/api/uploads/profile-pictures/"
+                      : "http://localhost:3000/uploads/profile-pictures/"
+                      }${user?.profile_picture}` : profile} onError={(e) => { (e.target as HTMLImageElement).src = profile }} alt="" className="profile-sm" />
+                  </a>
+                  <span className="star-range">
+                    <input
+                      type="range"
+                      name="star"
+                      id="star"
+                      min={1}
+                      max={5}
+                      value={newComment.stars}
+                      onChange={handleStarChange}
+                    />
+                    <span className="ms-2">{newComment.stars}/5</span>
+                  </span>
                 </div>
                 <div className="col-md">
-                  <select name="comment_category" id="comment_category" className="form-select car-comment-select">
-                    <option value="">értékelés típus</option>
-                    <option value="">értékelés típus</option>
-                    <option value="">értékelés típus</option>
+                  <select
+                    name="comment_category"
+                    id="comment_category"
+                    className="form-select car-comment-select"
+                    value={newComment.category}
+                    onChange={handleCategoryChange}
+                  >
+                    <option value="comfort">{t("comfort", "CarDetail")}</option>
+                    <option value="performance">{t("performance", "CarDetail")}</option>
+                    <option value="fuel_efficiency">{t("fuel_efficiency", "CarDetail")}</option>
+                    <option value="safety">{t("safety", "CarDetail")}</option>
+                    <option value="value_for_money">{t("value_for_money", "CarDetail")}</option>
                   </select>
                 </div>
               </div>
-
             </div>
-            <textarea name="comment" id="comment" className="w-100 form-control" rows={3} placeholder="Írd meg te is a véleményed!"></textarea>
-            <button className="btn btn-primary mt-2 py-2 w-25">Küldés</button>
-            </form>
 
-            <div className="comment-section">
-                <div className="comment-box bg-light">
-                    <div className="comment-content">
-                        <img src={profile} alt="" className='profile' />
-                        <div className="comment-text">
-                            <h5><span><b>{t('name', 'MainPage')}</b></span><br />vélemény típus: 5/3</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
+            <textarea
+              name="comment"
+              id="comment"
+              className="w-100 form-control"
+              rows={3}
+              placeholder={t("writeReview", "CarDetail")}
+              value={newComment.message}
+              onChange={handleCommentChange}
+              disabled={!isLoggedIn}
+            ></textarea>
+
+            <button
+              className="btn btn-primary mt-2 py-2 w-25"
+              disabled={!isLoggedIn || loading2}
+            >
+              {loading2 ? t("sending", "CarDetail") : t("send", "CarDetail")}
+            </button>
+          </form>
+
+          <div className="comment-section mt-4">
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <div key={comment.comment_id} className="comment-box bg-light mb-3">
+                  <div className="comment-content">
+                    <img src={
+                      comment.profile_picture
+                        ? `${import.meta.env.PROD
+                          ? "/api/uploads/profile-pictures/"
+                          : "http://localhost:3000/uploads/profile-pictures/"
+                        }${comment.profile_picture}`
+                        : profile
+                    } alt="" onError={(e) => { (e.target as HTMLImageElement).src = profile }} className='profile' />
+                    <div className="comment-text">
+                      <h5>
+                        <span><b>{comment.user_name}</b></span><br />
+                        {t(comment.rating_category, "CarDetail")}: {comment.comment_star}/5
+                      </h5>
+                      <p>{comment.comment_message}</p>
+                      <small className="text-muted">
+                        {new Date(comment.comment_date).toLocaleDateString()}
+                      </small>
                     </div>
+                  </div>
                 </div>
-            </div>
+              ))
+            ) : (
+              <div className="text-center mt-4">
+                <p>{t("noReviews", "CarDetail")}</p>
+              </div>
+            )}
+          </div>
         </div>
       </main>
     </>

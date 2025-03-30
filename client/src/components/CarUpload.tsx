@@ -1,68 +1,373 @@
-function CarUpload() {
-    return(
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
+import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { buildApiUrl } from '@/lib/utils';
+import { CarInfo } from './interfaces/Car';
+import { CarCondition, CarType, FuelType, TransmissionType } from './enums/Car';
+
+const CarUpload: React.FC = () => {
+    const { t, loadedNamespaces, loadNamespace } = useLanguage();
+
+    useEffect(() => {
+        if (!loadedNamespaces.includes("CarUpload")) {
+            loadNamespace("CarUpload");
+        }
+    }, [loadedNamespaces, loadNamespace]);
+
+    const [formData, setFormData] = useState<CarInfo>({
+        car_brand: '',
+        car_model: '',
+        car_condition: CarCondition.EXCELLENT,
+        car_year: 0,
+        car_type: CarType.CONVERTIBLE,
+        fuel_type: FuelType.DIESEL,
+        transmission_type: TransmissionType.AUTOMATIC,
+        car_regnumber: '',
+        seats: 0,
+        number_of_doors: 0,
+        price_per_hour: 0,
+        price_per_day: 0,
+        car_description: '',
+        image: '',
+        car_id: 0,
+        car_price: '',
+        car_active: false,
+        insurance_id: 0,
+        mileage: 0,
+    });
+
+    const [availableCars, setAvailableCars] = useState<CarInfo[]>([]);
+
+    const [files, setFiles] = useState<File[]>([]);
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        const fetchCars = async (): Promise<void> => {
+            try {
+                const response = await fetch(buildApiUrl('/cars'), {
+                    credentials: 'include',
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data: CarInfo[] = await response.json();
+                setAvailableCars(data);
+            } catch (error) {
+                console.error('Error fetching cars:', error);
+                toast.error('Failed to load options');
+            }
+        };
+
+        fetchCars();
+    }, []);
+
+    const getUniqueOptions = (field: keyof CarInfo): string[] => {
+        if (!availableCars.length) return [];
+        const options = [
+            ...new Set(
+                availableCars
+                    .map((car) => car[field])
+                    .filter((value) => value !== undefined && value !== null)
+                    .map((value) => String(value))
+            ),
+        ];
+        return options;
+    };
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        if (e.target.files) {
+            setFiles(Array.from(e.target.files));
+        }
+    };
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        const requiredFields: (keyof CarInfo)[] = ['car_brand', 'car_model', 'car_condition', 'car_year', 'car_type',
+            'fuel_type', 'transmission_type', 'car_regnumber', 'seats',
+            'number_of_doors', 'price_per_hour', 'price_per_day', 'car_description'];
+
+        const emptyFields = requiredFields.filter(field => !formData[field]);
+
+        if (emptyFields.length > 0) {
+            toast.error(t('fillAllFields', 'CarUpload'));
+            setIsLoading(false);
+            return;
+        }
+
+        if (files.length === 0) {
+            toast.error(t('uploadOneImage', 'CarUpload'));
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const submitData = new FormData();
+
+            Object.keys(formData).forEach(key => {
+                const value = formData[key as keyof CarInfo];
+                submitData.append(key, value !== undefined ? String(value) : '');
+            });
+
+            files.forEach(file => {
+                submitData.append('car_picture', file);
+            });
+
+            await axios.post(buildApiUrl('/upload'), submitData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                withCredentials: true
+            });
+
+            toast.success(t('uploadSuccess', 'CarUpload'));
+
+            // Reset form
+            setFormData({
+                car_brand: '',
+                car_model: '',
+                car_condition: CarCondition.EXCELLENT,
+                car_year: 0,
+                car_type: CarType.CONVERTIBLE,
+                fuel_type: FuelType.DIESEL,
+                transmission_type: TransmissionType.AUTOMATIC,
+                car_regnumber: '',
+                seats: 0,
+                number_of_doors: 0,
+                price_per_hour: 0,
+                price_per_day: 0,
+                car_description: '',
+                image: '',
+                car_id: 0,
+                car_price: '',
+                car_active: false,
+                insurance_id: 0,
+                mileage: 0,
+            });
+            setFiles([]);
+
+        } catch (error) {
+            console.error('Error uploading car:', error);
+
+            if (axios.isAxiosError(error) && error.response?.data?.errors) {
+                // Handle validation errors
+                const errorMessages = error.response.data.errors
+                    .map((err: unknown) => {
+                        if (typeof err === 'object' && err !== null && 'msg' in err) {
+                            return (err as { msg: string }).msg;
+                        }
+                        return t('unknownError', 'CarUpload');
+                    })
+                    .join(', ');
+                toast.error(errorMessages);
+            } else {
+                if (axios.isAxiosError(error) && error.response) {
+                    console.log(error);
+                    toast.error(error.response.data.error);
+                } else {
+                    toast.error("unknown error");
+                }
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Get current year for max year input
+    const currentYear = new Date().getFullYear();
+
+    return (
         <>
-            {/* KOCSI FELTÖLTÉS */}
-            
             <main className="nav-gap">
                 <div className="form">
                     <div className="form-box bg-dark">
-                        <h1 className="text-center">Autó feltöltés</h1>
+                        <h1 className="text-center">{t('carUpload', 'CarUpload')}</h1>
 
+                        <form onSubmit={handleSubmit}>
+                            <div className="d-flex justify-content-center gap-3 upload-form">
+                                <input
+                                    type="text"
+                                    name="car_brand"
+                                    value={formData.car_brand}
+                                    onChange={handleChange}
+                                    placeholder={t('carBrand', 'CarUpload')}
+                                    className="form-control"
+                                />
+                                <input
+                                    type="text"
+                                    name="car_model"
+                                    value={formData.car_model}
+                                    onChange={handleChange}
+                                    placeholder={t('carModel', 'CarUpload')}
+                                    className="form-control"
+                                />
+                            </div>
 
-                        <div className="d-flex justify-content-center gap-3 upload-form">
-                            <input type="text" placeholder="Márka" className="form-control"/>
-                            <input type="text" placeholder="Modell" className="form-control"/>
-                        </div>
+                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                                <select
+                                    name="car_condition"
+                                    value={formData.car_condition}
+                                    onChange={handleChange}
+                                    className="form-select w-75"
+                                >
+                                    <option value="">{t('condition', 'CarUpload')}</option>
+                                    {getUniqueOptions('car_condition').map((condition) => (
+                                        <option key={condition} value={condition}>
+                                            {t(condition, 'CarUpload')}
+                                        </option>
+                                    ))}
+                                </select>
+                                <input
+                                    type="number"
+                                    name="car_year"
+                                    value={formData.car_year}
+                                    onChange={handleChange}
+                                    placeholder={t('year', 'CarUpload')}
+                                    className="form-control w-25"
+                                    min="1900"
+                                    max={currentYear}
+                                />
+                            </div>
 
-                        <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                            <select name="condition" id="conidion" className="form-select w-75">
-                                <option value="-">Állapot</option>
-                                <option value="1">rossz</option>
-                                <option value="2">jo</option>
-                            </select>
-                            <input type="text" placeholder="Évjárat" className="form-control w-25"/>
-                        </div>
+                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                                <select
+                                    name="car_type"
+                                    value={formData.car_type}
+                                    onChange={handleChange}
+                                    className="form-select w-25"
+                                >
+                                    <option value="">{t('carType', 'CarUpload')}</option>
+                                    {getUniqueOptions('car_type').map((type) => (
+                                        <option key={type} value={type}>
+                                            {t(type, 'CarUpload')}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
+                                    name="fuel_type"
+                                    value={formData.fuel_type}
+                                    onChange={handleChange}
+                                    className="form-select w-25"
+                                >
+                                    <option value="">{t('fuelType', 'CarUpload')}</option>
+                                    {getUniqueOptions('fuel_type').map((type) => (
+                                        <option key={type} value={type}>
+                                            {t(type, 'CarUpload')}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
+                                    name="transmission_type"
+                                    value={formData.transmission_type}
+                                    onChange={handleChange}
+                                    className="form-select w-25"
+                                >
+                                    <option value="">{t('transmissionType', 'CarUpload')}</option>
+                                    {getUniqueOptions('transmission_type').map((type) => (
+                                        <option key={type} value={type}>
+                                            {t(type, 'CarUpload')}
+                                        </option>
+                                    ))}
+                                </select>
+                                <input
+                                    type="text"
+                                    name="car_regnumber"
+                                    value={formData.car_regnumber}
+                                    onChange={handleChange}
+                                    placeholder={t('regNumber', 'CarUpload')}
+                                    className="form-control w-25"
+                                />
+                            </div>
 
-                        <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                            <select name="car_type" id="conidion" className="form-select w-25">
-                                <option value="-">Autó típusa</option>
-                                <option value="1">rossz</option>
-                                <option value="2">jo</option>
-                            </select>
-                            <select name="fuel_type" id="conidion" className="form-select w-25">
-                                <option value="-">Üzemanyag</option>
-                                <option value="1">rossz</option>
-                                <option value="2">jo</option>
-                            </select>
-                            <select name="transmission_type" id="conidion" className="form-select w-25">
-                                <option value="-">Sebességváltó</option>
-                                <option value="1">rossz</option>
-                                <option value="2">jo</option>
-                            </select>
-                            <input type="text" placeholder="Rendszám" className="form-control w-25"/>
-                        </div>
+                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                                <input
+                                    type="number"
+                                    name="seats"
+                                    value={formData.seats}
+                                    onChange={handleChange}
+                                    placeholder={t('seats', 'CarUpload')}
+                                    className="form-control w-25"
+                                    min="1"
+                                />
+                                <input
+                                    type="number"
+                                    name="number_of_doors"
+                                    value={formData.number_of_doors}
+                                    onChange={handleChange}
+                                    placeholder={t('doors', 'CarUpload')}
+                                    className="form-control w-25"
+                                    min="1"
+                                />
+                                <input
+                                    type="number"
+                                    name="price_per_hour"
+                                    value={formData.price_per_hour}
+                                    onChange={handleChange}
+                                    placeholder={t('pricePerHour', 'CarUpload')}
+                                    className="form-control w-25"
+                                    min="0"
+                                />
+                                <input
+                                    type="number"
+                                    name="price_per_day"
+                                    value={formData.price_per_day}
+                                    onChange={handleChange}
+                                    placeholder={t('pricePerDay', 'CarUpload')}
+                                    className="form-control w-25"
+                                    min="0"
+                                />
+                            </div>
 
-                        <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                            <input type="text" placeholder="Ülések száma" className="form-control w-25"/>
-                            <input type="text" placeholder="Ajtók száma" className="form-control w-25"/>
-                            <input type="text" placeholder="Ár / óra" className="form-control w-25"/>
-                            <input type="text" placeholder="Ár / nap" className="form-control w-25"/>
-                        </div>
+                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                                <input
+                                    type="file"
+                                    name="car_picture"
+                                    onChange={handleFileChange}
+                                    className="form-control form-control-lg"
+                                    multiple
+                                    accept="image/*"
+                                />
+                            </div>
 
-                        <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                            <input type="file" name="car_picture" id="formFileMultiple" className="form-control form-control-lg" multiple />
-                        </div>
+                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                                <textarea
+                                    name="car_description"
+                                    value={formData.car_description}
+                                    onChange={handleChange}
+                                    placeholder={t('description', 'CarUpload')}
+                                    className="form-control"
+                                    rows={10}
+                                ></textarea>
+                            </div>
 
-                        <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                            <textarea name="description" id="description" placeholder="Leírás az autóhoz!" className="form-control" rows={10}></textarea>
-                        </div>
-
-                        <button className="btn btn-success w-100 mt-5 p-2">Autó felöltése</button>
+                            <button
+                                type="submit"
+                                className="btn btn-success w-100 mt-5 p-2"
+                                disabled={isLoading}
+                            >
+                                {isLoading ? t('uploading', 'CarUpload') : t('uploadCar', 'CarUpload')}
+                            </button>
+                        </form>
                     </div>
                 </div>
             </main>
         </>
-    )
+    );
+
 }
 
 export default CarUpload;

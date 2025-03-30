@@ -1,14 +1,10 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import db from "../../db/connection";
-import { User } from "../../interfaces/User";
-
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
+import { AuthenticatedRequest, User } from "../../interfaces/User";
 
 export const resetPasswordHandler = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response
 ): Promise<void> => {
   const { oldPassword, newPassword, passwordAgain } = req.body;
@@ -37,7 +33,7 @@ export const resetPasswordHandler = async (
   }
 
   try {
-    const userEmail = req.user?.email;
+    const userEmail = (req as AuthenticatedRequest).user?.user_email;
 
     if (!userEmail) {
       res.status(401).json({ error: "Sikertelen verifikáció!" });

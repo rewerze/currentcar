@@ -2,16 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useUser } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 
 import delete_icon from "../assets/img/delete.svg";
 import logout_icon from "../assets/img/logout.svg";
@@ -25,7 +15,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { CarInfo } from "./interfaces/Car";
 import axios from "axios";
 import { buildApiUrl } from "@/lib/utils";
-import { Button } from "./ui/button";
 
 function Profile() {
   const { user, loading } = useUser();
@@ -36,7 +25,7 @@ function Profile() {
   const [notificationCount, setNotificationCount] = useState<number>(0);
 
   const handleDelete = () => {
-    navigate("/profil/torles");
+
   };
 
   useEffect(() => {
@@ -98,10 +87,10 @@ function Profile() {
                     <span className="badge bg-secondary">
                       {user?.born_at
                         ? new Date(user.born_at).toLocaleString("hu-HU", {
-                            year: "numeric",
-                            month: "numeric",
-                            day: "numeric",
-                          })
+                          year: "numeric",
+                          month: "numeric",
+                          day: "numeric",
+                        })
                         : "N/a"}
                     </span>
                   </p>
@@ -134,8 +123,8 @@ function Profile() {
                     <span className="badge bg-secondary">
                       {user?.driver_license_expiry
                         ? new Date(user.driver_license_expiry).toLocaleString(
-                            "hu-HU"
-                          )
+                          "hu-HU"
+                        )
                         : "N/a"}
                     </span>
                   </p>
@@ -180,7 +169,7 @@ function Profile() {
                 </div>
 
                 <div>
-                  <a href="/profil/torles" className="btn btn-danger w-100">
+                  <a onClick={handleDelete} className="btn btn-danger w-100">
                     <span>
                       <img src={delete_icon} className="icon mx-2" />
                     </span>
@@ -205,13 +194,16 @@ function Profile() {
 
           <div className="profile-car gap-2">
             {cars.map((car, index) => (
-              <div key={index} className="profile-car-card">
+              <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
                 <div className="profile-car-card-body bg-dark">
                   <img
                     src={
-                      "../assets/img/" + car.images?.split(",")[0] ||
-                      templateImage
+                      car.car_id
+                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                        : templateImage
                     }
+
+                    onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
                   />
                   <h3 className="text-center">
                     {car.car_brand} {car.car_model}

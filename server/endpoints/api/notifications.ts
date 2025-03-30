@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import db from "../../db/connection";
-
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
+import { AuthenticatedRequest } from "../../interfaces/User";
 
 export interface Notification {
   notification_id: string;
@@ -14,11 +11,12 @@ export interface Notification {
 }
 
 export const readNotification = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response
 ): Promise<void> => {
   const notificationId = req.params.notificationId;
-  const id = req.user.user_id;
+  const authenticatedReq = req as AuthenticatedRequest;
+  const id = authenticatedReq.user.user_id;
 
   try {
     const notification = await db.query<Notification[]>(
@@ -43,10 +41,10 @@ export const readNotification = async (
 };
 
 export const getNotification = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response
 ): Promise<void> => {
-  const userId = req.user.user_id;
+  const userId = (req as AuthenticatedRequest).user.user_id;
 
   try {
     const notifications = await db.query(

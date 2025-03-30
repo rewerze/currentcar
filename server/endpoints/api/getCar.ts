@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "../../db/connection";
 import mysql from "mysql2";
-import { User } from "../../interfaces/User";
+import { AuthenticatedRequest, User } from "../../interfaces/User";
 import { Car } from "../../interfaces/Car";
 
 export const carHandler = async (
@@ -30,15 +30,8 @@ export const carHandler = async (
   }
 };
 
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
-
-export const getCars = async (
-  req: AuthenticatedRequest,
-  res: Response
-): Promise<void> => {
-  const id = req.user.user_id;
+export const getCars = async (req: Request, res: Response): Promise<void> => {
+  const id = (req as AuthenticatedRequest).user.user_id;
 
   if (!id) {
     res.status(404).json({

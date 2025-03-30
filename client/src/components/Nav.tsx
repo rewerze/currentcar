@@ -12,7 +12,7 @@ function Nav() {
   const navigate = useNavigate();
   const { notifications } = useNotifications();
 
-  const [notificationCount, setNotificationCount] = useState<Number>(0);
+  const [notificationCount, setNotificationCount] = useState<number>(0);
 
   useEffect(() => {
     setNotificationCount(notifications.length);
@@ -89,11 +89,10 @@ function Nav() {
                   <img
                     src={
                       user.profile_picture
-                        ? `${
-                            import.meta.env.PROD
-                              ? "/api/uploads/profile-pictures/"
-                              : "http://localhost:3000/uploads/profile-pictures/"
-                          }${user.profile_picture}`
+                        ? `${import.meta.env.PROD
+                          ? "/api/uploads/profile-pictures/"
+                          : "http://localhost:3000/uploads/profile-pictures/"
+                        }${user.profile_picture}`
                         : profil
                     }
                     alt="Profilkép"

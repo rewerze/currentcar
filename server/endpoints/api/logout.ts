@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
-
 export const logoutHandler = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response
 ): Promise<void> => {
   res.clearCookie("auth_token");

@@ -60,6 +60,13 @@ function EditProfile() {
       return;
     }
 
+    if (formData.driver_license_expiry != null) {
+      if (new Date(formData.driver_license_expiry).getTime() < new Date().getTime()) {
+        toast.error("A jogosítványod lejárati dátuma csak a jövőben lehet!")
+        return;
+      }
+    }
+
     try {
       const response = await axios.put(buildApiUrl("/profile/edit"), formData, {
         withCredentials: true,
@@ -71,7 +78,7 @@ function EditProfile() {
       toast.success(response.data.message || "Profile updated successfully");
 
       navigate("/profil");
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const errorMessage =
           error.response?.data?.error || "Failed to update profile";
@@ -132,10 +139,10 @@ function EditProfile() {
               value={
                 formData.born_at
                   ? new Date(formData.born_at).toLocaleString("hu-HU", {
-                      year: "numeric",
-                      month: "numeric",
-                      day: "numeric",
-                    })
+                    year: "numeric",
+                    month: "numeric",
+                    day: "numeric",
+                  })
                   : ""
               }
               disabled

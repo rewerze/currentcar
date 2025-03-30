@@ -4,12 +4,8 @@ import jwt from "jsonwebtoken";
 import db from "../../db/connection";
 import { User } from "../../interfaces/User";
 
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
-
 export const loginHandler = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response
 ): Promise<void> => {
   const { email, password } = req.body;

@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 type UserRole = "admin" | "user";
 
 export interface User {
@@ -15,4 +17,8 @@ export interface User {
   driver_license_number: string;
   driver_license_expiry: Date;
   profile_picture: string;
+}
+
+export interface AuthenticatedRequest extends Request {
+  user: any;
 }

@@ -315,8 +315,15 @@ function AllCar() {
                     <div>
                       <p className="text-center">
                         <img
-                          src={car.image || carDefaultImage}
+                          src={
+                            car.car_id
+                              ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                              : carDefaultImage
+                          }
                           alt={`${car.car_brand} ${car.car_model}`}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = carDefaultImage;
+                          }}
                           className="car-image"
                         />
                       </p>
