@@ -45,6 +45,7 @@ const CarUpload: React.FC = () => {
         car_active: false,
         insurance_id: 0,
         mileage: 0,
+        available_to: new Date()
     });
 
     const [availableCars, setAvailableCars] = useState<CarInfo[]>([]);
@@ -108,7 +109,7 @@ const CarUpload: React.FC = () => {
 
         const requiredFields: (keyof CarInfo)[] = ['car_brand', 'car_model', 'car_condition', 'car_year', 'car_type',
             'fuel_type', 'transmission_type', 'car_regnumber', 'seats',
-            'number_of_doors', 'price_per_hour', 'price_per_day', 'car_description'];
+            'number_of_doors', 'price_per_hour', 'price_per_day', 'car_description', 'available_to'];
 
         const emptyFields = requiredFields.filter(field => !formData[field]);
 
@@ -166,6 +167,7 @@ const CarUpload: React.FC = () => {
                 car_active: false,
                 insurance_id: 0,
                 mileage: 0,
+                available_to: new Date()
             });
             setFiles([]);
 
@@ -389,20 +391,13 @@ const CarUpload: React.FC = () => {
 
                             <div className="d-flex justify-content-center gap-3 upload-form mt-2">
                                 <div className='upload-data'>
-                                    <label htmlFor="from">Mettől?</label>
-                                    <input
-                                        id="from"
-                                        type="date"
-                                        name="from"
-                                        className="form-control"
-                                    />
-                                </div>
-                                <div className='upload-data'>
-                                    <label htmlFor="to">Meddig?</label>
+                                    <label htmlFor="to">{t('available_to', 'CarUpload')}</label>
                                     <input
                                         id="to"
                                         type="date"
-                                        name="to"
+                                        name="available_to"
+                                        value={formData.available_to.toString()}
+                                        onChange={handleChange}
                                         className="form-control"
                                     />
                                 </div>

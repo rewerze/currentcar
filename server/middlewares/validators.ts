@@ -87,4 +87,10 @@ export const validateCarUpload = [
     .withMessage("Description is required")
     .isLength({ max: 250 })
     .withMessage("Description must be less than 250 characters"),
+
+    check('available_to')
+    .notEmpty()
+    .withMessage("Availability date is required")
+    .isDate()
+    .withMessage("Available to must be a valid date"),
 ];

@@ -57,7 +57,7 @@ function Nav() {
                   aria-current="page"
                   href="/feladas"
                 >
-                  Autó feltöltés
+                  {t("uploadCar", "navbar")}
                 </a>
               </li>
               <li className="nav-item">

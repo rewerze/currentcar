@@ -26,5 +26,5 @@ export interface CarInfo {
   fuel_type: FuelType;
   transmission_type: TransmissionType;
   car_brand: string;
-  available_to: string;
+  available_to: Date;
 }

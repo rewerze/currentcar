@@ -85,7 +85,7 @@ export const rentCar = async (
     await connection.beginTransaction();
 
     const [carRows] = await connection.query<RowDataPacket[]>(
-      'SELECT * FROM car WHERE car_id = ? AND car_active = 1',
+      'SELECT * FROM car WHERE car_id = ?',
       [car_id]
     );
 

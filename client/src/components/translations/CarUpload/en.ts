@@ -44,7 +44,8 @@ const translations = {
   uploadSuccess: "Successfully uploaded car!",
   uploadOneImage: "Please upload an image!",
   carUpload: "Car Upload",
-  unknownError: "An unknown error occured!"
+  unknownError: "An unknown error occured!",
+  available_to: "Until when?"
 };
 
 export default translations;
