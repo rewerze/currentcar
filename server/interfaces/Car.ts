@@ -17,4 +17,5 @@ export interface Car {
     fuel_type: 'petrol' | 'diesel' | 'electric' | 'hybrid' | 'gas';
     transmission_type: 'automatic' | 'manual' | 'semi-automatic' | 'CVT';
     car_brand: string;
+    available_to: string;
 }

@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "../../db/connection";
-import mysql from "mysql2";
+import mysql, { RowDataPacket } from "mysql2";
 import { AuthenticatedRequest, User } from "../../interfaces/User";
 import { Car } from "../../interfaces/Car";
 
@@ -23,6 +23,26 @@ export const carHandler = async (
     const [rows] = await db.query<Car>(`SELECT * FROM car WHERE car_id = ?`, [
       carId,
     ]);
+
+    const [availableRows] = await db.query<RowDataPacket>(`
+      SELECT 
+        c.car_id, 
+        c.car_model, 
+        c.car_brand, 
+        c.car_type, 
+        c.car_price,
+        ca.available_to
+      FROM 
+        car_user cu
+      JOIN 
+        car c ON cu.car_id = c.car_id
+      LEFT JOIN 
+        car_availability ca ON c.car_id = ca.car_id
+      WHERE 
+        cu.user_id = ?
+    `, [carId])
+
+    rows["available_to"] = (availableRows as RowDataPacket).available_to
     res.json(rows);
   } catch (error) {
     console.error("Error fetching cars:", error);

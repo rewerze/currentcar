@@ -55,6 +55,10 @@ const translations = {
   fuel_efficiency: "Üzemanyag-hatékonyság",
   safety: "Biztonság",
   value_for_money: "Ár-érték arány",
+  signIn: "Be kell jelentkezned, hogy kibéreld ezt a járművet!",
+  rented: "Ez a jármű már ki van bérelve!",
+  purchaseError: "Hiba történt vásárlás közben. Frissítsd az oldalt, és próbáld újra",
+  availableUntil: "Elérhető eddig"
 };
 
 export default translations;

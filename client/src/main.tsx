@@ -25,6 +25,7 @@ import NotFound from "./components/404.tsx";
 import { Toaster } from "@/components/ui/sonner";
 import ProfilePicture from "./components/ProfilePicture.tsx";
 import { NotificationProvider } from "./contexts/NotificationContext.tsx";
+import Notification from "./components/Notification.tsx";
 
 const ToasterWrapper = () => {
   return (
@@ -90,6 +91,7 @@ createRoot(document.getElementById("root")!).render(
               {/*  KÖVETELMENYEK */}
               <Route path="/profil/modositas" element={<EditProfile />} />{" "}
               {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
+              <Route path="/profil/ertesitesek" element={<Notification />} />{" "}
               <Route
                 path="/profil/profilkep"
                 element={<ProfilePicture />}

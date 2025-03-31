@@ -2,6 +2,7 @@
     .car-box {
         width: 30%;
     }
+
     .search {
         border: none;
         margin: 0;
@@ -16,7 +17,8 @@
         margin-right: auto;
     }
 
-    .search input, .search select{
+    .search input,
+    .search select {
         width: 100% !important;
     }
 
@@ -38,7 +40,7 @@
         margin: auto;
     }
 
-    .notif .row{
+    .notif .row {
         display: flex;
         flex-direction: column;
     }
@@ -80,6 +82,7 @@
         margin: auto;
         gap: 6px;
     }
+
     .profile-data {
         width: 100%;
     }
@@ -114,6 +117,10 @@
         width: 100% !important;
     }
 
+    .form-box input[type="radio"] {
+        width: 1rem !important;
+    }
+
     .form-box button {
         height: 3rem;
     }
@@ -123,6 +130,7 @@
         margin: 0;
         padding: 0;
     }
+
     section {
         padding: 2rem !important;
     }
@@ -160,7 +168,7 @@
     }
 
     footer {
-        display: flex; 
+        display: flex;
         flex-direction: column;
         justify-content: center;
     }
@@ -195,11 +203,12 @@
         flex-direction: column;
     }
 
-    .upload-form input, .upload-form select{
+    .upload-form input,
+    .upload-form select {
         width: 100% !important;
     }
-    
-    .upload-form select {        
+
+    .upload-form select {
         padding-top: 0.7rem !important;
         padding-bottom: 0.7rem !important;
     }
@@ -216,15 +225,16 @@
         width: 100% !important;
     }
 
-    .star-range input[type="range"]{
-    
+    .star-range input[type="range"] {
+
         --s: 33px;
-      
+
     }
 
-    .icon-left a, .icon-left button{
+    .icon-left a,
+    .icon-left button {
         align-items: center;
-        justify-content:start;
+        justify-content: start;
     }
 
 
@@ -232,7 +242,8 @@
         flex-direction: column;
     }
 
-    .edit-buttons button, .edit-buttons a {
+    .edit-buttons button,
+    .edit-buttons a {
         width: 100% !important;
     }
 
@@ -260,10 +271,11 @@
         flex-direction: column;
     }
 
-    
+
     .file-details button {
         width: 60% !important;
     }
+
 }
 
 @media only screen and (max-width: 576px) {
@@ -310,7 +322,8 @@
         width: 100% !important;
     }
 
-    .data-list p, .data-list a {
+    .data-list p,
+    .data-list a {
         display: flex;
         flex-direction: column;
         text-align: center;
@@ -330,8 +343,13 @@
         width: 80% !important;
     }
 
-    
+
     .file-details button {
         width: 80% !important;
+    }
+
+    .star-range {
+        flex-direction: column;
+        align-items: start;
     }
 }

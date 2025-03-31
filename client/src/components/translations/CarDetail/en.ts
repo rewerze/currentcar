@@ -54,6 +54,10 @@ const translations = {
   fuel_efficiency: "Fuel Efficiency",
   safety: "Safety",
   value_for_money: "Value for Money",
+  signIn: "You have to sign in to rent this car!",
+  rented: "This car has already been rented!",
+  purchaseError: "There was an error while purchasing. Please refresh the page, and try again!",
+  availableUntil: "Available until"
 };
 
 export default translations;

@@ -8,6 +8,8 @@ import profile from "../assets/img/profile.jpg";
 import { Comment } from "./interfaces/Comment";
 import { buildApiUrl } from "@/lib/utils";
 import { useUser } from "@/contexts/UserContext";
+import axios, { AxiosError } from "axios";
+import PaymentModal from "./Payment";
 
 function CarData() {
   const { user, loading } = useUser();
@@ -16,6 +18,16 @@ function CarData() {
   const [car, setCarInfo] = useState<CarInfo | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const [newComment, setNewComment] = useState({
     message: "",
     stars: 5,
@@ -84,8 +96,51 @@ function CarData() {
     return <div className="nav-gap text-center">Loading...</div>;
   }
 
-  function onPurchase(): void {
-    toast(t("purchaseSuccess", "CarDetail"));
+  async function onCarPurchase(fromDate: string, toDate: string, paymentMethod: string): Promise<void> {
+    if (user && !loading) {
+      try {
+        const response = await axios.post(
+          buildApiUrl("/rent"),
+          {
+            car_id: id,
+            start_date: fromDate,
+            end_date: toDate,
+            pickup_location: "Default Pickup Location",
+            dropoff_location: "Default Dropoff Location",
+            payment_method: paymentMethod == "card" ? "credit_card" : "cash",
+            discount_code: ""
+          },
+          {
+            withCredentials: true
+          }
+        );
+
+        if (response.data.success) {
+          toast.success(t("purchaseSuccess", "CarDetail"));
+        } else {
+          console.log(response.data.error)
+          toast.error(response.data.error || t("purchaseError", "CarDetail"));
+        }
+      } catch (error) {
+        console.error("Error renting car:", error);
+        if (error instanceof AxiosError) {
+          toast.error(
+            (error.response?.data as { error?: string })?.error ||
+            error.message ||
+            (t("purchaseError", "CarDetail") as string) ||
+            ""
+          );
+        } else {
+          toast.error("An unknown error occurred.");
+        }
+      }
+    } else {
+      toast.error(t("signIn", "CarDetail"));
+    }
+  }
+
+  async function onPurchase(): Promise<void> {
+    openModal();
   }
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -164,6 +219,7 @@ function CarData() {
 
   return (
     <>
+      <PaymentModal isOpen={isModalOpen} onClose={closeModal} onPurchase={onCarPurchase} />
       <main className="nav-gap">
         <div className="row">
           <div className="col-lg-5">
@@ -266,12 +322,20 @@ function CarData() {
                       {car.price_per_day} {language === "hu" ? "HUF" : "EUR"}
                     </td>
                   </tr>
+                  <tr>
+                    <th>{t("availableUntil", "CarDetail")}:</th>
+                    <td>{new Date(car.available_to).toLocaleDateString()}</td>
+                  </tr>
+                  <tr>
+                    <th>Itt vehető át:</th>
+                    <td>cím google maps-es link-kel</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
             <div className="d-flex justify-content-center adatlap-table-alatt">
-              <button className="btn btn-success" onClick={onPurchase}>
-                {t("purchase", "CarDetail")}
+              <button className="btn btn-success" onClick={onPurchase} disabled={car.car_active != true}>
+                {car.car_active ? t("purchase", "CarDetail") : t("rented", "CarDetail")}
               </button>
             </div>
           </div>

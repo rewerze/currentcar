@@ -5,9 +5,19 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { buildApiUrl } from '@/lib/utils';
 import { CarInfo } from './interfaces/Car';
 import { CarCondition, CarType, FuelType, TransmissionType } from './enums/Car';
+import { useUser } from '@/contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const CarUpload: React.FC = () => {
     const { t, loadedNamespaces, loadNamespace } = useLanguage();
+    const { user, loading } = useUser();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loading && !user) {
+            navigate('/');
+        }
+    }, [user, loading])
 
     useEffect(() => {
         if (!loadedNamespaces.includes("CarUpload")) {
@@ -136,7 +146,6 @@ const CarUpload: React.FC = () => {
 
             toast.success(t('uploadSuccess', 'CarUpload'));
 
-            // Reset form
             setFormData({
                 car_brand: '',
                 car_model: '',
@@ -164,7 +173,6 @@ const CarUpload: React.FC = () => {
             console.error('Error uploading car:', error);
 
             if (axios.isAxiosError(error) && error.response?.data?.errors) {
-                // Handle validation errors
                 const errorMessages = error.response.data.errors
                     .map((err: unknown) => {
                         if (typeof err === 'object' && err !== null && 'msg' in err) {
@@ -187,7 +195,6 @@ const CarUpload: React.FC = () => {
         }
     };
 
-    // Get current year for max year input
     const currentYear = new Date().getFullYear();
 
     return (
@@ -199,159 +206,238 @@ const CarUpload: React.FC = () => {
 
                         <form onSubmit={handleSubmit}>
                             <div className="d-flex justify-content-center gap-3 upload-form">
-                                <input
-                                    type="text"
-                                    name="car_brand"
-                                    value={formData.car_brand}
-                                    onChange={handleChange}
-                                    placeholder={t('carBrand', 'CarUpload')}
-                                    className="form-control"
-                                />
-                                <input
-                                    type="text"
-                                    name="car_model"
-                                    value={formData.car_model}
-                                    onChange={handleChange}
-                                    placeholder={t('carModel', 'CarUpload')}
-                                    className="form-control"
-                                />
+                                <div className='upload-data'>
+                                    <label htmlFor="car_brand">{t('carBrand', 'CarUpload')}</label>
+                                    <input
+                                        id="car_brand"
+                                        type="text"
+                                        name="car_brand"
+                                        value={formData.car_brand}
+                                        onChange={handleChange}
+                                        placeholder={t('carBrand', 'CarUpload')}
+                                        className="form-control"
+                                    />
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="car_model">{t('carModel', 'CarUpload')}</label>
+                                    <input
+                                        id="car_model"
+                                        type="text"
+                                        name="car_model"
+                                        value={formData.car_model}
+                                        onChange={handleChange}
+                                        placeholder={t('carModel', 'CarUpload')}
+                                        className="form-control"
+                                    />
+                                </div>
                             </div>
 
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                                <select
-                                    name="car_condition"
-                                    value={formData.car_condition}
-                                    onChange={handleChange}
-                                    className="form-select w-75"
-                                >
-                                    <option value="">{t('condition', 'CarUpload')}</option>
-                                    {getUniqueOptions('car_condition').map((condition) => (
-                                        <option key={condition} value={condition}>
-                                            {t(condition, 'CarUpload')}
-                                        </option>
-                                    ))}
-                                </select>
-                                <input
-                                    type="number"
-                                    name="car_year"
-                                    value={formData.car_year}
-                                    onChange={handleChange}
-                                    placeholder={t('year', 'CarUpload')}
-                                    className="form-control w-25"
-                                    min="1900"
-                                    max={currentYear}
-                                />
+                                <div className='upload-data'>
+                                    <label htmlFor="car_condition">{t('condition', 'CarUpload')}</label>
+                                    <select
+                                        id="car_condition"
+                                        name="car_condition"
+                                        value={formData.car_condition}
+                                        onChange={handleChange}
+                                        className="form-select w-75"
+                                    >
+                                        <option value="">{t('condition', 'CarUpload')}</option>
+                                        {getUniqueOptions('car_condition').map((condition) => (
+                                            <option key={condition} value={condition}>
+                                                {t(condition, 'CarUpload')}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="car_year">{t('year', 'CarUpload')}</label>
+                                    <input
+                                        id="car_year"
+                                        type="number"
+                                        name="car_year"
+                                        value={formData.car_year}
+                                        onChange={handleChange}
+                                        placeholder={t('year', 'CarUpload')}
+                                        className="form-control w-25"
+                                        min="1900"
+                                        max={currentYear}
+                                    />
+                                </div>
                             </div>
 
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                                <select
-                                    name="car_type"
-                                    value={formData.car_type}
-                                    onChange={handleChange}
-                                    className="form-select w-25"
-                                >
-                                    <option value="">{t('carType', 'CarUpload')}</option>
-                                    {getUniqueOptions('car_type').map((type) => (
-                                        <option key={type} value={type}>
-                                            {t(type, 'CarUpload')}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    name="fuel_type"
-                                    value={formData.fuel_type}
-                                    onChange={handleChange}
-                                    className="form-select w-25"
-                                >
-                                    <option value="">{t('fuelType', 'CarUpload')}</option>
-                                    {getUniqueOptions('fuel_type').map((type) => (
-                                        <option key={type} value={type}>
-                                            {t(type, 'CarUpload')}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    name="transmission_type"
-                                    value={formData.transmission_type}
-                                    onChange={handleChange}
-                                    className="form-select w-25"
-                                >
-                                    <option value="">{t('transmissionType', 'CarUpload')}</option>
-                                    {getUniqueOptions('transmission_type').map((type) => (
-                                        <option key={type} value={type}>
-                                            {t(type, 'CarUpload')}
-                                        </option>
-                                    ))}
-                                </select>
-                                <input
-                                    type="text"
-                                    name="car_regnumber"
-                                    value={formData.car_regnumber}
-                                    onChange={handleChange}
-                                    placeholder={t('regNumber', 'CarUpload')}
-                                    className="form-control w-25"
-                                />
+                                <div className='upload-data'>
+                                    <label htmlFor="car_type">{t('carType', 'CarUpload')}</label>
+                                    <select
+                                        id="car_type"
+                                        name="car_type"
+                                        value={formData.car_type}
+                                        onChange={handleChange}
+                                        className="form-select w-25"
+                                    >
+                                        <option value="">{t('carType', 'CarUpload')}</option>
+                                        {getUniqueOptions('car_type').map((type) => (
+                                            <option key={type} value={type}>
+                                                {t(type, 'CarUpload')}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="fuel_type">{t('fuelType', 'CarUpload')}</label>
+                                    <select
+                                        id="fuel_type"
+                                        name="fuel_type"
+                                        value={formData.fuel_type}
+                                        onChange={handleChange}
+                                        className="form-select w-25"
+                                    >
+                                        <option value="">{t('fuelType', 'CarUpload')}</option>
+                                        {getUniqueOptions('fuel_type').map((type) => (
+                                            <option key={type} value={type}>
+                                                {t(type, 'CarUpload')}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="transmission_type">{t('transmissionType', 'CarUpload')}</label>
+                                    <select
+                                        id="transmission_type"
+                                        name="transmission_type"
+                                        value={formData.transmission_type}
+                                        onChange={handleChange}
+                                        className="form-select w-25"
+                                    >
+                                        <option value="">{t('transmissionType', 'CarUpload')}</option>
+                                        {getUniqueOptions('transmission_type').map((type) => (
+                                            <option key={type} value={type}>
+                                                {t(type, 'CarUpload')}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="car_regnumber">{t('regNumber', 'CarUpload')}</label>
+                                    <input
+                                        id="car_regnumber"
+                                        type="text"
+                                        name="car_regnumber"
+                                        value={formData.car_regnumber}
+                                        onChange={handleChange}
+                                        placeholder={t('regNumber', 'CarUpload')}
+                                        className="form-control w-25"
+                                    />
+                                </div>
                             </div>
 
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                                <input
-                                    type="number"
-                                    name="seats"
-                                    value={formData.seats}
-                                    onChange={handleChange}
-                                    placeholder={t('seats', 'CarUpload')}
-                                    className="form-control w-25"
-                                    min="1"
-                                />
-                                <input
-                                    type="number"
-                                    name="number_of_doors"
-                                    value={formData.number_of_doors}
-                                    onChange={handleChange}
-                                    placeholder={t('doors', 'CarUpload')}
-                                    className="form-control w-25"
-                                    min="1"
-                                />
-                                <input
-                                    type="number"
-                                    name="price_per_hour"
-                                    value={formData.price_per_hour}
-                                    onChange={handleChange}
-                                    placeholder={t('pricePerHour', 'CarUpload')}
-                                    className="form-control w-25"
-                                    min="0"
-                                />
-                                <input
-                                    type="number"
-                                    name="price_per_day"
-                                    value={formData.price_per_day}
-                                    onChange={handleChange}
-                                    placeholder={t('pricePerDay', 'CarUpload')}
-                                    className="form-control w-25"
-                                    min="0"
-                                />
+                                <div className='upload-data'>
+                                    <label htmlFor="seats">{t('seats', 'CarUpload')}</label>
+                                    <input
+                                        id="seats"
+                                        type="number"
+                                        name="seats"
+                                        value={formData.seats}
+                                        onChange={handleChange}
+                                        placeholder={t('seats', 'CarUpload')}
+                                        className="form-control w-25"
+                                        min="1"
+                                    />
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="number_of_doors">{t('doors', 'CarUpload')}</label>
+                                    <input
+                                        id="number_of_doors"
+                                        type="number"
+                                        name="number_of_doors"
+                                        value={formData.number_of_doors}
+                                        onChange={handleChange}
+                                        placeholder={t('doors', 'CarUpload')}
+                                        className="form-control w-25"
+                                        min="1"
+                                    />
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="price_per_hour">{t('pricePerHour', 'CarUpload')}</label>
+                                    <input
+                                        id="price_per_hour"
+                                        type="number"
+                                        name="price_per_hour"
+                                        value={formData.price_per_hour}
+                                        onChange={handleChange}
+                                        placeholder={t('pricePerHour', 'CarUpload')}
+                                        className="form-control w-25"
+                                        min="0"
+                                    />
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="price_per_day">{t('pricePerDay', 'CarUpload')}</label>
+                                    <input
+                                        id="price_per_day"
+                                        type="number"
+                                        name="price_per_day"
+                                        value={formData.price_per_day}
+                                        onChange={handleChange}
+                                        placeholder={t('pricePerDay', 'CarUpload')}
+                                        className="form-control w-25"
+                                        min="0"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="d-flex justify-content-center gap-3 upload-form mt-2">
+                                <div className='upload-data'>
+                                    <label htmlFor="from">Mettől?</label>
+                                    <input
+                                        id="from"
+                                        type="date"
+                                        name="from"
+                                        className="form-control"
+                                    />
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="to">Meddig?</label>
+                                    <input
+                                        id="to"
+                                        type="date"
+                                        name="to"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+
+
+                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                                <div className="upload-data">
+                                    <label htmlFor="car_picture">Képfeltöltés</label>
+                                    <input
+                                        id="car_picture"
+                                        type="file"
+                                        name="car_picture"
+                                        onChange={handleFileChange}
+                                        className="form-control form-control-lg"
+                                        multiple
+                                        accept="image/*"
+                                    />
+                                </div>
                             </div>
 
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                                <input
-                                    type="file"
-                                    name="car_picture"
-                                    onChange={handleFileChange}
-                                    className="form-control form-control-lg"
-                                    multiple
-                                    accept="image/*"
-                                />
-                            </div>
+                                <div className="upload-data">
 
-                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                                <textarea
-                                    name="car_description"
-                                    value={formData.car_description}
-                                    onChange={handleChange}
-                                    placeholder={t('description', 'CarUpload')}
-                                    className="form-control"
-                                    rows={10}
-                                ></textarea>
+                                    <label htmlFor="car_description">{t('description', 'CarUpload')}</label>
+                                    <textarea
+                                        id="car_description"
+                                        name="car_description"
+                                        value={formData.car_description}
+                                        onChange={handleChange}
+                                        placeholder={t('description', 'CarUpload')}
+                                        className="form-control"
+                                        rows={10}
+                                    ></textarea>
+                                </div>
                             </div>
 
                             <button
@@ -367,7 +453,6 @@ const CarUpload: React.FC = () => {
             </main>
         </>
     );
-
 }
 
 export default CarUpload;

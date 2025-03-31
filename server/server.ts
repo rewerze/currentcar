@@ -10,11 +10,12 @@ import { loginHandler } from "./endpoints/api/login";
 import { verifyAuthTokenMiddleware } from "./middlewares/authToken";
 import { logoutHandler } from "./endpoints/api/logout";
 import { resetPasswordHandler } from "./endpoints/api/reset-password";
-import { carsHandler, getCarImage } from "./endpoints/api/cars";
+import { carsHandler, getCarImage, rentCar } from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
 import { carHandler, getCars } from "./endpoints/api/getCar";
 import { upload } from "./middlewares/upload";
 import { validateCarUpload } from "./middlewares/validators";
+import cron from "node-cron";
 import morgan from "morgan";
 import {
   getNotification,
@@ -25,6 +26,8 @@ import path from "path";
 import multer from "multer";
 import { uploadCar } from "./endpoints/api/carUpload";
 import { getComments, postComment } from "./endpoints/api/comments";
+import db from "./db/connection";
+import { RowDataPacket } from "mysql2";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -132,9 +135,50 @@ app.get("/api/getCarImage", verifyAuthTokenMiddleware, getCarImage);
 app.get("/api/comments", getComments);
 app.post("/api/comments", verifyAuthTokenMiddleware, postComment);
 
+app.post("/api/rent", verifyAuthTokenMiddleware, rentCar)
+
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });
 });
+
+cron.schedule("*/30 * * * *", async () => {
+  console.log("Checking for expired cars...");
+  await updateExpiredOrders();
+  await deactivateExpiredAvailability();
+});
+
+export const updateExpiredOrders = async () => {
+  try {
+    const result = await db.query<RowDataPacket>(`
+          UPDATE car
+          SET car_active = 1
+          WHERE car_id IN (
+              SELECT car_id FROM orders 
+              WHERE end_date < NOW() AND rental_status = 'completed'
+          )
+      `);
+    console.log(`Reactivated ${(result as RowDataPacket).affectedRows} cars after rental expiry.`);
+  } catch (error) {
+    console.error("Error updating expired orders:", error);
+  }
+};
+
+export const deactivateExpiredAvailability = async () => {
+  try {
+    const result = await db.query<RowDataPacket>(`
+          UPDATE car
+          SET car_active = 0
+          WHERE car_id IN (
+              SELECT car_id FROM car_availability 
+              WHERE available_to < NOW()
+          )
+      `);
+    console.log(`Deactivated ${(result as RowDataPacket).affectedRows} cars due to availability expiration.`);
+  } catch (error) {
+    console.error("Error deactivating expired availability:", error);
+  }
+};
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import upload from "../assets/img/upload.svg";
 import "../assets/css/profilepicture.css";
 import { toast } from "sonner";
 import { buildApiUrl } from "@/lib/utils";
+import { useUser } from "@/contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePicture() {
   const [file, setFile] = useState<File | null>(null);
@@ -11,6 +13,14 @@ function ProfilePicture() {
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { user, loading } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/register');
+    }
+  }, [user, loading])
 
   const handleFileSelect = (selectedFile: File) => {
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
@@ -84,7 +94,7 @@ function ProfilePicture() {
     formData.append("profile_picture", file);
 
     try {
-      const response = await axios.post(
+      await axios.post(
         buildApiUrl("/upload-profile-picture"),
         formData,
         {
@@ -115,7 +125,7 @@ function ProfilePicture() {
 
   return (
     <main className="nav-gap">
-      {file && 
+      {file &&
         <p className="text-center"><b>Kiválasztva:</b> {file.name}</p>
       }
       <input
@@ -127,9 +137,8 @@ function ProfilePicture() {
       />
 
       <div
-        className={`drop-zone d-flex justify-content-center ${
-          isDragging ? "dragging" : ""
-        }`}
+        className={`drop-zone d-flex justify-content-center ${isDragging ? "dragging" : ""
+          }`}
         onClick={handleClickUpload}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}

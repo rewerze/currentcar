@@ -44,6 +44,7 @@ const translations = {
   uploadSuccess: "Sikeresen feltöltötted az autót!",
   uploadOneImage: "Kérlek tölts fel egy képet!",
   carUpload: "Jármű feltöltés",
+  unknownError: "Egy ismeretlen hiba történt!"
 };
 
 export default translations;

@@ -10,12 +10,13 @@ function Nav() {
   const { user } = useUser();
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
   const navigate = useNavigate();
-  const { notifications } = useNotifications();
+  const notifications = useNotifications();
 
   const [notificationCount, setNotificationCount] = useState<number>(0);
 
   useEffect(() => {
-    setNotificationCount(notifications.length);
+    console.log(notifications.getUnreadCount())
+    setNotificationCount(notifications.getUnreadCount());
   }, [notifications]);
 
   useEffect(() => {
