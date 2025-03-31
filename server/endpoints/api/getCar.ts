@@ -33,16 +33,18 @@ export const carHandler = async (
         c.car_price,
         ca.available_to
       FROM 
-        car_user cu
+        car c
       JOIN 
-        car c ON cu.car_id = c.car_id
+        car_user cu ON cu.car_id = c.car_id
       LEFT JOIN 
         car_availability ca ON c.car_id = ca.car_id
       WHERE 
-        cu.user_id = ?
-    `, [carId])
+        c.car_id = ?
+    `, [carId]);
 
-    rows["available_to"] = (availableRows as RowDataPacket).available_to
+    if (availableRows && (availableRows as RowDataPacket).available_to) {
+      rows["available_to"] = (availableRows as RowDataPacket).available_to
+    }
     res.json(rows);
   } catch (error) {
     console.error("Error fetching cars:", error);
