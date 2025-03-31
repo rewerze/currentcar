@@ -515,11 +515,11 @@ input#card {
 details summary {
     list-style: none;
     position: relative;
-    padding-left: 50px;
+    padding-left: 60px;
 }
 
 details[open] summary::before {
-    transform: translateY(-50%) rotate(90deg); /* Csak a nyíl forgása */
+    transform: translateY(-50%) rotate(90deg);
     transition: 500ms ease;
 }
 
@@ -529,18 +529,13 @@ details summary::before {
     position: absolute;
     left: 0;
     top: 45%;
-    transform: translateY(-50%); /* Eredeti helyzet */
+    transform: translateY(-50%);
     width: 50px;
     height: 50px;
     background-image: url('../img/csavar.svg');
     background-size: contain;
     background-repeat: no-repeat;
 }
-
-summary::content {
-    padding-left: 2rem;
-}
-
 
 details { 
     @media (prefers-reduced-motion: no-preference) { interpolate-size: allow-keywords; }
@@ -556,3 +551,10 @@ details {
       block-size: auto;
     }
   }
+
+.car-icon {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    position: absolute;
+}

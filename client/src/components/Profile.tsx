@@ -192,9 +192,13 @@ function Profile() {
             </div>
           </div>
 
+
+          {/* KOCSIK */}
           <div className="profile-car gap-2">
             {cars.map((car, index) => (
               <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
+                <span className="car-icon badge bg-primary">mod</span>
+                <span className="car-icon badge bg-danger">kuka</span>
                 <div className="profile-car-card-body bg-dark">
                   <img
                     src={
