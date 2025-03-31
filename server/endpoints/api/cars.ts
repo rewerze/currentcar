@@ -8,7 +8,7 @@ export const carsHandler = async (
   res: Response
 ): Promise<void> => {
   try {
-    const rows = await db.query<Car>("SELECT * FROM car WHERE car_active = 1");
+    const rows = await db.query<Car>("SELECT * FROM car");
     res.json(rows);
   } catch (error) {
     console.error("Error fetching cars:", error);
