@@ -197,8 +197,6 @@ function Profile() {
           <div className="profile-car gap-2">
             {cars.map((car, index) => (
               <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
-                <span className="car-icon badge bg-primary">mod</span>
-                <span className="car-icon badge bg-danger">kuka</span>
                 <div className="profile-car-card-body bg-dark">
                   <img
                     src={
@@ -206,13 +204,17 @@ function Profile() {
                         ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
                         : templateImage
                     }
-
                     onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
+                    className="profile-car-img"
                   />
                   <h3 className="text-center">
                     {car.car_brand} {car.car_model}
                   </h3>
                   <p>{car.car_description}</p>
+                  <div className="profile-car-btn">
+                      <button className="btn badge bg-primary"><img src={edit_icon} /></button>
+                      <button className="btn badge bg-danger"><img src={delete_icon} /></button>
+                    </div>
                 </div>
               </div>
             ))}

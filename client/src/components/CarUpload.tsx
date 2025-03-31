@@ -406,7 +406,7 @@ const CarUpload: React.FC = () => {
 
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className="upload-data">
-                                    <label htmlFor="car_picture">Képfeltöltés</label>
+                                    <label htmlFor="car_picture">Képfeltöltés: <i>(ajánlott arányok: 16:9, fekvő képek)</i></label>
                                     <input
                                         id="car_picture"
                                         type="file"

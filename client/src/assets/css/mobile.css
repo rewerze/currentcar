@@ -213,6 +213,11 @@
         padding-bottom: 0.7rem !important;
     }
 
+    .car-data-col {
+        width: 100%;
+        margin: auto;
+    }
+
     .car-comment-select {
         margin-top: 0.5rem;
     }

@@ -234,7 +234,12 @@ form h1 {
 }
 
 .car-image {
-    width: 50%;
+    width: 100%;
+    margin: auto;
+}
+
+.car-image img {
+    height: 25vh;
 }
 
 table,
@@ -269,6 +274,12 @@ th {
 
 .adatlap-table-alatt button {
     width: 80%;
+}
+
+.car-data-img {
+    width: 100% !important;
+    height: 37vh;
+    margin: auto;
 }
 
 main {
@@ -376,6 +387,10 @@ main {
     border-radius: 10px;
     padding: 1rem;
     width: 100%;
+}
+
+.profile-car-img {
+    height: 13rem;
 }
 
 .comment-section {
@@ -552,9 +567,19 @@ details {
     }
   }
 
-.car-icon {
+.profile-car-btn {
     display: flex;
+    justify-content: space-between;
+}
+
+.profile-car-btn button {
+    padding: 0.5rem;
     align-items: center;
-    height: 2rem;
-    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.car-data-col {
+    margin-left: 3rem;
+    margin-top: 4rem;
 }

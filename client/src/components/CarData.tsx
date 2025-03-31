@@ -222,7 +222,7 @@ function CarData() {
       <PaymentModal isOpen={isModalOpen} onClose={closeModal} onPurchase={onCarPurchase} />
       <main className="nav-gap">
         <div className="row">
-          <div className="col-lg-5">
+          <div className="col-lg-4 car-data-col">
             <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
               <div id="carouselExample" className="carousel slide">
                 <div className="carousel-inner">
@@ -231,21 +231,21 @@ function CarData() {
                       car.car_id
                         ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
                         : carImage
-                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100" />
+                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100 car-data-img" />
                   </div>
                   <div className="carousel-item">
                     <img src={
                       car.car_id
                         ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
                         : carImage
-                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100" />
+                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block car-data-img" />
                   </div>
                   <div className="carousel-item">
                     <img src={
                       car.car_id
                         ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
                         : carImage
-                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100" />
+                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100 car-data-img" />
                   </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

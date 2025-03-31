@@ -313,7 +313,7 @@ function AllCar() {
                 <div className="car-box bg-dark" key={car.car_id}>
                   <a href={`/adatlap/${car.car_id}`} className="off-link">
                     <div>
-                      <p className="text-center">
+                      <p className="text-center car-image">
                         <img
                           src={
                             car.car_id
@@ -324,7 +324,6 @@ function AllCar() {
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = carDefaultImage;
                           }}
-                          className="car-image"
                         />
                       </p>
                     </div>
