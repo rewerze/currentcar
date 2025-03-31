@@ -55,9 +55,9 @@ function Nav() {
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  href="/utiterv"
+                  href="/feladas"
                 >
-                  {t("itinerary", "navbar")}
+                  Autó feltöltés
                 </a>
               </li>
               <li className="nav-item">

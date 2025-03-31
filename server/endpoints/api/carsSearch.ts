@@ -11,7 +11,7 @@ export const carsSearchHandler = async (
   res: Response
 ): Promise<void> => {
   try {
-    let query = "SELECT * FROM car WHERE car_active = 1";
+    let query = "SELECT * FROM car WHERE 1";
     const params: any[] = [];
 
     if (req.query.q) {
