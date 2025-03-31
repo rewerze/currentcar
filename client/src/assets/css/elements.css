@@ -511,3 +511,48 @@ input#card {
     width: 100% !important;
     height: 3rem;
 }
+
+details summary {
+    list-style: none;
+    position: relative;
+    padding-left: 50px;
+}
+
+details[open] summary::before {
+    transform: translateY(-50%) rotate(90deg); /* Csak a nyíl forgása */
+    transition: 500ms ease;
+}
+
+details summary::before {
+    content: '';
+    transition: 500ms;
+    position: absolute;
+    left: 0;
+    top: 45%;
+    transform: translateY(-50%); /* Eredeti helyzet */
+    width: 50px;
+    height: 50px;
+    background-image: url('../img/csavar.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+summary::content {
+    padding-left: 2rem;
+}
+
+
+details { 
+    @media (prefers-reduced-motion: no-preference) { interpolate-size: allow-keywords; }
+    &::details-content {
+      opacity: 0;
+      block-size: 0;
+      overflow-y: clip; 
+      transition: content-visibility 250ms allow-discrete, opacity 1s, block-size 250ms;
+    }
+    
+    &[open]::details-content {
+      opacity: 1;
+      block-size: auto;
+    }
+  }
