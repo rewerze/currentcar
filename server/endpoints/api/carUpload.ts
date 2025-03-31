@@ -39,6 +39,7 @@ export const uploadCar = async (
       price_per_hour: pricePerHour,
       price_per_day: pricePerDay,
       car_description: description,
+      available_to: available_to,
     } = req.body as Car;
 
     console.log({
@@ -55,6 +56,7 @@ export const uploadCar = async (
       pricePerHour,
       pricePerDay,
       description,
+      available_to
     });
 
     const pool = db.pool;
@@ -141,7 +143,7 @@ export const uploadCar = async (
 
       await connection.query(
         "INSERT INTO car_availability (car_id, available_from, available_to) VALUES (?, ?, ?)",
-        [carId, now, oneYearLater]
+        [carId, now, available_to]
       );
 
       await connection.commit();
