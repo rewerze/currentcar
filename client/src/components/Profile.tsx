@@ -212,12 +212,23 @@ function Profile() {
                   </h3>
                   <p>{car.car_description}</p>
                   <div className="profile-car-btn">
-                      <button className="btn badge bg-primary"><img src={edit_icon} /></button>
-                      <button className="btn badge bg-danger"><img src={delete_icon} /></button>
-                    </div>
+                    <button
+                      className="btn badge bg-primary"
+                      onClick={(e) => { e.stopPropagation(); console.log("Edit clicked"); }}
+                    >
+                      <img src={edit_icon} />
+                    </button>
+                    <button
+                      className="btn badge bg-danger"
+                      onClick={(e) => { e.stopPropagation(); console.log("Delete clicked"); }}
+                    >
+                      <img src={delete_icon} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
       </main>

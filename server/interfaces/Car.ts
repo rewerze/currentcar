@@ -18,4 +18,5 @@ export interface Car {
     transmission_type: 'automatic' | 'manual' | 'semi-automatic' | 'CVT';
     car_brand: string;
     available_to: string;
+    car_owner: number;
 }

@@ -57,7 +57,8 @@ const translations = {
   signIn: "You have to sign in to rent this car!",
   rented: "This car has already been rented!",
   purchaseError: "There was an error while purchasing. Please refresh the page, and try again!",
-  availableUntil: "Available until"
+  availableUntil: "Available until",
+  cantRentOwn: "You can't rent you own car."
 };
 
 export default translations;

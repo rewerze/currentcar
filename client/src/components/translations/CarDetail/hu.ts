@@ -58,7 +58,8 @@ const translations = {
   signIn: "Be kell jelentkezned, hogy kibéreld ezt a járművet!",
   rented: "Ez a jármű már ki van bérelve!",
   purchaseError: "Hiba történt vásárlás közben. Frissítsd az oldalt, és próbáld újra",
-  availableUntil: "Elérhető eddig"
+  availableUntil: "Elérhető eddig",
+  cantRentOwn: "Nem tudod kibérelni a saját autódat."
 };
 
 export default translations;

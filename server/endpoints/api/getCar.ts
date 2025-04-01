@@ -31,7 +31,8 @@ export const carHandler = async (
         c.car_brand, 
         c.car_type, 
         c.car_price,
-        ca.available_to
+        ca.available_to,
+        cu.user_id
       FROM 
         car c
       JOIN 
@@ -42,8 +43,10 @@ export const carHandler = async (
         c.car_id = ?
     `, [carId]);
 
+    console.log(availableRows)
     if (availableRows && (availableRows as RowDataPacket).available_to) {
       rows["available_to"] = (availableRows as RowDataPacket).available_to
+      rows["car_owner"] = (availableRows as RowDataPacket).user_id
     }
     res.json(rows);
   } catch (error) {

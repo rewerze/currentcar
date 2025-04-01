@@ -18,7 +18,7 @@ function Requirements() {
     const checkRequirements = () => {
         const requirements = [
             user?.driver_license_expiry != null && user?.driver_license_number != null,
-            user?.user_email != null && user?.u_phone_number != null,
+            user?.user_email != null && Number(user?.u_phone_number) != 0,
             user?.user_iban != null,
             user?.born_at != null && new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
         ];
@@ -33,7 +33,7 @@ function Requirements() {
     }, [user, loading])
 
     useEffect(() => {
-        if (!loading) {
+        if (!loading && user) {
             checkRequirements();
         }
     }, [user, loading]);
@@ -59,7 +59,7 @@ function Requirements() {
                     <tr>
                         <td className="p-1">{t('contact', 'requirements')}</td>
                         <td className="p-1">{t('contactDescription', 'requirements')}</td>
-                        <td className="p-1 fs-5">{user?.user_email != undefined && user.u_phone_number != undefined ? "✅" : "❌"}</td>
+                        <td className="p-1 fs-5">{user?.user_email != undefined && Number(user.u_phone_number) != 0 ? "✅" : "❌"}</td>
                     </tr>
                     <tr>
                         <td className="p-1">{t('iban', 'requirements')}</td>

@@ -27,4 +27,5 @@ export interface CarInfo {
   transmission_type: TransmissionType;
   car_brand: string;
   available_to: Date;
+  car_owner?: number;
 }

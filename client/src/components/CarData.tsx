@@ -67,7 +67,7 @@ function CarData() {
     };
 
     fetchCarData();
-  }, [id, t]);
+  }, [id, t, isModalOpen]);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -97,6 +97,11 @@ function CarData() {
   }
 
   async function onCarPurchase(fromDate: string, toDate: string, paymentMethod: string): Promise<void> {
+    if(car?.car_active == false) {
+      setIsModalOpen(false);
+      return;
+    }
+
     if (user && !loading) {
       try {
         const response = await axios.post(
@@ -117,9 +122,11 @@ function CarData() {
 
         if (response.data.success) {
           toast.success(t("purchaseSuccess", "CarDetail"));
+          setIsModalOpen(false);
         } else {
           console.log(response.data.error)
           toast.error(response.data.error || t("purchaseError", "CarDetail"));
+          setIsModalOpen(false);
         }
       } catch (error) {
         console.error("Error renting car:", error);
@@ -334,8 +341,8 @@ function CarData() {
               </table>
             </div>
             <div className="d-flex justify-content-center adatlap-table-alatt">
-              <button className="btn btn-success" onClick={onPurchase} disabled={car.car_active != true}>
-                {car.car_active ? t("purchase", "CarDetail") : t("rented", "CarDetail")}
+              <button className="btn btn-success" onClick={onPurchase} disabled={!!(car.car_active != true || (car.car_owner && car.car_owner == user?.user_id))}>
+                {car.car_owner && car.car_owner == user?.user_id ? t('cantRentOwn', 'CarDetail') : car.car_active ? t("purchase", "CarDetail") : t("rented", "CarDetail")}
               </button>
             </div>
           </div>
