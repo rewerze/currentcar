@@ -239,7 +239,7 @@ form h1 {
 }
 
 .car-image img {
-    height: 25vh;
+    height: 20vh;
 }
 
 table,
@@ -582,4 +582,9 @@ details {
 .car-data-col {
     margin-left: 3rem;
     margin-top: 4rem;
+}
+
+.car-edit {
+    display: flex;
+    gap: 1.5rem;
 }
