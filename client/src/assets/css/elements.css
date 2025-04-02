@@ -387,6 +387,7 @@ main {
     border-radius: 10px;
     padding: 1rem;
     width: 100%;
+    cursor: pointer;
 }
 
 .profile-car-img {
@@ -477,6 +478,16 @@ button {
         linear-gradient(90deg, rgb(255, 208, 0) calc(50% + var(--s) / 2), rgb(189, 184, 160) 0) fill 0 // var(--s) 500px;
 }
 
+.star-range input[type="range"]::-moz-range-thumb {
+    width: 1px;
+    height: var(--s);
+
+    appearance: none;
+
+    border-image:
+        linear-gradient(90deg, rgb(255, 208, 0) calc(50% + var(--s) / 2), rgb(189, 184, 160) 0) fill 0 // var(--s) 500px;
+}
+
 .star-range {
     display: flex;
     align-items: center;
@@ -533,6 +544,10 @@ details summary {
     padding-left: 60px;
 }
 
+details p {
+    padding-left: 60px;
+}
+
 details[open] summary::before {
     transform: translateY(-50%) rotate(90deg);
     transition: 500ms ease;
@@ -577,6 +592,12 @@ details {
     align-items: center;
     width: 40px;
     height: 40px;
+    filter: brightness(100%);
+    transition: 300ms;
+}
+
+.profile-car-btn button:hover {
+    filter: brightness(120%);
 }
 
 .car-data-col {
