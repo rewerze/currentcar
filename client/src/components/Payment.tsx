@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect, useState } from "react";
 
 function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClose: () => void, onPurchase: (fromDate: string, toDate: string, paymentMethod: string) => void; }) {
+    const { t, loadNamespace, loadedNamespaces } = useLanguage();
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
-    if (!isOpen) return null;
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         onPurchase(fromDate, toDate, paymentMethod);
     };
 
+    useEffect(() => {
+        if (!loadedNamespaces.includes("Payment")) {
+            loadNamespace("Payment");
+        }
+    }, [loadedNamespaces, loadNamespace]);
+
+    if (!isOpen) return null;
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -20,11 +28,11 @@ function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClos
                 <div className="modal-body">
                     <form className="form" onSubmit={handleSubmit}>
                         <div className="form-box bg-dark">
-                            <h1>Fizetés</h1>
-                            <h2 className="mt-3">Bérlés időtartalma:</h2>
+                            <h1>{t('rent_period', 'Payment')}</h1>
+                            <h2 className="mt-3">{t('rent_period', 'Payment')}:</h2>
                             <div className="rent-time">
-                                <label htmlFor="from">Mettől?</label>
-                                <label htmlFor="to">Meddig?</label>
+                                <label htmlFor="from">{t('from', 'Payment')}</label>
+                                <label htmlFor="to">{t('until', 'Payment')}</label>
                             </div>
                             <div className="rent-time mt-2">
                                 <input
@@ -44,14 +52,14 @@ function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClos
                                     onChange={(e) => setToDate(e.target.value)}
                                 />
                             </div>
-                            <h2 className="mt-4">Hogyan szeretne fizetni?</h2>
+                            <h2 className="mt-4">{t('payment_method', 'Payment')}</h2>
                             <div className="payment-method">
                                 <input type="radio" name="payment-method" id="cash" value="cash" className="form-check-input" onChange={(_) => setPaymentMethod('cash')} />
-                                <label htmlFor="cash">Kézpénzben</label>
+                                <label htmlFor="cash">{t('cash', 'Payment')}</label>
                                 <input type="radio" name="payment-method" id="card" value="card" className="form-check-input" onChange={(_) => setPaymentMethod('card')} />
-                                <label htmlFor="card" className="form-check-label">Kártyával</label>
+                                <label htmlFor="card" className="form-check-label">{t('card', 'Payment')}</label>
                             </div>
-                            <button className="w-100 btn btn-success mt-5">Tovább a fizetéshez</button>
+                            <button className="w-100 btn btn-success mt-5">{t('to_payment', 'Payment')}</button>
                         </div>
                     </form>
                 </div>

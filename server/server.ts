@@ -130,7 +130,7 @@ app.post(
   uploadCar
 );
 
-app.get("/api/getCarImage", verifyAuthTokenMiddleware, getCarImage);
+app.get("/api/getCarImage", getCarImage);
 
 app.get("/api/comments", getComments);
 app.post("/api/comments", verifyAuthTokenMiddleware, postComment);

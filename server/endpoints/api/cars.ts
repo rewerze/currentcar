@@ -186,6 +186,31 @@ export const rentCar = async (
       [userId, `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`]
     );
 
+    const [queryResult] = await connection.query<RowDataPacket[]>(
+      `SELECT * FROM car_user WHERE car_id = ?`,
+      [car_id]
+    );
+
+    await connection.query(
+      `INSERT INTO notifications (
+        user_id,
+        message,
+        status,
+        created_at
+      ) VALUES (?, ?, 'unread', NOW())`,
+      [userId, `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`]
+    );
+
+    await connection.query(
+      `INSERT INTO notifications (
+        user_id,
+        message,
+        status,
+        created_at
+      ) VALUES (?, ?, 'unread', NOW())`,
+      [(queryResult as RowDataPacket[])[0].user_id, `Your car has been successfully rented out to a customer. The rental is for a ${carDetails[0].car_brand} ${carDetails[0].car_model}.`]
+    );
+
     await connection.commit();
 
     res.status(201).json({

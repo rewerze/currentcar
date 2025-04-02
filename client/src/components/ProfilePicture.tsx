@@ -13,7 +13,7 @@ function ProfilePicture() {
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { user, loading } = useUser();
+  const { user, loading, fetchUser } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -105,6 +105,7 @@ function ProfilePicture() {
         }
       );
 
+      fetchUser()
       toast.success("Profilkép sikeresen feltöltve!");
     } catch (error) {
       console.error("Hiba a feltöltés során:", error);

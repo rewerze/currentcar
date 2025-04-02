@@ -44,6 +44,7 @@ export type UserContextType = {
     passwordAgain: string
   ) => Promise<void>;
   setError: (message: string | null) => void;
+  fetchUser: () => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -71,6 +72,19 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
     fetchUser();
   }, []);
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(buildApiUrl("/auth/verify"), {
+        withCredentials: true,
+      });
+      setUser(response.data.user);
+    } catch (err) {
+      setError("");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const logout = async () => {
     try {
@@ -188,6 +202,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
         login,
         resetPass,
         setError,
+        fetchUser
       }}
     >
       {children}

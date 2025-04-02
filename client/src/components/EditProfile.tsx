@@ -11,7 +11,7 @@ import axios from "axios";
 import { buildApiUrl } from "@/lib/utils";
 
 function EditProfile() {
-  const { user, loading } = useUser();
+  const { user, loading, fetchUser } = useUser();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -77,6 +77,7 @@ function EditProfile() {
 
       toast.success(response.data.message || "Profile updated successfully");
 
+      fetchUser()
       navigate("/profil");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
