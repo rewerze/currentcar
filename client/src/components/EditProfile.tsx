@@ -123,6 +123,7 @@ function EditProfile() {
               type="text"
               name="user_email"
               id="user_email"
+              disabled
               value={formData.user_email}
               onChange={handleChange}
               className="form-control"
