@@ -198,8 +198,8 @@ function Profile() {
           {/* BÉRELT / SAJÁT AUTÓK */}
           <div className="profile-tab">
             <div className="profile-tab-button bg-dark">
-                <button>Bérelt autók</button>
-                <button className="profile-btn-active">Feladott autók</button>
+                <button>Bérelt autóim</button>
+                <button className="profile-btn-active">Feladott autóim</button>
             </div>
             <div className="profile-tab-content">
             {cars.map((car, index) => (
