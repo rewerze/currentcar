@@ -123,7 +123,11 @@ function Profile() {
                     <span className="badge bg-secondary">
                       {user?.driver_license_expiry
                         ? new Date(user.driver_license_expiry).toLocaleString(
-                          "hu-HU"
+                          "hu-HU", {
+                            year: "numeric",
+                            month: "numeric",
+                            day: "numeric"
+                          }
                         )
                         : "N/a"}
                     </span>
@@ -136,7 +140,7 @@ function Profile() {
             </div>
 
             {/* Profile Buttons */}
-            <div className="profile-form-box bg-dark text-light mx-1">
+            <div className="profile-form-box bg-dark text-light">
               <div className="profile-buttons">
                 <div>
                   <a href="/profil/modositas" className="btn btn-primary w-100">
@@ -191,10 +195,13 @@ function Profile() {
               </div>
             </div>
           </div>
-
-
-          {/* KOCSIK */}
-          <div className="profile-car gap-2">
+          {/* BÉRELT / SAJÁT AUTÓK */}
+          <div className="profile-tab">
+            <div className="profile-tab-button bg-dark">
+                <button>Bérelt autók</button>
+                <button className="profile-btn-active">Feladott autók</button>
+            </div>
+            <div className="profile-tab-content">
             {cars.map((car, index) => (
               <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
                 <div className="profile-car-card-body bg-dark">
@@ -228,7 +235,12 @@ function Profile() {
                 </div>
               </div>
             ))}
+            </div>
+          </div>
 
+
+          {/* KOCSIK */}
+          <div className="profile-car gap-2">
           </div>
         </div>
       </main>
