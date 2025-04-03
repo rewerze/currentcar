@@ -197,11 +197,15 @@ function Profile() {
           </div>
           {/* BÉRELT / SAJÁT AUTÓK */}
           <div className="profile-tab">
+            {/* GOMBOK => AZ AKTÍV GOMBOKON LEGYEN RAJTA A "profile-btn-active" CLASS */}
             <div className="profile-tab-button bg-dark">
                 <button>Bérelt autóim</button>
                 <button className="profile-btn-active">Feladott autóim</button>
             </div>
+
+            {/* AUTÓK */}
             <div className="profile-tab-content">
+              <div className="profile-car">
             {cars.map((car, index) => (
               <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
                 <div className="profile-car-card-body bg-dark">
@@ -236,11 +240,7 @@ function Profile() {
               </div>
             ))}
             </div>
-          </div>
-
-
-          {/* KOCSIK */}
-          <div className="profile-car gap-2">
+            </div>
           </div>
         </div>
       </main>

@@ -369,12 +369,12 @@ main {
 
 .profile-car {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     margin-top: 5px;
     margin: 10px auto;
     gap: 5px;
-    width: 60%;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .profile-car-card {
@@ -389,6 +389,15 @@ main {
     padding: 1rem;
     width: 100%;
     cursor: pointer;
+    max-height: 30rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-car-card-body h3 {
+    min-height: 3.5rem;
+    margin-top: 1rem;
 }
 
 .profile-car-img {
@@ -615,7 +624,7 @@ details {
     margin-top: 5px;
     margin: 10px auto;
     width: 59%;
-    border: 5px solid #1E201E;
+    border: 6px solid #1E201E;
     border-radius: 10px;
 }
 
@@ -647,4 +656,9 @@ details {
     width: 100%;
     background-color: rgb(131, 131, 131);
     padding: 1rem;
+}
+
+.profile-center {
+    max-width: 90rem;
+    margin: auto;
 }

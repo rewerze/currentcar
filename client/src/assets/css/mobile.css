@@ -63,9 +63,17 @@
     .notif-message button {
         visibility: visible;
     }
+
+    .profile-tab {
+        width: 64% !important;
+    }
 }
 
 @media only screen and (max-width: 992px) {
+    .profile-tab {
+        width: 90% !important;
+    }
+
     .profile-car-card {
         width: 40%;
     }
@@ -284,9 +292,22 @@
     .notif {
         width: 90%;
     }
+
 }
 
 @media only screen and (max-width: 576px) {
+    .profile-tab-content {
+        justify-content: center;
+    }
+
+    .profile-car {
+        justify-content: center;
+    }
+
+    .profile-tab-button button{
+        width: 100% !important;
+    }
+
     .profile-car-card {
         width: 85%;
     }
