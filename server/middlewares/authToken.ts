@@ -10,6 +10,8 @@ export const verifyAuthTokenMiddleware: RequestHandler = async (
   const token =
     req.cookies?.auth_token || req.headers.authorization?.split(" ")[1];
 
+  console.log(token);
+
   if (!token) {
     res.status(403).json({ message: "Access denied. No token provided." });
     return;

@@ -28,6 +28,7 @@ import { uploadCar } from "./endpoints/api/carUpload";
 import { getComments, postComment } from "./endpoints/api/comments";
 import db from "./db/connection";
 import { RowDataPacket } from "mysql2";
+import { verifyAdmin } from "./middlewares/adminVerify";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -130,12 +131,18 @@ app.post(
   uploadCar
 );
 
+app.post(
+  "/api/admin/uploadProfilePiture",
+  [verifyAuthTokenMiddleware, verifyAdmin, limiter],
+  uploadProfilePicture
+);
+
 app.get("/api/getCarImage", getCarImage);
 
 app.get("/api/comments", getComments);
 app.post("/api/comments", verifyAuthTokenMiddleware, postComment);
 
-app.post("/api/rent", verifyAuthTokenMiddleware, rentCar)
+app.post("/api/rent", verifyAuthTokenMiddleware, rentCar);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });
@@ -157,7 +164,11 @@ export const updateExpiredOrders = async () => {
               WHERE end_date < NOW() AND rental_status = 'completed'
           )
       `);
-    console.log(`Reactivated ${(result as RowDataPacket).affectedRows} cars after rental expiry.`);
+    console.log(
+      `Reactivated ${
+        (result as RowDataPacket).affectedRows
+      } cars after rental expiry.`
+    );
   } catch (error) {
     console.error("Error updating expired orders:", error);
   }
@@ -173,12 +184,15 @@ export const deactivateExpiredAvailability = async () => {
               WHERE available_to < NOW()
           )
       `);
-    console.log(`Deactivated ${(result as RowDataPacket).affectedRows} cars due to availability expiration.`);
+    console.log(
+      `Deactivated ${
+        (result as RowDataPacket).affectedRows
+      } cars due to availability expiration.`
+    );
   } catch (error) {
     console.error("Error deactivating expired availability:", error);
   }
 };
-
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
