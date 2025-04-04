@@ -403,7 +403,7 @@ const CarUpload: React.FC = () => {
                                 </div>
 
                                 <div className='upload-data'>
-                                    <label htmlFor="extra">Extra</label>
+                                    <label htmlFor="extra">Extrák</label>
                                     <input
                                         id="extra"
                                         type="text"
