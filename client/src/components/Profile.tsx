@@ -124,10 +124,10 @@ function Profile() {
                       {user?.driver_license_expiry
                         ? new Date(user.driver_license_expiry).toLocaleString(
                           "hu-HU", {
-                            year: "numeric",
-                            month: "numeric",
-                            day: "numeric"
-                          }
+                          year: "numeric",
+                          month: "numeric",
+                          day: "numeric"
+                        }
                         )
                         : "N/a"}
                     </span>
@@ -199,47 +199,47 @@ function Profile() {
           <div className="profile-tab">
             {/* GOMBOK => AZ AKTÍV GOMBOKON LEGYEN RAJTA A "profile-btn-active" CLASS */}
             <div className="profile-tab-button bg-dark">
-                <button>Bérelt autóim</button>
-                <button className="profile-btn-active">Feladott autóim</button>
+              <button>{t('rentedCars', 'Profile')}</button>
+              <button className="profile-btn-active">{t('uploadedCars', 'Profile')}</button>
             </div>
 
             {/* AUTÓK */}
             <div className="profile-tab-content">
               <div className="profile-car">
-            {cars.map((car, index) => (
-              <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
-                <div className="profile-car-card-body bg-dark">
-                  <img
-                    src={
-                      car.car_id
-                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
-                        : templateImage
-                    }
-                    onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
-                    className="profile-car-img"
-                  />
-                  <h3 className="text-center">
-                    {car.car_brand} {car.car_model}
-                  </h3>
-                  <p>{car.car_description}</p>
-                  <div className="profile-car-btn">
-                    <button
-                      className="btn badge bg-primary"
-                      onClick={(e) => { e.stopPropagation(); console.log("Edit clicked"); }}
-                    >
-                      <img src={edit_icon} />
-                    </button>
-                    <button
-                      className="btn badge bg-danger"
-                      onClick={(e) => { e.stopPropagation(); console.log("Delete clicked"); }}
-                    >
-                      <img src={delete_icon} />
-                    </button>
+                {cars.map((car, index) => (
+                  <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
+                    <div className="profile-car-card-body bg-dark">
+                      <img
+                        src={
+                          car.car_id
+                            ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                            : templateImage
+                        }
+                        onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
+                        className="profile-car-img"
+                      />
+                      <h3 className="text-center">
+                        {car.car_brand} {car.car_model}
+                      </h3>
+                      <p>{car.car_description}</p>
+                      <div className="profile-car-btn">
+                        <button
+                          className="btn badge bg-primary"
+                          onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/edit/${car.car_id}`) }}
+                        >
+                          <img src={edit_icon} />
+                        </button>
+                        <button
+                          className="btn badge bg-danger"
+                          onClick={(e) => { e.stopPropagation(); console.log("Delete clicked"); }}
+                        >
+                          <img src={delete_icon} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-            </div>
             </div>
           </div>
         </div>

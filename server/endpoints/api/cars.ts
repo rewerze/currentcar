@@ -247,3 +247,201 @@ export const rentCar = async (
     }
   }
 }
+
+export const editCar = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const userId = (req as AuthenticatedRequest).user?.user_id;
+  const {
+    car_id,
+    car_price,
+    car_description,
+    car_type,
+    seats,
+    number_of_doors,
+    insurance_id,
+    car_model,
+    car_regnumber,
+    price_per_hour,
+    price_per_day,
+    car_condition,
+    mileage,
+    car_year,
+    fuel_type,
+    transmission_type,
+    car_brand,
+  } = req.body;
+
+  if (!userId) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+
+  if (!car_id) {
+    res.status(400).json({ error: "Car ID is required" });
+    return;
+  }
+
+  try {
+    const [carOwnership] = await db.query(
+      "SELECT * FROM car JOIN car_user ON car.car_id = car_user.car_id WHERE car.car_id = ? AND car_user.user_id = ?",
+      [car_id, userId]
+    );
+
+    if (!carOwnership) {
+      res.status(403).json({ error: "You don't have permission to edit this car" });
+      return;
+    }
+
+    if (car_description && car_description.length > 250) {
+      res.status(400).json({ error: "Description is too long" });
+      return;
+    }
+
+    if (car_type && !['sedan', 'suv', 'hatchback', 'convertible', 'coupe', 'wagon', 'pickup', 'minivan'].includes(car_type)) {
+      res.status(400).json({ error: "Invalid car type" });
+      return;
+    }
+
+    if (car_condition && !['new', 'excellent', 'good', 'fair', 'poor'].includes(car_condition)) {
+      res.status(400).json({ error: "Invalid car condition" });
+      return;
+    }
+
+    if (fuel_type && !['petrol', 'diesel', 'electric', 'hybrid', 'gas'].includes(fuel_type)) {
+      res.status(400).json({ error: "Invalid fuel type" });
+      return;
+    }
+
+    if (transmission_type && !['automatic', 'manual', 'semi-automatic', 'CVT'].includes(transmission_type)) {
+      res.status(400).json({ error: "Invalid transmission type" });
+      return;
+    }
+
+    if (car_regnumber) {
+      const existingCar = await db.query(
+        "SELECT * FROM car WHERE car_regnumber = ? AND car_id != ?",
+        [car_regnumber, car_id]
+      );
+
+      if (existingCar.length > 0) {
+        res.status(409).json({ error: "Registration number is already in use" });
+        return;
+      }
+    }
+
+    // Prepare update query
+    const updateFields: string[] = [];
+    const updateValues: any[] = [];
+
+    if (car_price !== undefined) {
+      updateFields.push("car_price = ?");
+      updateValues.push(car_price);
+    }
+
+    if (car_description !== undefined) {
+      updateFields.push("car_description = ?");
+      updateValues.push(car_description);
+    }
+
+    if (car_type !== undefined) {
+      updateFields.push("car_type = ?");
+      updateValues.push(car_type);
+    }
+
+    if (seats !== undefined) {
+      updateFields.push("seats = ?");
+      updateValues.push(seats);
+    }
+
+    if (number_of_doors !== undefined) {
+      updateFields.push("number_of_doors = ?");
+      updateValues.push(number_of_doors);
+    }
+
+    if (insurance_id !== undefined) {
+      updateFields.push("insurance_id = ?");
+      updateValues.push(insurance_id);
+    }
+
+    if (car_model !== undefined) {
+      updateFields.push("car_model = ?");
+      updateValues.push(car_model);
+    }
+
+    if (car_regnumber !== undefined) {
+      updateFields.push("car_regnumber = ?");
+      updateValues.push(car_regnumber);
+    }
+
+    if (price_per_hour !== undefined) {
+      updateFields.push("price_per_hour = ?");
+      updateValues.push(price_per_hour);
+    }
+
+    if (price_per_day !== undefined) {
+      updateFields.push("price_per_day = ?");
+      updateValues.push(price_per_day);
+    }
+
+    if (car_condition !== undefined) {
+      updateFields.push("car_condition = ?");
+      updateValues.push(car_condition);
+    }
+
+    if (mileage !== undefined) {
+      updateFields.push("mileage = ?");
+      updateValues.push(mileage);
+    }
+
+    if (car_year !== undefined) {
+      updateFields.push("car_year = ?");
+      updateValues.push(car_year);
+    }
+
+    if (fuel_type !== undefined) {
+      updateFields.push("fuel_type = ?");
+      updateValues.push(fuel_type);
+    }
+
+    if (transmission_type !== undefined) {
+      updateFields.push("transmission_type = ?");
+      updateValues.push(transmission_type);
+    }
+
+    if (car_brand !== undefined) {
+      updateFields.push("car_brand = ?");
+      updateValues.push(car_brand);
+    }
+
+    if (updateFields.length === 0) {
+      res.status(400).json({ error: "No update fields provided" });
+      return;
+    }
+
+    // Add car_id for WHERE clause
+    updateValues.push(car_id);
+
+    const updateQuery = `
+      UPDATE car 
+      SET ${updateFields.join(", ")} 
+      WHERE car_id = ?
+    `;
+
+    await db.query(updateQuery, updateValues);
+
+    const [updatedCar] = await db.query(
+      `SELECT * FROM car WHERE car_id = ?`,
+      [car_id]
+    );
+
+    res.json({
+      message: "Car updated successfully",
+      car: updatedCar,
+    });
+  } catch (error) {
+    console.error("Car update error:", error);
+    res.status(500).json({ error: "Failed to update car information" });
+  }
+};

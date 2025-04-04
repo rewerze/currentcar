@@ -43,7 +43,6 @@ export const carHandler = async (
         c.car_id = ?
     `, [carId]);
 
-    console.log(availableRows)
     if (availableRows && (availableRows as RowDataPacket).available_to) {
       rows["available_to"] = (availableRows as RowDataPacket).available_to
       rows["car_owner"] = (availableRows as RowDataPacket).user_id

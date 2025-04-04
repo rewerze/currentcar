@@ -15,5 +15,7 @@ const translations = {
   change_password: "Change password",
   delete_profile: "Delete profile",
   notifications: "Notifications",
+  rentedCars: "Rented Cars",
+  uploadedCars: "Uploaded Cars"
 };
 export default translations;
