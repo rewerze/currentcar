@@ -10,7 +10,7 @@ import { loginHandler } from "./endpoints/api/login";
 import { verifyAuthTokenMiddleware } from "./middlewares/authToken";
 import { logoutHandler } from "./endpoints/api/logout";
 import { resetPasswordHandler } from "./endpoints/api/reset-password";
-import { carsHandler, getCarImage, rentCar } from "./endpoints/api/cars";
+import { carsHandler, editCar, getCarImage, rentCar } from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
 import { carHandler, getCars } from "./endpoints/api/getCar";
 import { upload } from "./middlewares/upload";
@@ -28,7 +28,6 @@ import { uploadCar } from "./endpoints/api/carUpload";
 import { getComments, postComment } from "./endpoints/api/comments";
 import db from "./db/connection";
 import { RowDataPacket } from "mysql2";
-import { verifyAdmin } from "./middlewares/adminVerify";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -116,6 +115,7 @@ app.put(
 );
 
 app.put("/api/profile/edit", [verifyAuthTokenMiddleware, limiter], editProfile);
+app.put("/api/car/edit", [verifyAuthTokenMiddleware, limiter], editCar);
 
 app.post(
   "/api/upload-profile-picture",
@@ -129,12 +129,6 @@ app.post(
   validateCarUpload,
   verifyAuthTokenMiddleware,
   uploadCar
-);
-
-app.post(
-  "/api/admin/uploadProfilePiture",
-  [verifyAuthTokenMiddleware, verifyAdmin, limiter],
-  uploadProfilePicture
 );
 
 app.get("/api/getCarImage", getCarImage);
@@ -165,8 +159,7 @@ export const updateExpiredOrders = async () => {
           )
       `);
     console.log(
-      `Reactivated ${
-        (result as RowDataPacket).affectedRows
+      `Reactivated ${(result as RowDataPacket).affectedRows
       } cars after rental expiry.`
     );
   } catch (error) {
@@ -185,8 +178,7 @@ export const deactivateExpiredAvailability = async () => {
           )
       `);
     console.log(
-      `Deactivated ${
-        (result as RowDataPacket).affectedRows
+      `Deactivated ${(result as RowDataPacket).affectedRows
       } cars due to availability expiration.`
     );
   } catch (error) {

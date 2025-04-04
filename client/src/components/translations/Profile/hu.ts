@@ -15,6 +15,8 @@ const translations = {
   change_password: "Jelszó módosítás",
   delete_profile: "Profil törlés",
   notifications: "Értesítések",
+  rentedCars: "Bérelt autóim",
+  uploadedCars: "Feltöltött autóim"
 };
 
 export default translations;

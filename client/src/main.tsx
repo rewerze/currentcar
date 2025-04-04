@@ -26,6 +26,7 @@ import { Toaster } from "@/components/ui/sonner";
 import ProfilePicture from "./components/ProfilePicture.tsx";
 import { NotificationProvider } from "./contexts/NotificationContext.tsx";
 import Notification from "./components/Notification.tsx";
+import EditCar from "./components/EditCar.tsx";
 
 const ToasterWrapper = () => {
   return (
@@ -75,6 +76,7 @@ createRoot(document.getElementById("root")!).render(
               {/*  JELSZÓ MÓDOSÍTÁS */}
               <Route path="/osszesauto" element={<AllCar />} />{" "}
               {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
+              <Route path="/adatlap/edit/:id" element={<EditCar />} />{" "}
               <Route path="/adatlap/:id" element={<CarData />} />{" "}
               {/*  AUTÓK ADATLAPJAI */}
               <Route path="/feladas" element={<CarUpload />} />{" "}
