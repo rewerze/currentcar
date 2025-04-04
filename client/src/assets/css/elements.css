@@ -302,6 +302,7 @@ main {
 
 .card {
     width: 18%;
+    border: 3px solid black;
 }
 
 .car-rent {
@@ -309,10 +310,6 @@ main {
     flex-direction: row;
     justify-content: center;
     gap: 5rem;
-}
-
-.card {
-    position: none !important;
 }
 
 .notification {
@@ -658,4 +655,29 @@ details {
 .profile-center {
     max-width: 90rem;
     margin: auto;
+}
+
+.contact-text ul {
+    list-style-type: none;
+    font-weight: 600;
+    margin-left: 3rem;
+}
+
+.contact-text p, .contact-text ul {
+    font-size: x-large;
+}
+
+.contact-text span {
+    margin-right: 5px;
+}
+
+.contact-img img{
+    max-height: 100vh;
+    width: 50%;
+    border: 3px solid black;
+}
+
+.contact-img {
+    display: flex;
+    justify-content: center;
 }
