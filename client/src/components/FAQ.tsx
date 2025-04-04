@@ -56,14 +56,6 @@ function FAQ() {
                 </div>
                 <div className="mx-5 mt-5">
                     <details>
-                        <summary className="display-5">Hogyan történik az autó átvétele és visszaadása?
-                            <hr className="w-100" />
-                        </summary>
-                        <p>válasz válasz válasz válasz válasz válasz válasz válasz </p>
-                    </details>
-                </div>
-                <div className="mx-5 mt-5">
-                    <details>
                         <summary className="display-5">Visszavihetem az autót másik depóba, mint ahol átvettem?
                             <hr className="w-100" />
                         </summary>
