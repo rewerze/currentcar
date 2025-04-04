@@ -624,7 +624,6 @@ details {
     margin-top: 5px;
     margin: 10px auto;
     width: 59%;
-    border: 6px solid #1E201E;
     border-radius: 10px;
 }
 
@@ -637,24 +636,22 @@ details {
 
 .profile-tab-button button {
     padding: 0.5rem;
-    color: white;
     font-size: larger;
     transition: 300ms;
 }
-.profile-tab-button button:hover:not(.profile-btn-active) {
-    background-color: #353535;
-}
 
 .profile-btn-active {
-    background-color: rgb(131, 131, 131);
     font-weight: 500;
+    --k: 5px;
+
+    border-top-left-radius: var(--k);
+    border-top-right-radius: var(--k);
 }
 
 
 .profile-tab-content {
     display: flex;
     width: 100%;
-    background-color: rgb(131, 131, 131);
     padding: 1rem;
 }
 

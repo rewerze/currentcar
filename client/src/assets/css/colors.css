@@ -96,3 +96,24 @@ input::placeholder, select, textarea::placeholder {
     background-color: #fff;
     color: black;
 }
+
+.profile-tab-button button {
+    color: white;
+}
+.profile-tab-button button:hover:not(.profile-btn-active) {
+    background-color: #353535;
+}
+
+.profile-btn-active {
+    background-color: #eee5db;
+    color: #000 !important;
+}
+
+
+.profile-tab-content {
+    background-color: #eee5db;
+}
+
+.profile-tab {
+    border: 6px solid #1E201E;
+}
