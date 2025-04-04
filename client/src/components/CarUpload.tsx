@@ -15,7 +15,7 @@ const CarUpload: React.FC = () => {
 
     useEffect(() => {
         if (!loading && !user) {
-            navigate('/');
+            navigate('/login');
         }
     }, [user, loading])
 
@@ -403,7 +403,7 @@ const CarUpload: React.FC = () => {
                                 </div>
 
                                 <div className='upload-data'>
-                                    <label htmlFor="extra">Extra<span className='text-danger'>*</span></label>
+                                    <label htmlFor="extra">Extra</label>
                                     <input
                                         id="extra"
                                         type="text"
