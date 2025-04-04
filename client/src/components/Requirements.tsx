@@ -40,7 +40,7 @@ function Requirements() {
 
     return (
         <>
-            <main className="nav-gap">
+            <main className="nav-gap mx-3">
                 <h1 className="text-center">{t('requirements', 'requirements')}</h1>
                 <p className="text-center"><b dangerouslySetInnerHTML={{ __html: t('editData', 'requirements') }}></b></p>
 

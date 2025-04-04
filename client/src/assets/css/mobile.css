@@ -267,6 +267,20 @@
     .file-details button {
         width: 30% !important;
     }
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-text {
+        text-align: center;
+    }
+
+    .contact-img {
+        max-height: 100vh !important;
+        width: 100% !important;
+    }
 }
 
 @media only screen and (max-width: 768px) {

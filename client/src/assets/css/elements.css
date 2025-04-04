@@ -682,3 +682,18 @@ details {
     display: flex;
     justify-content: center;
 }
+
+.contact {
+    margin: auto 1rem;
+}
+
+.aboutus {
+    display: flex;
+    flex-direction: row;
+}
+
+.aboutus .card {
+    min-height: 20rem;
+    width: 80%;
+    margin: auto;
+}

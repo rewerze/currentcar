@@ -6,7 +6,7 @@ function Contact() {
     return(
         <>
             <main className="nav-gap">
-                <div className="row">
+                <div className="row contact">
                     <div className="col-md contact-text">
                     <h1 className="text-center">Kapcsolat</h1>
                         <p className="mt-5 text-center">Ha hibát bárhol hibát talál akkor kérem jelezze nekünk a következő helyeken:</p>
