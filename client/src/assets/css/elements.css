@@ -639,6 +639,7 @@ details {
 
 .profile-btn-active {
     font-weight: 500;
+    cursor:auto !important;
     --k: 5px;
 
     border-top-left-radius: var(--k);
