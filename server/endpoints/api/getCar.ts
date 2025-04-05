@@ -24,7 +24,8 @@ export const carHandler = async (
       carId,
     ]);
 
-    const [availableRows] = await db.query<RowDataPacket>(`
+    const [availableRows] = await db.query<RowDataPacket>(
+      `
       SELECT 
         c.car_id, 
         c.car_model, 
@@ -41,11 +42,13 @@ export const carHandler = async (
         car_availability ca ON c.car_id = ca.car_id
       WHERE 
         c.car_id = ?
-    `, [carId]);
+    `,
+      [carId]
+    );
 
     if (availableRows && (availableRows as RowDataPacket).available_to) {
-      rows["available_to"] = (availableRows as RowDataPacket).available_to
-      rows["car_owner"] = (availableRows as RowDataPacket).user_id
+      rows["available_to"] = (availableRows as RowDataPacket).available_to;
+      rows["car_owner"] = (availableRows as RowDataPacket).user_id;
     }
     res.json(rows);
   } catch (error) {
@@ -85,5 +88,43 @@ export const getCars = async (req: Request, res: Response): Promise<void> => {
   } catch (error) {
     console.error("Error fetching cars:", error);
     res.status(500).json({ error: "Failed to fetch cars" });
+  }
+};
+
+export const getRentedCars = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const userId = (req as AuthenticatedRequest).user.user_id;
+
+    if (!userId) {
+      res.status(401).json({ error: "User not authenticated" });
+      return;
+    }
+
+    const rentedCars = await db.query(
+      `
+      SELECT DISTINCT car.*
+      FROM car
+      INNER JOIN orders ON car.car_id = orders.car_id
+      WHERE orders.user_id = ?
+      ORDER BY orders.start_date DESC
+    `,
+      [userId]
+    );
+
+    if (Array.isArray(rentedCars)) {
+      const formattedCars = rentedCars.map((car) => {
+        return typeof car === "object" && car !== null ? { ...car } : {};
+      });
+
+      res.status(200).json(formattedCars);
+    } else {
+      res.status(200).json([]);
+    }
+  } catch (error) {
+    console.error("Error fetching rented cars:", error);
+    res.status(500).json({ error: "Failed to fetch rented cars" });
   }
 };

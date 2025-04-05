@@ -56,10 +56,7 @@ export const getCarImage = async (
   }
 };
 
-export const rentCar = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const rentCar = async (req: Request, res: Response): Promise<void> => {
   const userId = (req as AuthenticatedRequest).user.user_id;
 
   const {
@@ -68,11 +65,17 @@ export const rentCar = async (
     end_date,
     pickup_location,
     payment_method,
-    discount_code = ''
+    discount_code = "",
   } = req.body;
 
-  if (!car_id || !start_date || !end_date || !pickup_location || !payment_method) {
-    res.status(400).json({ error: 'Missing required fields' });
+  if (
+    !car_id ||
+    !start_date ||
+    !end_date ||
+    !pickup_location ||
+    !payment_method
+  ) {
+    res.status(400).json({ error: "Missing required fields" });
     return;
   }
 
@@ -85,29 +88,31 @@ export const rentCar = async (
     await connection.beginTransaction();
 
     const [carRows] = await connection.query<RowDataPacket[]>(
-      'SELECT * FROM car WHERE car_id = ?',
+      "SELECT * FROM car WHERE car_id = ?",
       [car_id]
     );
 
     if (carRows.length === 0) {
       await connection.rollback();
-      res.status(400).json({ error: 'Car is not available for rent' });
+      res.status(400).json({ error: "Car is not available for rent" });
       return;
     }
 
     const [availabilityRows] = await connection.query<RowDataPacket[]>(
-      'SELECT * FROM car_availability WHERE car_id = ? AND available_from <= ? AND available_to >= ?',
+      "SELECT * FROM car_availability WHERE car_id = ? AND available_from <= ? AND available_to >= ?",
       [car_id, start_date, end_date]
     );
 
     if (availabilityRows.length === 0) {
       await connection.rollback();
-      res.status(400).json({ error: 'Car is not available for the requested dates' });
+      res
+        .status(400)
+        .json({ error: "Car is not available for the requested dates" });
       return;
     }
 
     const [locationResult] = await connection.query<RowDataPacket[]>(
-      'INSERT INTO location (pickup_location, dropoff_location, longitude, latitude) VALUES (?, ?, ?, ?)',
+      "INSERT INTO location (pickup_location, dropoff_location, longitude, latitude) VALUES (?, ?, ?, ?)",
       [pickup_location, pickup_location, 0, 0]
     );
 
@@ -153,7 +158,7 @@ export const rentCar = async (
 
     paymentAmount += parseFloat(carDetails[0].insurance_fee);
 
-    const taxRate = 0.10;
+    const taxRate = 0.1;
     const taxAmount = paymentAmount * taxRate;
     const totalAmount = paymentAmount + taxAmount;
 
@@ -168,13 +173,19 @@ export const rentCar = async (
         payment_date,
         invoice_address
       ) VALUES (?, ?, ?, ?, ?, 'pending', NOW(), ?)`,
-      [orderId, carDetails[0].insurance_id, paymentAmount, taxAmount, payment_method, '']
+      [
+        orderId,
+        carDetails[0].insurance_id,
+        paymentAmount,
+        taxAmount,
+        payment_method,
+        "",
+      ]
     );
 
-    await connection.query(
-      'UPDATE car SET car_active = 0 WHERE car_id = ?',
-      [car_id]
-    );
+    await connection.query("UPDATE car SET car_active = 0 WHERE car_id = ?", [
+      car_id,
+    ]);
 
     await connection.query(
       `INSERT INTO notifications (
@@ -183,7 +194,10 @@ export const rentCar = async (
         status,
         created_at
       ) VALUES (?, ?, 'unread', NOW())`,
-      [userId, `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`]
+      [
+        userId,
+        `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`,
+      ]
     );
 
     const [queryResult] = await connection.query<RowDataPacket[]>(
@@ -198,7 +212,10 @@ export const rentCar = async (
         status,
         created_at
       ) VALUES (?, ?, 'unread', NOW())`,
-      [userId, `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`]
+      [
+        userId,
+        `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`,
+      ]
     );
 
     await connection.query(
@@ -208,50 +225,49 @@ export const rentCar = async (
         status,
         created_at
       ) VALUES (?, ?, 'unread', NOW())`,
-      [(queryResult as RowDataPacket[])[0].user_id, `Your car has been successfully rented out to a customer. The rental is for a ${carDetails[0].car_brand} ${carDetails[0].car_model}.`]
+      [
+        (queryResult as RowDataPacket[])[0].user_id,
+        `Your car has been successfully rented out to a customer. The rental is for a ${carDetails[0].car_brand} ${carDetails[0].car_model}.`,
+      ]
     );
 
     await connection.commit();
 
     res.status(201).json({
       success: true,
-      message: 'Car rental successful',
+      message: "Car rental successful",
       data: {
         order_id: orderId,
         total_amount: totalAmount,
-        payment_status: 'pending',
+        payment_status: "pending",
         rental_details: {
           car: `${carDetails[0].car_brand} ${carDetails[0].car_model}`,
           start_date,
           end_date,
           pickup_location,
-          dropoff_location: pickup_location
-        }
-      }
+          dropoff_location: pickup_location,
+        },
+      },
     });
-
   } catch (error) {
     if (connection) {
       await connection.rollback();
     }
 
-    console.error('Error during car rental:', error);
+    console.error("Error during car rental:", error);
     res.status(500).json({
       success: false,
-      message: 'An error occurred during car rental',
-      error: (error as any).message
+      message: "An error occurred during car rental",
+      error: (error as any).message,
     });
   } finally {
     if (connection) {
       connection.release();
     }
   }
-}
+};
 
-export const editCar = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const editCar = async (req: Request, res: Response): Promise<void> => {
   const userId = (req as AuthenticatedRequest).user?.user_id;
   const {
     car_id,
@@ -290,31 +306,61 @@ export const editCar = async (
     );
 
     if (!carOwnership) {
-      res.status(403).json({ error: "You don't have permission to edit this car" });
+      res
+        .status(403)
+        .json({ error: "You don't have permission to edit this car" });
       return;
     }
 
-    if (car_description && car_description.length > 250) {
-      res.status(400).json({ error: "Description is too long" });
+    const activeOrdersResult = await db.query(
+      'SELECT * FROM orders WHERE car_id = ? AND rental_status IN ("pending", "confirmed", "extended")',
+      [car_id]
+    );
+
+    if (Array.isArray(activeOrdersResult) && activeOrdersResult.length > 0) {
+      res.status(400).json({ error: "Cannot edit car with active bookings" });
       return;
     }
 
-    if (car_type && !['sedan', 'suv', 'hatchback', 'convertible', 'coupe', 'wagon', 'pickup', 'minivan'].includes(car_type)) {
+    if (
+      car_type &&
+      ![
+        "sedan",
+        "suv",
+        "hatchback",
+        "convertible",
+        "coupe",
+        "wagon",
+        "pickup",
+        "minivan",
+      ].includes(car_type)
+    ) {
       res.status(400).json({ error: "Invalid car type" });
       return;
     }
 
-    if (car_condition && !['new', 'excellent', 'good', 'fair', 'poor'].includes(car_condition)) {
+    if (
+      car_condition &&
+      !["new", "excellent", "good", "fair", "poor"].includes(car_condition)
+    ) {
       res.status(400).json({ error: "Invalid car condition" });
       return;
     }
 
-    if (fuel_type && !['petrol', 'diesel', 'electric', 'hybrid', 'gas'].includes(fuel_type)) {
+    if (
+      fuel_type &&
+      !["petrol", "diesel", "electric", "hybrid", "gas"].includes(fuel_type)
+    ) {
       res.status(400).json({ error: "Invalid fuel type" });
       return;
     }
 
-    if (transmission_type && !['automatic', 'manual', 'semi-automatic', 'CVT'].includes(transmission_type)) {
+    if (
+      transmission_type &&
+      !["automatic", "manual", "semi-automatic", "CVT"].includes(
+        transmission_type
+      )
+    ) {
       res.status(400).json({ error: "Invalid transmission type" });
       return;
     }
@@ -326,7 +372,9 @@ export const editCar = async (
       );
 
       if (existingCar.length > 0) {
-        res.status(409).json({ error: "Registration number is already in use" });
+        res
+          .status(409)
+          .json({ error: "Registration number is already in use" });
         return;
       }
     }
@@ -431,10 +479,9 @@ export const editCar = async (
 
     await db.query(updateQuery, updateValues);
 
-    const [updatedCar] = await db.query(
-      `SELECT * FROM car WHERE car_id = ?`,
-      [car_id]
-    );
+    const [updatedCar] = await db.query(`SELECT * FROM car WHERE car_id = ?`, [
+      car_id,
+    ]);
 
     res.json({
       message: "Car updated successfully",
@@ -443,5 +490,61 @@ export const editCar = async (
   } catch (error) {
     console.error("Car update error:", error);
     res.status(500).json({ error: "Failed to update car information" });
+  }
+};
+
+export const deleteCar = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const carId = parseInt(req.body.id);
+    const userId = (req as AuthenticatedRequest).user.user_id;
+
+    if (!carId || isNaN(carId)) {
+      res.status(400).json({ error: "Invalid car ID" });
+      return;
+    }
+
+    const carOwnerResult = await db.query(
+      "SELECT * FROM car_user WHERE car_id = ? AND user_id = ?",
+      [carId, userId]
+    );
+
+    if (!Array.isArray(carOwnerResult) || carOwnerResult.length === 0) {
+      res
+        .status(403)
+        .json({ error: "You do not have permission to deactivate this car" });
+      return;
+    }
+
+    const activeOrdersResult = await db.query(
+      'SELECT * FROM orders WHERE car_id = ? AND rental_status IN ("pending", "confirmed", "extended")',
+      [carId]
+    );
+
+    if (Array.isArray(activeOrdersResult) && activeOrdersResult.length > 0) {
+      res
+        .status(400)
+        .json({ error: "Cannot deactivate car with active bookings" });
+      return;
+    }
+
+    const updateResult = await db.query(
+      "UPDATE car SET car_active = 0 WHERE car_id = ?",
+      [carId]
+    );
+
+    const affectedRows =
+      updateResult && "affectedRows" in updateResult
+        ? updateResult.affectedRows
+        : 0;
+
+    if (affectedRows === 0) {
+      res.status(404).json({ error: "Car not found or already deactivated" });
+      return;
+    }
+
+    res.status(200).json({ message: "Car deactivated successfully" });
+  } catch (error) {
+    console.error("Error deactivating car:", error);
+    res.status(500).json({ error: "Failed to deactivate car" });
   }
 };

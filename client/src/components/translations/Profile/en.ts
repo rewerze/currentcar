@@ -16,6 +16,8 @@ const translations = {
   delete_profile: "Delete profile",
   notifications: "Notifications",
   rentedCars: "Rented Cars",
-  uploadedCars: "Uploaded Cars"
+  uploadedCars: "Uploaded Cars",
+  noRentedCars: "You have no rented cars.",
+  viewDetails: "View Details",
 };
 export default translations;

@@ -10,9 +10,15 @@ import { loginHandler } from "./endpoints/api/login";
 import { verifyAuthTokenMiddleware } from "./middlewares/authToken";
 import { logoutHandler } from "./endpoints/api/logout";
 import { resetPasswordHandler } from "./endpoints/api/reset-password";
-import { carsHandler, editCar, getCarImage, rentCar } from "./endpoints/api/cars";
+import {
+  carsHandler,
+  deleteCar,
+  editCar,
+  getCarImage,
+  rentCar,
+} from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
-import { carHandler, getCars } from "./endpoints/api/getCar";
+import { carHandler, getCars, getRentedCars } from "./endpoints/api/getCar";
 import { upload } from "./middlewares/upload";
 import { validateCarUpload } from "./middlewares/validators";
 import cron from "node-cron";
@@ -138,6 +144,9 @@ app.post("/api/comments", verifyAuthTokenMiddleware, postComment);
 
 app.post("/api/rent", verifyAuthTokenMiddleware, rentCar);
 
+app.post("/api/deleteCar", verifyAuthTokenMiddleware, deleteCar);
+app.get("/api/getRentedCars", verifyAuthTokenMiddleware, getRentedCars);
+
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });
 });
@@ -159,7 +168,8 @@ export const updateExpiredOrders = async () => {
           )
       `);
     console.log(
-      `Reactivated ${(result as RowDataPacket).affectedRows
+      `Reactivated ${
+        (result as RowDataPacket).affectedRows
       } cars after rental expiry.`
     );
   } catch (error) {
@@ -178,7 +188,8 @@ export const deactivateExpiredAvailability = async () => {
           )
       `);
     console.log(
-      `Deactivated ${(result as RowDataPacket).affectedRows
+      `Deactivated ${
+        (result as RowDataPacket).affectedRows
       } cars due to availability expiration.`
     );
   } catch (error) {

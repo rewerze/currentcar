@@ -18,14 +18,35 @@ import { buildApiUrl } from "@/lib/utils";
 
 function Profile() {
   const { user, loading } = useUser();
-  const [cars, setCars] = useState<CarInfo[]>([]);
+  const [uploadedCars, setUploadedCars] = useState<CarInfo[]>([]);
+  const [rentedCars, setRentedCars] = useState<CarInfo[]>([]);
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
   const navigate = useNavigate();
   const { notifications } = useNotifications();
   const [notificationCount, setNotificationCount] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<'rented' | 'uploaded'>('uploaded');
 
   const handleDelete = () => {
+    // Profile deletion logic
+  };
 
+  const deleteCar = (id: number) => {
+    axios
+      .post(
+        buildApiUrl("/deleteCar"),
+        { id: id },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          setUploadedCars((prevCars) => prevCars.filter((car) => car.car_id !== id));
+        } else {
+          console.error("Failed to delete car");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting car:", error);
+      });
   };
 
   useEffect(() => {
@@ -35,19 +56,32 @@ function Profile() {
   }, [loadedNamespaces, loadNamespace]);
 
   useEffect(() => {
-    const fetchCars = async () => {
+    const fetchUploadedCars = async () => {
       try {
         const response = await axios.get(buildApiUrl("/getCars"), {
           withCredentials: true,
         });
 
-        setCars(response.data);
+        setUploadedCars(response.data);
       } catch (err) {
-        console.error("Failed to fetch cars", err);
+        console.error("Failed to fetch uploaded cars", err);
       }
     };
 
-    fetchCars();
+    const fetchRentedCars = async () => {
+      try {
+        const response = await axios.get(buildApiUrl("/getRentedCars"), {
+          withCredentials: true,
+        });
+
+        setRentedCars(response.data);
+      } catch (err) {
+        console.error("Failed to fetch rented cars", err);
+      }
+    };
+
+    fetchUploadedCars();
+    fetchRentedCars();
   }, []);
 
   useEffect(() => {
@@ -199,46 +233,98 @@ function Profile() {
           <div className="profile-tab">
             {/* GOMBOK => AZ AKTÍV GOMBOKON LEGYEN RAJTA A "profile-btn-active" CLASS */}
             <div className="profile-tab-button bg-dark">
-              <button>{t('rentedCars', 'Profile')}</button>
-              <button className="profile-btn-active">{t('uploadedCars', 'Profile')}</button>
+              <button
+                className={activeTab === 'rented' ? "profile-btn-active" : ""}
+                onClick={() => setActiveTab('rented')}
+              >
+                {t('rentedCars', 'Profile')}
+              </button>
+              <button
+                className={activeTab === 'uploaded' ? "profile-btn-active" : ""}
+                onClick={() => setActiveTab('uploaded')}
+              >
+                {t('uploadedCars', 'Profile')}
+              </button>
             </div>
 
             {/* AUTÓK */}
             <div className="profile-tab-content">
               <div className="profile-car">
-                {cars.map((car, index) => (
-                  <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
-                    <div className="profile-car-card-body bg-dark">
-                      <img
-                        src={
-                          car.car_id
-                            ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
-                            : templateImage
-                        }
-                        onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
-                        className="profile-car-img"
-                      />
-                      <h3 className="text-center">
-                        {car.car_brand} {car.car_model}
-                      </h3>
-                      <p>{car.car_description}</p>
-                      <div className="profile-car-btn">
-                        <button
-                          className="btn badge bg-primary"
-                          onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/edit/${car.car_id}`) }}
-                        >
-                          <img src={edit_icon} />
-                        </button>
-                        <button
-                          className="btn badge bg-danger"
-                          onClick={(e) => { e.stopPropagation(); console.log("Delete clicked"); }}
-                        >
-                          <img src={delete_icon} />
-                        </button>
+                {activeTab === 'uploaded' ? (
+                  uploadedCars.length > 0 ? (
+                    uploadedCars.map((car, index) => (
+                      <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
+                        <div className="profile-car-card-body bg-dark">
+                          <img
+                            src={
+                              car.car_id
+                                ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                                : templateImage
+                            }
+                            onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
+                            className="profile-car-img"
+                          />
+                          <h3 className="text-center">
+                            {car.car_brand} {car.car_model}
+                          </h3>
+                          <p>{car.car_description}</p>
+                          <div className="profile-car-btn">
+                            <button
+                              className="btn badge bg-primary"
+                              onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/edit/${car.car_id}`) }}
+                            >
+                              <img src={edit_icon} />
+                            </button>
+                            <button
+                              className="btn badge bg-danger"
+                              onClick={(e) => { e.stopPropagation(); deleteCar(car.car_id) }}
+                            >
+                              <img src={delete_icon} />
+                            </button>
+                          </div>
+                        </div>
                       </div>
+                    ))
+                  ) : (
+                    <div className="text-center p-4">
+                      <p>{t('noUploadedCars', 'Profile') || "You haven't uploaded any cars yet."}</p>
                     </div>
-                  </div>
-                ))}
+                  )
+                ) : (
+                  rentedCars.length > 0 ? (
+                    rentedCars.map((car, index) => (
+                      <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
+                        <div className="profile-car-card-body bg-dark">
+                          <img
+                            src={
+                              car.car_id
+                                ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                                : templateImage
+                            }
+                            onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
+                            className="profile-car-img"
+                          />
+                          <h3 className="text-center">
+                            {car.car_brand} {car.car_model}
+                          </h3>
+                          <p>{car.car_description}</p>
+                          <div className="profile-car-btn">
+                            <button
+                              className="btn badge bg-primary w-100"
+                              onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/${car.car_id}`) }}
+                            >
+                              {t('viewDetails', 'Profile') || "View Details"}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center p-4">
+                      <p>{t('noRentedCars', 'Profile') || "You haven't rented any cars yet."}</p>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>

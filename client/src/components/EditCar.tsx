@@ -132,7 +132,7 @@ function EditCar() {
     };
 
     try {
-      const response = await axios.put(buildApiUrl("/car/edit"), updatePayload, {
+      await axios.put(buildApiUrl("/car/edit"), updatePayload, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
@@ -253,7 +253,7 @@ function EditCar() {
                 </span>
                 <span>{t('save_data', 'EditCar')}</span>
               </button>
-              <a href="/cars" className="btn btn-danger w-50">
+              <a href="/profil" className="btn btn-danger w-50">
                 <span>
                   <img src={cancel_icon} className="icon icon-small" alt="Cancel" />
                 </span>

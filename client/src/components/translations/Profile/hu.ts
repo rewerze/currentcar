@@ -16,7 +16,9 @@ const translations = {
   delete_profile: "Profil törlés",
   notifications: "Értesítések",
   rentedCars: "Bérelt autóim",
-  uploadedCars: "Feltöltött autóim"
+  uploadedCars: "Feltöltött autóim",
+  noRentedCars: "Nincsenek bérelt autóid.",
+  viewDetails: "Részletek megtekintése",
 };
 
 export default translations;
