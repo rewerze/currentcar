@@ -147,21 +147,16 @@ function App() {
     #           UTAZÁSI ÁR        #
     ############################ */}
         <section id="ar" className="bg-dark shadow">
-          <h1 className="text-light">{t("travelPrices", "MainPage")}</h1>
+          <h1 className="text-light">{t("carPrices", "MainPage")}</h1>
           <div className="row">
             <div className="col-lg-8">
               <p className="text-light">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
+                A CurRentCar-nál nálunk az árazás átlátható és rugalmas – pont, ahogy neked kényelmes.
               </p>
+              <p className="text-light">🧾 A bérlési díjakat mindig előre látod – nincs apró betűs rész vagy váratlan kiadás.</p>
+              <p className="text-light">🔄 Minden jármű tulajdonosa saját árakat állíthat be, így a kínálat sokszínű, te pedig biztosan találsz a pénztárcádhoz illő ajánlatot – akár egy napra, hétvégére vagy hosszabb időre bérelnél.</p>
+              <p className="text-light">💰 Több napos bérlésre extra kedvezmények járhatnak – minél hosszabb ideig használod az autót, annál jobban jársz.</p>
+              <p className="text-light">🛡️ Egyes autók esetében letét szükséges lehet, amit a bérlés végén visszakapsz, ha minden rendben zajlott. A bérlési folyamat során minden fontos információt világosan megjelenítünk.</p>
             </div>
             <div className="col-lg-4">
               <p className="penz text-blue">{t("priceAmount", "MainPage")}</p>

@@ -5,7 +5,7 @@ export default {
   mostPopularCars: "Legnépszerűbb autóink",
   xyzCar: "XYZ autó",
   clickForMoreInfo: "További információkért kattints a képre",
-  travelPrices: "Utazási árak",
+  carPrices: "Autók Árai",
   priceAmount: "9999 HUF",
   reviews: "Vélemények",
   name: "Név",

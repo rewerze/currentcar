@@ -5,7 +5,7 @@ export default {
   mostPopularCars: "Our Most Popular Cars",
   xyzCar: "XYZ Car",
   clickForMoreInfo: "Click on the image for more information",
-  travelPrices: "Travel Prices",
+  carPrices: "Car Prices",
   priceAmount: "9999 HUF",
   reviews: "Reviews",
   name: "Name",
