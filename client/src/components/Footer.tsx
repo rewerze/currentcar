@@ -29,7 +29,7 @@ function Footer() {
                     <p><b>{t('ourServices', 'Footer')}</b></p>
                     <a href="/berles">{t('carRental', 'Footer')}</a>
                     <a href="/feladas">{t('carListing', 'Footer')}</a>
-                    <a href="/biztonsag">{t('security', 'Footer')}</a>
+                    <a href="/osszesauto">{t('allcar', 'Footer')}</a>
                     <a href="/gyik">{t('faq', 'Footer')}</a>
                 </div>
                 <div className="col-3">

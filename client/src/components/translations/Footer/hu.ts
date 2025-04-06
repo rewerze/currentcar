@@ -8,7 +8,7 @@ export default {
     "ourServices": "Szolgáltatásaink",
     "carRental": "Autó bérlés",
     "carListing": "Autó feladása",
-    "security": "Biztonság",
+    "allcar": "Összes autó",
     "faq": "Gyakori kérdések",
     "contactUs": "Vedd fel velünk a kapcsolatot",
     "facebook": "Facebook",

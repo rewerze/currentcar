@@ -8,7 +8,7 @@ export default {
     "ourServices": "Our Services",
     "carRental": "Car rental",
     "carListing": "Car listing",
-    "security": "Security",
+    "allcar": "All cars",
     "faq": "Frequently Asked Questions",
     "contactUs": "Contact us",
     "facebook": "Facebook",
