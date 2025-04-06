@@ -28,4 +28,5 @@ export interface CarInfo {
   car_brand: string;
   available_to: Date;
   car_owner?: number;
+  extras?: string;
 }

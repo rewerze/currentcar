@@ -42,6 +42,11 @@ export const loginHandler = async (
       return;
     }
 
+    if (!user.user_active) {
+      res.status(403).json({ error: "Ez a fiók deaktiválva lett." });
+      return;
+    }
+
     const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: "24h" });
 
     res.cookie("auth_token", token, {

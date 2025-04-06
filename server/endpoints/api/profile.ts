@@ -18,6 +18,35 @@ interface ProfileUpdateData {
   profile_picture?: string;
 }
 
+export const deleteProfile = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const userId = (req as AuthenticatedRequest).user?.user_id;
+
+  if (!userId) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+
+  try {
+    await db.query("UPDATE user SET user_active = 0 WHERE user_id = ?", [
+      userId,
+    ]);
+    res.clearCookie("auth_token", {
+      domain: process.env.NODE_ENV === "production" ? "beniary.com" : "",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 24 * 60 * 60 * 1000,
+      sameSite: "lax",
+    });
+    res.json({ message: "Profile deleted successfully" });
+  } catch (error) {
+    console.error("Profile deletion error:", error);
+    res.status(500).json({ error: "Failed to delete profile" });
+  }
+};
+
 export const editProfile = async (
   req: Request,
   res: Response

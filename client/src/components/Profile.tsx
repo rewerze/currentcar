@@ -15,6 +15,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { CarInfo } from "./interfaces/Car";
 import axios from "axios";
 import { buildApiUrl } from "@/lib/utils";
+import { toast } from "sonner";
 
 function Profile() {
   const { user, loading } = useUser();
@@ -27,7 +28,22 @@ function Profile() {
   const [activeTab, setActiveTab] = useState<'rented' | 'uploaded'>('uploaded');
 
   const handleDelete = () => {
-    // Profile deletion logic
+    axios(buildApiUrl("/deleteProfile"), {
+      withCredentials: true,
+      method: "POST",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.location.reload();
+          toast.success(t("profileDeleted", "Profile") || "Profile deleted successfully");
+        } else {
+          toast.error("Failed to delete profile");
+        }
+      })
+      .catch(() => {
+        window.location.reload();
+        toast.error("Error deleting profile:");
+      });
   };
 
   const deleteCar = (id: number) => {
@@ -39,9 +55,9 @@ function Profile() {
       )
       .then((response) => {
         if (response.status === 200) {
-          setUploadedCars((prevCars) => prevCars.filter((car) => car.car_id !== id));
+          toast.success(t("carDeleted", "Profile") || "Car deleted successfully");
         } else {
-          console.error("Failed to delete car");
+          toast.error("Failed to delete car");
         }
       })
       .catch((error) => {

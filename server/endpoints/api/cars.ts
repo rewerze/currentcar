@@ -79,6 +79,32 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
+  const user = (req as AuthenticatedRequest).user;
+
+  const requirements = [
+    user.driver_license_expiry != null && user.driver_license_number != null,
+    user.user_email != null && Number(user.u_phone_number) !== 0,
+    user.user_iban != null,
+    user.born_at != null &&
+      new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
+  ];
+
+  if (
+    ![
+      user?.driver_license_expiry != null &&
+        user?.driver_license_number != null,
+      user?.user_email != null && Number(user?.u_phone_number) !== 0,
+      user?.user_iban != null,
+      user?.born_at != null &&
+        new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
+    ].every(Boolean)
+  ) {
+    res.status(400).json({
+      error: `User profile is incomplete or invalid for car rental`,
+    });
+    return;
+  }
+
   let connection;
 
   try {
@@ -203,19 +229,6 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
     const [queryResult] = await connection.query<RowDataPacket[]>(
       `SELECT * FROM car_user WHERE car_id = ?`,
       [car_id]
-    );
-
-    await connection.query(
-      `INSERT INTO notifications (
-        user_id,
-        message,
-        status,
-        created_at
-      ) VALUES (?, ?, 'unread', NOW())`,
-      [
-        userId,
-        `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`,
-      ]
     );
 
     await connection.query(

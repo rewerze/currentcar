@@ -16,6 +16,7 @@ function CarData() {
   const { t, loadNamespace, language, loadedNamespaces } = useLanguage();
   const { id } = useParams<{ id: string }>();
   const [car, setCarInfo] = useState<CarInfo | null>(null);
+  const [images, setImages] = useState<string[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,6 +61,7 @@ function CarData() {
 
         const data = await response.json();
         setCarInfo(data);
+        setImages(data.images || []);
       } catch (error) {
         console.error(error);
         toast.error(t("errorFetchingCar", "CarDetail"));
@@ -97,7 +99,7 @@ function CarData() {
   }
 
   async function onCarPurchase(fromDate: string, toDate: string, paymentMethod: string): Promise<void> {
-    if(car?.car_active == false) {
+    if (car?.car_active == false) {
       setIsModalOpen(false);
       return;
     }
@@ -230,36 +232,38 @@ function CarData() {
       <main className="nav-gap">
         <div className="row">
           <div className="col-lg-4 car-data-col">
-            <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
-              <div id="carouselExample" className="carousel slide">
+            <div className="col-lg-4 car-data-col">
+              <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
                 <div className="carousel-inner">
-                  <div className="carousel-item active">
-                    <img src={
-                      car.car_id
-                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
-                        : carImage
-                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100 car-data-img" />
-                  </div>
-                  <div className="carousel-item">
-                    <img src={
-                      car.car_id
-                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
-                        : carImage
-                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block car-data-img" />
-                  </div>
-                  <div className="carousel-item">
-                    <img src={
-                      car.car_id
-                        ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
-                        : carImage
-                    } alt={`${car.car_brand} ${car.car_model}`} onError={(e) => { (e.target as HTMLImageElement).src = carImage }} className="d-block w-100 car-data-img" />
-                  </div>
+                  {images && images.length > 0 ? (
+                    images.map((image, index) => (
+                      <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
+                        <img
+                          src={`${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/uploads/${image}`}
+                          alt={`${car.car_brand} ${car.car_model} - ${index + 1}`}
+                          className="d-block w-100 car-data-img"
+                          onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <div className="carousel-item active">
+                        <img
+                          src={car.car_id ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}` : carImage}
+                          alt={`${car.car_brand} ${car.car_model}`}
+                          className="d-block w-100 car-data-img"
+                          onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                   <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                   <span className="carousel-control-next-icon" aria-hidden="true"></span>
                   <span className="visually-hidden">Next</span>
                 </button>
@@ -363,7 +367,7 @@ function CarData() {
                   <a href="/profil">
                     <img src={isLoggedIn ? `${import.meta.env.PROD
                       ? "/api/uploads/profile-pictures/"
-                      : "http://localhost:3000/uploads/profile-pictures/"
+                      : "http://localhost:3000/api/uploads/profile-pictures/"
                       }${user?.profile_picture}` : profile} onError={(e) => { (e.target as HTMLImageElement).src = profile }} alt="" className="profile-sm" />
                   </a>
                   <span className="star-range">
@@ -425,7 +429,7 @@ function CarData() {
                       comment.profile_picture
                         ? `${import.meta.env.PROD
                           ? "/api/uploads/profile-pictures/"
-                          : "http://localhost:3000/uploads/profile-pictures/"
+                          : "http://localhost:3000/api/uploads/profile-pictures/"
                         }${comment.profile_picture}`
                         : profile
                     } alt="" onError={(e) => { (e.target as HTMLImageElement).src = profile }} className='profile' />
@@ -449,7 +453,7 @@ function CarData() {
             )}
           </div>
         </div>
-      </main>
+      </main >
     </>
   );
 }

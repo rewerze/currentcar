@@ -2,19 +2,53 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/elements.css";
 import "./assets/css/colors.css";
 import "./assets/css/mobile.css";
-import map from "./assets/img/googlemap.png";
 import depo from "./assets/img/miert_a_currentcar.png";
 import nepszeru from "./assets/img/nepszeru_auto.png";
 import profil from "./assets/img/profile.jpg";
 import { useLanguage } from "./contexts/LanguageContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { buildApiUrl } from "./lib/utils";
+import { CarInfo } from "./components/interfaces/Car";
+import { Review } from "./components/interfaces/Review";
 
 function App() {
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [popularCars, setPopularCars] = useState<CarInfo[]>([]);
 
   useEffect(() => {
     if (!loadedNamespaces.includes("MainPage")) loadNamespace("MainPage");
-  }, [loadedNamespaces]);
+  }, [loadedNamespaces, loadNamespace]);
+
+  useEffect(() => {
+    const fetchRandomReviews = async () => {
+      try {
+        const response = await axios.get(buildApiUrl("/randomReviews"), {
+          withCredentials: true,
+        });
+
+        setReviews(response.data);
+      } catch (err) {
+        console.error("Failed to fetch random reviews", err);
+      }
+    };
+
+    const fetchPopularCars = async () => {
+      try {
+        const response = await axios.get(buildApiUrl("/popularCars"), {
+          withCredentials: true,
+        });
+
+        setPopularCars(response.data);
+      } catch (err) {
+        console.error("Failed to fetch popular cars", err);
+      }
+    };
+
+    fetchRandomReviews();
+    fetchPopularCars();
+  }, []);
   return (
     <>
       {/* ############################
@@ -26,12 +60,12 @@ function App() {
             <div className="row">
               <div className="col-lg mt-5">
                 <p>
-                  Találja meg az Önhöz legközelebbi depót!
+                  {t('findNearestDepot', 'MainPage')}
                 </p>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Jelenlegi helyzeted"
+                  placeholder={t('currentPosition', 'MainPage')}
                   id="hely"
                 />
               </div>
@@ -59,33 +93,25 @@ function App() {
           <div className="row center">
             <div className="col-lg-6">
               <p className="text-light">
-              A CurRentCar egy modern és megbízható autóbérlési platform, amely egyszerű és biztonságos megoldást kínál mind bérbeadóknak, mind bérlőknek.
+                {t("introText", "MainPage")}
               </p>
 
-              <h2>Miért érdemes minket választani?</h2>
+              <h2>{t("whyChooseUs", "MainPage")}</h2>
 
               <p>
-              ✅ Egyszerű és gyors folyamat
-              Regisztrálj, töltsd fel az autódat, vagy bérelj egyet néhány kattintással! Intuitív felületünknek köszönhetően az autóbérlés még sosem volt ilyen könnyű.
+                {t("easyFastProcess", "MainPage")}
               </p>
               <p>
-              ✅ Biztonságos bérlés
-              Felhasználóinkat és járműveiket ellenőrizzük, hogy mind a bérlők, mind a tulajdonosok nyugodtan vehessenek részt a bérlésben.
+                {t("secureRenting", "MainPage")}
               </p>
               <p>
-              ✅ Széles autókínálat
-              Kompakt városi autót, elegáns limuzint vagy kalandokra kész SUV-t keresel? Nálunk minden igényt kielégítő járműveket találhatsz.
+                {t("wideCarSelection", "MainPage")}
               </p>
               <p>
-              ✅ Rugalmas árak és feltételek
-              A bérbeadók saját feltételeik szerint kínálhatják járműveiket, a bérlők pedig versenyképes árakon találhatják meg az ideális autót.
+                {t("flexiblePricing", "MainPage")}
               </p>
               <p>
-              ✅ Közösség és értékelések
-              A valós felhasználói vélemények segítenek a legjobb autót kiválasztani, így mindenki biztos lehet benne, hogy megbízható partnerekkel üzletel.
-              </p>
-              <p className="mt-5">
-              Válaszd a CurRentCar-t, és tapasztald meg az autóbérlés új, kényelmes formáját!
+                {t("communityReviews", "MainPage")}
               </p>
             </div>
             <div className="col-lg-6">
@@ -100,36 +126,20 @@ function App() {
         <section id="nepszeru">
           <h1 className="right">{t("mostPopularCars", "MainPage")}</h1>
           <div className="row d-flex justify-content-center">
-            <div className="col col-md-4 autok bg-dark">
-              <a href="/adatlap" className="off-link">
-                <p>
-                  <img src={nepszeru} alt="" />
-                </p>
-                <hr />
-                <h2>{t("xyzCar", "MainPage")}</h2>
-                <p>{t("clickForMoreInfo", "MainPage")}</p>
-              </a>
-            </div>
-            <div className="col col-md-4 autok bg-dark">
-              <a href="/adatlap" className="off-link">
-                <p>
-                  <img src={nepszeru} alt="" />
-                </p>
-                <hr />
-                <h2>{t("xyzCar", "MainPage")}</h2>
-                <p>{t("clickForMoreInfo", "MainPage")}</p>
-              </a>
-            </div>
-            <div className="col col-md-4 autok bg-dark">
-              <a href="/adatlap" className="off-link">
-                <p>
-                  <img src={nepszeru} alt="" />
-                </p>
-                <hr />
-                <h2>{t("xyzCar", "MainPage")}</h2>
-                <p>{t("clickForMoreInfo", "MainPage")}</p>
-              </a>
-            </div>
+            {Array.isArray(popularCars) && popularCars.map((car) => (
+              <div className="col col-md-4 autok bg-dark" key={car.car_id}>
+                <a href={`/adatlap/` + car.car_id} className="off-link">
+                  <p>
+                    <img src={car.car_id ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}` : nepszeru} onError={(e) => {
+                      (e.target as HTMLImageElement).src = nepszeru;
+                    }} alt="" />
+                  </p>
+                  <hr />
+                  <h2>{car.car_brand} {car.car_model}</h2>
+                  <p>{t("clickForMoreInfo", "MainPage")}</p>
+                </a>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -141,7 +151,7 @@ function App() {
           <div className="row">
             <div className="col-lg-8">
               <p className="text-light">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
+                Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
                 of type and scrambled it to make a type specimen book. It has
@@ -165,42 +175,30 @@ function App() {
         <section id="velemenyek">
           <h1 className="right">{t("reviews", "MainPage")}</h1>
           <div className="comments">
-            <div className="comment-box bg-light">
-              <div className="comment-content">
-                <img src={profil} alt="" className="profile" />
-                <div className="comment-text">
-                  <h5>{t("name", "MainPage")}</h5>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </p>
+            {
+              reviews.map((review) => (
+                <div className="comment-box bg-light" key={review.review_id}>
+                  <div className="comment-content">
+                    <img src={profil} alt="" className="profile" />
+                    <div className="comment-text">
+                      <h5>{review.user_name}</h5>
+                      <div className="rating">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="star">
+                            {i < review.review_rating ? (
+                              <i className="fas fa-star text-warning"></i>
+                            ) : (
+                              <i className="far fa-star text-warning"></i>
+                            )}
+                          </span>
+                        ))}
+                      </div>
+                      <p>{review.review_message}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="comment-box bg-light">
-              <div className="comment-content">
-                <img src={profil} alt="" className="profile" />
-                <div className="comment-text">
-                  <h5>{t("name", "MainPage")}</h5>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="comment-box bg-light">
-              <div className="comment-content">
-                <img src={profil} alt="" className="profile" />
-                <div className="comment-text">
-                  <h5>{t("name", "MainPage")}</h5>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </p>
-                </div>
-              </div>
-            </div>
+              ))
+            }
           </div>
         </section>
       </main>

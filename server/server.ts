@@ -27,13 +27,18 @@ import {
   getNotification,
   readNotification,
 } from "./endpoints/api/notifications";
-import { editProfile, uploadProfilePicture } from "./endpoints/api/profile";
+import {
+  deleteProfile,
+  editProfile,
+  uploadProfilePicture,
+} from "./endpoints/api/profile";
 import path from "path";
 import multer from "multer";
 import { uploadCar } from "./endpoints/api/carUpload";
 import { getComments, postComment } from "./endpoints/api/comments";
 import db from "./db/connection";
 import { RowDataPacket } from "mysql2";
+import { getMostPopularCars, getRandomReviews } from "./endpoints/api/mainPage";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -70,11 +75,11 @@ app.get("/", (req, res) => {
 });
 
 app.use(
-  "/uploads/profile-pictures",
+  "/api/uploads/profile-pictures",
   express.static(path.join(__dirname, "endpoints/uploads/profile-pictures"))
 );
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads/cars")));
+app.use("/api/uploads", express.static(path.join(__dirname, "uploads/cars")));
 
 app.use(((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof multer.MulterError) {
@@ -137,6 +142,9 @@ app.post(
   uploadCar
 );
 
+app.get("/api/randomReviews", getRandomReviews);
+app.get("/api/popularCars", getMostPopularCars);
+
 app.get("/api/getCarImage", getCarImage);
 
 app.get("/api/comments", getComments);
@@ -145,6 +153,7 @@ app.post("/api/comments", verifyAuthTokenMiddleware, postComment);
 app.post("/api/rent", verifyAuthTokenMiddleware, rentCar);
 
 app.post("/api/deleteCar", verifyAuthTokenMiddleware, deleteCar);
+app.post("/api/deleteProfile", verifyAuthTokenMiddleware, deleteProfile);
 app.get("/api/getRentedCars", verifyAuthTokenMiddleware, getRentedCars);
 
 app.use((req: Request, res: Response) => {

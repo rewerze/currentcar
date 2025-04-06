@@ -30,7 +30,7 @@ const CarUpload: React.FC = () => {
         car_model: '',
         car_condition: CarCondition.EXCELLENT,
         car_year: 0,
-        car_type: CarType.CONVERTIBLE,
+        car_type: CarType.SEDAN,
         fuel_type: FuelType.DIESEL,
         transmission_type: TransmissionType.AUTOMATIC,
         car_regnumber: '',
@@ -45,49 +45,45 @@ const CarUpload: React.FC = () => {
         car_active: false,
         insurance_id: 0,
         mileage: 0,
-        available_to: new Date()
+        available_to: new Date(),
+        extras: ''
     });
 
-    const [availableCars, setAvailableCars] = useState<CarInfo[]>([]);
-
     const [files, setFiles] = useState<File[]>([]);
-
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    useEffect(() => {
-        const fetchCars = async (): Promise<void> => {
-            try {
-                const response = await fetch(buildApiUrl('/cars'), {
-                    credentials: 'include',
-                });
+    const carConditions = [
+        { value: CarCondition.NEW, label: 'new' },
+        { value: CarCondition.EXCELLENT, label: 'excellent' },
+        { value: CarCondition.GOOD, label: 'good' },
+        { value: CarCondition.FAIR, label: 'fair' },
+        { value: CarCondition.POOR, label: 'poor' }
+    ];
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+    const carTypes = [
+        { value: CarType.CONVERTIBLE, label: 'convertible' },
+        { value: CarType.COUPE, label: 'coupe' },
+        { value: CarType.HATCHBACK, label: 'hatchback' },
+        { value: CarType.MINIVAN, label: 'minivan' },
+        { value: CarType.SEDAN, label: 'sedan' },
+        { value: CarType.SUV, label: 'suv' },
+        { value: CarType.WAGON, label: 'wagon' }
+    ];
 
-                const data: CarInfo[] = await response.json();
-                setAvailableCars(data);
-            } catch (error) {
-                console.error('Error fetching cars:', error);
-                toast.error('Failed to load options');
-            }
-        };
+    const fuelTypes = [
+        { value: FuelType.PETROL, label: 'petrol' },
+        { value: FuelType.DIESEL, label: 'diesel' },
+        { value: FuelType.ELECTRIC, label: 'electric' },
+        { value: FuelType.HYBRID, label: 'hybrid' },
+        { value: FuelType.GAS, label: 'gas' }
+    ];
 
-        fetchCars();
-    }, []);
-
-    const getUniqueOptions = (field: keyof CarInfo): string[] => {
-        if (!availableCars.length) return [];
-        const options = [
-            ...new Set(
-                availableCars
-                    .map((car) => car[field])
-                    .filter((value) => value !== undefined && value !== null)
-                    .map((value) => String(value))
-            ),
-        ];
-        return options;
-    };
+    const transmissionTypes = [
+        { value: TransmissionType.AUTOMATIC, label: 'automatic' },
+        { value: TransmissionType.MANUAL, label: 'manual' },
+        { value: TransmissionType.SEMI_AUTOMATIC, label: 'semi_automatic' },
+        { value: TransmissionType.CVT, label: 'cvt' }
+    ];
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
         const { name, value } = e.target;
@@ -152,7 +148,7 @@ const CarUpload: React.FC = () => {
                 car_model: '',
                 car_condition: CarCondition.EXCELLENT,
                 car_year: 0,
-                car_type: CarType.CONVERTIBLE,
+                car_type: CarType.SEDAN,
                 fuel_type: FuelType.DIESEL,
                 transmission_type: TransmissionType.AUTOMATIC,
                 car_regnumber: '',
@@ -167,7 +163,8 @@ const CarUpload: React.FC = () => {
                 car_active: false,
                 insurance_id: 0,
                 mileage: 0,
-                available_to: new Date()
+                available_to: new Date(),
+                extras: ''
             });
             setFiles([]);
 
@@ -244,10 +241,9 @@ const CarUpload: React.FC = () => {
                                         onChange={handleChange}
                                         className="form-select w-75"
                                     >
-                                        <option value="">{t('condition', 'CarUpload')}</option>
-                                        {getUniqueOptions('car_condition').map((condition) => (
-                                            <option key={condition} value={condition}>
-                                                {t(condition, 'CarUpload')}
+                                        {carConditions.map((condition) => (
+                                            <option key={condition.value} value={condition.value}>
+                                                {t(condition.label, 'CarUpload')}
                                             </option>
                                         ))}
                                     </select>
@@ -278,10 +274,9 @@ const CarUpload: React.FC = () => {
                                         onChange={handleChange}
                                         className="form-select w-25"
                                     >
-                                        <option value="">{t('carType', 'CarUpload')}<span className='text-danger'>*</span></option>
-                                        {getUniqueOptions('car_type').map((type) => (
-                                            <option key={type} value={type}>
-                                                {t(type, 'CarUpload')}
+                                        {carTypes.map((type) => (
+                                            <option key={type.value} value={type.value}>
+                                                {t(type.label, 'CarUpload')}
                                             </option>
                                         ))}
                                     </select>
@@ -295,10 +290,9 @@ const CarUpload: React.FC = () => {
                                         onChange={handleChange}
                                         className="form-select w-25"
                                     >
-                                        <option value="">{t('fuelType', 'CarUpload')}<span className='text-danger'>*</span></option>
-                                        {getUniqueOptions('fuel_type').map((type) => (
-                                            <option key={type} value={type}>
-                                                {t(type, 'CarUpload')}
+                                        {fuelTypes.map((type) => (
+                                            <option key={type.value} value={type.value}>
+                                                {t(type.label, 'CarUpload')}
                                             </option>
                                         ))}
                                     </select>
@@ -312,10 +306,9 @@ const CarUpload: React.FC = () => {
                                         onChange={handleChange}
                                         className="form-select w-25"
                                     >
-                                        <option value="">{t('transmissionType', 'CarUpload')}<span className='text-danger'>*</span></option>
-                                        {getUniqueOptions('transmission_type').map((type) => (
-                                            <option key={type} value={type}>
-                                                {t(type, 'CarUpload')}
+                                        {transmissionTypes.map((type) => (
+                                            <option key={type.value} value={type.value}>
+                                                {t(type.label, 'CarUpload')}
                                             </option>
                                         ))}
                                     </select>
@@ -401,13 +394,14 @@ const CarUpload: React.FC = () => {
                                         className="form-control"
                                     />
                                 </div>
-
                                 <div className='upload-data'>
-                                    <label htmlFor="extra">Extrák</label>
+                                    <label htmlFor="extras">Extrák</label>
                                     <input
-                                        id="extra"
+                                        id="extras"
                                         type="text"
-                                        name="extra"
+                                        name="extras"
+                                        value={formData.extras}
+                                        onChange={handleChange}
                                         className="form-control"
                                         placeholder='pl.: baba ülés, sötétítő, stb...'
                                     />
@@ -427,12 +421,23 @@ const CarUpload: React.FC = () => {
                                         multiple
                                         accept="image/*"
                                     />
+                                    {files.length > 0 && (
+                                        <div className="mt-2">
+                                            <p>{files.length} kép kiválasztva</p>
+                                            <div className="selected-files">
+                                                {files.map((file, index) => (
+                                                    <span key={index} className="badge bg-primary me-1">
+                                                        {file.name}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className="upload-data">
-
                                     <label htmlFor="car_description">{t('description', 'CarUpload')}</label>
                                     <textarea
                                         id="car_description"

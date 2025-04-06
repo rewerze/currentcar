@@ -19,5 +19,8 @@ const translations = {
   uploadedCars: "Uploaded Cars",
   noRentedCars: "You have no rented cars.",
   viewDetails: "View Details",
+  noUploadedCars: "You have no uploaded cars.",
+  profileDeleted: "Your profile has been deleted.",
+  carDeleted: "Your car has been deleted.",
 };
 export default translations;

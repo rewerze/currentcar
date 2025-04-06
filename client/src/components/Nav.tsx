@@ -92,7 +92,7 @@ function Nav() {
                       user.profile_picture
                         ? `${import.meta.env.PROD
                           ? "/api/uploads/profile-pictures/"
-                          : "http://localhost:3000/uploads/profile-pictures/"
+                          : "http://localhost:3000/api/uploads/profile-pictures/"
                         }${user.profile_picture}`
                         : profil
                     }

@@ -6,6 +6,18 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import translations from "./translations/API";
 import { buildApiUrl } from "@/lib/utils";
 
+interface PaginationData {
+  total: number;
+  totalPages: number;
+  currentPage: number;
+  limit: number;
+}
+
+interface ApiResponse {
+  data: Car[];
+  pagination: PaginationData;
+}
+
 function AllCar() {
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
 
@@ -14,9 +26,19 @@ function AllCar() {
       loadNamespace("AllCar");
     }
   }, [loadedNamespaces, loadNamespace]);
+
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+
+  const [pagination, setPagination] = useState<PaginationData>({
+    total: 0,
+    totalPages: 0,
+    currentPage: 1,
+    limit: 12
+  });
+
   const [filters, setFilters] = useState<FilterState>({
     search: "",
     brand: "Összes",
@@ -26,6 +48,7 @@ function AllCar() {
     fuel: "Összes",
     year: "Összes",
   });
+
   const filterKeys = [
     "search",
     "brand",
@@ -35,6 +58,7 @@ function AllCar() {
     "fuel",
     "year",
   ] as const;
+
   const defaultValues = ["Összes", "All"];
   type FilterKey = (typeof filterKeys)[number];
 
@@ -62,52 +86,63 @@ function AllCar() {
     return value;
   };
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        setLoading(true);
+  const fetchCars = async (page = 1) => {
+    try {
+      setLoading(true);
 
-        // Construct query parameters for filtering
-        const queryParams = new URLSearchParams();
 
-        if (filters.search) {
-          queryParams.append("q", filters.search);
-        }
+      const queryParams = new URLSearchParams();
 
-        Object.entries(filters).forEach(([key, value]) => {
-          if (!defaultValues.includes(value)) {
-            queryParams.append(
-              key,
-              getTranslatedFilterValue(key as keyof typeof translations, value)
-            );
-          }
-        });
 
-        console.log(queryParams.toString());
+      queryParams.append("page", page.toString());
+      queryParams.append("limit", pagination.limit.toString());
 
-        const queryString = queryParams.toString();
-        const endpoint = queryString ? `/cars/search?${queryString}` : `/cars`;
-
-        const response = await fetch(buildApiUrl(endpoint), {
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data: Car[] = await response.json();
-        console.log("Fetched cars data:", data);
-        setCars(data);
-        setLoading(false);
-      } catch (error) {
-        setError((error as Error).message);
-        setLoading(false);
+      if (filters.search) {
+        queryParams.append("q", filters.search);
       }
-    };
 
-    fetchCars();
+      Object.entries(filters).forEach(([key, value]) => {
+        if (!defaultValues.includes(value)) {
+          queryParams.append(
+            key,
+            getTranslatedFilterValue(key as keyof typeof translations, value)
+          );
+        }
+      });
+
+      console.log(queryParams.toString());
+
+      const queryString = queryParams.toString();
+      const endpoint = `/cars/search?${queryString}`;
+
+      const response = await fetch(buildApiUrl(endpoint), {
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result: ApiResponse = await response.json();
+      console.log("Fetched cars data:", result);
+
+      setCars(result.data);
+      setPagination(result.pagination);
+      setLoading(false);
+    } catch (error) {
+      setError((error as Error).message);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCars(1);
   }, [filters]);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > pagination.totalPages) return;
+    fetchCars(page);
+  };
 
   const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -141,6 +176,90 @@ function AllCar() {
     return options;
   };
 
+
+  const Pagination = () => {
+    const { totalPages, currentPage } = pagination;
+
+
+    if (totalPages <= 1) return null;
+
+
+    let startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, startPage + 4);
+
+
+    if (endPage - startPage < 4) {
+      startPage = Math.max(1, endPage - 4);
+    }
+
+    const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+
+    return (
+      <div aria-label="Page navigation" className="mt-4">
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              &laquo;
+            </button>
+          </li>
+
+          {startPage > 1 && (
+            <>
+              <li className="page-item">
+                <button className="page-link" onClick={() => handlePageChange(1)}>1</button>
+              </li>
+              {startPage > 2 && (
+                <li className="page-item disabled">
+                  <span className="page-link">...</span>
+                </li>
+              )}
+            </>
+          )}
+
+          {pages.map(page => (
+            <li key={page} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+              <button
+                className="page-link"
+                onClick={() => handlePageChange(page)}
+              >
+                {page}
+              </button>
+            </li>
+          ))}
+
+          {endPage < totalPages && (
+            <>
+              {endPage < totalPages - 1 && (
+                <li className="page-item disabled">
+                  <span className="page-link">...</span>
+                </li>
+              )}
+              <li className="page-item">
+                <button className="page-link" onClick={() => handlePageChange(totalPages)}>
+                  {totalPages}
+                </button>
+              </li>
+            </>
+          )}
+
+          <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              &raquo;
+            </button>
+          </li>
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <>
       <main className="nav-gap">
@@ -151,7 +270,7 @@ function AllCar() {
           onSubmit={(e: FormEvent) => e.preventDefault()}
         >
           <div className="search">
-            {/* KERESÉS */}
+            { }
             <div className="d-flex justify-content-center mb-3 mx-auto gap-3">
               <input
                 type="text"
@@ -180,7 +299,7 @@ function AllCar() {
               </button>
             </div>
 
-            {/* SZŰRÉS */}
+            { }
             <div className="filter d-flex justify-content-center gap-2 w-100 mx-auto">
               <div className="w-25">
                 <label htmlFor="brand">{t("brand", "AllCar")}</label>
@@ -295,7 +414,7 @@ function AllCar() {
           </div>
         </form>
 
-        {/* AUTÓK */}
+        { }
         {loading ? (
           <div className="text-center mt-5">
             <p>{t("loading", "AllCar")}...</p>
@@ -307,96 +426,111 @@ function AllCar() {
             </p>
           </div>
         ) : (
-          <div className="cars mt-5 d-flex flex-wrap justify-content-center gap-4">
-            {cars.length > 0 ? (
-              cars.map((car) => (
-                <div className="car-box bg-dark" key={car.car_id}>
-                  <a href={`/adatlap/${car.car_id}`} className="off-link">
-                    <div>
-                      <p className="text-center car-image">
-                        <img
-                          src={
-                            car.car_id
-                              ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
-                              : carDefaultImage
-                          }
-                          alt={`${car.car_brand} ${car.car_model}`}
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = carDefaultImage;
-                          }}
-                        />
-                      </p>
-                    </div>
-                    <div className="text-center p-3">
-                      <h3>
-                        {car.car_brand} {car.car_model}
-                      </h3>
-                      <p className="text-truncate mb-2">
-                        {car.car_description}
-                      </p>
-
-                      <div className="d-flex justify-content-between">
-                        <span className="badge bg-primary">{car.car_year}</span>
-                        <span className="badge bg-secondary">
-                          {t(car.car_type, "car_type")}
-                        </span>
-                        <span className="badge bg-info text-dark">
-                          {t(car.car_condition, "AllCar")}
-                        </span>
+          <>
+            <div className="cars mt-5 d-flex flex-wrap justify-content-center gap-4">
+              {cars.length > 0 ? (
+                cars.map((car) => (
+                  <div className="car-box bg-dark" key={car.car_id}>
+                    <a href={`/adatlap/${car.car_id}`} className="off-link">
+                      <div>
+                        <p className="text-center car-image">
+                          <img
+                            src={
+                              car.car_id
+                                ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                                : carDefaultImage
+                            }
+                            alt={`${car.car_brand} ${car.car_model}`}
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = carDefaultImage;
+                            }}
+                          />
+                        </p>
                       </div>
+                      <div className="text-center p-3">
+                        <h3>
+                          {car.car_brand} {car.car_model}
+                        </h3>
+                        <p className="text-truncate mb-2">
+                          {car.car_description}
+                        </p>
 
-                      <div className="d-flex justify-content-between mt-2">
-                        <span className="badge bg-success">
-                          {t(car.fuel_type, "AllCar")}
-                        </span>
-                        <span className="badge bg-warning text-dark">
-                          {t(car.transmission_type, "AllCar")}
-                        </span>
-                      </div>
+                        <div className="d-flex justify-content-between">
+                          <span className="badge bg-primary">{car.car_year}</span>
+                          <span className="badge bg-secondary">
+                            {t(car.car_type, "car_type")}
+                          </span>
+                          <span className="badge bg-info text-dark">
+                            {t(car.car_condition, "AllCar")}
+                          </span>
+                        </div>
 
-                      <div className="d-flex justify-content-between align-items-center mt-3">
-                        <small>
-                          {t("seats", "AllCar")}: {car.seats}
-                        </small>
-                        <small>
-                          {t("doors", "AllCar")}: {car.number_of_doors}
-                        </small>
-                        <small>{car.mileage.toLocaleString()} km</small>
-                      </div>
+                        <div className="d-flex justify-content-between mt-2">
+                          <span className="badge bg-success">
+                            {t(car.fuel_type, "AllCar")}
+                          </span>
+                          <span className="badge bg-warning text-dark">
+                            {t(car.transmission_type, "AllCar")}
+                          </span>
+                        </div>
 
-                      <hr className="my-2 border-secondary" />
+                        <div className="d-flex justify-content-between align-items-center mt-3">
+                          <small>
+                            {t("seats", "AllCar")}: {car.seats}
+                          </small>
+                          <small>
+                            {t("doors", "AllCar")}: {car.number_of_doors}
+                          </small>
+                          <small>{car.mileage.toLocaleString()} km</small>
+                        </div>
 
-                      <div className="d-flex justify-content-between">
-                        <div className="text-start">
-                          <div>
-                            <small>
-                              {t("hour", "AllCar")}:{" "}
-                              {formatPrice(car.price_per_hour)}
-                            </small>
+                        <hr className="my-2 border-secondary" />
+
+                        <div className="d-flex justify-content-between">
+                          <div className="text-start">
+                            <div>
+                              <small>
+                                {t("hour", "AllCar")}:{" "}
+                                {formatPrice(car.price_per_hour)}
+                              </small>
+                            </div>
+                            <div>
+                              <small>
+                                {t("day", "AllCar")}:{" "}
+                                {formatPrice(car.price_per_day)}
+                              </small>
+                            </div>
                           </div>
-                          <div>
-                            <small>
-                              {t("day", "AllCar")}:{" "}
-                              {formatPrice(car.price_per_day)}
-                            </small>
+                          <div className="text-end">
+                            <strong className="text-success">
+                              {formatPrice(car.car_price)}
+                            </strong>
                           </div>
                         </div>
-                        <div className="text-end">
-                          <strong className="text-success">
-                            {formatPrice(car.car_price)}
-                          </strong>
-                        </div>
                       </div>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center w-100">
+                  <p>{t("noResults", "AllCar")}</p>
                 </div>
-              ))
-            ) : (
-              <div className="text-center w-100">
-                <p>{t("noResults", "AllCar")}</p>
+              )}
+            </div>
+
+            { }
+            <Pagination />
+
+            { }
+            {cars.length > 0 && (
+              <div className="text-center mt-3">
+                <p>
+                  {t("showing", "AllCar")} {(pagination.currentPage - 1) * pagination.limit + 1}-
+                  {Math.min(pagination.currentPage * pagination.limit, pagination.total)} {t("of", "AllCar")} {pagination.total} {t("results", "AllCar")}
+                </p>
               </div>
             )}
-          </div>
+          </>
         )}
       </main>
     </>

@@ -46,9 +46,19 @@ export const carHandler = async (
       [carId]
     );
 
+    const imageRows = await db.query<RowDataPacket>(
+      `SELECT image_url FROM car_images WHERE car_id = ?`,
+      [carId]
+    );
+
+    const imageUrls = imageRows.map(
+      (row) => row.image_url.split("uploads/cars/")[1]
+    );
+
     if (availableRows && (availableRows as RowDataPacket).available_to) {
       rows["available_to"] = (availableRows as RowDataPacket).available_to;
       rows["car_owner"] = (availableRows as RowDataPacket).user_id;
+      rows["images"] = imageUrls as unknown as string;
     }
     res.json(rows);
   } catch (error) {
