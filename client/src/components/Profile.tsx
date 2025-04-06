@@ -289,13 +289,13 @@ function Profile() {
                               className="btn badge bg-primary"
                               onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/edit/${car.car_id}`) }}
                             >
-                              <img src={edit_icon} />
+                              <img src={edit_icon} title="Módosíás" />
                             </button>
                             <button
                               className="btn badge bg-danger"
                               onClick={(e) => { e.stopPropagation(); deleteCar(car.car_id) }}
                             >
-                              <img src={delete_icon} />
+                              <img src={delete_icon} title="Törlés" />
                             </button>
                           </div>
                         </div>

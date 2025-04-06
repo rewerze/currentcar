@@ -232,7 +232,6 @@ function CarData() {
       <main className="nav-gap">
         <div className="row">
           <div className="col-lg-4 car-data-col">
-            <div className="col-lg-4 car-data-col">
               <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
                 <div className="carousel-inner">
                   {images && images.length > 0 ? (
@@ -267,7 +266,6 @@ function CarData() {
                   <span className="carousel-control-next-icon" aria-hidden="true"></span>
                   <span className="visually-hidden">Next</span>
                 </button>
-              </div>
             </div>
           </div>
           <div className="col-lg-7">

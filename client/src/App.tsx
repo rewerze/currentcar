@@ -114,7 +114,7 @@ function App() {
                 {t("communityReviews", "MainPage")}
               </p>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-6 miert-img">
               <img src={depo} alt="" />
             </div>
           </div>

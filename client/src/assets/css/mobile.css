@@ -2,6 +2,15 @@
     .profile-car {
         justify-content: center;
     }
+
+    #miert_a_currentcar .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #miert_a_currentcar .col-lg-6 {
+        width: 100%;
+    }
 }
 
 
@@ -73,6 +82,15 @@
 
     .profile-tab {
         width: 64% !important;
+    }
+
+    .terkep .row{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .terkep iframe {
+        width: 100%;
     }
 }
 
