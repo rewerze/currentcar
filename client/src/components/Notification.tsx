@@ -43,7 +43,7 @@ function Notification() {
     return (
         <>
             <main className="nav-gap">
-                <h1 className="text-center">Értesítések</h1>
+                <h1 className="text-center" id="top">Értesítések</h1>
                 <div className="notif bg-dark">
                     <div className="row">
                         <h2>Bejövő értesítések</h2>
@@ -65,7 +65,7 @@ function Notification() {
                             <div className="notif-message">
                                 <h2>{title}</h2>
                                 <p>{description}</p>
-                                <button className="btn btn-primary">Vissza</button>
+                                <a className="btn btn-primary" href="#top">Vissza</a>
                             </div>
                         </div>
                     </div>

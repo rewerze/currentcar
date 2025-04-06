@@ -10,7 +10,7 @@ function AboutUs() {
                             <div className="card-body">
                                 <h2 className="text-center">Kósa Márk</h2>
                                 <p className="card-text text-center"><b>Web · Backend</b></p>
-                                <p>adjfnsdjfn</p>
+                                <p>placeholder</p>
                             </div>
                         </div>
                     </div>
@@ -20,7 +20,7 @@ function AboutUs() {
                             <div className="card-body">
                                 <h2 className="text-center">Suhajda Zsolt Péter</h2>
                                 <p className="card-text text-center"><b>Web · Frontend</b></p>
-                                <p>adjfnsdjfn</p>
+                                <p>placeholder</p>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ function AboutUs() {
                             <div className="card-body">
                                 <h2 className="text-center">Dávid Benedek</h2>
                                 <p className="card-text text-center"><b>Asztali alkalmazás</b></p>
-                                <p>adjfnsdjfn</p>
+                                <p>placeholder</p>
                             </div>
                         </div>
                     </div>

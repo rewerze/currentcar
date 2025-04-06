@@ -369,9 +369,9 @@ main {
     flex-wrap: wrap;
     margin-top: 5px;
     margin: 10px auto;
-    gap: 5px;
+    gap: 2.4rem;
     width: 100%;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .profile-car-card {
@@ -387,14 +387,19 @@ main {
     width: 100%;
     cursor: pointer;
     max-height: 30rem;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .profile-car-card-body h3 {
-    min-height: 3.5rem;
+    min-height: 4.2rem;
     margin-top: 1rem;
+}
+
+.profile-car-card-body p {
+    min-height: 2rem;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .profile-car-img {
@@ -444,7 +449,7 @@ main {
     text-align: start;
 }
 
-.notif-message button {
+.notif-message a {
     visibility: hidden;
 }
 
