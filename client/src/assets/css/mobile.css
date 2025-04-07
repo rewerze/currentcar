@@ -92,9 +92,23 @@
     .terkep iframe {
         width: 100%;
     }
+
+    .penz {
+        position: relative;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
+    }
 }
 
 @media only screen and (max-width: 992px) {
+    .penz {
+        position: relative;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
+    }
+    
     .profile-tab {
         width: 90% !important;
     }

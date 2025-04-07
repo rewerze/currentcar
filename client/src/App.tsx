@@ -11,7 +11,6 @@ import axios from "axios";
 import { buildApiUrl } from "./lib/utils";
 import { CarInfo } from "./components/interfaces/Car";
 import { Review } from "./components/interfaces/Review";
-import { NumericFormat } from 'react-number-format';
 
 function App() {
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
