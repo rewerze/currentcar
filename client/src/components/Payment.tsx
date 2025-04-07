@@ -39,6 +39,7 @@ function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClos
                                     type="date"
                                     name="from"
                                     id="from"
+                                    max="9999-12-31"
                                     className="form-control"
                                     value={fromDate}
                                     onChange={(e) => setFromDate(e.target.value)}
@@ -47,6 +48,7 @@ function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClos
                                     type="date"
                                     name="to"
                                     id="to"
+                                    max="9999-12-31"
                                     className="form-control"
                                     value={toDate}
                                     onChange={(e) => setToDate(e.target.value)}

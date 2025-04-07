@@ -520,7 +520,6 @@ function AllCar() {
 
             { }
             <Pagination />
-
             { }
             {cars.length > 0 && (
               <div className="text-center mt-3">
