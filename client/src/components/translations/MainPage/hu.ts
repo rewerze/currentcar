@@ -24,4 +24,13 @@ export default {
     "✅ Közösség és értékelések\nA valós felhasználói vélemények segítenek a legjobb autót kiválasztani, így mindenki biztos lehet benne, hogy megbízható partnerekkel üzletel.",
   findNearestDepot: "Találja meg az Önhöz legközelebbi depót!",
   currentPosition: "Jelenlegi helyzeted",
+  pricingTransparent: "A CurRentCar-nál nálunk az árazás átlátható és rugalmas – pont, ahogy neked kényelmes.",
+  pricingUpfront:
+    "🧾 A bérlési díjakat mindig előre látod – nincs apró betűs rész vagy váratlan kiadás.",
+  pricingVariety:
+    "🔄 Minden jármű tulajdonosa saját árakat állíthat be, így a kínálat sokszínű, te pedig biztosan találsz a pénztárcádhoz illő ajánlatot – akár egy napra, hétvégére vagy hosszabb időre bérelnél.",
+  pricingDiscount:
+    "💰 Több napos bérlésre extra kedvezmények járhatnak – minél hosszabb ideig használod az autót, annál jobban jársz.",
+  pricingDeposit:
+    "🛡️ Egyes autók esetében letét szükséges lehet, amit a bérlés végén visszakapsz, ha minden rendben zajlott. A bérlési folyamat során minden fontos információt világosan megjelenítünk."
 };

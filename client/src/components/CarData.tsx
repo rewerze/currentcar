@@ -232,40 +232,40 @@ function CarData() {
       <main className="nav-gap">
         <div className="row">
           <div className="col-lg-4 car-data-col">
-              <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
-                <div className="carousel-inner">
-                  {images && images.length > 0 ? (
-                    images.map((image, index) => (
-                      <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                        <img
-                          src={`${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/uploads/${image}`}
-                          alt={`${car.car_brand} ${car.car_model} - ${index + 1}`}
-                          className="d-block w-100 car-data-img"
-                          onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
-                        />
-                      </div>
-                    ))
-                  ) : (
-                    <>
-                      <div className="carousel-item active">
-                        <img
-                          src={car.car_id ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}` : carImage}
-                          alt={`${car.car_brand} ${car.car_model}`}
-                          className="d-block w-100 car-data-img"
-                          onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
-                        />
-                      </div>
-                    </>
-                  )}
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Next</span>
-                </button>
+            <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
+              <div className="carousel-inner">
+                {images && images.length > 0 ? (
+                  images.map((image, index) => (
+                    <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
+                      <img
+                        src={`${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/uploads/${image}`}
+                        alt={`${car.car_brand} ${car.car_model} - ${index + 1}`}
+                        className="d-block w-100 car-data-img"
+                        onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="carousel-item active">
+                      <img
+                        src={car.car_id ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}` : carImage}
+                        alt={`${car.car_brand} ${car.car_model}`}
+                        className="d-block w-100 car-data-img"
+                        onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
           <div className="col-lg-7">
@@ -322,13 +322,13 @@ function CarData() {
                   <tr>
                     <th>{t("pricePerHour", "CarDetail")}:</th>
                     <td>
-                      {car.price_per_hour} {language === "hu" ? "HUF" : "EUR"}
+                      {car.price_per_hour} HUF
                     </td>
                   </tr>
                   <tr>
                     <th>{t("pricePerDay", "CarDetail")}:</th>
                     <td>
-                      {car.price_per_day} {language === "hu" ? "HUF" : "EUR"}
+                      {car.price_per_day} HUF
                     </td>
                   </tr>
                   <tr>

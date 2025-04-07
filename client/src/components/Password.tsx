@@ -25,7 +25,7 @@ function Password() {
 
     return (
         <>
-            <main>
+            <main className="nav-gap">
                 <form onSubmit={changePassword} className="form">
                     <div className="form-box bg-dark text-light">
                         <h1>Jelszó módosítás</h1>

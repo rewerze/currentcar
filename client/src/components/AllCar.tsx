@@ -458,7 +458,7 @@ function AllCar() {
                         <div className="d-flex justify-content-between">
                           <span className="badge bg-primary">{car.car_year}</span>
                           <span className="badge bg-secondary">
-                            {t(car.car_type, "car_type")}
+                            {t(car.car_type, "AllCar")}
                           </span>
                           <span className="badge bg-info text-dark">
                             {t(car.car_condition, "AllCar")}

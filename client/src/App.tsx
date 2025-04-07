@@ -11,11 +11,13 @@ import axios from "axios";
 import { buildApiUrl } from "./lib/utils";
 import { CarInfo } from "./components/interfaces/Car";
 import { Review } from "./components/interfaces/Review";
+import { NumericFormat } from 'react-number-format';
 
 function App() {
   const { t, loadedNamespaces, loadNamespace } = useLanguage();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [popularCars, setPopularCars] = useState<CarInfo[]>([]);
+  const [averagePrice, setAveragePrice] = useState<number>();
 
   useEffect(() => {
     if (!loadedNamespaces.includes("MainPage")) loadNamespace("MainPage");
@@ -40,7 +42,8 @@ function App() {
           withCredentials: true,
         });
 
-        setPopularCars(response.data);
+        setPopularCars(response.data.mostPopularCars);
+        setAveragePrice(response.data.averagePriceOfAllCars);
       } catch (err) {
         console.error("Failed to fetch popular cars", err);
       }
@@ -151,15 +154,23 @@ function App() {
           <div className="row">
             <div className="col-lg-8">
               <p className="text-light">
-                A CurRentCar-nál nálunk az árazás átlátható és rugalmas – pont, ahogy neked kényelmes.
+                {t('pricingTransparent', 'MainPage')}
               </p>
-              <p className="text-light">🧾 A bérlési díjakat mindig előre látod – nincs apró betűs rész vagy váratlan kiadás.</p>
-              <p className="text-light">🔄 Minden jármű tulajdonosa saját árakat állíthat be, így a kínálat sokszínű, te pedig biztosan találsz a pénztárcádhoz illő ajánlatot – akár egy napra, hétvégére vagy hosszabb időre bérelnél.</p>
-              <p className="text-light">💰 Több napos bérlésre extra kedvezmények járhatnak – minél hosszabb ideig használod az autót, annál jobban jársz.</p>
-              <p className="text-light">🛡️ Egyes autók esetében letét szükséges lehet, amit a bérlés végén visszakapsz, ha minden rendben zajlott. A bérlési folyamat során minden fontos információt világosan megjelenítünk.</p>
+              <p className="text-light">
+                {t('pricingUpfront', 'MainPage')}
+              </p>
+              <p className="text-light">
+                {t('pricingVariety', 'MainPage')}
+              </p>
+              <p className="text-light">
+                {t('pricingDiscount', 'MainPage')}
+              </p>
+              <p className="text-light">
+                {t('pricingDeposit', 'MainPage')}
+              </p>
             </div>
             <div className="col-lg-4">
-              <p className="penz text-blue">{t("priceAmount", "MainPage")}</p>
+              <p className="penz text-blue">{Intl.NumberFormat("en-IN", { maximumSignificantDigits: 3 }).format(Math.round(averagePrice || 0))} HUF</p>
             </div>
           </div>
         </section>

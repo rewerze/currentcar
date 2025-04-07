@@ -1,3 +1,4 @@
+import { RowDataPacket } from "mysql2";
 import db from "../../db/connection";
 import { Car } from "../../interfaces/Car";
 import { Request, Response } from "express";
@@ -8,14 +9,25 @@ export const getMostPopularCars = async (
 ): Promise<void> => {
   try {
     const rows = await db.query(
-      `SELECT car.*, COUNT(comment.comment_id) AS rating_count
+      `SELECT car.*, COUNT(comment.comment_id) AS rating_count, 
+              AVG(car.car_price) AS average_price
          FROM car
          LEFT JOIN comment ON car.car_id = comment.car_id
          GROUP BY car.car_id
          ORDER BY rating_count DESC
          LIMIT 3`
     );
-    res.json(rows);
+
+    const avgPriceRows = await db.query<RowDataPacket>(
+      `SELECT AVG(CAST(car_price AS DECIMAL)) AS average_price FROM car`
+    );
+
+    const averagePrice = avgPriceRows[0].average_price;
+
+    res.json({
+      mostPopularCars: rows,
+      averagePriceOfAllCars: averagePrice,
+    });
   } catch (error) {
     console.error("Error fetching most popular cars:", error);
     res.status(500).json({ error: "Failed to fetch popular cars" });
