@@ -115,6 +115,7 @@ function Reg() {
                   type="date"
                   name="date"
                   id="date"
+                  max="9999-12-31"
                   value={bornDate}
                   onChange={(e) => setBornDate(e.target.value)}
                   className="form-control"

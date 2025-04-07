@@ -117,3 +117,31 @@ input::placeholder, select, textarea::placeholder {
 .profile-tab {
     border: 6px solid #1E201E;
 }
+
+.pagination button{
+    background-color: #353535;
+    color: white;
+    border: 1px black solid;
+}
+
+.pagination button:hover {
+    color: white;
+    background-color: #464646;
+    border: 1px black solid;
+}
+
+.pagination .page-item.disabled button {
+    background-color: #494949;
+    color: white;
+    border: 1px black solid;
+}
+
+.pagination .page-item.active button{
+    background-color: rgb(212, 173, 0) !important;
+    border: 1px solid black;
+    color: black;
+}
+
+.pagination {
+    gap: 3px;
+}

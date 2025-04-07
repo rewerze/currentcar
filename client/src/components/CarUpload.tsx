@@ -389,21 +389,10 @@ const CarUpload: React.FC = () => {
                                         id="to"
                                         type="date"
                                         name="available_to"
+                                        max="9999-12-31"
                                         value={formData.available_to.toString()}
                                         onChange={handleChange}
                                         className="form-control"
-                                    />
-                                </div>
-                                <div className='upload-data'>
-                                    <label htmlFor="extras">Extrák</label>
-                                    <input
-                                        id="extras"
-                                        type="text"
-                                        name="extras"
-                                        value={formData.extras}
-                                        onChange={handleChange}
-                                        className="form-control"
-                                        placeholder='pl.: baba ülés, sötétítő, stb...'
                                     />
                                 </div>
                             </div>

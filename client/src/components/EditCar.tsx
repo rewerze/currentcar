@@ -207,6 +207,7 @@ function EditCar() {
                 <input
                   type="date"
                   name="available_until"
+                  max="9999-12-31"
                   id="available_until"
                   className="form-control"
                   value={formData.available_until}
