@@ -15,7 +15,7 @@ const translations = {
   description: "Leírás",
   pricePerHour: "Ár / óra",
   pricePerDay: "Ár / nap",
-  purchase: "Vásárlás",
+  purchase: "Bérlés",
   [CarCondition.NEW]: "új",
   [CarCondition.EXCELLENT]: "kiváló",
   [CarCondition.GOOD]: "jó",

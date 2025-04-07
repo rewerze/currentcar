@@ -15,7 +15,7 @@ const translations = {
   description: "Description",
   pricePerHour: "Price / hour",
   pricePerDay: "Price / day",
-  purchase: "Purchase",
+  purchase: "Rent",
   [CarCondition.NEW]: "new",
   [CarCondition.EXCELLENT]: "excellent",
   [CarCondition.GOOD]: "good",
