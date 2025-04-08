@@ -1,0 +1,540 @@
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe.config
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\CarRentalAdmin.pdb
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Google.Protobuf.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\MySql.Data.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Buffers.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.IO.Pipelines.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Memory.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Text.Json.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.ValueTuple.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\ZstdSharp.dll
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Google.Protobuf.pdb
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Google.Protobuf.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\MySql.Data.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Buffers.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.IO.Pipelines.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Memory.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Text.Json.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\bin\Debug\System.ValueTuple.xml
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CurRentCar.csproj.AssemblyReference.cache
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CarRentalAdmin.LoginForm.resources
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CarRentalAdmin.MainForm.resources
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderManageForm.resources
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CarRentalAdmin.Properties.Resources.resources
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CurRentCar.csproj.GenerateResource.cache
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CurRentCar.csproj.CoreCompileInputs.cache
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CurRentCar.csproj.Up2Date
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CarRentalAdmin.exe
+C:\Users\bests\Desktop\cur\CarRentalAdmin\CarRentalAdmin\obj\Debug\CarRentalAdmin.pdb
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe.config
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.pdb
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\ZstdSharp.dll
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.pdb
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.xml
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.AssemblyReference.cache
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.LoginForm.resources
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.MainForm.resources
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderManageForm.resources
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.Properties.Resources.resources
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.GenerateResource.cache
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.CoreCompileInputs.cache
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.Up2Date
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.exe
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.pdb
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarEditForm.resources
+C:\Users\bests\Desktop\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserEditForm.resources
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe.config
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.pdb
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\ZstdSharp.dll
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.pdb
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.xml
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.AssemblyReference.cache
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarEditForm.resources
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.LoginForm.resources
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.MainForm.resources
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderEditForm.resources
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderManageForm.resources
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.Properties.Resources.resources
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserEditForm.resources
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.GenerateResource.cache
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.CoreCompileInputs.cache
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.Up2Date
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.exe
+E:\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.pdb
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe.config
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.pdb
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\ZstdSharp.dll
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.pdb
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.xml
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.AssemblyReference.cache
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.LoginForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.MainForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderManageForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.Properties.Resources.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.GenerateResource.cache
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.CoreCompileInputs.cache
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.Up2Date
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.exe
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.pdb
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewManageForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentManageForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationManageForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserManageForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.AssemblyReference.cache
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarEditForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentEditForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.LoginForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.MainForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationEditForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderEditForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.Properties.Resources.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserEditForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.GenerateResource.cache
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.CoreCompileInputs.cache
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.exe
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.pdb
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe.config
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.pdb
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\ZstdSharp.dll
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.pdb
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.xml
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.Up2Date
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtrasManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtraEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtraEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtrasManageForm.resources
+D:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewEditForm.resources
+G:\nvmeouterssd\cur\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe.config
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\CarRentalAdmin.pdb
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Google.Protobuf.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\MySql.Data.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Buffers.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.IO.Pipelines.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Memory.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Text.Json.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.ValueTuple.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\ZstdSharp.dll
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Google.Protobuf.pdb
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Google.Protobuf.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\MySql.Data.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Buffers.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.IO.Pipelines.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Memory.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Text.Json.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\bin\Debug\System.ValueTuple.xml
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CurRentCar.csproj.AssemblyReference.cache
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtraEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtrasManageForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarManageForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentManageForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.LoginForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.MainForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationManageForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderManageForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.Properties.Resources.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewManageForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserEditForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserManageForm.resources
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CurRentCar.csproj.GenerateResource.cache
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CurRentCar.csproj.CoreCompileInputs.cache
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CurRentCar.csproj.Up2Date
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.exe
+D:\Downloads\curs\CurRentCar backup 2025-04-07\CarRentalAdmin\obj\Debug\CarRentalAdmin.pdb
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe.config
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.exe
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\CarRentalAdmin.pdb
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\ZstdSharp.dll
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\BCrypt.Net-Next.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\BouncyCastle.Cryptography.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.pdb
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Google.Protobuf.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Compression.LZ4.Streams.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\K4os.Hash.xxHash.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.Memory.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Bcl.TimeProvider.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Abstractions.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\MySql.Data.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Buffers.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Configuration.ConfigurationManager.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.IO.Pipelines.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Memory.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Numerics.Vectors.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Encodings.Web.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Text.Json.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\bin\Debug\System.ValueTuple.xml
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.AssemblyReference.cache
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarEditForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtraEditForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarExtrasManageForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CarManageForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentEditForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.CommentManageForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.LoginForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.MainForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationEditForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.NotificationManageForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderEditForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.OrderManageForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.Properties.Resources.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewEditForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.ReviewManageForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserEditForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.UserManageForm.resources
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.GenerateResource.cache
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.CoreCompileInputs.cache
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CurRentCar.csproj.Up2Date
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.exe
+D:\Downloads\curs\CurRentCar\CarRentalAdmin\obj\Debug\CarRentalAdmin.pdb
