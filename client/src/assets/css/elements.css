@@ -439,6 +439,8 @@ main {
     margin: auto;
     padding: 2rem;
     border-radius: 10px;
+    max-width: 75rem;
+    min-width: 70rem;
 }
 
 .notif .col-md-4 {
@@ -462,6 +464,14 @@ main {
 
 .notif-card-content h3 {
     text-align: start;
+}
+
+.notif-card-content p {
+    max-width: 20rem;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .notif-message a {

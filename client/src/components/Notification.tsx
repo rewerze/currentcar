@@ -54,7 +54,7 @@ function Notification() {
                                         <div key={value.notification_id} className="notif-card-content">
                                             <button onClick={changeNotification} data-id={value.notification_id}>
                                                 <h3>Értesítés</h3>
-                                                <p>{value.message.substring(0, 40)}...</p>
+                                                <p>{value.message}</p>
                                             </button>
                                         </div>
                                     ))
