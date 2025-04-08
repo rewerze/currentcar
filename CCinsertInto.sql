@@ -25,7 +25,6 @@ INSERT INTO `insurance` (`insurance_provider`, `coverage_details`, `insurance_fe
 INSERT INTO `user` (`user_email`, `user_name`, `password`, `born_at`, `created_at`, `updated_at`, `user_active`, `u_phone_number`, `user_areacode`, `user_role`, `driver_license_number`, `driver_license_expiry`, `profile_picture`) VALUES
 ('jan.kowalski@email.com', 'Jan Kowalski', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1985-05-15 00:00:00', '2023-01-01 10:00:00', '2023-01-01 10:00:00', 1, '+48 555-123-456', 48, 'user', 'PL123456789', '2027-05-15', 'profile1.jpg'),
 ('emma.mueller@email.com', 'Emma Müller', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1990-08-22 00:00:00', '2023-01-02 11:30:00', '2023-01-02 11:30:00', 1, '+49 555-234-567', 49, 'user', 'DE987654321', '2028-08-22', 'profile2.jpg'),
-('admin@carrent.eu', 'Admin User', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1980-03-10 00:00:00', '2023-01-03 09:15:00', '2023-01-03 09:15:00', 1, '+32 555-345-678', 32, 'admin', 'BE567891234', '2026-03-10', 'admin.jpg'),
 ('antoine.dupont@email.com', 'Antoine Dupont', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1988-11-05 00:00:00', '2023-01-04 13:45:00', '2023-01-04 13:45:00', 1, '+33 555-456-789', 33, 'user', 'FR654321987', '2026-11-05', 'profile3.jpg'),
 ('sofia.rossi@email.com', 'Sofia Rossi', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1992-07-18 00:00:00', '2023-01-05 14:20:00', '2023-01-05 14:20:00', 1, '+39 555-567-890', 39, 'user', 'IT789456123', '2027-07-18', 'profile4.jpg'),
 ('javier.garcia@email.com', 'Javier García', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1983-09-30 00:00:00', '2023-01-06 10:10:00', '2023-01-06 10:10:00', 1, '+34 555-678-901', 34, 'user', 'ES456789123', '2025-09-30', 'profile5.jpg'),
@@ -37,65 +36,86 @@ INSERT INTO `user` (`user_email`, `user_name`, `password`, `born_at`, `created_a
 ('anders.nielsen@email.com', 'Anders Nielsen', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1986-03-28 00:00:00', '2023-01-12 13:15:00', '2023-01-12 13:15:00', 1, '+45 555-234-876', 45, 'user', 'DK741852963', '2026-03-28', 'profile11.jpg'),
 ('elisa.marino@email.com', 'Elisa Marino', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1990-01-05 00:00:00', '2023-01-13 14:25:00', '2023-01-13 14:25:00', 1, '+39 555-345-765', 39, 'user', 'IT369258147', '2025-01-05', 'profile12.jpg'),
 ('markus.wagner@email.com', 'Markus Wagner', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1982-08-17 00:00:00', '2023-01-14 15:35:00', '2023-01-14 15:35:00', 1, '+43 555-456-654', 43, 'user', 'AT147258369', '2026-08-17', 'profile13.jpg'),
-('sophie.martin@email.com', 'Sophie Martin', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1991-05-10 00:00:00', '2023-01-15 16:40:00', '2023-01-15 16:40:00', 1, '+33 555-567-543', 33, 'user', 'FR258147369', '2028-05-10', 'profile14.jpg'),
-('rafael.santos@email.com', 'Rafael Santos', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1988-09-22 00:00:00', '2023-01-16 09:50:00', '2023-01-16 09:50:00', 1, '+351 555-678-432', 351, 'user', 'PT654987321', '2027-09-22', 'profile15.jpg'),
-('katarzyna.nowak@email.com', 'Katarzyna Nowak', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1985-11-30 00:00:00', '2023-01-17 10:55:00', '2023-01-17 10:55:00', 1, '+48 555-789-321', 48, 'user', 'PL987321654', '2025-11-30', 'profile16.jpg'),
-('viktor.kovacs@email.com', 'Viktor Kovács', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1994-02-14 00:00:00', '2023-01-18 11:10:00', '2023-01-18 11:10:00', 1, '+36 555-890-210', 36, 'user', 'HU321789654', '2028-02-14', 'profile17.jpg'),
-('pierre.dubois@email.com', 'Pierre Dubois', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1983-04-05 00:00:00', '2023-01-19 12:15:00', '2023-01-19 12:15:00', 1, '+33 555-901-098', 33, 'user', 'FR654123789', '2026-04-05', 'profile18.jpg'),
-('elena.popescu@email.com', 'Elena Popescu', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1990-07-12 00:00:00', '2023-01-20 13:20:00', '2023-01-20 13:20:00', 1, '+40 555-012-987', 40, 'user', 'RO789456123', '2027-07-12', 'profile19.jpg'),
-('dimitris.papadopoulos@email.com', 'Dimitris Papadopoulos', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1987-12-25 00:00:00', '2023-01-21 14:25:00', '2023-01-21 14:25:00', 1, '+30 555-123-876', 30, 'user', 'GR123789456', '2026-12-25', 'profile20.jpg');
+('sophie.martin@email.com', 'Sophie Martin', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1991-05-10 00:00:00', '2023-01-15 16:40:00', '2023-01-15 16:40:00', 1, '+33 555-567-543', 33, 'user', 'FR258147369', '2028-05-10', 'profile14.jpg');
 
--- Insert data into car table
+-- Insert data for 14 popular cars
 INSERT INTO `car` (`car_price`, `car_active`, `car_description`, `car_type`, `seats`, `number_of_doors`, `insurance_id`, `car_model`, `car_regnumber`, `price_per_hour`, `price_per_day`, `car_condition`, `mileage`, `car_year`, `fuel_type`, `transmission_type`, `car_brand`) VALUES
-('28000', 1, 'Reliable family sedan with excellent fuel economy', 'sedan', 5, 4, 1, 'Insignia', 'W-AB-1234', 25, 125, 'excellent', 35000, 2020, 'diesel', 'automatic', 'Opel'),
-('32000', 1, 'Spacious SUV perfect for family trips', 'suv', 7, 5, 2, 'Kodiaq', 'M-CD-5678', 35, 175, 'excellent', 28000, 2021, 'diesel', 'automatic', 'Škoda'),
-('24500', 1, 'Compact hatchback with great city handling', 'hatchback', 5, 5, 3, 'Golf', 'B-EF-9012', 20, 100, 'good', 42000, 2019, 'petrol', 'manual', 'Volkswagen'),
-('65000', 1, 'Luxury convertible for special occasions', 'convertible', 4, 2, 4, 'A5', 'K-GH-3456', 60, 300, 'excellent', 15000, 2022, 'petrol', 'automatic', 'Audi'),
-('45000', 1, 'Sporty coupe with powerful engine', 'coupe', 4, 2, 5, 'M4', 'F-IJ-7890', 45, 225, 'excellent', 20000, 2021, 'petrol', 'manual', 'BMW'),
-('26000', 1, 'Practical wagon with ample cargo space', 'wagon', 5, 5, 6, 'V60', 'S-KL-1234', 30, 150, 'good', 38000, 2020, 'diesel', 'automatic', 'Volvo'),
-('35000', 1, 'Robust pickup truck for heavy duty tasks', 'pickup', 5, 4, 7, 'Ranger', 'L-MN-5678', 40, 200, 'good', 45000, 2019, 'diesel', 'automatic', 'Ford'),
-('32000', 1, 'Spacious minivan for large families', 'minivan', 8, 4, 8, 'Espace', 'F-OP-9012', 35, 175, 'excellent', 32000, 2020, 'diesel', 'automatic', 'Renault'),
-('42000', 1, 'Luxury sedan with premium features', 'sedan', 5, 4, 9, 'E-Class', 'S-QR-3456', 50, 250, 'excellent', 25000, 2021, 'diesel', 'automatic', 'Mercedes-Benz'),
-('38000', 1, 'Mid-size SUV with off-road capabilities', 'suv', 5, 5, 10, 'Tucson', 'B-ST-7890', 40, 200, 'good', 35000, 2020, 'hybrid', 'automatic', 'Hyundai'),
-('22000', 1, 'Economical compact sedan', 'sedan', 5, 4, 11, 'Corolla', 'W-UV-1234', 20, 100, 'good', 40000, 2019, 'hybrid', 'automatic', 'Toyota'),
-('55000', 1, 'High-performance electric sedan', 'sedan', 5, 4, 12, 'Model 3', 'M-WX-5678', 55, 275, 'excellent', 18000, 2022, 'electric', 'automatic', 'Tesla'),
-('30000', 1, 'Compact SUV with good fuel efficiency', 'suv', 5, 5, 13, 'Qashqai', 'B-YZ-9012', 30, 150, 'good', 30000, 2020, 'petrol', 'manual', 'Nissan'),
-('27000', 1, 'Versatile hatchback with spacious interior', 'hatchback', 5, 5, 14, 'Leon', 'E-AB-3456', 25, 125, 'good', 35000, 2019, 'petrol', 'manual', 'SEAT'),
-('85000', 1, 'Premium luxury SUV with cutting-edge technology', 'suv', 7, 5, 15, 'Q7', 'K-CD-7890', 70, 350, 'excellent', 12000, 2022, 'hybrid', 'automatic', 'Audi'),
-('20000', 1, 'Budget-friendly compact car', 'sedan', 5, 4, 16, 'Tipo', 'I-EF-1234', 20, 100, 'good', 45000, 2018, 'petrol', 'manual', 'Fiat'),
-('38000', 1, 'Mid-size pickup with excellent towing capacity', 'pickup', 5, 4, 17, 'Hilux', 'F-GH-5678', 40, 200, 'good', 38000, 2020, 'diesel', 'manual', 'Toyota'),
-('29000', 1, 'Practical crossover SUV for daily use', 'suv', 5, 5, 18, 'Captur', 'F-IJ-9012', 30, 150, 'good', 40000, 2019, 'petrol', 'automatic', 'Renault'),
-('60000', 1, 'Luxury coupe with sporty handling', 'coupe', 4, 2, 19, '4 Series', 'M-KL-3456', 55, 275, 'excellent', 22000, 2021, 'petrol', 'automatic', 'BMW'),
-('34000', 1, 'Comfortable mid-size sedan with advanced safety features', 'sedan', 5, 4, 20, 'Passat', 'B-MN-7890', 30, 150, 'excellent', 28000, 2020, 'diesel', 'automatic', 'Volkswagen');
+('32000', 1, 'Reliable family sedan with excellent safety features', 'sedan', 5, 4, 1, 'Accord', 'W-AB-1234', 25, 125, 'excellent', 35000, 2022, 'hybrid', 'automatic', 'Honda'),
+('35000', 1, 'Spacious SUV perfect for family trips and outdoor adventures', 'suv', 7, 5, 2, 'RAV4', 'M-CD-5678', 35, 175, 'excellent', 28000, 2021, 'hybrid', 'automatic', 'Toyota'),
+('28500', 1, 'Compact hatchback with great city handling and fuel economy', 'hatchback', 5, 5, 3, 'Golf', 'B-EF-9012', 20, 100, 'good', 42000, 2020, 'petrol', 'manual', 'Volkswagen'),
+('68000', 1, 'Luxury electric sedan with cutting-edge technology', 'sedan', 5, 4, 4, 'Model 3', 'K-GH-3456', 60, 300, 'excellent', 15000, 2022, 'electric', 'automatic', 'Tesla'),
+('50000', 1, 'Sporty coupe with powerful engine and dynamic handling', 'coupe', 4, 2, 5, 'Mustang', 'F-IJ-7890', 45, 225, 'excellent', 20000, 2021, 'petrol', 'manual', 'Ford'),
+('45000', 1, 'Premium crossover SUV with elegant design and comfort', 'suv', 5, 5, 6, 'CX-5', 'S-KL-1234', 40, 200, 'excellent', 25000, 2022, 'petrol', 'automatic', 'Mazda'),
+('38000', 1, 'Robust pickup truck for heavy duty tasks and adventures', 'pickup', 5, 4, 7, 'F-150', 'L-MN-5678', 40, 200, 'good', 45000, 2020, 'petrol', 'automatic', 'Ford'),
+('42000', 1, 'Versatile mid-size SUV with off-road capabilities', 'suv', 5, 5, 8, 'Wrangler', 'F-OP-9012', 45, 225, 'excellent', 32000, 2021, 'petrol', 'manual', 'Jeep'),
+('55000', 1, 'Luxury sedan with premium features and smooth ride', 'sedan', 5, 4, 9, 'E-Class', 'S-QR-3456', 50, 250, 'excellent', 25000, 2022, 'diesel', 'automatic', 'Mercedes-Benz'),
+('33000', 1, 'Reliable compact SUV with excellent fuel efficiency', 'suv', 5, 5, 10, 'CR-V', 'B-ST-7890', 30, 150, 'good', 35000, 2021, 'hybrid', 'automatic', 'Honda'),
+('26000', 1, 'Economical compact sedan with modern safety features', 'sedan', 5, 4, 11, 'Civic', 'W-UV-1234', 20, 100, 'good', 40000, 2020, 'petrol', 'automatic', 'Honda'),
+('75000', 1, 'Premium electric SUV with long range and performance', 'suv', 5, 5, 12, 'Model Y', 'M-WX-5678', 65, 325, 'excellent', 18000, 2022, 'electric', 'automatic', 'Tesla'),
+('34000', 1, 'Stylish compact SUV with distinctive design', 'suv', 5, 5, 13, 'Sportage', 'B-YZ-9012', 30, 150, 'good', 30000, 2021, 'petrol', 'automatic', 'Kia'),
+('65000', 1, 'Premium luxury SUV with cutting-edge technology and comfort', 'suv', 7, 5, 14, 'X5', 'K-CD-7890', 60, 300, 'excellent', 22000, 2022, 'hybrid', 'automatic', 'BMW');
 
--- Insert data into car_images table
+-- Insert data into car_images table (at least 2 images per car)
 INSERT INTO `car_images` (`car_id`, `image_url`, `uploaded_at`) VALUES
-(1, 'cars/insignia1.jpg', '2023-01-01 10:15:00'),
-(1, 'cars/insignia2.jpg', '2023-01-01 10:16:00'),
-(1, 'cars/insignia3.jpg', '2023-01-01 10:17:00'),
-(2, 'cars/kodiaq1.jpg', '2023-01-02 11:00:00'),
-(2, 'cars/kodiaq2.jpg', '2023-01-02 11:01:00'),
-(3, 'cars/golf1.jpg', '2023-01-03 12:30:00'),
-(3, 'cars/golf2.jpg', '2023-01-03 12:31:00'),
-(4, 'cars/audi_a5_1.jpg', '2023-01-04 13:15:00'),
-(4, 'cars/audi_a5_2.jpg', '2023-01-04 13:16:00'),
-(5, 'cars/bmw_m4_1.jpg', '2023-01-05 14:00:00'),
-(5, 'cars/bmw_m4_2.jpg', '2023-01-05 14:01:00'),
-(6, 'cars/volvo_v60_1.jpg', '2023-01-06 15:30:00'),
-(7, 'cars/ranger1.jpg', '2023-01-07 16:00:00'),
-(8, 'cars/espace1.jpg', '2023-01-08 10:30:00'),
-(9, 'cars/eclass1.jpg', '2023-01-09 11:15:00'),
-(10, 'cars/tucson1.jpg', '2023-01-10 12:45:00'),
-(11, 'cars/corolla1.jpg', '2023-01-11 13:30:00'),
-(12, 'cars/model3_1.jpg', '2023-01-12 14:15:00'),
-(13, 'cars/qashqai1.jpg', '2023-01-13 15:00:00'),
-(14, 'cars/leon1.jpg', '2023-01-14 16:30:00'),
-(15, 'cars/q7_1.jpg', '2023-01-15 10:00:00'),
-(16, 'cars/tipo1.jpg', '2023-01-16 11:45:00'),
-(17, 'cars/hilux1.jpg', '2023-01-17 12:30:00'),
-(18, 'cars/captur1.jpg', '2023-01-18 13:15:00'),
-(19, 'cars/4series1.jpg', '2023-01-19 14:00:00'),
-(20, 'cars/passat1.jpg', '2023-01-20 15:30:00');
+(1, 'uploads/cars/honda_accord_1.png', '2023-01-01 10:15:00'),
+(1, 'uploads/cars/honda_accord_2.png', '2023-01-01 10:16:00'),
+(2, 'uploads/cars/c6de9cb1-227d-46bc-9dd2-00ac53937ed2_0bedffec-ec1f-4bc5-aab7-023033fb0ac5.webp', '2023-01-02 11:00:00'),
+(2, 'uploads/cars/c6de9cb1-227d-46bc-9dd2-00ac53937ed2_93d66103-09da-49ee-b31a-bd6e9d1307f1.webp', '2023-01-02 11:01:00'),
+(2, 'uploads/cars/c6de9cb1-227d-46bc-9dd2-00ac53937ed2_a6897c2a-976e-4d26-b861-d432f3d9a22e.webp', '2023-01-02 11:02:00'),
+(2, 'uploads/cars/c6de9cb1-227d-46bc-9dd2-00ac53937ed2_1c7edcc7-6a81-4461-8a57-5e25e0b5d690.webp', '2023-01-02 11:03:00'),
+(3, 'uploads/cars/7-2.jpg', '2023-01-03 12:30:00'),
+(3, 'uploads/cars/5-2.jpg', '2023-01-03 12:31:00'),
+(3, 'uploads/cars/95-1.jpg', '2023-01-03 12:32:00'),
+(3, 'uploads/cars/995-1.jpg', '2023-01-03 12:33:00'),
+(4, 'uploads/cars/b194debe-dfce-429e-8432-d6c0f9acdaab_d3cefbd8-c964-4c53-a2ad-7397377b5ad0.webp', '2023-01-04 13:15:00'),
+(4, 'uploads/cars/b194debe-dfce-429e-8432-d6c0f9acdaab_148f8dfe-835a-4ec5-a278-4e216755e6c4.webp', '2023-01-04 13:16:00'),
+(4, 'uploads/cars/b194debe-dfce-429e-8432-d6c0f9acdaab_5c975207-e051-457c-89c2-36fdfa36d1d5.webp', '2023-01-04 13:17:00'),
+(5, 'uploads/cars/b6a8b9ef-19cb-3b5a-9f83-48fbaecedcce.jpg', '2023-01-05 14:00:00'),
+(5, 'uploads/cars/1d573aac-4663-3966-ae65-38c38f3db01f.jpg', '2023-01-05 14:01:00'),
+(5, 'uploads/cars/2c5198c5-f20f-3f72-887e-ff6433088f16.jpg', '2023-01-05 14:02:00'),
+(5, 'uploads/cars/a409496d-f07b-354e-aa8f-a91036d60372.jpg', '2023-01-05 14:02:00'),
+(6, 'uploads/cars/mazda-cx-5-2022_3.jpg', '2023-01-06 15:29:00'),
+(6, 'uploads/cars/mazda-cx-5-2022.jpg', '2023-01-06 15:30:00'),
+(6, 'uploads/cars/mazda-cx-5-2022_2.jpg', '2023-01-06 15:31:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_e5b3f9b2-dc9d-46f8-89ad-2c0046c630d3.webp', '2023-01-07 16:00:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_23461772-e95e-4770-b09d-9afcdaf62895.webp', '2023-01-07 16:01:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_fc59059d-b962-4ccf-af94-efa924da5bf8.webp', '2023-01-07 16:02:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_fd6f4856-b792-4f6e-b43c-eb9b374ee22b.webp', '2023-01-07 16:02:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_d7f06267-874c-473f-b8f3-6dbfe201df84.webp', '2023-01-07 16:02:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_bc4fa6ae-1298-49f9-8f31-3c3fab3d6078.webp', '2023-01-07 16:02:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_410bc329-d132-47a2-97aa-8c46852dcf60.webp', '2023-01-07 16:02:00'),
+(7, 'uploads/cars/3b382882-e0b4-4b6a-b6d7-8c07379180e0_7e832567-f0a9-4d34-9edc-ea2150026073.webp', '2023-01-07 16:02:00'),
+(8, 'uploads/cars/727c5e8f-37a2-4ea1-8bd9-df4d6a53f1b4_b8716b85-0e49-4194-9534-e1c4bff8b9e4.webp', '2023-01-08 10:30:00'),
+(8, 'uploads/cars/727c5e8f-37a2-4ea1-8bd9-df4d6a53f1b4_e17e9ffe-0200-4542-baa6-1d85bc263eab.webp', '2023-01-08 10:31:00'),
+(8, 'uploads/cars/727c5e8f-37a2-4ea1-8bd9-df4d6a53f1b4_f9c20b41-67a1-4884-ae47-d9b1a3b4a377.webp', '2023-01-08 10:32:00'),
+(9, 'uploads/cars/2021-mercedes-benz-e450-4matic-sedan-101-1604280336.avif', '2023-01-09 11:15:00'),
+(9, 'uploads/cars/2021-mercedes-benz-e450-4matic-sedan-102-1604280319.avif', '2023-01-09 11:16:00'),
+(9, 'uploads/cars/2021-mercedes-benz-e450-4matic-sedan-104-1604280307.avif', '2023-01-09 11:17:00'),
+(10, 'uploads/cars/65b795e9-b713-4a2a-ab42-d498990b51bb_89d0080a-63be-4558-bbc2-c9054956308a.webp', '2023-01-10 12:45:00'),
+(10, 'uploads/cars65b795e9-b713-4a2a-ab42-d498990b51bb_832baa80-f84c-4122-b46a-19fbb96c28f9.webp', '2023-01-10 12:46:00'),
+(10, 'uploads/cars/65b795e9-b713-4a2a-ab42-d498990b51bb_c3149ab1-fed5-4a4f-95ef-c2c6725875b1.webp', '2023-01-10 12:47:00'),
+(11, 'uploads/cars/4fb5a1cf-98f4-48e0-838e-a73377d5573c_f29bda02-5095-455a-bcc1-18b191e47004.webp', '2023-01-11 13:30:00'),
+(11, 'uploads/cars/4fb5a1cf-98f4-48e0-838e-a73377d5573c_d388c5ee-33fc-4fde-b66d-460cf95069db.webp', '2023-01-11 13:31:00'),
+(11, 'uploads/cars/4fb5a1cf-98f4-48e0-838e-a73377d5573c_1b454a7e-2a4f-472a-ae6c-ff0a7e492c4d.webp', '2023-01-11 13:32:00'),
+(12, 'uploads/cars/9bd019ab-c9fb-499b-b251-e47c74ab0ebb_3a9d5530-1ad5-407e-a56f-190593d535f7.webp', '2023-01-12 14:15:00'),
+(12, 'uploads/cars/9bd019ab-c9fb-499b-b251-e47c74ab0ebb_f8d3d8f7-428d-4a06-adb4-c15b8fa03f91.webp', '2023-01-12 14:16:00'),
+(12, 'uploads/cars/9bd019ab-c9fb-499b-b251-e47c74ab0ebb_275836e3-1dae-4029-b553-460adc9b8c6a.webp', '2023-01-12 14:17:00'),
+(13, 'uploads/cars/aa440f64-9daa-46b1-90e0-e686487f6d2b_28adb521-07c2-459e-9fa2-2645ad614cf0.webp', '2023-01-13 15:00:00'),
+(13, 'uploads/cars/aa440f64-9daa-46b1-90e0-e686487f6d2b_debdf632-543c-46ea-a8ca-02f6e2b6f720.webp', '2023-01-13 15:01:00'),
+(13, 'uploads/cars/aa440f64-9daa-46b1-90e0-e686487f6d2b_a51ae837-54f4-4780-9dc1-c003c84c11df.webp', '2023-01-13 15:02:00'),
+(13, 'uploads/cars/aa440f64-9daa-46b1-90e0-e686487f6d2b_8a26942e-605d-469a-ac52-243a5dc795d3.webp', '2023-01-13 15:02:00'),
+(13, 'uploads/cars/aa440f64-9daa-46b1-90e0-e686487f6d2b_e4aa8008-aaf3-4141-bab7-c50e7a453e76.webp', '2023-01-13 15:02:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_0aa42987-3a32-48ae-b485-75b11a2bb785.webp', '2023-01-14 16:30:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_e7378c27-ec8d-4d97-9b31-b9d35ed2d9fa.webp', '2023-01-14 16:31:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_db8079e1-d923-475a-8c64-0786c1fcfe7c.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_fe86126f-3073-4902-9849-c1c90ffdd5b3.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_33dabfa7-1648-41d5-936b-68d21e17efda.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_e4909c61-177c-4c89-b21a-596c1819de77.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_9b11ab41-c375-4fc6-b9b9-304c4f7c61f7.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_aacfc259-fe94-48db-b598-83ee05115321.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_6c4e7c78-f802-4800-b396-643812b18d3e.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_b7a8e2ba-fb8f-4939-a1bf-767f55532bb1.webp', '2023-01-14 16:32:00'),
+(14, 'uploads/cars/d04504ff-66f5-4aa4-aa94-a209bfcdc01a_096dbf77-906a-4406-b51e-b49fdb892c28.webp', '2023-01-14 16:32:00');
 
 -- Insert data into car_availability table
 INSERT INTO `car_availability` (`car_id`, `available_from`, `available_to`) VALUES
@@ -112,59 +132,56 @@ INSERT INTO `car_availability` (`car_id`, `available_from`, `available_to`) VALU
 (11, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
 (12, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
 (13, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
-(14, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
-(15, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
-(16, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
-(17, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
-(18, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
-(19, '2023-03-01 00:00:00', '2027-12-31 23:59:59'),
-(20, '2023-03-01 00:00:00', '2027-12-31 23:59:59');
+(14, '2023-03-01 00:00:00', '2027-12-31 23:59:59');
 
 -- Insert data into car_extras table
 INSERT INTO `car_extras` (`car_id`, `extra_name`, `extra_price`) VALUES
 (1, 'baby seat', 10.00),
+(1, 'GPS navigation', 5.00),
 (2, 'baby seat', 10.00),
+(2, 'roof rack', 15.00),
 (3, 'baby seat', 10.00),
+(3, 'GPS navigation', 5.00),
 (4, 'baby seat', 15.00),
+(4, 'premium charging cable', 10.00),
 (5, 'baby seat', 10.00),
+(5, 'performance package', 25.00),
 (6, 'baby seat', 10.00),
+(6, 'roof rack', 15.00),
 (7, 'baby seat', 15.00),
+(7, 'towing package', 30.00),
 (8, 'baby seat', 10.00),
+(8, 'off-road package', 35.00),
 (9, 'baby seat', 15.00),
+(9, 'premium sound system', 20.00),
 (10, 'baby seat', 15.00),
+(10, 'roof rack', 15.00),
 (11, 'baby seat', 10.00),
+(11, 'GPS navigation', 5.00),
 (12, 'baby seat', 15.00),
+(12, 'premium charging cable', 10.00),
 (13, 'baby seat', 10.00),
-(14, 'baby seat', 10.00),
-(15, 'baby seat', 15.00),
-(16, 'baby seat', 10.00),
-(17, 'baby seat', 15.00),
-(18, 'baby seat', 10.00),
-(19, 'baby seat', 15.00),
-(20, 'baby seat', 10.00);
+(13, 'roof rack', 15.00),
+(14, 'baby seat', 15.00),
+(14, 'premium sound system', 20.00);
 
 -- Insert data into car_user table (who owns/manages which cars)
 INSERT INTO `car_user` (`car_id`, `user_id`) VALUES
-(1, 3),  -- Admin manages several cars
+(1, 3), 
 (2, 3),
 (3, 3),
 (4, 3),
 (5, 3),
-(6, 5),  -- Some users also manage cars
-(7, 7),
-(8, 9),
-(9, 11),
-(10, 13),
-(11, 15),
-(12, 17),
-(13, 19),
-(14, 3),
-(15, 3),
-(16, 4),
-(17, 6),
-(18, 8),
-(19, 10),
-(20, 12);
+(6, 5),
+(7, 5),
+(8, 7),
+(9, 7),
+(10, 9),
+(11, 9),
+(12, 11),
+(13, 11),
+(14, 13);
+
 
 -- Insert data into location table
 INSERT INTO `location` (`pickup_location`, `dropoff_location`, `longitude`, `latitude`) VALUES
@@ -200,7 +217,6 @@ INSERT INTO `location` (`pickup_location`, `dropoff_location`, `longitude`, `lat
 ('Ermou Street 44, Athens, Greece', 'Ermou Street 44, Athens, Greece', 23, 37);
 
 -- Insert data into orders table
--- Making sure to use only user_ids that exist in the user table (1-20)
 INSERT INTO `orders` (`user_id`, `car_id`, `start_date`, `end_date`, `rental_status`, `location_id`, `payment_status`, `discount_code`, `extended_rental`) VALUES
 (1, 2, '2023-03-10 10:00:00', '2023-03-12 10:00:00', 'completed', 1, 'paid', 'SPRING10', 0),
 (2, 4, '2023-03-15 09:00:00', '2023-03-16 09:00:00', 'completed', 2, 'paid', '', 0),
@@ -209,19 +225,9 @@ INSERT INTO `orders` (`user_id`, `car_id`, `start_date`, `end_date`, `rental_sta
 (6, 10, '2023-04-10 12:00:00', '2023-04-15 12:00:00', 'completed', 5, 'paid', 'LOYALTY20', 0),
 (7, 12, '2023-04-20 15:00:00', '2023-04-22 15:00:00', 'completed', 6, 'paid', '', 0),
 (8, 14, '2023-05-01 09:30:00', '2023-05-05 09:30:00', 'completed', 7, 'paid', '', 0),
-(9, 16, '2023-05-10 13:00:00', '2023-05-11 13:00:00', 'completed', 8, 'paid', 'WEEKEND10', 0),
-(10, 18, '2023-05-15 10:00:00', '2023-05-20 10:00:00', 'completed', 9, 'paid', '', 0),
-(11, 20, '2023-05-25 14:30:00', '2023-05-30 14:30:00', 'completed', 10, 'paid', '', 0),
 (12, 1, '2023-06-01 08:00:00', '2023-06-03 08:00:00', 'completed', 11, 'paid', 'SUMMER15', 0),
 (13, 3, '2023-06-05 11:30:00', '2023-06-10 11:30:00', 'completed', 12, 'paid', '', 0),
 (14, 5, '2023-06-15 13:00:00', '2023-06-17 13:00:00', 'completed', 13, 'paid', '', 0),
-(15, 7, '2023-06-20 09:00:00', '2023-06-25 09:00:00', 'completed', 14, 'paid', 'ROAD10', 0),
-(16, 9, '2023-07-01 12:00:00', '2023-07-03 12:00:00', 'completed', 15, 'paid', '', 0),
-(17, 11, '2023-07-05 15:30:00', '2023-07-10 15:30:00', 'completed', 16, 'paid', '', 0),
-(18, 13, '2023-07-15 10:00:00', '2023-07-16 10:00:00', 'completed', 17, 'paid', 'DAY20', 0),
-(19, 15, '2023-07-20 14:00:00', '2023-07-25 14:00:00', 'completed', 18, 'paid', '', 0),
-(20, 17, '2023-08-01 11:00:00', '2023-08-03 11:00:00', 'completed', 19, 'paid', '', 0),
-(1, 19, '2023-08-05 13:30:00', '2023-08-10 13:30:00', 'completed', 20, 'paid', 'AUGUST15', 0),
 (2, 2, '2023-08-15 09:00:00', '2023-08-17 09:00:00', 'completed', 1, 'paid', '', 0),
 (3, 4, '2023-08-20 12:00:00', '2023-08-25 12:00:00', 'completed', 2, 'paid', '', 0),
 (4, 6, '2023-09-01 14:30:00', '2023-09-03 14:30:00', 'completed', 3, 'paid', 'FALL10', 0),
@@ -254,44 +260,83 @@ INSERT INTO `invoice` (`orders_id`, `insurance_id`, `payment_amount`, `tax_amoun
 (17, 13, 100.00, 8.00, 'credit_card', 'paid', '2023-07-15 10:15:00', 'Raday utca 15, Budapest, Hungary'),
 (18, 15, 1250.00, 100.00, 'paypal', 'paid', '2023-07-20 14:15:00', 'Via Montenapoleone 22, Milan, Italy'),
 (19, 17, 400.00, 32.00, 'credit_card', 'paid', '2023-08-01 11:15:00', 'Drottninggatan 31, Stockholm, Sweden'),
-(20, 19, 1375.00, 110.00, 'credit_card', 'paid', '2023-08-05 13:45:00', 'Syntagma Square 9, Athens, Greece'),
-(21, 2, 350.00, 28.00, 'paypal', 'paid', '2023-08-15 09:15:00', 'Unter den Linden 17, Berlin, Germany'),
-(22, 4, 1250.00, 100.00, 'bank_transfer', 'paid', '2023-08-20 12:15:00', 'Boulevard Saint-Germain 89, Paris, France'),
-(23, 6, 300.00, 24.00, 'credit_card', 'paid', '2023-09-01 14:45:00', 'Piazza Navona 11, Rome, Italy'),
-(24, 8, 750.00, 60.00, 'paypal', 'paid', '2023-09-10 10:15:00', 'Puerta del Sol 4, Madrid, Spain'),
-(25, 1, 125.00, 10.00, 'credit_card', 'paid', '2023-10-05 09:15:00', 'Piccadilly 76, London, UK'),
-(26, 5, 1125.00, 90.00, 'bank_transfer', 'paid', '2023-10-10 13:15:00', 'Graben 16, Vienna, Austria'),
-(27, 7, 400.00, 32.00, 'credit_card', 'paid', '2023-10-20 11:45:00', 'Leidsestraat 27, Amsterdam, Netherlands'),
-(28, 9, 1250.00, 100.00, 'pending', 'pending', '2023-11-01 10:15:00', 'Kongens Nytorv 8, Copenhagen, Denmark'),
-(29, 11, 200.00, 16.00, 'pending', 'pending', '2023-11-10 14:15:00', 'Erzsébet körút 39, Budapest, Hungary'),
-(30, 13, 750.00, 60.00, 'pending', 'pending', '2023-11-15 12:45:00', 'Rue du Mont-Blanc 18, Geneva, Switzerland');
+(20, 19, 1375.00, 110.00, 'credit_card', 'paid', '2023-08-05 13:45:00', 'Syntagma Square 9, Athens, Greece');
 
 -- Insert data into comment table
-INSERT INTO `comment` (`user_id`, `car_id`, `comment_message`, `comment_star`, `comment_date`, `rating_category`, `comment_flagged`) VALUES
+INSERT INTO `comment` (`user_id`, `car_id`, `comment_message`, `comment_star`, `comment_date`, `rating_category`, `comment_flagged`) VALUES 
+-- Honda Accord (car_id: 1)
+(1, 1, 'Smooth ride and excellent fuel economy. The hybrid system works flawlessly.', 5, '2023-03-10 14:20:00', 'performance', 0),
+(2, 1, 'Great family sedan with plenty of legroom. My kids loved the spacious back seats.', 4, '2023-04-05 09:45:00', 'comfort', 0),
+(3, 1, 'The infotainment system is a bit confusing to use at first but works well once you get used to it.', 3, '2023-05-12 16:30:00', 'features', 0),
+
+-- Toyota RAV4 (car_id: 2)
 (1, 2, 'Great SUV for our family trip to the Alps. Plenty of space and very comfortable.', 5, '2023-03-13 15:30:00', 'comfort', 0),
-(2, 4, 'Beautiful convertible, perfect for driving along the French Riviera.', 5, '2023-03-17 14:00:00', 'value_for_money', 0),
-(4, 6, 'The Volvo handled all terrain wonderfully, great for our tour through Scandinavia.', 4, '2023-03-26 16:45:00', 'performance', 0),
-(5, 8, 'Spacious minivan, perfect for transporting our large group around Madrid.', 5, '2023-04-08 10:30:00', 'comfort', 0),
-(6, 10, 'The Tucson was comfortable but used more fuel than expected in city driving.', 3, '2023-04-16 11:15:00', 'fuel_efficiency', 0),
-(7, 12, 'The Tesla was amazing! So fast and zero fuel costs for our trip across Germany.', 5, '2023-04-23 09:00:00', 'performance', 0),
-(8, 14, 'The SEAT Leon was economical and fun to drive in the narrow streets of Barcelona.', 4, '2023-05-06 13:30:00', 'fuel_efficiency', 0),
-(9, 16, 'The Fiat Tipo was basic but reliable and economical for our Italian road trip.', 3, '2023-05-12 15:45:00', 'value_for_money', 0),
-(10, 18, 'The Renault Captur was comfortable for our journey through France but acceleration was a bit sluggish.', 3, '2023-05-21 14:00:00', 'performance', 0),
-(11, 20, 'The Passat was extremely fuel efficient and comfortable for our business trip.', 5, '2023-05-31 10:30:00', 'fuel_efficiency', 0),
-(12, 1, 'The Opel Insignia was a solid, reliable sedan with good comfort for long journeys.', 4, '2023-06-04 12:15:00', 'comfort', 0),
-(13, 3, 'The Golf had excellent handling and was fun to drive through the Black Forest.', 4, '2023-06-11 14:30:00', 'performance', 0),
-(14, 5, 'The BMW M4 was a blast! Great power and handling on the Autobahn.', 5, '2023-06-18 16:45:00', 'performance', 0),
-(15, 7, 'The Ford Ranger had great towing capacity for our camping equipment.', 4, '2023-06-26 11:00:00', 'performance', 0),
-(16, 9, 'The Mercedes E-Class was luxurious but expensive to rent for our business trip.', 4, '2023-07-04 09:15:00', 'value_for_money', 0),
-(17, 11, 'The Toyota Corolla was economical but a bit cramped for taller passengers.', 3, '2023-07-11 13:30:00', 'comfort', 0),
-(18, 13, 'The Nissan Qashqai had excellent safety features and was comfortable to drive through Portugal.', 5, '2023-07-17 15:45:00', 'safety', 0),
-(19, 15, 'The Audi Q7 was a premium experience but came with a premium price.', 4, '2023-07-26 14:00:00', 'value_for_money', 0),
-(20, 17, 'The Toyota Hilux was rugged and reliable, perfect for our countryside exploration.', 4, '2023-08-04 10:30:00', 'performance', 0),
-(1, 19, 'The BMW 4 Series had excellent handling on Swiss mountain roads.', 5, '2023-08-11 12:15:00', 'performance', 0),
-(2, 2, 'Second time renting the Kodiaq, still a great family vehicle for exploring Eastern Europe.', 5, '2023-08-18 14:30:00', 'comfort', 0),
-(3, 4, 'The Audi A5 convertible was a joy to drive along the Mediterranean coast.', 5, '2023-08-26 16:45:00', 'performance', 0),
-(4, 6, 'The Volvo V60 all-wheel-drive system was perfect for the mountain roads in the Alps.', 4, '2023-09-04 11:00:00', 'safety', 0),
-(5, 8, 'The Renault Espace was spacious but could use better fuel efficiency in urban Paris.', 3, '2023-09-16 09:15:00', 'fuel_efficiency', 0);
+(5, 2, 'The hybrid system provides excellent fuel economy even when driving in the city.', 5, '2023-04-18 10:20:00', 'efficiency', 0),
+(6, 2, 'Good handling for an SUV, but the lane-keeping assist is too aggressive.', 4, '2023-05-25 14:10:00', 'performance', 0),
+(7, 2, 'Plenty of cargo space. We fit all our camping gear with room to spare.', 5, '2023-07-03 09:00:00', 'utility', 0),
+
+-- Volkswagen Golf (car_id: 3)
+(8, 3, 'Fun to drive with responsive handling. Perfect for city driving.', 4, '2023-03-15 16:45:00', 'performance', 0),
+(9, 3, 'Manual transmission is smooth but city traffic made it tiring after a while.', 3, '2023-04-22 11:30:00', 'comfort', 0),
+(10, 3, 'Great fuel economy and compact size makes parking a breeze.', 5, '2023-06-05 13:25:00', 'efficiency', 0),
+(11, 3, 'The interior feels premium for its class. Well-built with quality materials.', 4, '2023-07-18 15:40:00', 'quality', 0),
+
+-- Tesla Model 3 (car_id: 4)
+(12, 4, 'Amazing acceleration and handling. Feels like driving a sports car.', 5, '2023-03-18 10:15:00', 'performance', 0),
+(13, 4, 'The minimalist interior takes some getting used to but works well.', 4, '2023-04-26 14:30:00', 'design', 0),
+(14, 4, 'Autopilot feature made my highway commute much less stressful.', 5, '2023-06-10 09:20:00', 'technology', 0),
+(10, 4, 'Range anxiety wasn\'t an issue. Plenty of charging stations on our route.', 4, '2023-07-22 11:45:00', 'range', 0),
+
+-- Ford Mustang (car_id: 5)
+(1, 5, 'Incredible power and engine sound. A true American muscle car experience.', 5, '2023-03-20 13:40:00', 'performance', 0),
+(13, 5, 'Fuel economy is poor but that\'s expected with this much power.', 2, '2023-07-28 14:10:00', 'efficiency', 0),
+
+-- Mazda CX-5 (car_id: 6)
+(3, 6, 'Premium feel without the premium price. Interior quality is exceptional.', 5, '2023-03-22 11:25:00', 'quality', 0),
+(2, 6, 'Handles like a sedan despite being an SUV. Very impressed with the driving dynamics.', 5, '2023-05-08 13:45:00', 'performance', 0),
+
+-- Ford F-150 (car_id: 7)
+(11, 7, 'Fuel economy is what you\'d expect from a full-size truck - not great.', 2, '2023-06-25 13:40:00', 'efficiency', 0),
+(12, 7, 'The bed size and features are perfect for my construction business.', 5, '2023-08-07 11:05:00', 'utility', 0),
+
+-- Jeep Wrangler (car_id: 8)
+(9, 8, 'Took it off-road and it performed flawlessly. A true off-road beast.', 5, '2023-03-28 10:10:00', 'performance', 0),
+(13, 8, 'Highway driving is noisy and ride is rough, but that\'s part of the Jeep experience.', 3, '2023-05-15 15:30:00', 'comfort', 0),
+(1, 8, 'Removing the doors and roof was fun for summer driving.', 5, '2023-06-30 14:25:00', 'features', 0),
+
+-- Mercedes-Benz E-Class (car_id: 9)
+(10, 9, 'Luxurious interior with exceptional build quality. Every detail is perfect.', 5, '2023-03-30 13:20:00', 'quality', 0),
+(14, 9, 'Smooth and quiet ride even on rough roads. Perfect for long trips.', 5, '2023-05-18 11:40:00', 'comfort', 0),
+(8, 9, 'Excellent diesel engine with surprising efficiency for its size.', 4, '2023-08-15 10:30:00', 'efficiency', 0),
+
+-- Honda CR-V (car_id: 10)
+(3, 10, 'Perfect family SUV with excellent safety features.', 5, '2023-04-02 15:45:00', 'safety', 0),
+(10, 10, 'The hybrid system is smooth and provides great fuel economy.', 5, '2023-05-22 12:20:00', 'efficiency', 0),
+(2, 10, 'Cargo space is excellent. Easily fits all our luggage for family trips.', 4, '2023-07-10 09:35:00', 'utility', 0),
+(7, 10, 'Handling is good but not as sporty as some competitors.', 3, '2023-08-20 14:50:00', 'performance', 0),
+
+-- Honda Civic (car_id: 11)
+(10, 11, 'Excellent daily driver with good fuel economy.', 4, '2023-04-05 10:30:00', 'efficiency', 0),
+(11, 11, 'The interior feels more upscale than previous generations.', 4, '2023-05-25 16:15:00', 'quality', 0),
+(12, 11, 'Safety features like adaptive cruise control work great.', 5, '2023-07-12 11:25:00', 'safety', 0),
+(13, 11, 'A bit noisy on the highway, but comfortable for daily commuting.', 3, '2023-08-23 13:40:00', 'comfort', 0),
+
+-- Tesla Model Y (car_id: 12)
+(14, 12, 'Incredible performance for an SUV. Acceleration is mind-blowing.', 5, '2023-04-08 14:10:00', 'performance', 0),
+(4, 12, 'The minimalist interior is both beautiful and functional.', 5, '2023-05-30 10:45:00', 'design', 0),
+(6, 12, 'Autopilot made our long road trip much less tiring.', 5, '2023-07-15 15:30:00', 'technology', 0),
+(7, 12, 'Some build quality issues with panel gaps, but nothing major.', 3, '2023-08-27 11:15:00', 'quality', 0),
+
+-- Kia Sportage (car_id: 13)
+(8, 13, 'Great value for money. Lots of features for the price.', 4, '2023-04-12 09:25:00', 'value', 0),
+(9, 13, 'The new design is eye-catching and stands out from other SUVs.', 5, '2023-06-02 13:50:00', 'design', 0),
+(5, 13, 'Comfortable ride but handling could be more responsive.', 3, '2023-07-18 10:35:00', 'performance', 0),
+
+-- BMW X5 (car_id: 14)
+(2, 14, 'Drives like a sports car despite its size. Incredible handling.', 5, '2023-04-15 11:40:00', 'performance', 0),
+(13, 14, 'Luxurious interior with exceptional comfort for all passengers.', 5, '2023-06-05 14:30:00', 'comfort', 0),
+(4, 14, 'The hybrid system provides good efficiency for a large SUV.', 4, '2023-07-22 09:15:00', 'efficiency', 0),
+(14, 14, 'Technology features are comprehensive but the interface has a learning curve.', 4, '2023-09-02 12:45:00', 'technology', 0);
 
 -- Insert data into user_reviews table (users reviewing other users)
 INSERT INTO `user_reviews` (`reviewer_user_id`, `reviewee_user_id`, `review_message`, `review_rating`, `review_date`) VALUES
@@ -303,18 +348,12 @@ INSERT INTO `user_reviews` (`reviewer_user_id`, `reviewee_user_id`, `review_mess
 (13, 3, 'Car was as described, no issues with the rental in Paris.', 4, '2023-08-26 18:30:00'),
 (4, 14, 'Car was returned with less fuel than agreed upon in Barcelona.', 3, '2023-09-04 13:30:00'),
 (14, 4, 'Some confusion about pickup location in Vienna, but otherwise ok.', 3, '2023-09-04 14:00:00'),
-(5, 15, 'Excellent renter, car returned in perfect condition in Lisbon.', 5, '2023-09-16 11:30:00'),
-(15, 5, 'Very smooth rental process in Madrid, would rent again.', 5, '2023-09-16 12:00:00'),
-(6, 16, 'Good communication but returned car late to our London office.', 3, '2023-07-04 11:00:00'),
-(16, 6, "Car had some issues that weren't mentioned in the Rome listing.", 2, '2023-07-04 11:30:00'),
-(7, 17, "Perfect rental experience in Stockholm, highly recommended.", 5, '2023-07-11 15:00:00'),
-(17, 7, 'Car was clean and in great condition for our Copenhagen trip.', 5, '2023-07-11 15:30:00'),
-(8, 18, 'Respectful and responsible renter in Amsterdam.', 4, '2023-07-17 17:15:00'),
-(18, 8, 'Good value for the price in Budapest, would rent again.', 4, '2023-07-17 17:45:00'),
-(9, 19, 'Returned car late without communication to our Milan office.', 2, '2023-07-26 16:30:00'),
-(19, 9, 'Car in Zurich had fewer features than advertised.', 3, '2023-07-26 17:00:00'),
-(10, 20, 'Great renter in Brussels, followed all guidelines.', 5, '2023-08-04 13:00:00'),
-(20, 10, 'Seamless rental process and great car condition in Athens.', 5, '2023-08-04 13:30:00');
+(5, 6, 'Excellent renter, car returned in perfect condition in Lisbon.', 5, '2023-09-16 11:30:00'),
+(6, 5, 'Very smooth rental process in Madrid, would rent again.', 5, '2023-09-16 12:00:00'),
+(7, 8, 'Good communication but returned car late to our London office.', 3, '2023-07-04 11:00:00'),
+(8, 7, "Car had some issues that weren't mentioned in the Rome listing.", 2, '2023-07-04 11:30:00'),
+(9, 7, "Perfect rental experience in Stockholm, highly recommended.", 5, '2023-07-11 15:00:00'),
+(1, 9, 'Car was clean and in great condition for our Copenhagen trip.', 5, '2023-07-11 15:30:00');
 
 -- Insert data into notifications table
 -- Ensuring all user_ids exist in the user table
@@ -332,12 +371,6 @@ INSERT INTO `notifications` (`user_id`, `message`, `status`, `created_at`) VALUE
 (12, 'Your rental of Opel Insignia in Warsaw has been confirmed.', 'read', '2023-05-31 09:30:00'),
 (13, 'Your rental of Volkswagen Golf in Lisbon has been confirmed.', 'read', '2023-06-04 11:45:00'),
 (14, 'Your rental of BMW M4 in Düsseldorf has been confirmed.', 'read', '2023-06-14 14:00:00'),
-(15, 'Your rental of Ford Ranger in Barcelona has been confirmed.', 'read', '2023-06-19 10:15:00'),
-(16, 'Your rental of Mercedes-Benz E-Class in Brussels has been confirmed.', 'read', '2023-06-30 13:30:00'),
-(17, 'Your rental of Toyota Corolla in Zurich has been confirmed.', 'read', '2023-07-04 15:45:00'),
-(18, 'Your rental of Nissan Qashqai in Budapest has been confirmed.', 'read', '2023-07-14 17:00:00'),
-(19, 'Your rental of Audi Q7 in Milan has been confirmed.', 'read', '2023-07-19 10:30:00'),
-(20, 'Your rental of Toyota Hilux in Stockholm has been confirmed.', 'read', '2023-07-31 12:45:00'),
 (1, 'Your rental of BMW 4 Series in Athens has been confirmed.', 'read', '2023-08-04 15:00:00'),
 (2, 'Your rental of Škoda Kodiaq in Berlin has been confirmed.', 'read', '2023-08-14 17:15:00'),
 (3, 'Your rental of Audi A5 in Paris has been confirmed.', 'read', '2023-08-19 10:45:00'),
