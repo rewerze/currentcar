@@ -164,9 +164,6 @@ function App() {
               <p className="text-light">
                 {t('pricingDiscount', 'MainPage')}
               </p>
-              <p className="text-light">
-                {t('pricingDeposit', 'MainPage')}
-              </p>
             </div>
             <div className="col-lg-4">
               <p className="penz text-blue">{Intl.NumberFormat("en-IN", { maximumSignificantDigits: 3 }).format(Math.round(averagePrice || 0))} HUF</p>
