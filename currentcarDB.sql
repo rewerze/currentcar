@@ -104,10 +104,7 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 
 CREATE TABLE IF NOT EXISTS `location` (
     `location_id` int AUTO_INCREMENT NOT NULL,
-    `pickup_location` varchar(250) NOT NULL,
-    `dropoff_location` varchar(250) NOT NULL,
-    `longitude` int NOT NULL,
-    `latitude` int NOT NULL,
+    `location` varchar(250) NOT NULL,
     PRIMARY KEY (`location_id`)
 );
 
