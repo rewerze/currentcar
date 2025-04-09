@@ -738,3 +738,23 @@ details {
     height: 120px;
     margin-top: 15vh;
 }
+
+.price-table thead {
+    width: 30%;
+}
+
+.price-table th, .price-table td {
+    text-align: center;
+    padding: 1rem;
+}
+
+.price-table {
+    width: 70%;
+}
+
+.price-page {
+    padding: 3rem;
+    border-radius: 20px;
+    width: 50%;
+    margin: auto;
+}
