@@ -195,7 +195,7 @@
         height: auto;
     }
 
-    input {
+    input not(input[type="radio"]){
         width: 100% !important;
     }
 
