@@ -197,7 +197,7 @@ function Profile() {
                     <span>
                       <img src={edit_icon} className="icon mx-2" />
                     </span>
-                    <b>{t("edit_data", "Profile")}</b>
+                    <b className="text-black">{t("edit_data", "Profile")}</b>
                   </a>
                 </div>
 
@@ -227,7 +227,7 @@ function Profile() {
                     <span>
                       <img src={delete_icon} className="icon mx-2" />
                     </span>
-                    <b>{t("delete_profile", "Profile")}</b>
+                    <b className="text-black">{t("delete_profile", "Profile")}</b>
                   </a>
                 </div>
 
