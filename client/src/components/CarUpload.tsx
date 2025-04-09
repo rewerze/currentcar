@@ -7,11 +7,13 @@ import { CarInfo } from './interfaces/Car';
 import { CarCondition, CarType, FuelType, TransmissionType } from './enums/Car';
 import { useUser } from '@/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import PriceTableModal from "./PriceTable";
 
 const CarUpload: React.FC = () => {
     const { t, loadedNamespaces, loadNamespace } = useLanguage();
     const { user, loading } = useUser();
     const navigate = useNavigate();
+    const [isPriceModalOpen, setPriceModalOpen] = useState(false);
     const [depoLocations, setDepoLocations] = useState<{ location_id: number, location: string }[]>([]);
 
     useEffect(() => {
@@ -433,7 +435,11 @@ const CarUpload: React.FC = () => {
                             </div>
 
                             {/* PRICES */}
-                            <h2 className='mt-5'>{t('pricing', 'CarUpload')}</h2>
+                            <div className='upload-price'>
+                                <h2 className='mt-5'>{t('pricing', 'CarUpload')}</h2>
+                                <button className="btn btn-primary" onClick={() => setPriceModalOpen(true)}>Ajánlott ártábla megtekintése</button>
+                            </div>
+                            <PriceTableModal isOpen={isPriceModalOpen} onClose={() => setPriceModalOpen(false)} />
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className='upload-data'>
                                     <label htmlFor="basic_price">{t('basePrice', 'CarUpload')}<span className='text-danger'>*</span></label>

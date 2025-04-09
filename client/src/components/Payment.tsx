@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
+import "../assets/css/modal.css";
 
 function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClose: () => void, onPurchase: (fromDate: string, toDate: string, paymentMethod: string) => void; }) {
     const { t, loadNamespace, loadedNamespaces } = useLanguage();
@@ -21,13 +22,13 @@ function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClos
     if (!isOpen) return null;
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-content bg-dark" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
                     <button type="button" className="close-button" onClick={onClose}>×</button>
                 </div>
                 <div className="modal-body">
                     <form className="form" onSubmit={handleSubmit}>
-                        <div className="form-box bg-dark">
+                        <div>
                             <h1>{t('rent_period', 'Payment')}</h1>
                             <h2 className="mt-3">{t('rent_period', 'Payment')}:</h2>
                             <div className="rent-time">
@@ -66,42 +67,6 @@ function PaymentModal({ isOpen, onClose, onPurchase }: { isOpen: boolean, onClos
                     </form>
                 </div>
             </div>
-
-            <style>{`
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
-        
-        .modal-content {
-          padding: 20px;
-          border-radius: 5px;
-          max-width: 500px;
-          width: 90%;
-          max-height: 90vh;
-          overflow-y: auto;
-        }
-        
-        .modal-header {
-          display: flex;
-          justify-content: flex-end;
-        }
-        
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-        }
-      `}</style>
         </div>
     );
 }
