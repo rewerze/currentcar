@@ -39,6 +39,7 @@ import { getComments, postComment } from "./endpoints/api/comments";
 import db from "./db/connection";
 import { RowDataPacket } from "mysql2";
 import { getMostPopularCars, getRandomReviews } from "./endpoints/api/mainPage";
+import { captureOrder, CreatePayment } from "./endpoints/api/payment";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -155,6 +156,9 @@ app.post("/api/rent", verifyAuthTokenMiddleware, rentCar);
 app.post("/api/deleteCar", verifyAuthTokenMiddleware, deleteCar);
 app.post("/api/deleteProfile", verifyAuthTokenMiddleware, deleteProfile);
 app.get("/api/getRentedCars", verifyAuthTokenMiddleware, getRentedCars);
+
+app.post("/api/paypal/create-order", verifyAuthTokenMiddleware, CreatePayment);
+app.post("/api/paypal/capture-order", verifyAuthTokenMiddleware, captureOrder);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });

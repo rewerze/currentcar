@@ -20,27 +20,19 @@ function CarData() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   const [newComment, setNewComment] = useState({
     message: "",
     stars: 5,
-    category: "comfort"
+    category: "comfort",
   });
   const [loading2, setLoading] = useState<boolean>(false);
 
+  // All useEffect hooks in the same order every time
   useEffect(() => {
     if (!loading && user) {
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     }
-  }, [user, loading])
+  }, [user, loading]);
 
   useEffect(() => {
     if (!loadedNamespaces.includes("CarDetail")) {
@@ -94,11 +86,75 @@ function CarData() {
     }
   }, [id]);
 
-  if (!car) {
-    return <div className="nav-gap text-center">Loading...</div>;
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const paypalOrderId = urlParams.get("token");
+    const paymentStatus = urlParams.get("PayerID");
+
+    if (paypalOrderId && paymentStatus) {
+      const completePaypalPayment = async () => {
+        try {
+          const response = await axios.post(
+            buildApiUrl("/paypal/capture-order"),
+            {
+              orderID: paypalOrderId,
+              car_id: id,
+            },
+            {
+              withCredentials: true,
+            }
+          );
+
+          if (response.data.success) {
+            toast.success(t("purchaseSuccess", "CarDetail"));
+            window.history.replaceState(
+              {},
+              document.title,
+              window.location.pathname
+            );
+          } else {
+            toast.error(response.data.error || t("paypalError", "CarDetail"));
+          }
+        } catch (error) {
+          console.error("Error completing PayPal payment:", error);
+          toast.error(t("paypalError", "CarDetail"));
+        }
+      };
+
+      completePaypalPayment();
+    }
+  }, [id, t]);
+
+  // Regular functions
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  function calculateTotalAmount(fromDate: string, toDate: string): number {
+    if (!car) return 0;
+
+    const startDate = new Date(fromDate);
+    const endDate = new Date(toDate);
+    const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 1) {
+      const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+      return diffHours * car.price_per_hour;
+    }
+
+    return diffDays * car.price_per_day;
   }
 
-  async function onCarPurchase(fromDate: string, toDate: string, paymentMethod: string): Promise<void> {
+  async function onCarPurchase(
+    fromDate: string,
+    toDate: string,
+    paymentMethod: string
+  ): Promise<void> {
     if (car?.car_active == false) {
       setIsModalOpen(false);
       return;
@@ -106,38 +162,42 @@ function CarData() {
 
     if (user && !loading) {
       try {
-        const response = await axios.post(
-          buildApiUrl("/rent"),
-          {
-            car_id: id,
-            start_date: fromDate,
-            end_date: toDate,
-            pickup_location: "Default Pickup Location",
-            dropoff_location: "Default Dropoff Location",
-            payment_method: paymentMethod == "card" ? "credit_card" : "cash",
-            discount_code: ""
-          },
-          {
-            withCredentials: true
-          }
-        );
+        if (paymentMethod === "card") {
+          setIsModalOpen(false);
+          const response = await axios.post(
+            buildApiUrl("/paypal/create-order"),
+            {
+              car_id: id,
+              start_date: fromDate,
+              end_date: toDate,
+              amount: calculateTotalAmount(fromDate, toDate),
+              currency: "HUF",
+            },
+            {
+              withCredentials: true,
+            }
+          );
 
-        if (response.data.success) {
-          toast.success(t("purchaseSuccess", "CarDetail"));
-          setIsModalOpen(false);
-        } else {
-          console.log(response.data.error)
-          toast.error(response.data.error || t("purchaseError", "CarDetail"));
-          setIsModalOpen(false);
+          const approveLink = response.data.links.find(
+            (link: { rel: string }) => link.rel === "approve"
+          );
+
+          if (approveLink) {
+            window.location.href = approveLink.href;
+          } else {
+            toast.error(
+              "Approve link not found in PayPal response. Please contact an administrator!"
+            );
+          }
         }
       } catch (error) {
         console.error("Error renting car:", error);
         if (error instanceof AxiosError) {
           toast.error(
             (error.response?.data as { error?: string })?.error ||
-            error.message ||
-            (t("purchaseError", "CarDetail") as string) ||
-            ""
+              error.message ||
+              (t("purchaseError", "CarDetail") as string) ||
+              ""
           );
         } else {
           toast.error("An unknown error occurred.");
@@ -155,21 +215,21 @@ function CarData() {
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewComment({
       ...newComment,
-      message: e.target.value
+      message: e.target.value,
     });
   };
 
   const handleStarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewComment({
       ...newComment,
-      stars: parseInt(e.target.value)
+      stars: parseInt(e.target.value),
     });
   };
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setNewComment({
       ...newComment,
-      category: e.target.value
+      category: e.target.value,
     });
   };
 
@@ -199,7 +259,7 @@ function CarData() {
           carId: id,
           message: newComment.message,
           stars: newComment.stars,
-          ratingCategory: newComment.category
+          ratingCategory: newComment.category,
         }),
       });
 
@@ -214,7 +274,7 @@ function CarData() {
       setNewComment({
         message: "",
         stars: 5,
-        category: "comfort"
+        category: "comfort",
       });
 
       toast.success(t("commentSubmitted", "CarDetail"));
@@ -226,22 +286,42 @@ function CarData() {
     }
   };
 
+  if (!car) {
+    return <div className="nav-gap text-center">Loading...</div>;
+  }
+
   return (
     <>
-      <PaymentModal isOpen={isModalOpen} onClose={closeModal} onPurchase={onCarPurchase} />
+      <PaymentModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onPurchase={onCarPurchase}
+      />
       <main className="nav-gap">
         <div className="row">
           <div className="col-lg-4 car-data-col">
-            <div id="carouselExampleIndicators" className="carousel slide carousel-dark">
+            <div
+              id="carouselExampleIndicators"
+              className="carousel slide carousel-dark"
+            >
               <div className="carousel-inner">
                 {images && images.length > 0 ? (
                   images.map((image, index) => (
-                    <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
+                    <div
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      key={index}
+                    >
                       <img
-                        src={`${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/uploads/${image}`}
+                        src={`${
+                          import.meta.env.PROD
+                            ? "/api"
+                            : "http://localhost:3000/api"
+                        }/uploads/${image}`}
                         alt={`${car.car_brand} ${car.car_model} - ${index + 1}`}
                         className="d-block w-100 car-data-img"
-                        onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = carImage;
+                        }}
                       />
                     </div>
                   ))
@@ -249,21 +329,47 @@ function CarData() {
                   <>
                     <div className="carousel-item active">
                       <img
-                        src={car.car_id ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}` : carImage}
+                        src={
+                          car.car_id
+                            ? `${
+                                import.meta.env.PROD
+                                  ? "/api"
+                                  : "http://localhost:3000/api"
+                              }/getCarImage?car_id=${car.car_id}`
+                            : carImage
+                        }
                         alt={`${car.car_brand} ${car.car_model}`}
                         className="d-block w-100 car-data-img"
-                        onError={(e) => { (e.target as HTMLImageElement).src = carImage }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = carImage;
+                        }}
                       />
                     </div>
                   </>
                 )}
               </div>
-              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <button
+                className="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
                 <span className="visually-hidden">Previous</span>
               </button>
-              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <button
+                className="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
@@ -321,15 +427,11 @@ function CarData() {
                   </tr>
                   <tr>
                     <th>{t("pricePerHour", "CarDetail")}:</th>
-                    <td>
-                      {car.price_per_hour} HUF
-                    </td>
+                    <td>{car.price_per_hour} HUF</td>
                   </tr>
                   <tr>
                     <th>{t("pricePerDay", "CarDetail")}:</th>
-                    <td>
-                      {car.price_per_day} HUF
-                    </td>
+                    <td>{car.price_per_day} HUF</td>
                   </tr>
                   <tr>
                     <th>{t("availableUntil", "CarDetail")}:</th>
@@ -343,8 +445,21 @@ function CarData() {
               </table>
             </div>
             <div className="d-flex justify-content-center adatlap-table-alatt">
-              <button className="btn btn-success" onClick={onPurchase} disabled={!!(car.car_active != true || (car.car_owner && car.car_owner == user?.user_id))}>
-                {car.car_owner && car.car_owner == user?.user_id ? t('cantRentOwn', 'CarDetail') : car.car_active ? t("purchase", "CarDetail") : t("rented", "CarDetail")}
+              <button
+                className="btn btn-success"
+                onClick={onPurchase}
+                disabled={
+                  !!(
+                    car.car_active != true ||
+                    (car.car_owner && car.car_owner == user?.user_id)
+                  )
+                }
+              >
+                {car.car_owner && car.car_owner == user?.user_id
+                  ? t("cantRentOwn", "CarDetail")
+                  : car.car_active
+                  ? t("purchase", "CarDetail")
+                  : t("rented", "CarDetail")}
               </button>
             </div>
           </div>
@@ -355,7 +470,9 @@ function CarData() {
           <hr />
 
           {!isLoggedIn && (
-            <h3 className="text-center text-danger">{t("loginRequired", "CarDetail")}</h3>
+            <h3 className="text-center text-danger">
+              {t("loginRequired", "CarDetail")}
+            </h3>
           )}
 
           <form onSubmit={handleSubmitComment}>
@@ -363,10 +480,22 @@ function CarData() {
               <div className="row">
                 <div className="col-md comment-header">
                   <a href="/profil">
-                    <img src={isLoggedIn ? `${import.meta.env.PROD
-                      ? "/api/uploads/profile-pictures/"
-                      : "http://localhost:3000/api/uploads/profile-pictures/"
-                      }${user?.profile_picture}` : profile} onError={(e) => { (e.target as HTMLImageElement).src = profile }} alt="" className="profile-sm" />
+                    <img
+                      src={
+                        isLoggedIn
+                          ? `${
+                              import.meta.env.PROD
+                                ? "/api/uploads/profile-pictures/"
+                                : "http://localhost:3000/api/uploads/profile-pictures/"
+                            }${user?.profile_picture}`
+                          : profile
+                      }
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = profile;
+                      }}
+                      alt=""
+                      className="profile-sm"
+                    />
                   </a>
                   <span className="star-range">
                     <input
@@ -390,10 +519,16 @@ function CarData() {
                     onChange={handleCategoryChange}
                   >
                     <option value="comfort">{t("comfort", "CarDetail")}</option>
-                    <option value="performance">{t("performance", "CarDetail")}</option>
-                    <option value="fuel_efficiency">{t("fuel_efficiency", "CarDetail")}</option>
+                    <option value="performance">
+                      {t("performance", "CarDetail")}
+                    </option>
+                    <option value="fuel_efficiency">
+                      {t("fuel_efficiency", "CarDetail")}
+                    </option>
                     <option value="safety">{t("safety", "CarDetail")}</option>
-                    <option value="value_for_money">{t("value_for_money", "CarDetail")}</option>
+                    <option value="value_for_money">
+                      {t("value_for_money", "CarDetail")}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -421,20 +556,35 @@ function CarData() {
           <div className="comment-section mt-4">
             {comments.length > 0 ? (
               comments.map((comment) => (
-                <div key={comment.comment_id} className="comment-box bg-light mb-3">
+                <div
+                  key={comment.comment_id}
+                  className="comment-box bg-light mb-3"
+                >
                   <div className="comment-content">
-                    <img src={
-                      comment.profile_picture
-                        ? `${import.meta.env.PROD
-                          ? "/api/uploads/profile-pictures/"
-                          : "http://localhost:3000/api/uploads/profile-pictures/"
-                        }${comment.profile_picture}`
-                        : profile
-                    } alt="" onError={(e) => { (e.target as HTMLImageElement).src = profile }} className='profile' />
+                    <img
+                      src={
+                        comment.profile_picture
+                          ? `${
+                              import.meta.env.PROD
+                                ? "/api/uploads/profile-pictures/"
+                                : "http://localhost:3000/api/uploads/profile-pictures/"
+                            }${comment.profile_picture}`
+                          : profile
+                      }
+                      alt=""
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = profile;
+                      }}
+                      className="profile"
+                    />
                     <div className="comment-text">
                       <h5>
-                        <span><b>{comment.user_name}</b></span><br />
-                        {t(comment.rating_category, "CarDetail")}: {comment.comment_star}/5
+                        <span>
+                          <b>{comment.user_name}</b>
+                        </span>
+                        <br />
+                        {t(comment.rating_category, "CarDetail")}:{" "}
+                        {comment.comment_star}/5
                       </h5>
                       <p>{comment.comment_message}</p>
                       <small className="text-muted">
@@ -451,7 +601,7 @@ function CarData() {
             )}
           </div>
         </div>
-      </main >
+      </main>
     </>
   );
 }

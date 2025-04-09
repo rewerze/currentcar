@@ -56,7 +56,7 @@ export const uploadCar = async (
       pricePerHour,
       pricePerDay,
       description,
-      available_to
+      available_to,
     });
 
     const pool = db.pool;
@@ -75,6 +75,15 @@ export const uploadCar = async (
       }
 
       const insuranceId = insuranceRows[0].insurance_id;
+
+      const availableToDate = new Date(available_to);
+      const now = new Date();
+
+      const diffTime = availableToDate.getTime() - now.getTime();
+
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      const carPrice = pricePerDay * diffDays;
 
       const [carResult] = await connection.query<ResultSetHeader>(
         `INSERT INTO car (
@@ -110,7 +119,7 @@ export const uploadCar = async (
           pricePerDay,
           description,
           insuranceId,
-          (pricePerDay * 7).toString(),
+          carPrice.toString(),
           0,
         ]
       );
@@ -137,7 +146,6 @@ export const uploadCar = async (
         await Promise.all(imageInsertPromises);
       }
 
-      const now = new Date();
       const oneYearLater = new Date();
       oneYearLater.setFullYear(now.getFullYear() + 1);
 
