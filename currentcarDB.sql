@@ -104,10 +104,7 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 
 CREATE TABLE IF NOT EXISTS `location` (
     `location_id` int AUTO_INCREMENT NOT NULL,
-    `pickup_location` varchar(250) NOT NULL,
-    `dropoff_location` varchar(250) NOT NULL,
-    `longitude` int NOT NULL,
-    `latitude` int NOT NULL,
+    `location` varchar(250) NOT NULL,
     PRIMARY KEY (`location_id`)
 );
 
@@ -144,6 +141,21 @@ CREATE TABLE IF NOT EXISTS `notifications` (
     PRIMARY KEY (`notification_id`)
 );
 
+CREATE TABLE IF NOT EXISTS payment_orders (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          order_ref VARCHAR(36) NOT NULL,
+          payment_ref VARCHAR(255),
+          user_id INT NOT NULL,
+          car_id INT NOT NULL,
+          start_date DATE NOT NULL,
+          end_date DATE NOT NULL,
+          amount DECIMAL(10, 2) NOT NULL,
+          currency VARCHAR(3) NOT NULL DEFAULT 'USD',
+          payment_method VARCHAR(20) NOT NULL,
+          status VARCHAR(20) NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
 ALTER TABLE car_user ADD FOREIGN KEY (`car_id`) REFERENCES `car`(`car_id`);
 ALTER TABLE car_user ADD FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`);
 ALTER TABLE orders ADD FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`);
@@ -160,3 +172,5 @@ ALTER TABLE user_reviews ADD FOREIGN KEY (`reviewer_user_id`) REFERENCES `user`(
 ALTER TABLE user_reviews ADD FOREIGN KEY (`reviewee_user_id`) REFERENCES `user`(`user_id`);
 ALTER TABLE invoice ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`insurance_id`);
 ALTER TABLE car ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`insurance_id`);
+ALTER TABLE payment_orders ADD FOREIGN KEY (user_id) REFERENCES `user`(user_id);
+ALTER TABLE payment_orders ADD FOREIGN KEY (car_id) REFERENCES `car`(car_id);
