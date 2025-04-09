@@ -186,6 +186,7 @@ function EditProfile() {
               type="date"
               name="driver_license_expiry"
               id="driver_license_expiry"
+              max="9999-12-31"
               onChange={handleChange}
               className="form-control"
             />
