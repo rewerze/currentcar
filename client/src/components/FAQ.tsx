@@ -8,6 +8,14 @@ function FAQ() {
 
                 <div className="mx-5">
                     <details>
+                        <summary className="display-5">Fizetés után, mi a teendőm?
+                            <hr className="w-100" />
+                        </summary>
+                        <p>Fizetés után el kell menned a kijelölt depóba (ezt az autó adatlapján megtalálod) és fizetési módszertől függően az ott dolgozó munkatársunknál elintézi a papírmunkákat.</p>
+                    </details>
+                </div>
+                <div className="mx-5 mt-5">
+                    <details>
                         <summary className="display-5">Milyen dokumentumokra van szükségem a bérléshez?
                             <hr className="w-100" />
                         </summary>
