@@ -40,6 +40,7 @@ import db from "./db/connection";
 import { RowDataPacket } from "mysql2";
 import { getMostPopularCars, getRandomReviews } from "./endpoints/api/mainPage";
 import { captureOrder, CreatePayment } from "./endpoints/api/payment";
+import { getDepos } from "./endpoints/api/depos";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -146,6 +147,8 @@ app.post(
 app.get("/api/randomReviews", getRandomReviews);
 app.get("/api/popularCars", getMostPopularCars);
 
+app.get("/api/getDepos", verifyAuthTokenMiddleware, getDepos);
+
 app.get("/api/getCarImage", getCarImage);
 
 app.get("/api/comments", getComments);
@@ -181,8 +184,7 @@ export const updateExpiredOrders = async () => {
           )
       `);
     console.log(
-      `Reactivated ${
-        (result as RowDataPacket).affectedRows
+      `Reactivated ${(result as RowDataPacket).affectedRows
       } cars after rental expiry.`
     );
   } catch (error) {
@@ -201,8 +203,7 @@ export const deactivateExpiredAvailability = async () => {
           )
       `);
     console.log(
-      `Deactivated ${
-        (result as RowDataPacket).affectedRows
+      `Deactivated ${(result as RowDataPacket).affectedRows
       } cars due to availability expiration.`
     );
   } catch (error) {

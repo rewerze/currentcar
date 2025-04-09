@@ -1,4 +1,4 @@
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useState, FormEvent, useRef } from "react";
 import carImage from "../assets/img/nepszeru_auto.png";
 import { useParams } from "react-router-dom";
 import { CarInfo } from "./interfaces/Car";
@@ -13,8 +13,8 @@ import PaymentModal from "./Payment";
 
 function CarData() {
   const { user, loading } = useUser();
-  const { t, loadNamespace, language, loadedNamespaces } = useLanguage();
-  const { id } = useParams<{ id: string }>();
+  const { t, loadNamespace, loadedNamespaces } = useLanguage();
+  const { id } = useParams<{ id: string, token: string, PayerID: string }>();
   const [car, setCarInfo] = useState<CarInfo | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -86,45 +86,6 @@ function CarData() {
     }
   }, [id]);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const paypalOrderId = urlParams.get("token");
-    const paymentStatus = urlParams.get("PayerID");
-
-    if (paypalOrderId && paymentStatus) {
-      const completePaypalPayment = async () => {
-        try {
-          const response = await axios.post(
-            buildApiUrl("/paypal/capture-order"),
-            {
-              orderID: paypalOrderId,
-              car_id: id,
-            },
-            {
-              withCredentials: true,
-            }
-          );
-
-          if (response.data.success) {
-            toast.success(t("purchaseSuccess", "CarDetail"));
-            window.history.replaceState(
-              {},
-              document.title,
-              window.location.pathname
-            );
-          } else {
-            toast.error(response.data.error || t("paypalError", "CarDetail"));
-          }
-        } catch (error) {
-          console.error("Error completing PayPal payment:", error);
-          toast.error(t("paypalError", "CarDetail"));
-        }
-      };
-
-      completePaypalPayment();
-    }
-  }, [id, t]);
-
   // Regular functions
   const openModal = () => {
     setIsModalOpen(true);
@@ -170,7 +131,6 @@ function CarData() {
               car_id: id,
               start_date: fromDate,
               end_date: toDate,
-              amount: calculateTotalAmount(fromDate, toDate),
               currency: "HUF",
             },
             {
@@ -189,15 +149,37 @@ function CarData() {
               "Approve link not found in PayPal response. Please contact an administrator!"
             );
           }
+        } else {
+          setIsModalOpen(false);
+          const response = await axios.post(
+            buildApiUrl("/rent"),
+            {
+              car_id: id,
+              start_date: fromDate,
+              end_date: toDate,
+              pickup_location: "Default Location",
+              payment_method: "cash"
+            },
+            {
+              withCredentials: true,
+            }
+          );
+
+          if (response.data.success) {
+            window.location.reload()
+            toast.success(t("purchaseSuccess", "CarDetail"))
+          } else {
+            throw new Error("Internal server error")
+          }
         }
       } catch (error) {
         console.error("Error renting car:", error);
         if (error instanceof AxiosError) {
           toast.error(
             (error.response?.data as { error?: string })?.error ||
-              error.message ||
-              (t("purchaseError", "CarDetail") as string) ||
-              ""
+            error.message ||
+            (t("purchaseError", "CarDetail") as string) ||
+            ""
           );
         } else {
           toast.error("An unknown error occurred.");
@@ -312,11 +294,10 @@ function CarData() {
                       key={index}
                     >
                       <img
-                        src={`${
-                          import.meta.env.PROD
-                            ? "/api"
-                            : "http://localhost:3000/api"
-                        }/uploads/${image}`}
+                        src={`${import.meta.env.PROD
+                          ? "/api"
+                          : "http://localhost:3000/api"
+                          }/uploads/${image}`}
                         alt={`${car.car_brand} ${car.car_model} - ${index + 1}`}
                         className="d-block w-100 car-data-img"
                         onError={(e) => {
@@ -331,11 +312,10 @@ function CarData() {
                       <img
                         src={
                           car.car_id
-                            ? `${
-                                import.meta.env.PROD
-                                  ? "/api"
-                                  : "http://localhost:3000/api"
-                              }/getCarImage?car_id=${car.car_id}`
+                            ? `${import.meta.env.PROD
+                              ? "/api"
+                              : "http://localhost:3000/api"
+                            }/getCarImage?car_id=${car.car_id}`
                             : carImage
                         }
                         alt={`${car.car_brand} ${car.car_model}`}
@@ -458,8 +438,8 @@ function CarData() {
                 {car.car_owner && car.car_owner == user?.user_id
                   ? t("cantRentOwn", "CarDetail")
                   : car.car_active
-                  ? t("purchase", "CarDetail")
-                  : t("rented", "CarDetail")}
+                    ? t("purchase", "CarDetail")
+                    : t("rented", "CarDetail")}
               </button>
             </div>
           </div>
@@ -483,11 +463,10 @@ function CarData() {
                     <img
                       src={
                         isLoggedIn
-                          ? `${
-                              import.meta.env.PROD
-                                ? "/api/uploads/profile-pictures/"
-                                : "http://localhost:3000/api/uploads/profile-pictures/"
-                            }${user?.profile_picture}`
+                          ? `${import.meta.env.PROD
+                            ? "/api/uploads/profile-pictures/"
+                            : "http://localhost:3000/api/uploads/profile-pictures/"
+                          }${user?.profile_picture}`
                           : profile
                       }
                       onError={(e) => {
@@ -564,11 +543,10 @@ function CarData() {
                     <img
                       src={
                         comment.profile_picture
-                          ? `${
-                              import.meta.env.PROD
-                                ? "/api/uploads/profile-pictures/"
-                                : "http://localhost:3000/api/uploads/profile-pictures/"
-                            }${comment.profile_picture}`
+                          ? `${import.meta.env.PROD
+                            ? "/api/uploads/profile-pictures/"
+                            : "http://localhost:3000/api/uploads/profile-pictures/"
+                          }${comment.profile_picture}`
                           : profile
                       }
                       alt=""

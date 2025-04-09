@@ -59,6 +59,10 @@ export const getCarImage = async (
 export const rentCar = async (req: Request, res: Response): Promise<void> => {
   const userId = (req as AuthenticatedRequest).user.user_id;
 
+  if (!userId) {
+    res.status(400).json({ success: false, error: "User not authenticated." })
+  }
+
   const {
     car_id,
     start_date,
@@ -86,17 +90,17 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
     user.user_email != null && Number(user.u_phone_number) !== 0,
     user.user_iban != null,
     user.born_at != null &&
-      new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
+    new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
   ];
 
   if (
     ![
       user?.driver_license_expiry != null &&
-        user?.driver_license_number != null,
+      user?.driver_license_number != null,
       user?.user_email != null && Number(user?.u_phone_number) !== 0,
       user?.user_iban != null,
       user?.born_at != null &&
-        new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
+      new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
     ].every(Boolean)
   ) {
     res.status(400).json({
@@ -252,7 +256,7 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
       data: {
         order_id: orderId,
         total_amount: totalAmount,
-        payment_status: "pending",
+        payment_status: "paid",
         rental_details: {
           car: `${carDetails[0].car_brand} ${carDetails[0].car_model}`,
           start_date,
@@ -326,7 +330,7 @@ export const editCar = async (req: Request, res: Response): Promise<void> => {
     }
 
     const activeOrdersResult = await db.query(
-      'SELECT * FROM orders WHERE car_id = ? AND rental_status IN ("pending", "confirmed", "extended")',
+      'SELECT * FROM orders WHERE car_id = ? AND rental_status IN ("pending", "paid", "extended")',
       [car_id]
     );
 
@@ -529,7 +533,7 @@ export const deleteCar = async (req: Request, res: Response): Promise<void> => {
     }
 
     const activeOrdersResult = await db.query(
-      'SELECT * FROM orders WHERE car_id = ? AND rental_status IN ("pending", "confirmed", "extended")',
+      'SELECT * FROM orders WHERE car_id = ? AND rental_status IN ("pending", "paid", "extended")',
       [carId]
     );
 

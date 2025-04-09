@@ -40,6 +40,22 @@ async function generateAccessToken(): Promise<string> {
   }
 }
 
+function calculateTotalAmount(car: Car, fromDate: string, toDate: string): number {
+  if (!car) return 0;
+
+  const startDate = new Date(fromDate);
+  const endDate = new Date(toDate);
+  const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 1) {
+    const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+    return diffHours * car.price_per_hour;
+  }
+
+  return diffDays * car.price_per_day;
+}
+
 export const CreatePayment = async (
   req: Request,
   res: Response
@@ -54,11 +70,10 @@ export const CreatePayment = async (
       car_id,
       start_date,
       end_date,
-      amount,
       currency = "USD",
     }: CreateOrderRequest = req.body;
 
-    if (!car_id || !start_date || !end_date || !amount) {
+    if (!car_id || !start_date || !end_date) {
       res.status(400).json({ error: "Missing required fields" });
       return;
     }
@@ -78,6 +93,8 @@ export const CreatePayment = async (
       res.status(400).json({ error: "Car is not available for rent" });
       return;
     }
+
+    const amount = calculateTotalAmount(car, start_date, end_date);
 
     await db.query(`
           CREATE TABLE IF NOT EXISTS payment_orders (
@@ -131,8 +148,8 @@ export const CreatePayment = async (
           },
         ],
         application_context: {
-          return_url: `${FRONTEND_URL}/adatlap/${car_id}`,
-          cancel_url: `${FRONTEND_URL}/adatlap/${car_id}?canceled=true`,
+          return_url: `${FRONTEND_URL}/status/${car_id}`,
+          cancel_url: `${FRONTEND_URL}/status/${car_id}?canceled=true`,
         },
       },
       {
@@ -183,7 +200,7 @@ export const captureOrder = async (
 
     const response = await axios.post(
       `${PAYPAL_API}/v2/checkout/orders/${orderID}/capture`,
-      {},
+      undefined,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -245,12 +262,14 @@ export const captureOrder = async (
         "INSERT INTO notifications (user_id, message, status, created_at) VALUES (?, ?, ?, NOW())",
         [
           (req as AuthenticatedRequest).user.user_id,
-          `Your car rental for ${order.start_date} to ${order.end_date} has been confirmed.`,
+          `Your car rental for ${new Date(order.start_date).toLocaleDateString()} to ${new Date(order.end_date).toLocaleDateString()} has been confirmed.`,
           "unread",
         ]
       );
 
-      res.json({ success: true });
+      res.json({
+        success: true, startDate: order.start_date, endDate: order.end_date
+      });
     } else {
       await db.query(
         "UPDATE payment_orders SET status = ? WHERE payment_ref = ?",
@@ -260,6 +279,7 @@ export const captureOrder = async (
       res.status(400).json({ error: "Payment not completed" });
     }
   } catch (error) {
+    console.error((error as { response: { data: string } }).response?.data);
     console.error("Error capturing PayPal payment:", error);
     res.status(500).json({ error: "Failed to capture PayPal payment" });
   }

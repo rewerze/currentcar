@@ -12,12 +12,34 @@ const CarUpload: React.FC = () => {
     const { t, loadedNamespaces, loadNamespace } = useLanguage();
     const { user, loading } = useUser();
     const navigate = useNavigate();
+    const [depoLocations, setDepoLocations] = useState<{ location_id: number, location: string }[]>([]);
 
     useEffect(() => {
         if (!loading && !user) {
             navigate('/login');
         }
-    }, [user, loading])
+    }, [user, loading]);
+
+    useEffect(() => {
+        const fetchCarData = async () => {
+            try {
+                const response = await fetch(buildApiUrl(`/getDepos`), {
+                    credentials: "include",
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch depo data: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setDepoLocations(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchCarData();
+    }, []);
 
     useEffect(() => {
         if (!loadedNamespaces.includes("CarUpload")) {
@@ -46,7 +68,8 @@ const CarUpload: React.FC = () => {
         insurance_id: 0,
         mileage: 0,
         available_to: new Date(),
-        extras: ''
+        extras: '',
+        depo: ''
     });
 
     const [files, setFiles] = useState<File[]>([]);
@@ -105,7 +128,7 @@ const CarUpload: React.FC = () => {
 
         const requiredFields: (keyof CarInfo)[] = ['car_brand', 'car_model', 'car_condition', 'car_year', 'car_type',
             'fuel_type', 'transmission_type', 'car_regnumber', 'seats',
-            'number_of_doors', 'price_per_hour', 'price_per_day', 'car_description', 'available_to'];
+            'number_of_doors', 'price_per_hour', 'price_per_day', 'car_description', 'available_to', 'depo'];
 
         const emptyFields = requiredFields.filter(field => !formData[field]);
 
@@ -164,7 +187,8 @@ const CarUpload: React.FC = () => {
                 insurance_id: 0,
                 mileage: 0,
                 available_to: new Date(),
-                extras: ''
+                extras: '',
+                depo: ''
             });
             setFiles([]);
 
@@ -262,7 +286,7 @@ const CarUpload: React.FC = () => {
                                         min="1900"
                                         max={currentYear}
                                     />
-                                </div>  
+                                </div>
                             </div>
 
                             {/* CONDITION + TYPE + FUEL +  TRANSMISSION */}
@@ -333,7 +357,7 @@ const CarUpload: React.FC = () => {
                                 </div>
                             </div>
 
-                            
+
                             {/* SEAT + DOORS + HOUR + DAILY */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className='upload-data'>
@@ -367,7 +391,7 @@ const CarUpload: React.FC = () => {
                             {/* IMAGE */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className="upload-data">
-                                    <label htmlFor="car_picture">Képfeltöltés: <i>(ajánlott arányok: 16:9, fekvő képek)</i><span className='text-danger'>*</span></label>
+                                    <label htmlFor="car_picture">{t('imageUpload', 'CarUpload')}: <i>{t('recommendedSizes', 'CarUpload')}</i><span className='text-danger'>*</span></label>
                                     <input
                                         id="car_picture"
                                         type="file"
@@ -409,9 +433,9 @@ const CarUpload: React.FC = () => {
                             </div>
 
                             {/* PRICES */}
-                            <h2 className='mt-5'>Árazás</h2>
+                            <h2 className='mt-5'>{t('pricing', 'CarUpload')}</h2>
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
-                            <div className='upload-data'>
+                                <div className='upload-data'>
                                     <label htmlFor="basic_price">{t('basePrice', 'CarUpload')}<span className='text-danger'>*</span></label>
                                     <input
                                         id="basic_price"
@@ -447,9 +471,9 @@ const CarUpload: React.FC = () => {
                                     />
                                 </div>
                             </div>
-                            
+
                             {/* AVAILABLE TO */}
-                            <h2 className='mt-5'>Hely adatok</h2>
+                            <h2 className='mt-5'>{t('location', 'CarUpload')}</h2>
                             <div className="d-flex justify-content-center gap-3 upload-form mt-2">
                                 <div className='upload-data'>
                                     <label htmlFor="to">{t('available_to', 'CarUpload')}<span className='text-danger'>*</span></label>
@@ -465,20 +489,25 @@ const CarUpload: React.FC = () => {
                                 </div>
 
                                 <div className='upload-data'>
-                                    <label htmlFor="depo">Depó választása<span className='text-danger'>*</span></label>
+                                    <label htmlFor="depo">{t('chooseDepo', 'CarUpload')} <span className='text-danger'>*</span></label>
                                     <select
                                         id="depo"
                                         name="depo"
-                                        value={formData.transmission_type}
+                                        value={formData.depo}
                                         onChange={handleChange}
                                         className="form-select">
-                                        <option value="1">Depó I.</option>
-                                        <option value="2">Depó II.</option>
+                                        {
+                                            depoLocations.map((depo) => (
+                                                <option key={depo.location_id} value={depo.location_id}>
+                                                    {depo.location}
+                                                </option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
                             </div>
 
-                            <p className='mt-5'><b>A <span className='text-danger'>*</span> jelölésü mezők kitöltése kötelező!</b></p>
+                            <p className='mt-5'><b dangerouslySetInnerHTML={{ __html: t('fieldsRequired', 'CarUpload') }}></b></p>
 
                             <button
                                 type="submit"

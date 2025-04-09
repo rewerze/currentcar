@@ -46,7 +46,13 @@ const translations = {
   carUpload: "Car Upload",
   unknownError: "An unknown error occured!",
   available_to: "Until when?",
-  basePrice: "Base price"
+  basePrice: "Base price",
+  chooseDepo: "Choose a depot",
+  imageUpload: "Image Upload",
+  recommendedSizes: "(recommended sizes: 16:9, landscape images)",
+  pricing: "Pricing",
+  location: "Location data",
+  fieldsRequired: "The fields marked with <span className='text-danger'>*</span> are mandatory!"
 };
 
 export default translations;

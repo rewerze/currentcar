@@ -29,4 +29,5 @@ export interface CarInfo {
   available_to: Date;
   car_owner?: number;
   extras?: string;
+  depo?: string;
 }

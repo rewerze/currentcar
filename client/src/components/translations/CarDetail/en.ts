@@ -39,6 +39,7 @@ const translations = {
   "semi-automatic": "semi-automatic",
   CVT: "continuously variable",
   purchaseSuccess: "Purchase successful!",
+  paypalError: "An error occurred while paying.",
   reviews: "Reviews",
   loginRequired: "Login required to post a review!",
   writeReview: "Write your review here...",
@@ -58,7 +59,9 @@ const translations = {
   rented: "This car has already been rented!",
   purchaseError: "There was an error while purchasing. Please refresh the page, and try again!",
   availableUntil: "Available until",
-  cantRentOwn: "You can't rent you own car."
+  cantRentOwn: "You can't rent you own car.",
+  successfullyPurchased: "successfully rented for the following days:",
+  rentFailed: "<b>Failed to rent the car.</b> The following error happened:",
 };
 
 export default translations;

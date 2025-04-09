@@ -46,7 +46,13 @@ const translations = {
   carUpload: "Jármű feltöltés",
   unknownError: "Egy ismeretlen hiba történt!",
   available_to: "Meddig?",
-  basePrice: "Alap ár"
+  basePrice: "Alap ár",
+  chooseDepo: "Válassz depót",
+  imageUpload: "Kép feltöltése",
+  recommendedSizes: "(ajánlott arányok: 16:9, fekvő képek)",
+  pricing: 'Árazás',
+  location: 'Helyszín adatok',
+  fieldsRequired: "A <span className='text-danger'>*</span> jelölésü mezők kitöltése kötelező!"
 };
 
 export default translations;

@@ -27,6 +27,7 @@ import ProfilePicture from "./components/ProfilePicture.tsx";
 import { NotificationProvider } from "./contexts/NotificationContext.tsx";
 import Notification from "./components/Notification.tsx";
 import EditCar from "./components/EditCar.tsx";
+import Success from "./components/Status.tsx";
 
 const ToasterWrapper = () => {
   return (
@@ -78,6 +79,7 @@ createRoot(document.getElementById("root")!).render(
               {/*  ÖSSZES AUTÓ AMIT KIADUNK */}
               <Route path="/adatlap/edit/:id" element={<EditCar />} />{" "}
               <Route path="/adatlap/:id" element={<CarData />} />{" "}
+              <Route path="/status/:id" element={<Success />} />{" "}
               {/*  AUTÓK ADATLAPJAI */}
               <Route path="/feladas" element={<CarUpload />} />{" "}
               {/*  AUTÓ FELTÖLTÉS */}
