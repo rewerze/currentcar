@@ -45,7 +45,8 @@ const translations = {
   uploadOneImage: "Please upload an image!",
   carUpload: "Car Upload",
   unknownError: "An unknown error occured!",
-  available_to: "Until when?"
+  available_to: "Until when?",
+  basePrice: "Base price"
 };
 
 export default translations;

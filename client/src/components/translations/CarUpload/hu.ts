@@ -45,7 +45,8 @@ const translations = {
   uploadOneImage: "Kérlek tölts fel egy képet!",
   carUpload: "Jármű feltöltés",
   unknownError: "Egy ismeretlen hiba történt!",
-  available_to: "Meddig?"
+  available_to: "Meddig?",
+  basePrice: "Alap ár"
 };
 
 export default translations;

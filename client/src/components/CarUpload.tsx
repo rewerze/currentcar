@@ -204,6 +204,9 @@ const CarUpload: React.FC = () => {
                         <h1 className="text-center">{t('carUpload', 'CarUpload')}</h1>
 
                         <form onSubmit={handleSubmit}>
+
+                            {/* BRAND + MODEL */}
+                            <h2>Autó adatai</h2>
                             <div className="d-flex justify-content-center gap-3 upload-form">
                                 <div className='upload-data'>
                                     <label htmlFor="car_brand">{t('carBrand', 'CarUpload')}<span className='text-danger'>*</span></label>
@@ -231,22 +234,20 @@ const CarUpload: React.FC = () => {
                                 </div>
                             </div>
 
+
+                            {/* CAR YEAR + REG NUMBER */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className='upload-data'>
-                                    <label htmlFor="car_condition">{t('condition', 'CarUpload')}<span className='text-danger'>*</span></label>
-                                    <select
-                                        id="car_condition"
-                                        name="car_condition"
-                                        value={formData.car_condition}
+                                    <label htmlFor="car_regnumber">{t('regNumber', 'CarUpload')}<span className='text-danger'>*</span></label>
+                                    <input
+                                        id="car_regnumber"
+                                        type="text"
+                                        name="car_regnumber"
+                                        value={formData.car_regnumber}
                                         onChange={handleChange}
-                                        className="form-select w-75"
-                                    >
-                                        {carConditions.map((condition) => (
-                                            <option key={condition.value} value={condition.value}>
-                                                {t(condition.label, 'CarUpload')}
-                                            </option>
-                                        ))}
-                                    </select>
+                                        placeholder={t('regNumber', 'CarUpload')}
+                                        className="form-control"
+                                    />
                                 </div>
                                 <div className='upload-data'>
                                     <label htmlFor="car_year">{t('year', 'CarUpload')}<span className='text-danger'>*</span></label>
@@ -257,14 +258,31 @@ const CarUpload: React.FC = () => {
                                         value={formData.car_year}
                                         onChange={handleChange}
                                         placeholder={t('year', 'CarUpload')}
-                                        className="form-control w-25"
+                                        className="form-control"
                                         min="1900"
                                         max={currentYear}
                                     />
-                                </div>
+                                </div>  
                             </div>
 
+                            {/* CONDITION + TYPE + FUEL +  TRANSMISSION */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                                <div className='upload-data'>
+                                    <label htmlFor="car_condition">{t('condition', 'CarUpload')}<span className='text-danger'>*</span></label>
+                                    <select
+                                        id="car_condition"
+                                        name="car_condition"
+                                        value={formData.car_condition}
+                                        onChange={handleChange}
+                                        className="form-select"
+                                    >
+                                        {carConditions.map((condition) => (
+                                            <option key={condition.value} value={condition.value}>
+                                                {t(condition.label, 'CarUpload')}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                                 <div className='upload-data'>
                                     <label htmlFor="car_type">{t('carType', 'CarUpload')}<span className='text-danger'>*</span></label>
                                     <select
@@ -272,7 +290,7 @@ const CarUpload: React.FC = () => {
                                         name="car_type"
                                         value={formData.car_type}
                                         onChange={handleChange}
-                                        className="form-select w-25"
+                                        className="form-select"
                                     >
                                         {carTypes.map((type) => (
                                             <option key={type.value} value={type.value}>
@@ -304,7 +322,7 @@ const CarUpload: React.FC = () => {
                                         name="transmission_type"
                                         value={formData.transmission_type}
                                         onChange={handleChange}
-                                        className="form-select w-25"
+                                        className="form-select"
                                     >
                                         {transmissionTypes.map((type) => (
                                             <option key={type.value} value={type.value}>
@@ -313,20 +331,10 @@ const CarUpload: React.FC = () => {
                                         ))}
                                     </select>
                                 </div>
-                                <div className='upload-data'>
-                                    <label htmlFor="car_regnumber">{t('regNumber', 'CarUpload')}<span className='text-danger'>*</span></label>
-                                    <input
-                                        id="car_regnumber"
-                                        type="text"
-                                        name="car_regnumber"
-                                        value={formData.car_regnumber}
-                                        onChange={handleChange}
-                                        placeholder={t('regNumber', 'CarUpload')}
-                                        className="form-control w-25"
-                                    />
-                                </div>
                             </div>
 
+                            
+                            {/* SEAT + DOORS + HOUR + DAILY */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className='upload-data'>
                                     <label htmlFor="seats">{t('seats', 'CarUpload')}<span className='text-danger'>*</span></label>
@@ -337,7 +345,7 @@ const CarUpload: React.FC = () => {
                                         value={formData.seats}
                                         onChange={handleChange}
                                         placeholder={t('seats', 'CarUpload')}
-                                        className="form-control w-25"
+                                        className="form-control"
                                         min="1"
                                     />
                                 </div>
@@ -350,54 +358,13 @@ const CarUpload: React.FC = () => {
                                         value={formData.number_of_doors}
                                         onChange={handleChange}
                                         placeholder={t('doors', 'CarUpload')}
-                                        className="form-control w-25"
+                                        className="form-control"
                                         min="1"
                                     />
                                 </div>
-                                <div className='upload-data'>
-                                    <label htmlFor="price_per_hour">{t('pricePerHour', 'CarUpload')}<span className='text-danger'>*</span></label>
-                                    <input
-                                        id="price_per_hour"
-                                        type="number"
-                                        name="price_per_hour"
-                                        value={formData.price_per_hour}
-                                        onChange={handleChange}
-                                        placeholder={t('pricePerHour', 'CarUpload')}
-                                        className="form-control w-25"
-                                        min="0"
-                                    />
-                                </div>
-                                <div className='upload-data'>
-                                    <label htmlFor="price_per_day">{t('pricePerDay', 'CarUpload')}<span className='text-danger'>*</span></label>
-                                    <input
-                                        id="price_per_day"
-                                        type="number"
-                                        name="price_per_day"
-                                        value={formData.price_per_day}
-                                        onChange={handleChange}
-                                        placeholder={t('pricePerDay', 'CarUpload')}
-                                        className="form-control w-25"
-                                        min="0"
-                                    />
-                                </div>
                             </div>
 
-                            <div className="d-flex justify-content-center gap-3 upload-form mt-2">
-                                <div className='upload-data'>
-                                    <label htmlFor="to">{t('available_to', 'CarUpload')}<span className='text-danger'>*</span></label>
-                                    <input
-                                        id="to"
-                                        type="date"
-                                        name="available_to"
-                                        max="9999-12-31"
-                                        value={formData.available_to.toString()}
-                                        onChange={handleChange}
-                                        className="form-control"
-                                    />
-                                </div>
-                            </div>
-
-
+                            {/* IMAGE */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className="upload-data">
                                     <label htmlFor="car_picture">Képfeltöltés: <i>(ajánlott arányok: 16:9, fekvő képek)</i><span className='text-danger'>*</span></label>
@@ -425,6 +392,7 @@ const CarUpload: React.FC = () => {
                                 </div>
                             </div>
 
+                            {/* DESCRIPTION */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className="upload-data">
                                     <label htmlFor="car_description">{t('description', 'CarUpload')}</label>
@@ -435,16 +403,86 @@ const CarUpload: React.FC = () => {
                                         onChange={handleChange}
                                         placeholder={t('description', 'CarUpload')}
                                         className="form-control"
-                                        rows={10}
+                                        rows={4}
                                     ></textarea>
                                 </div>
                             </div>
 
-                            <p className='mt-3'><b>A <span className='text-danger'>*</span> jelölésü mezők kitöltése kötelező!</b></p>
+                            {/* PRICES */}
+                            <h2 className='mt-5'>Árazás</h2>
+                            <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
+                            <div className='upload-data'>
+                                    <label htmlFor="basic_price">{t('basePrice', 'CarUpload')}<span className='text-danger'>*</span></label>
+                                    <input
+                                        id="basic_price"
+                                        type="number"
+                                        name="basic_price"
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        min="0"
+                                    />
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="price_per_hour">{t('pricePerHour', 'CarUpload')}<span className='text-danger'>*</span></label>
+                                    <input
+                                        id="price_per_hour"
+                                        type="number"
+                                        name="price_per_hour"
+                                        value={formData.price_per_hour}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        min="0"
+                                    />
+                                </div>
+                                <div className='upload-data'>
+                                    <label htmlFor="price_per_day">{t('pricePerDay', 'CarUpload')}<span className='text-danger'>*</span></label>
+                                    <input
+                                        id="price_per_day"
+                                        type="number"
+                                        name="price_per_day"
+                                        value={formData.price_per_day}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        min="0"
+                                    />
+                                </div>
+                            </div>
+                            
+                            {/* AVAILABLE TO */}
+                            <h2 className='mt-5'>Hely adatok</h2>
+                            <div className="d-flex justify-content-center gap-3 upload-form mt-2">
+                                <div className='upload-data'>
+                                    <label htmlFor="to">{t('available_to', 'CarUpload')}<span className='text-danger'>*</span></label>
+                                    <input
+                                        id="to"
+                                        type="date"
+                                        name="available_to"
+                                        max="9999-12-31"
+                                        value={formData.available_to.toString()}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                    />
+                                </div>
+
+                                <div className='upload-data'>
+                                    <label htmlFor="depo">Depó választása<span className='text-danger'>*</span></label>
+                                    <select
+                                        id="depo"
+                                        name="depo"
+                                        value={formData.transmission_type}
+                                        onChange={handleChange}
+                                        className="form-select">
+                                        <option value="1">Depó I.</option>
+                                        <option value="2">Depó II.</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <p className='mt-5'><b>A <span className='text-danger'>*</span> jelölésü mezők kitöltése kötelező!</b></p>
 
                             <button
                                 type="submit"
-                                className="btn btn-success w-100 mt-5 p-2"
+                                className="btn btn-success w-100 p-2"
                                 disabled={isLoading}
                             >
                                 {isLoading ? t('uploading', 'CarUpload') : t('uploadCar', 'CarUpload')}
