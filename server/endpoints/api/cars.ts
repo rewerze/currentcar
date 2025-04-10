@@ -88,7 +88,6 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
   const requirements = [
     user.driver_license_expiry != null && user.driver_license_number != null,
     user.user_email != null && Number(user.u_phone_number) !== 0,
-    user.user_iban != null,
     user.born_at != null &&
       new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
   ];
@@ -98,7 +97,6 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
       user?.driver_license_expiry != null &&
         user?.driver_license_number != null,
       user?.user_email != null && Number(user?.u_phone_number) !== 0,
-      user?.user_iban != null,
       user?.born_at != null &&
         new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
     ].every(Boolean)

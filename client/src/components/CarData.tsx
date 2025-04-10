@@ -27,7 +27,6 @@ function CarData() {
   });
   const [loading2, setLoading] = useState<boolean>(false);
 
-  // All useEffect hooks in the same order every time
   useEffect(() => {
     if (!loading && user) {
       setIsLoggedIn(true);

@@ -49,7 +49,7 @@ import { getDepos } from "./endpoints/api/depos";
 import { getLocationById } from "./endpoints/api/location";
 import { getInvoice } from "./endpoints/api/invoice";
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(
