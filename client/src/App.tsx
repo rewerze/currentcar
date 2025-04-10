@@ -85,50 +85,51 @@ function App() {
     fetchPopularCars();
   }, []);
 
-  const calculatePostcodeDistance = (
-    zip_code1: number,
-    zip_code2: number
-  ): number => {
-    return Math.abs(zip_code1 - zip_code2);
-  };
+  function calculatePostcodeDistance(zipA: number, zipB: number): number {
+    const [a1, a2] = [Math.floor(zipA / 1000), Math.floor((zipA % 1000) / 100)];
+    const [b1, b2] = [Math.floor(zipB / 1000), Math.floor((zipB % 1000) / 100)];
+
+    const regionDistance = Math.abs(a1 - b1) * 10;
+    const innerDistance = Math.abs(a2 - b2);
+
+    return regionDistance + innerDistance;
+  }
 
   useEffect(() => {
-    if (searchTerm.trim() === "") {
+    const trimmedSearch = searchTerm.trim();
+
+    if (trimmedSearch === "") {
+      // 1. Nincs keresés: mindent mutasson
       setFilteredDepoLocations(depoLocations);
       setClosestDepo(null);
       return;
     }
 
-    const searchValue = searchTerm.trim();
-
-    const searchNumberValue = parseInt(searchValue, 10);
-    const isValidNumber = !isNaN(searchNumberValue);
+    const searchNumber = parseInt(trimmedSearch, 10);
+    const isValidZipCode = !isNaN(searchNumber);
 
     const exactMatches = depoLocations.filter((depo) => {
-      const zip_codeStr =
-        depo.zip_code !== undefined && depo.zip_code !== null
-          ? depo.zip_code.toString()
-          : "";
-
-      return zip_codeStr.includes(searchValue);
+      const zip = depo.zip_code?.toString() ?? "";
+      return zip === trimmedSearch;
     });
 
     if (exactMatches.length > 0) {
+      // 2. Pontos egyezés van
       setFilteredDepoLocations(exactMatches);
       setClosestDepo(null);
-    } else if (isValidNumber) {
-      let closest: SetStateAction<{
-        location_id: number;
-        location: string;
-        zip_code: number;
-      } | null> = null;
+      return;
+    }
+
+    if (isValidZipCode) {
+      // 3. Nincs pontos egyezés, de szám: keressük a legközelebbit
+      let closest: (typeof depoLocations)[0] | null = null;
       let minDistance = Number.MAX_SAFE_INTEGER;
 
       depoLocations.forEach((depo) => {
-        if (depo.zip_code !== undefined && depo.zip_code !== null) {
+        if (depo.zip_code != null) {
           const distance = calculatePostcodeDistance(
             depo.zip_code,
-            searchNumberValue
+            searchNumber
           );
           if (distance < minDistance) {
             minDistance = distance;
@@ -142,25 +143,21 @@ function App() {
         setFilteredDepoLocations([
           closest,
           ...depoLocations.filter(
-            (d) =>
-              d.location_id !==
-              (
-                closest as {
-                  location_id: number;
-                  location: string;
-                  zip_code: number;
-                }
-              )?.location_id
+            (d) => d.location_id !== closest?.location_id
           ),
         ]);
       } else {
-        setFilteredDepoLocations([]);
+        // nincs semmi értelmes
         setClosestDepo(null);
+        setFilteredDepoLocations([]);
       }
-    } else {
-      setFilteredDepoLocations([]);
-      setClosestDepo(null);
+
+      return;
     }
+
+    // 4. Nem szám: fallback → mindent mutat
+    setFilteredDepoLocations(depoLocations);
+    setClosestDepo(null);
   }, [searchTerm, depoLocations]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
