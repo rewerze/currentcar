@@ -18,7 +18,7 @@ import {
   rentCar,
 } from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
-import { carHandler, getCars, getRentedCars } from "./endpoints/api/getCar";
+import { carHandler, getCars, getRentedCars, getRentHistory } from "./endpoints/api/getCar";
 import { upload } from "./middlewares/upload";
 import { validateCarUpload } from "./middlewares/validators";
 import cron from "node-cron";
@@ -41,6 +41,8 @@ import { RowDataPacket } from "mysql2";
 import { getMostPopularCars, getRandomReviews } from "./endpoints/api/mainPage";
 import { captureOrder, CreatePayment } from "./endpoints/api/payment";
 import { getDepos } from "./endpoints/api/depos";
+import { getLocationById } from "./endpoints/api/location";
+import { getInvoice } from "./endpoints/api/invoice";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -148,6 +150,7 @@ app.get("/api/randomReviews", getRandomReviews);
 app.get("/api/popularCars", getMostPopularCars);
 
 app.get("/api/getDepos", verifyAuthTokenMiddleware, getDepos);
+app.get("/api/getLocationById", verifyAuthTokenMiddleware, getLocationById);
 
 app.get("/api/getCarImage", getCarImage);
 
@@ -156,9 +159,12 @@ app.post("/api/comments", verifyAuthTokenMiddleware, postComment);
 
 app.post("/api/rent", verifyAuthTokenMiddleware, rentCar);
 
+app.get('/api/invoice/:orderId', verifyAuthTokenMiddleware, getInvoice);
+
 app.post("/api/deleteCar", verifyAuthTokenMiddleware, deleteCar);
 app.post("/api/deleteProfile", verifyAuthTokenMiddleware, deleteProfile);
 app.get("/api/getRentedCars", verifyAuthTokenMiddleware, getRentedCars);
+app.get("/api/getRentHistory", verifyAuthTokenMiddleware, getRentHistory);
 
 app.post("/api/paypal/create-order", verifyAuthTokenMiddleware, CreatePayment);
 app.post("/api/paypal/capture-order", verifyAuthTokenMiddleware, captureOrder);

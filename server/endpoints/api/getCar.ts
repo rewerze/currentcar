@@ -5,6 +5,7 @@ import db from "../../db/connection";
 import mysql, { RowDataPacket } from "mysql2";
 import { AuthenticatedRequest, User } from "../../interfaces/User";
 import { Car } from "../../interfaces/Car";
+import { getLocationByParam } from "./location";
 
 export const carHandler = async (
   req: Request,
@@ -60,6 +61,10 @@ export const carHandler = async (
       rows["car_owner"] = (availableRows as RowDataPacket).user_id;
       rows["images"] = imageUrls as unknown as string;
     }
+
+    const locationName = await getLocationByParam(Number(rows["location_id"])?.toString());
+
+    rows["location_id"] = locationName ? (locationName as unknown as { location_id: number, location: string }).location : "Location not found";
     res.json(rows);
   } catch (error) {
     console.error("Error fetching cars:", error);
@@ -136,5 +141,47 @@ export const getRentedCars = async (
   } catch (error) {
     console.error("Error fetching rented cars:", error);
     res.status(500).json({ error: "Failed to fetch rented cars" });
+  }
+};
+
+export const getRentHistory = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const userId = (req as AuthenticatedRequest).user.user_id;
+
+    if (!userId) {
+      res.status(401).json({ error: "User not authenticated" });
+      return;
+    }
+
+    const rentHistory = await db.query(
+      `
+      SELECT o.orders_id, o.car_id, c.car_brand, c.car_model, 
+             o.start_date, o.end_date, o.rental_status, o.payment_status,
+             COALESCE(po.amount, i.payment_amount) as amount
+      FROM orders o
+      INNER JOIN car c ON o.car_id = c.car_id
+      LEFT JOIN payment_orders po ON o.car_id = po.car_id AND o.user_id = po.user_id
+      LEFT JOIN invoice i ON o.orders_id = i.orders_id
+      WHERE o.user_id = ?
+      ORDER BY o.start_date DESC
+      `,
+      [userId]
+    );
+
+    if (Array.isArray(rentHistory)) {
+      const formattedHistory = rentHistory.map((rental) => {
+        return typeof rental === "object" && rental !== null ? { ...rental } : {};
+      });
+
+      res.status(200).json(formattedHistory);
+    } else {
+      res.status(200).json([]);
+    }
+  } catch (error) {
+    console.error("Error fetching rent history:", error);
+    res.status(500).json({ error: "Failed to fetch rent history" });
   }
 };

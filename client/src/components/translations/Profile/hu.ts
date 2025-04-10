@@ -22,6 +22,9 @@ const translations = {
   noUploadedCars: "Nincsenek feltöltött autóid.",
   profileDeleted: "A profilod törölve lett.",
   carDeleted: "Az autód törölve lett.",
+  noRentHistory: "Nincsen bérlési előzményed.",
+  rentHistory: "Autóbérlési előzmények",
+  rentalDates: "Bérlés időpontja",
 };
 
 export default translations;

@@ -71,7 +71,8 @@ const CarUpload: React.FC = () => {
         mileage: 0,
         available_to: new Date(),
         extras: '',
-        depo: ''
+        depo: 'Andrássy út 66, Budapest, Hungary',
+        location_id: '1'
     });
 
     const [files, setFiles] = useState<File[]>([]);
@@ -130,7 +131,7 @@ const CarUpload: React.FC = () => {
 
         const requiredFields: (keyof CarInfo)[] = ['car_brand', 'car_model', 'car_condition', 'car_year', 'car_type',
             'fuel_type', 'transmission_type', 'car_regnumber', 'seats',
-            'number_of_doors', 'price_per_hour', 'price_per_day', 'car_description', 'available_to', 'depo'];
+            'number_of_doors', 'price_per_hour', 'price_per_day', 'car_description', 'available_to', 'depo', 'car_price'];
 
         const emptyFields = requiredFields.filter(field => !formData[field]);
 
@@ -190,7 +191,8 @@ const CarUpload: React.FC = () => {
                 mileage: 0,
                 available_to: new Date(),
                 extras: '',
-                depo: ''
+                depo: 'Andrássy út 66, Budapest, Hungary',
+                location_id: '1'
             });
             setFiles([]);
 
@@ -442,11 +444,12 @@ const CarUpload: React.FC = () => {
                             <PriceTableModal isOpen={isPriceModalOpen} onClose={() => setPriceModalOpen(false)} />
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className='upload-data'>
-                                    <label htmlFor="basic_price">{t('basePrice', 'CarUpload')}<span className='text-danger'>*</span></label>
+                                    <label htmlFor="car_price">{t('basePrice', 'CarUpload')}<span className='text-danger'>*</span></label>
                                     <input
-                                        id="basic_price"
+                                        id="car_price"
                                         type="number"
-                                        name="basic_price"
+                                        name="car_price"
+                                        value={formData.car_price}
                                         onChange={handleChange}
                                         className="form-control"
                                         min="0"
@@ -495,11 +498,11 @@ const CarUpload: React.FC = () => {
                                 </div>
 
                                 <div className='upload-data'>
-                                    <label htmlFor="depo">{t('chooseDepo', 'CarUpload')} <span className='text-danger'>*</span></label>
+                                    <label htmlFor="location_id">{t('chooseDepo', 'CarUpload')} <span className='text-danger'>*</span></label>
                                     <select
-                                        id="depo"
-                                        name="depo"
-                                        value={formData.depo}
+                                        id="location_id"
+                                        name="location_id"
+                                        value={formData.location_id}
                                         onChange={handleChange}
                                         className="form-select">
                                         {

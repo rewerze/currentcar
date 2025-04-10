@@ -16,6 +16,7 @@ import { CarInfo } from "./interfaces/Car";
 import axios from "axios";
 import { buildApiUrl } from "@/lib/utils";
 import { toast } from "sonner";
+import { RentHistory } from "./interfaces/Orders";
 
 function Profile() {
   const { user, loading } = useUser();
@@ -25,7 +26,23 @@ function Profile() {
   const navigate = useNavigate();
   const { notifications } = useNotifications();
   const [notificationCount, setNotificationCount] = useState<number>(0);
-  const [activeTab, setActiveTab] = useState<'rented' | 'uploaded'>('uploaded');
+  const [rentHistory, setRentHistory] = useState<RentHistory[]>([]);
+  const [activeTab, setActiveTab] = useState<'rented' | 'uploaded' | 'history'>('uploaded');
+
+  useEffect(() => {
+    const fetchRentHistory = async () => {
+      try {
+        const response = await axios.get(buildApiUrl("/getRentHistory"), {
+          withCredentials: true,
+        });
+        setRentHistory(response.data);
+      } catch (err) {
+        console.error("Failed to fetch rent history", err);
+      }
+    };
+
+    fetchRentHistory();
+  }, []);
 
   const handleDelete = () => {
     axios(buildApiUrl("/deleteProfile"), {
@@ -261,6 +278,12 @@ function Profile() {
               >
                 {t('uploadedCars', 'Profile')}
               </button>
+              <button
+                className={activeTab === 'history' ? "profile-btn-active" : ""}
+                onClick={() => setActiveTab('history')}
+              >
+                {t('rentHistory', 'Profile')}
+              </button>
             </div>
 
             {/* AUTÓK */}
@@ -306,41 +329,86 @@ function Profile() {
                       <p>{t('noUploadedCars', 'Profile') || "You haven't uploaded any cars yet."}</p>
                     </div>
                   )
-                ) : (
-                  rentedCars.length > 0 ? (
-                    rentedCars.map((car, index) => (
-                      <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
-                        <div className="profile-car-card-body bg-dark">
-                          <img
-                            src={
-                              car.car_id
-                                ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
-                                : templateImage
-                            }
-                            onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
-                            className="profile-car-img"
-                          />
-                          <h3 className="text-center">
-                            {car.car_brand} {car.car_model}
-                          </h3>
-                          <p>{car.car_description}</p>
-                          <div className="profile-car-btn">
-                            <button
-                              className="btn badge bg-primary w-100"
-                              onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/${car.car_id}`) }}
-                            >
-                              {t('viewDetails', 'Profile') || "View Details"}
-                            </button>
+                )
+                  : activeTab === 'history' ? (
+                    rentHistory.length > 0 ? (
+                      <div className="profile-car">
+                        {rentHistory.map((rental, index) => (
+                          <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${rental.car_id}`)}>
+                            <div className="profile-car-card-body bg-dark">
+                              <img
+                                src={
+                                  rental.car_id
+                                    ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${rental.car_id}`
+                                    : templateImage
+                                }
+                                onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
+                                className="profile-car-img"
+                              />
+                              <h3 className="text-center">
+                                {rental.car_brand} {rental.car_model}
+                              </h3>
+                              <p>
+                                <b>{t('rentalDates', 'Profile')}:</b> {new Date(rental.start_date).toLocaleDateString()} - {new Date(rental.end_date).toLocaleDateString()}
+                              </p>
+                              <p>
+                                <b>{t('status', 'Profile')}:</b> <span className="badge bg-info">{rental.rental_status}</span>
+                              </p>
+                              <p>
+                                <b>{t('payment', 'Profile')}:</b> <span className={`badge ${rental.payment_status === 'paid' ? 'bg-success' : 'bg-warning'}`}>{rental.payment_status}</span>
+                              </p>
+                              <div className="profile-car-btn">
+                                <button
+                                  className="btn badge bg-primary w-100"
+                                  onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/${rental.car_id}`) }}
+                                >
+                                  {t('viewDetails', 'Profile') || "View Details"}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center p-4">
+                        <p>{t('noRentHistory', 'Profile') || "You don't have any rental history yet."}</p>
+                      </div>
+                    )
+                  ) : (
+                    rentedCars.length > 0 ? (
+                      rentedCars.map((car, index) => (
+                        <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
+                          <div className="profile-car-card-body bg-dark">
+                            <img
+                              src={
+                                car.car_id
+                                  ? `${import.meta.env.PROD ? "/api" : "http://localhost:3000/api"}/getCarImage?car_id=${car.car_id}`
+                                  : templateImage
+                              }
+                              onError={(e) => { (e.target as HTMLImageElement).src = templateImage }}
+                              className="profile-car-img"
+                            />
+                            <h3 className="text-center">
+                              {car.car_brand} {car.car_model}
+                            </h3>
+                            <p>{car.car_description}</p>
+                            <div className="profile-car-btn">
+                              <button
+                                className="btn badge bg-primary w-100"
+                                onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/${car.car_id}`) }}
+                              >
+                                {t('viewDetails', 'Profile') || "View Details"}
+                              </button>
+                            </div>
                           </div>
                         </div>
+                      ))
+                    ) : (
+                      <div className="text-center p-4">
+                        <p>{t('noRentedCars', 'Profile') || "You haven't rented any cars yet."}</p>
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-center p-4">
-                      <p>{t('noRentedCars', 'Profile') || "You haven't rented any cars yet."}</p>
-                    </div>
-                  )
-                )}
+                    )
+                  )}
               </div>
             </div>
           </div>

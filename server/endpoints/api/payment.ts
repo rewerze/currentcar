@@ -262,7 +262,7 @@ export const captureOrder = async (
         "INSERT INTO notifications (user_id, message, status, created_at) VALUES (?, ?, ?, NOW())",
         [
           (req as AuthenticatedRequest).user.user_id,
-          `Your car rental for ${new Date(order.start_date).toLocaleDateString()} to ${new Date(order.end_date).toLocaleDateString()} has been confirmed.`,
+          `Your car rental for ${new Date(order.start_date).toLocaleDateString()} to ${new Date(order.end_date).toLocaleDateString()} has been confirmed. Invoice can be accessed at ${process.env.FRONTEND_URL}/invoice/${orderId}`,
           "unread",
         ]
       );

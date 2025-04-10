@@ -22,5 +22,8 @@ const translations = {
   noUploadedCars: "You have no uploaded cars.",
   profileDeleted: "Your profile has been deleted.",
   carDeleted: "Your car has been deleted.",
+  noRentHistory: "You have no rental history.",
+  rentHistory: "Rental History",
+  rentalDates: "Rental Dates",
 };
 export default translations;

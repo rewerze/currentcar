@@ -80,7 +80,6 @@ function Success() {
                     if (response.data.success) {
                         setStartDate(response.data.startDate);
                         setEndDate(response.data.endDate);
-                        toast.success(t("purchaseSuccess", "CarDetail"));
                         window.history.replaceState(
                             {},
                             document.title,

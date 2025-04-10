@@ -141,13 +141,6 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const [locationResult] = await connection.query<RowDataPacket[]>(
-      "INSERT INTO location (pickup_location, dropoff_location, longitude, latitude) VALUES (?, ?, ?, ?)",
-      [pickup_location, pickup_location, 0, 0]
-    );
-
-    const locationId = (locationResult as RowDataPacket).insertId;
-
     const [orderResult] = await connection.query(
       `INSERT INTO orders (
         user_id, 
@@ -160,7 +153,7 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
         discount_code,
         extended_rental
       ) VALUES (?, ?, ?, ?, 'pending', ?, 'pending', ?, false)`,
-      [userId, car_id, start_date, end_date, locationId, discount_code]
+      [userId, car_id, start_date, end_date, (carRows[0] as unknown as Car).location_id, discount_code]
     );
 
     const orderId = (orderResult as RowDataPacket).insertId;
@@ -226,7 +219,7 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
       ) VALUES (?, ?, 'unread', NOW())`,
       [
         userId,
-        `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked.`,
+        `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked. Invoice can be accessed at ${process.env.FRONTEND_URL}/invoice/${orderId}`,
       ]
     );
 

@@ -30,4 +30,5 @@ export interface CarInfo {
   car_owner?: number;
   extras?: string;
   depo?: string;
+  location_id: string;
 }

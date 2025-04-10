@@ -5,6 +5,7 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 import db from "../../db/connection";
 import { Car } from "../../interfaces/Car";
 import { AuthenticatedRequest } from "../../interfaces/User";
+import { getLocationByName } from "./location";
 
 export const uploadCar = async (
   req: Request,
@@ -37,9 +38,11 @@ export const uploadCar = async (
       seats,
       number_of_doors: doors,
       price_per_hour: pricePerHour,
+      car_price: carPrice,
       price_per_day: pricePerDay,
       car_description: description,
       available_to: available_to,
+      location_id: locationId,
     } = req.body as Car;
 
     console.log({
@@ -57,6 +60,8 @@ export const uploadCar = async (
       pricePerDay,
       description,
       available_to,
+      locationId,
+      carPrice
     });
 
     const pool = db.pool;
@@ -76,14 +81,7 @@ export const uploadCar = async (
 
       const insuranceId = insuranceRows[0].insurance_id;
 
-      const availableToDate = new Date(available_to);
       const now = new Date();
-
-      const diffTime = availableToDate.getTime() - now.getTime();
-
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      const carPrice = pricePerDay * diffDays;
 
       const [carResult] = await connection.query<ResultSetHeader>(
         `INSERT INTO car (
@@ -102,8 +100,9 @@ export const uploadCar = async (
               car_description,
               insurance_id,
               car_price,
-              mileage
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              mileage,
+              location_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           brand,
           model,
@@ -121,6 +120,7 @@ export const uploadCar = async (
           insuranceId,
           carPrice.toString(),
           0,
+          locationId ? locationId : 1,
         ]
       );
 

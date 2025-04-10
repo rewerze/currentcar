@@ -28,6 +28,7 @@ import { NotificationProvider } from "./contexts/NotificationContext.tsx";
 import Notification from "./components/Notification.tsx";
 import EditCar from "./components/EditCar.tsx";
 import Success from "./components/Status.tsx";
+import Invoice from "./components/Invoice.tsx";
 
 const ToasterWrapper = () => {
   return (
@@ -99,6 +100,10 @@ createRoot(document.getElementById("root")!).render(
               <Route
                 path="/profil/profilkep"
                 element={<ProfilePicture />}
+              />{" "}
+              <Route
+                path="/invoice/:id"
+                element={<Invoice />}
               />{" "}
               {/*  PROFILKÉP MÓDOSÍTÁS */}
               <Route path="*" element={<NotFound />} />

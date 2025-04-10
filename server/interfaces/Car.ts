@@ -4,14 +4,14 @@ export interface Car {
   car_active: boolean;
   car_description: string;
   car_type:
-    | "sedan"
-    | "suv"
-    | "hatchback"
-    | "convertible"
-    | "coupe"
-    | "wagon"
-    | "pickup"
-    | "minivan";
+  | "sedan"
+  | "suv"
+  | "hatchback"
+  | "convertible"
+  | "coupe"
+  | "wagon"
+  | "pickup"
+  | "minivan";
   seats: number;
   number_of_doors: number;
   insurance_id: number;
@@ -28,4 +28,5 @@ export interface Car {
   available_to: string;
   car_owner: number;
   images: string;
+  location_id: string;
 }

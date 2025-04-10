@@ -1,4 +1,4 @@
-import { useEffect, useState, FormEvent, useRef } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import carImage from "../assets/img/nepszeru_auto.png";
 import { useParams } from "react-router-dom";
 import { CarInfo } from "./interfaces/Car";
@@ -94,22 +94,6 @@ function CarData() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  function calculateTotalAmount(fromDate: string, toDate: string): number {
-    if (!car) return 0;
-
-    const startDate = new Date(fromDate);
-    const endDate = new Date(toDate);
-    const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays < 1) {
-      const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
-      return diffHours * car.price_per_hour;
-    }
-
-    return diffDays * car.price_per_day;
-  }
 
   async function onCarPurchase(
     fromDate: string,
@@ -419,7 +403,7 @@ function CarData() {
                   </tr>
                   <tr>
                     <th>Itt vehető át:</th>
-                    <td>cím google maps-es link-kel</td>
+                    <td>{car.location_id}</td>
                   </tr>
                 </tbody>
               </table>
