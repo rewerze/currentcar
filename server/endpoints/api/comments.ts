@@ -16,7 +16,7 @@ export const getComments = async (
 
     const comments = await db.query(
       `SELECT c.comment_id, c.comment_message, c.comment_star, c.rating_category, c.comment_date, 
-                    u.user_name, u.profile_picture
+                    u.user_name, u.profile_picture, c.comment_flagged
              FROM comment c
              JOIN user u ON c.user_id = u.user_id
              WHERE c.car_id = ? 

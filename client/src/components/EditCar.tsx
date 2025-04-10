@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { CarInfo } from "./interfaces/Car";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { format } from 'react-string-format';
+import { format } from "react-string-format";
 import axios from "axios";
 
 function EditCar() {
@@ -36,12 +36,12 @@ function EditCar() {
     transmission_type: "",
     car_brand: "",
     available_until: "",
-    extras: ""
+    extras: "",
   });
 
   useEffect(() => {
     if (!user && !loading) {
-      navigate('/')
+      navigate("/");
     }
   }, [user, loading, navigate]);
 
@@ -65,7 +65,6 @@ function EditCar() {
         const data = await response.json();
         setCarInfo(data);
 
-        // Populate form data from fetched car data
         setFormData({
           car_id: data.car_id || "",
           car_price: data.car_price || "",
@@ -85,7 +84,7 @@ function EditCar() {
           transmission_type: data.transmission_type || "",
           car_brand: data.car_brand || "",
           available_until: data.available_until || "",
-          extras: data.extras || ""
+          extras: data.extras || "",
         });
       } catch (error) {
         console.error(error);
@@ -98,30 +97,28 @@ function EditCar() {
     }
   }, [id, t]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value, type } = e.target as HTMLInputElement;
 
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+      [name]:
+        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic validation
     if (!formData.price_per_hour || !formData.price_per_day) {
-      toast.error(t("priceRequired", "EditCar") || "Hourly and daily prices are required");
+      toast.error(
+        t("priceRequired", "EditCar") || "Hourly and daily prices are required"
+      );
       return;
     }
 
-    if (!formData.car_description || formData.car_description.length < 10) {
-      toast.error(t("descriptionTooShort", "EditCar") || "Description is too short");
-      return;
-    }
-
-    // Create the payload with only the fields we want to update
     const updatePayload = {
       car_id: formData.car_id,
       car_description: formData.car_description,
@@ -139,15 +136,21 @@ function EditCar() {
         },
       });
 
-      toast.success(t("carUpdatedSuccess", "EditCar") || "Car updated successfully");
+      toast.success(
+        t("carUpdatedSuccess", "EditCar") || "Car updated successfully"
+      );
       navigate("/profil");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const errorMessage =
-          error.response?.data?.error || t("failedToUpdateCar", "EditCar") || "Failed to update car";
+          error.response?.data?.error ||
+          t("failedToUpdateCar", "EditCar") ||
+          "Failed to update car";
         toast.error(errorMessage);
       } else {
-        toast.error(t("unexpectedError", "EditCar") || "An unexpected error occurred");
+        toast.error(
+          t("unexpectedError", "EditCar") || "An unexpected error occurred"
+        );
       }
 
       console.error("Car update error:", error);
@@ -163,12 +166,13 @@ function EditCar() {
       <main className="nav-gap">
         <form onSubmit={handleSubmit} className="form">
           <div className="form-box bg-dark">
-            <h1>{format(t('edit_car', 'EditCar'), car?.car_brand, car?.car_model)}</h1>
+            <h1>
+              {format(t("edit_car", "EditCar"), car?.car_brand, car?.car_model)}
+            </h1>
 
             {/* Árak */}
             <div className="car-edit">
-              
-            <div className="w-100">
+              <div className="w-100">
                 <label htmlFor="base_price" className="form-label">
                   Napi ár
                 </label>
@@ -185,14 +189,14 @@ function EditCar() {
 
               <div className="w-100">
                 <label htmlFor="price_per_hour" className="form-label">
-                  {t('hourly_price', 'EditCar')}
+                  {t("hourly_price", "EditCar")}
                 </label>
                 <input
                   type="number"
                   name="price_per_hour"
                   id="price_per_hour"
                   className="form-control"
-                  placeholder={t('hourly_price', 'EditCar')}
+                  placeholder={t("hourly_price", "EditCar")}
                   value={formData.price_per_hour}
                   onChange={handleChange}
                 />
@@ -200,14 +204,14 @@ function EditCar() {
 
               <div className="w-100">
                 <label htmlFor="price_per_day" className="form-label">
-                  {t('daily_price', 'EditCar')}
+                  {t("daily_price", "EditCar")}
                 </label>
                 <input
                   type="number"
                   name="price_per_day"
                   id="price_per_day"
                   className="form-control"
-                  placeholder={t('daily_price', 'EditCar')}
+                  placeholder={t("daily_price", "EditCar")}
                   value={formData.price_per_day}
                   onChange={handleChange}
                 />
@@ -218,7 +222,7 @@ function EditCar() {
             <div className="car-edit mt-1">
               <div className="w-100">
                 <label htmlFor="available_until" className="form-label">
-                  {t('until_when', 'EditCar')}
+                  {t("until_when", "EditCar")}
                 </label>
                 <input
                   type="date"
@@ -235,7 +239,9 @@ function EditCar() {
             {/* LEÍRÁS */}
             <div className="car-edit mt-1">
               <div className="w-100">
-                <label htmlFor="car_description">{t('description', 'EditCar')}</label>
+                <label htmlFor="car_description">
+                  {t("description", "EditCar")}
+                </label>
                 <textarea
                   name="car_description"
                   id="car_description"
@@ -253,13 +259,17 @@ function EditCar() {
                 <span>
                   <img src={save_icon} className="icon icon-small" alt="Save" />
                 </span>
-                <span>{t('save_data', 'EditCar')}</span>
+                <span>{t("save_data", "EditCar")}</span>
               </button>
               <a href="/profil" className="btn btn-danger w-50">
                 <span>
-                  <img src={cancel_icon} className="icon icon-small" alt="Cancel" />
+                  <img
+                    src={cancel_icon}
+                    className="icon icon-small"
+                    alt="Cancel"
+                  />
                 </span>
-                <span>{t('cancel', 'EditCar')}</span>
+                <span>{t("cancel", "EditCar")}</span>
               </a>
             </div>
           </div>

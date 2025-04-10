@@ -6,4 +6,5 @@ export interface Comment {
   comment_date: string;
   rating_category: string;
   profile_picture: string;
+  comment_flagged: 1 | 0;
 }

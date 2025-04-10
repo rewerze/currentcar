@@ -18,8 +18,13 @@ import {
   rentCar,
 } from "./endpoints/api/cars";
 import { carsSearchHandler } from "./endpoints/api/carsSearch";
-import { carHandler, getCars, getRentedCars, getRentHistory } from "./endpoints/api/getCar";
-import { upload } from "./middlewares/upload";
+import {
+  carHandler,
+  getCars,
+  getRentedCars,
+  getRentHistory,
+} from "./endpoints/api/getCar";
+import { multerErrorHandler, upload } from "./middlewares/upload";
 import { validateCarUpload } from "./middlewares/validators";
 import cron from "node-cron";
 import morgan from "morgan";
@@ -149,7 +154,7 @@ app.post(
 app.get("/api/randomReviews", getRandomReviews);
 app.get("/api/popularCars", getMostPopularCars);
 
-app.get("/api/getDepos", verifyAuthTokenMiddleware, getDepos);
+app.get("/api/getDepos", getDepos);
 app.get("/api/getLocationById", verifyAuthTokenMiddleware, getLocationById);
 
 app.get("/api/getCarImage", getCarImage);
@@ -159,7 +164,7 @@ app.post("/api/comments", verifyAuthTokenMiddleware, postComment);
 
 app.post("/api/rent", verifyAuthTokenMiddleware, rentCar);
 
-app.get('/api/invoice/:orderId', verifyAuthTokenMiddleware, getInvoice);
+app.get("/api/invoice/:orderId", verifyAuthTokenMiddleware, getInvoice);
 
 app.post("/api/deleteCar", verifyAuthTokenMiddleware, deleteCar);
 app.post("/api/deleteProfile", verifyAuthTokenMiddleware, deleteProfile);
@@ -172,6 +177,8 @@ app.post("/api/paypal/capture-order", verifyAuthTokenMiddleware, captureOrder);
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });
 });
+
+app.use(multerErrorHandler);
 
 cron.schedule("*/30 * * * *", async () => {
   console.log("Checking for expired cars...");
@@ -190,7 +197,8 @@ export const updateExpiredOrders = async () => {
           )
       `);
     console.log(
-      `Reactivated ${(result as RowDataPacket).affectedRows
+      `Reactivated ${
+        (result as RowDataPacket).affectedRows
       } cars after rental expiry.`
     );
   } catch (error) {
@@ -209,7 +217,8 @@ export const deactivateExpiredAvailability = async () => {
           )
       `);
     console.log(
-      `Deactivated ${(result as RowDataPacket).affectedRows
+      `Deactivated ${
+        (result as RowDataPacket).affectedRows
       } cars due to availability expiration.`
     );
   } catch (error) {

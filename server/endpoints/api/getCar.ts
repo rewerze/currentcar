@@ -62,9 +62,14 @@ export const carHandler = async (
       rows["images"] = imageUrls as unknown as string;
     }
 
-    const locationName = await getLocationByParam(Number(rows["location_id"])?.toString());
+    const locationName = await getLocationByParam(
+      Number(rows["location_id"])?.toString()
+    );
 
-    rows["location_id"] = locationName ? (locationName as unknown as { location_id: number, location: string }).location : "Location not found";
+    rows["location_id"] = locationName
+      ? (locationName as unknown as { location_id: number; location: string })
+          .location
+      : "Location not found";
     res.json(rows);
   } catch (error) {
     console.error("Error fetching cars:", error);
@@ -124,6 +129,7 @@ export const getRentedCars = async (
       FROM car
       INNER JOIN orders ON car.car_id = orders.car_id
       WHERE orders.user_id = ?
+      AND orders.end_date > CURRENT_DATE
       ORDER BY orders.start_date DESC
     `,
       [userId]
@@ -173,7 +179,9 @@ export const getRentHistory = async (
 
     if (Array.isArray(rentHistory)) {
       const formattedHistory = rentHistory.map((rental) => {
-        return typeof rental === "object" && rental !== null ? { ...rental } : {};
+        return typeof rental === "object" && rental !== null
+          ? { ...rental }
+          : {};
       });
 
       res.status(200).json(formattedHistory);

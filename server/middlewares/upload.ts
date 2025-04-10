@@ -1,7 +1,7 @@
 import multer from "multer";
 import fs from "fs";
 import path from "path";
-import { Request } from "express";
+import { NextFunction, Request, Response } from "express";
 
 const uploadDir = "uploads/cars";
 
@@ -43,3 +43,31 @@ export const upload = multer({
     files: 10,
   },
 });
+
+import { ErrorRequestHandler } from "express";
+
+export const multerErrorHandler: ErrorRequestHandler = (
+  err,
+  req,
+  res,
+  next
+) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_FILE_SIZE") {
+      res.status(400).json({ error: "File is too large" });
+      return;
+    }
+    if (err.code === "LIMIT_FILE_COUNT") {
+      res.status(400).json({ error: "Too many files" });
+      return;
+    }
+
+    res.status(400).json({ error: err.message });
+    return;
+  } else if (err) {
+    res.status(400).json({ error: err.message });
+    return;
+  }
+
+  next();
+};

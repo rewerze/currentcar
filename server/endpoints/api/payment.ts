@@ -40,7 +40,11 @@ async function generateAccessToken(): Promise<string> {
   }
 }
 
-function calculateTotalAmount(car: Car, fromDate: string, toDate: string): number {
+function calculateTotalAmount(
+  car: Car,
+  fromDate: string,
+  toDate: string
+): number {
   if (!car) return 0;
 
   const startDate = new Date(fromDate);
@@ -63,6 +67,33 @@ export const CreatePayment = async (
   try {
     if (!(req as AuthenticatedRequest).user) {
       res.status(401).json({ error: "User not authenticated" });
+      return;
+    }
+
+    const user = (req as AuthenticatedRequest).user;
+
+    const requirements = [
+      user.driver_license_expiry != null && user.driver_license_number != null,
+      user.user_email != null && Number(user.u_phone_number) !== 0,
+      user.user_iban != null,
+      user.born_at != null &&
+        new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
+    ];
+
+    if (
+      ![
+        user?.driver_license_expiry != null &&
+          user?.driver_license_number != null,
+        user?.user_email != null && Number(user?.u_phone_number) !== 0,
+        user?.user_iban != null,
+        user?.born_at != null &&
+          new Date().getFullYear() - new Date(user?.born_at).getFullYear() >=
+            17,
+      ].every(Boolean)
+    ) {
+      res.status(400).json({
+        error: `User profile is incomplete or invalid for car rental`,
+      });
       return;
     }
 
@@ -262,13 +293,21 @@ export const captureOrder = async (
         "INSERT INTO notifications (user_id, message, status, created_at) VALUES (?, ?, ?, NOW())",
         [
           (req as AuthenticatedRequest).user.user_id,
-          `Your car rental for ${new Date(order.start_date).toLocaleDateString()} to ${new Date(order.end_date).toLocaleDateString()} has been confirmed. Invoice can be accessed at ${process.env.FRONTEND_URL}/invoice/${orderId}`,
+          `Your car rental for ${new Date(
+            order.start_date
+          ).toLocaleDateString()} to ${new Date(
+            order.end_date
+          ).toLocaleDateString()} has been confirmed. Invoice can be accessed at ${
+            process.env.FRONTEND_URL
+          }/invoice/${orderId}`,
           "unread",
         ]
       );
 
       res.json({
-        success: true, startDate: order.start_date, endDate: order.end_date
+        success: true,
+        startDate: order.start_date,
+        endDate: order.end_date,
       });
     } else {
       await db.query(

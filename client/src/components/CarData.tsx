@@ -14,7 +14,7 @@ import PaymentModal from "./Payment";
 function CarData() {
   const { user, loading } = useUser();
   const { t, loadNamespace, loadedNamespaces } = useLanguage();
-  const { id } = useParams<{ id: string, token: string, PayerID: string }>();
+  const { id } = useParams<{ id: string; token: string; PayerID: string }>();
   const [car, setCarInfo] = useState<CarInfo | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -142,7 +142,7 @@ function CarData() {
               start_date: fromDate,
               end_date: toDate,
               pickup_location: "Default Location",
-              payment_method: "cash"
+              payment_method: "cash",
             },
             {
               withCredentials: true,
@@ -150,10 +150,10 @@ function CarData() {
           );
 
           if (response.data.success) {
-            window.location.reload()
-            toast.success(t("purchaseSuccess", "CarDetail"))
+            window.location.reload();
+            toast.success(t("purchaseSuccess", "CarDetail"));
           } else {
-            throw new Error("Internal server error")
+            throw new Error("Internal server error");
           }
         }
       } catch (error) {
@@ -161,9 +161,9 @@ function CarData() {
         if (error instanceof AxiosError) {
           toast.error(
             (error.response?.data as { error?: string })?.error ||
-            error.message ||
-            (t("purchaseError", "CarDetail") as string) ||
-            ""
+              error.message ||
+              (t("purchaseError", "CarDetail") as string) ||
+              ""
           );
         } else {
           toast.error("An unknown error occurred.");
@@ -278,10 +278,11 @@ function CarData() {
                       key={index}
                     >
                       <img
-                        src={`${import.meta.env.PROD
-                          ? "/api"
-                          : "http://localhost:3000/api"
-                          }/uploads/${image}`}
+                        src={`${
+                          import.meta.env.PROD
+                            ? "/api"
+                            : "http://localhost:3000/api"
+                        }/uploads/${image}`}
                         alt={`${car.car_brand} ${car.car_model} - ${index + 1}`}
                         className="d-block w-100 car-data-img"
                         onError={(e) => {
@@ -296,10 +297,11 @@ function CarData() {
                       <img
                         src={
                           car.car_id
-                            ? `${import.meta.env.PROD
-                              ? "/api"
-                              : "http://localhost:3000/api"
-                            }/getCarImage?car_id=${car.car_id}`
+                            ? `${
+                                import.meta.env.PROD
+                                  ? "/api"
+                                  : "http://localhost:3000/api"
+                              }/getCarImage?car_id=${car.car_id}`
                             : carImage
                         }
                         alt={`${car.car_brand} ${car.car_model}`}
@@ -422,8 +424,8 @@ function CarData() {
                 {car.car_owner && car.car_owner == user?.user_id
                   ? t("cantRentOwn", "CarDetail")
                   : car.car_active
-                    ? t("purchase", "CarDetail")
-                    : t("rented", "CarDetail")}
+                  ? t("purchase", "CarDetail")
+                  : t("rented", "CarDetail")}
               </button>
             </div>
           </div>
@@ -447,10 +449,11 @@ function CarData() {
                     <img
                       src={
                         isLoggedIn
-                          ? `${import.meta.env.PROD
-                            ? "/api/uploads/profile-pictures/"
-                            : "http://localhost:3000/api/uploads/profile-pictures/"
-                          }${user?.profile_picture}`
+                          ? `${
+                              import.meta.env.PROD
+                                ? "/api/uploads/profile-pictures/"
+                                : "http://localhost:3000/api/uploads/profile-pictures/"
+                            }${user?.profile_picture}`
                           : profile
                       }
                       onError={(e) => {
@@ -518,44 +521,50 @@ function CarData() {
 
           <div className="comment-section mt-4">
             {comments.length > 0 ? (
-              comments.map((comment) => (
-                <div
-                  key={comment.comment_id}
-                  className="comment-box bg-light mb-3"
-                >
-                  <div className="comment-content">
-                    <img
-                      src={
-                        comment.profile_picture
-                          ? `${import.meta.env.PROD
-                            ? "/api/uploads/profile-pictures/"
-                            : "http://localhost:3000/api/uploads/profile-pictures/"
-                          }${comment.profile_picture}`
-                          : profile
-                      }
-                      alt=""
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = profile;
-                      }}
-                      className="profile"
-                    />
-                    <div className="comment-text">
-                      <h5>
-                        <span>
-                          <b>{comment.user_name}</b>
-                        </span>
-                        <br />
-                        {t(comment.rating_category, "CarDetail")}:{" "}
-                        {comment.comment_star}/5
-                      </h5>
-                      <p>{comment.comment_message}</p>
-                      <small className="text-muted">
-                        {new Date(comment.comment_date).toLocaleDateString()}
-                      </small>
+              comments.map(
+                (comment) =>
+                  comment.comment_flagged == 0 && (
+                    <div
+                      key={comment.comment_id}
+                      className="comment-box bg-light mb-3"
+                    >
+                      <div className="comment-content">
+                        <img
+                          src={
+                            comment.profile_picture
+                              ? `${
+                                  import.meta.env.PROD
+                                    ? "/api/uploads/profile-pictures/"
+                                    : "http://localhost:3000/api/uploads/profile-pictures/"
+                                }${comment.profile_picture}`
+                              : profile
+                          }
+                          alt=""
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = profile;
+                          }}
+                          className="profile"
+                        />
+                        <div className="comment-text">
+                          <h5>
+                            <span>
+                              <b>{comment.user_name}</b>
+                            </span>
+                            <br />
+                            {t(comment.rating_category, "CarDetail")}:{" "}
+                            {comment.comment_star}/5
+                          </h5>
+                          <p>{comment.comment_message}</p>
+                          <small className="text-muted">
+                            {new Date(
+                              comment.comment_date
+                            ).toLocaleDateString()}
+                          </small>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))
+                  )
+              )
             ) : (
               <div className="text-center mt-4">
                 <p>{t("noReviews", "CarDetail")}</p>

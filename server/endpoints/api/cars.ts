@@ -60,7 +60,7 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
   const userId = (req as AuthenticatedRequest).user.user_id;
 
   if (!userId) {
-    res.status(400).json({ success: false, error: "User not authenticated." })
+    res.status(400).json({ success: false, error: "User not authenticated." });
   }
 
   const {
@@ -90,17 +90,17 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
     user.user_email != null && Number(user.u_phone_number) !== 0,
     user.user_iban != null,
     user.born_at != null &&
-    new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
+      new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
   ];
 
   if (
     ![
       user?.driver_license_expiry != null &&
-      user?.driver_license_number != null,
+        user?.driver_license_number != null,
       user?.user_email != null && Number(user?.u_phone_number) !== 0,
       user?.user_iban != null,
       user?.born_at != null &&
-      new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
+        new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
     ].every(Boolean)
   ) {
     res.status(400).json({
@@ -153,7 +153,14 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
         discount_code,
         extended_rental
       ) VALUES (?, ?, ?, ?, 'pending', ?, 'pending', ?, false)`,
-      [userId, car_id, start_date, end_date, (carRows[0] as unknown as Car).location_id, discount_code]
+      [
+        userId,
+        car_id,
+        start_date,
+        end_date,
+        (carRows[0] as unknown as Car).location_id,
+        discount_code,
+      ]
     );
 
     const orderId = (orderResult as RowDataPacket).insertId;

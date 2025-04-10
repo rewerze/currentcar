@@ -26,7 +26,8 @@ export default {
     "Choose CurRentCar and experience the new, convenient way of car renting!",
   findNearestDepot: "Find the depot closest to you!",
   currentPosition: "Your current position",
-  pricingTransparent: "At CurRentCar, our pricing is transparent and flexible – just the way you like it.",
+  pricingTransparent:
+    "At CurRentCar, our pricing is transparent and flexible – just the way you like it.",
   pricingUpfront:
     "🧾 Rental fees are always visible upfront – no small print or unexpected charges.",
   pricingVariety:
@@ -34,5 +35,7 @@ export default {
   pricingDiscount:
     "💰 Extra discounts are available for longer rentals – the longer you rent, the better the deal!",
   pricingDeposit:
-    "🛡️ For some cars, a deposit may be required, which you’ll get back at the end of the rental, provided everything goes smoothly. We make sure all important information is clearly displayed during the rental process."
+    "🛡️ For some cars, a deposit may be required, which you’ll get back at the end of the rental, provided everything goes smoothly. We make sure all important information is clearly displayed during the rental process.",
+  searchByPostcode: "Search by postcode",
+  depoLocations: "Depo Locations",
 };

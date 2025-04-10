@@ -24,7 +24,8 @@ export default {
     "✅ Közösség és értékelések! A valós felhasználói vélemények segítenek a legjobb autót kiválasztani, így mindenki biztos lehet benne, hogy megbízható partnerekkel üzletel.",
   findNearestDepot: "Találja meg az Önhöz legközelebbi depót!",
   currentPosition: "Írja be az irányító számát!",
-  pricingTransparent: "A CurRentCar-nál az árazás átlátható és rugalmas – pont, ahogy neked kényelmes.",
+  pricingTransparent:
+    "A CurRentCar-nál az árazás átlátható és rugalmas – pont, ahogy neked kényelmes.",
   pricingUpfront:
     "🧾 A bérlési díjakat mindig előre látod – nincs apró betűs rész vagy váratlan kiadás.",
   pricingVariety:
@@ -32,5 +33,7 @@ export default {
   pricingDiscount:
     "💰 Több napos bérlésre extra kedvezmények járhatnak – minél hosszabb ideig használod az autót, annál jobban jársz.",
   pricingDeposit:
-    "🛡️ Egyes autók esetében letét szükséges lehet, amit a bérlés végén visszakapsz, ha minden rendben zajlott. A bérlési folyamat során minden fontos információt világosan megjelenítünk."
+    "🛡️ Egyes autók esetében letét szükséges lehet, amit a bérlés végén visszakapsz, ha minden rendben zajlott. A bérlési folyamat során minden fontos információt világosan megjelenítünk.",
+  searchByPostcode: "Keresés irányítószám által",
+  depoLocations: "Depó helyszínek",
 };
