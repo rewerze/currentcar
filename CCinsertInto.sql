@@ -50,20 +50,20 @@ INSERT INTO `location` (`location`) VALUES
 
 -- 14 népszerű autó adatainak beszúrása
 INSERT INTO `car` (`car_price`, `car_active`, `car_description`, `car_type`, `seats`, `number_of_doors`, `insurance_id`, `car_model`, `car_regnumber`, `price_per_hour`, `price_per_day`, `car_condition`, `mileage`, `car_year`, `fuel_type`, `transmission_type`, `car_brand`, `location_id`) VALUES
-('4000', 1, 'Megbízható családi szedán kiváló biztonsági funkciókkal', 'sedan', 5, 5, 1, 'Accord', 'W-AB-1234', 25, 125, 'excellent', 35000, 2022, 'hybrid', 'automatic', 'Honda', 1),
-('5000', 1, 'Tágas SUV, tökéletes családi utazásokhoz és szabadtéri kalandokhoz', 'suv', 7, 5, 2, 'RAV4', 'M-CD-5678', 35, 175, 'excellent', 28000, 2021, 'hybrid', 'automatic', 'Toyota', 5),
-('3000', 1, 'Kompakt ferdehátú kiváló városi kezeléssel és üzemanyag-takarékossággal', 'hatchback', 5, 5, 3, 'Golf', 'B-EF-9012', 20, 100, 'good', 42000, 2020, 'petrol', 'manual', 'Volkswagen', 6),
-('6000', 1, 'Luxus elektromos szedán élvonalbeli technológiával', 'sedan', 5, 5, 4, 'Model 3', 'K-GH-3456', 60, 300, 'excellent', 15000, 2022, 'electric', 'automatic', 'Tesla', 7),
-('7000', 1, 'Sportkupé erőteljes motorral és dinamikus kezelhetőséggel', 'coupe', 4, 3, 5, 'Mustang', 'F-IJ-7890', 45, 225, 'excellent', 20000, 2021, 'petrol', 'manual', 'Ford', 2),
-('5000', 1, 'Prémium crossover SUV elegáns dizájnnal és kényelemmel', 'suv', 5, 5, 6, 'CX-5', 'LEV-CX-504', 40, 200, 'excellent', 25000, 2022, 'petrol', 'automatic', 'Mazda', 3),
-('8000', 1, 'Robusztus pickup nehéz feladatokhoz és kalandokhoz', 'pickup', 5, 5, 7, 'F-150', 'L-MN-5678', 40, 200, 'good', 45000, 2020, 'petrol', 'automatic', 'Ford', 5),
-('6000', 1, 'Sokoldalú közepes méretű SUV terepjáró képességekkel', 'suv', 5, 5, 8, 'Wrangler', 'F-OP-9012', 45, 225, 'excellent', 32000, 2021, 'petrol', 'manual', 'Jeep', 4),
-('8000', 1, 'Luxus szedán prémium funkciókkal és sima vezetési élménnyel', 'sedan', 5, 5, 9, 'E-Class', 'S-QR-3456', 50, 250, 'excellent', 25000, 2022, 'diesel', 'automatic', 'Mercedes-Benz',6),
-('4000', 1, 'Megbízható kompakt SUV kiváló üzemanyag-hatékonysággal', 'suv', 5, 5, 10, 'CR-V', 'B-ST-7890', 30, 150, 'good', 35000, 2021, 'hybrid', 'automatic', 'Honda', 7),
-('5000', 1, 'Gazdaságos kompakt szedán modern biztonsági funkciókkal', 'sedan', 5, 5, 11, 'Civic', 'W-UV-1234', 20, 100, 'good', 40000, 2020, 'petrol', 'automatic', 'Honda', 4),
-('7000', 1, 'Prémium elektromos SUV nagy hatótávolsággal és teljesítménnyel', 'suv', 5, 5, 12, 'Model Y', 'M-WX-5678', 65, 325, 'excellent', 18000, 2022, 'electric', 'automatic', 'Tesla', 6),
-('4000', 1, 'Stílusos kompakt SUV egyedi dizájnnal', 'suv', 5, 5, 13, 'Sportage', 'B-YZ-9012', 30, 150, 'good', 30000, 2021, 'petrol', 'automatic', 'Kia', 1),
-('9000', 1, 'Prémium luxus SUV élvonalbeli technológiával és kényelemmel', 'suv', 7, 5, 14, 'X5', 'K-CD-7890', 60, 300, 'excellent', 22000, 2022, 'hybrid', 'automatic', 'BMW', 3);
+('4000', 1, 'Megbízható családi szedán kiváló biztonsági funkciókkal', 'sedan', 5, 5, 1, 'Accord', 'W-AB-1234', 1800, 4000, 'excellent', 35000, 2022, 'hybrid', 'automatic', 'Honda', 1),
+('5000', 1, 'Tágas SUV, tökéletes családi utazásokhoz és szabadtéri kalandokhoz', 'suv', 7, 5, 2, 'RAV4', 'M-CD-5678', 2000, 5000, 'excellent', 28000, 2021, 'hybrid', 'automatic', 'Toyota', 5),
+('3000', 1, 'Kompakt ferdehátú kiváló városi kezeléssel és üzemanyag-takarékossággal', 'hatchback', 5, 5, 3, 'Golf', 'B-EF-9012', 1200, 6000, 'good', 42000, 2020, 'petrol', 'manual', 'Volkswagen', 6),
+('6000', 1, 'Luxus elektromos szedán élvonalbeli technológiával', 'sedan', 5, 5, 4, 'Model 3', 'K-GH-3456', 1400, 7000, 'excellent', 15000, 2022, 'electric', 'automatic', 'Tesla', 7),
+('7000', 1, 'Sportkupé erőteljes motorral és dinamikus kezelhetőséggel', 'coupe', 4, 3, 5, 'Mustang', 'F-IJ-7890', 1700, 6000, 'excellent', 20000, 2021, 'petrol', 'manual', 'Ford', 2),
+('5000', 1, 'Prémium crossover SUV elegáns dizájnnal és kényelemmel', 'suv', 5, 5, 6, 'CX-5', 'LEV-CX-504', 1500, 8000, 'excellent', 25000, 2022, 'petrol', 'automatic', 'Mazda', 3),
+('8000', 1, 'Robusztus pickup nehéz feladatokhoz és kalandokhoz', 'pickup', 5, 5, 7, 'F-150', 'L-MN-5678', 1400, 9000, 'good', 45000, 2020, 'petrol', 'automatic', 'Ford', 5),
+('6000', 1, 'Sokoldalú közepes méretű SUV terepjáró képességekkel', 'suv', 5, 5, 8, 'Wrangler', 'F-OP-9012', 1600, 7000, 'excellent', 32000, 2021, 'petrol', 'manual', 'Jeep', 4),
+('8000', 1, 'Luxus szedán prémium funkciókkal és sima vezetési élménnyel', 'sedan', 5, 5, 9, 'E-Class', 'S-QR-3456', 1300, 5000, 'excellent', 25000, 2022, 'diesel', 'automatic', 'Mercedes-Benz',6),
+('4000', 1, 'Megbízható kompakt SUV kiváló üzemanyag-hatékonysággal', 'suv', 5, 5, 10, 'CR-V', 'B-ST-7890', 1500, 4000, 'good', 35000, 2021, 'hybrid', 'automatic', 'Honda', 7),
+('5000', 1, 'Gazdaságos kompakt szedán modern biztonsági funkciókkal', 'sedan', 5, 5, 11, 'Civic', 'W-UV-1234', 1350, 5500, 'good', 40000, 2020, 'petrol', 'automatic', 'Honda', 4),
+('7000', 1, 'Prémium elektromos SUV nagy hatótávolsággal és teljesítménnyel', 'suv', 5, 5, 12, 'Model Y', 'M-WX-5678', 1490, 6700, 'excellent', 18000, 2022, 'electric', 'automatic', 'Tesla', 6),
+('4000', 1, 'Stílusos kompakt SUV egyedi dizájnnal', 'suv', 5, 5, 13, 'Sportage', 'B-YZ-9012', 980, 7300, 'good', 30000, 2021, 'petrol', 'automatic', 'Kia', 1),
+('9000', 1, 'Prémium luxus SUV élvonalbeli technológiával és kényelemmel', 'suv', 7, 5, 14, 'X5', 'K-CD-7890', 1400, 6050, 'excellent', 22000, 2022, 'hybrid', 'automatic', 'BMW', 3);
 
 -- Adatok beszúrása a car_images táblába (autónként legalább 2 kép)
 INSERT INTO `car_images` (`car_id`, `image_url`, `uploaded_at`) VALUES
