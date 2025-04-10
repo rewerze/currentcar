@@ -37,29 +37,6 @@ function SecurityDelete({ isOpen, onClose, onConfirm }: SecurityDeleteProps) {
                 maxWidth: '500px',
                 position: 'relative'
             }}>
-                <div className="modal-header">
-                    <button
-                        type="button"
-                        className="btn btn-outline-light"
-                        onClick={onClose}
-                        style={{
-                            position: 'absolute',
-                            right: '10px',
-                            top: '10px',
-                            width: '30px',
-                            height: '30px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: '0',
-                            fontSize: '20px',
-                            lineHeight: '1',
-                            borderRadius: '50%'
-                        }}
-                    >
-                        ×
-                    </button>
-                </div>
                 <div className="modal-body">
                     <h3 className="text-center text-light">{t('confirmDelete', 'Security')}</h3>
                     <div className="d-flex gap-3 mt-4">
