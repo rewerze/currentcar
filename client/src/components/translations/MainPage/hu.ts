@@ -23,7 +23,7 @@ export default {
   communityReviews:
     "✅ Közösség és értékelések! A valós felhasználói vélemények segítenek a legjobb autót kiválasztani, így mindenki biztos lehet benne, hogy megbízható partnerekkel üzletel.",
   findNearestDepot: "Találja meg az Önhöz legközelebbi depót!",
-  currentPosition: "Jelenlegi helyzeted",
+  currentPosition: "Írja be az irányító számát!",
   pricingTransparent: "A CurRentCar-nál az árazás átlátható és rugalmas – pont, ahogy neked kényelmes.",
   pricingUpfront:
     "🧾 A bérlési díjakat mindig előre látod – nincs apró betűs rész vagy váratlan kiadás.",

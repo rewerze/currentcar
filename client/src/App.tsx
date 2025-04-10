@@ -72,16 +72,33 @@ function App() {
                 />
               </div>
               <div className="col-lg mt-3">
-                <iframe
-                  width="600"
-                  height="450"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAN5SYLwcDXzm06exMmnIbr4pXsA4Z8ohc
-    &q=Space+Needle,Seattle+WA"
-                ></iframe>
+                <table className="big-table w-50">
+                  <thead>
+                    <tr>
+                      <th>Depó címek</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Árpád fejedelem útja 26-28, Budapest, Hungary</td>
+                    </tr>
+                    <tr>
+                      <td>Location 2</td>
+                    </tr>
+                    <tr>
+                      <td>Location 3</td>
+                    </tr>
+                    <tr>
+                      <td>Location 4</td>
+                    </tr>
+                    <tr>
+                      <td>Location 5</td>
+                    </tr>
+                    <tr>
+                      <td>Location 6</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

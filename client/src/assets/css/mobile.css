@@ -11,10 +11,32 @@
     #miert_a_currentcar .col-lg-6 {
         width: 100%;
     }
+
+    .big-table tbody{
+        width: 40rem;
+    }
+
+    .big-table td {
+        padding-left: 7rem;
+        padding-right: 7rem;
+    }
 }
 
 
 @media only screen and (max-width: 1200px) {
+
+    .big-table {
+        margin: auto;
+    }
+
+    .big-table tbody{
+        width: 100%;
+    }
+
+    .big-table td {
+        width: 100%;
+    }
+
     .car-box {
         width: 30%;
     }
@@ -352,6 +374,21 @@
 
     .notif {
         width: 90%;
+    }
+
+    .big-table {
+        margin: auto;
+        width: 30% !important;
+    }
+
+    .big-table {
+        width: 100% !important;
+    }
+
+    .big-table td {
+        width: 100% !important;
+        padding-left: 0;
+        padding-right: 0;
     }
 
 }

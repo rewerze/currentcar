@@ -768,3 +768,33 @@ details {
 .upload-price h2 {
     margin-bottom: 0;
 }
+
+.big-table th {
+    text-align: center;
+    padding: 1rem;
+    font-size: larger;
+    font-weight: 700;
+}
+
+.big-table thead {
+    border-bottom: 2px solid black;
+}
+
+.big-table tbody {    
+    display:block;
+    height: 138px;
+    width: 50rem;
+    white-space: nowrap;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px solid black;
+}
+
+.big-table td {
+    text-align: center;
+    padding: .5rem;
+    font-size: larger;
+    font-weight: 500;
+    padding-right: 12rem;
+    padding-left: 12rem;
+}
