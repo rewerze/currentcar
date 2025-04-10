@@ -39,14 +39,14 @@ INSERT INTO `user` (`user_email`, `user_name`, `password`, `born_at`, `created_a
 ('sophie.martin@email.com', 'Sophie Martin', '$2a$10$Ks9hzUMJHnZ5o3NpNPm5dujjrB6X.u3Yc6pQzQYoVjHg4Ln.N5nYO', '1991-05-10 00:00:00', '2023-01-15 16:40:00', '2023-01-15 16:40:00', 1, '+33 555-567-543', 33, 'user', 'FR258147369', '2028-05-10', 'profile14.jpg');
 
 -- Adatok beszúrása a location táblába
-INSERT INTO `location` (`location`) VALUES
-('Andrássy út 66, Budapest, Magyarország'),
-('Váci utca 18, Budapest, Magyarország'),
-('Üllői út 131, Budapest, Magyarország'),
-('Árpád fejedelem útja 26-28, Budapest, Magyarország'),
-('Nagytétényi út 37-43, Budapest, Magyarország'),
-('Bocskai út 77-79, Budaörs, Magyarország'),
-('Szentendrei út 24, Pomáz, Magyarország');
+INSERT INTO `location` (`location`, `zip_code`) VALUES
+('Andrássy út 66, Budapest, Magyarország', 1062),
+('Váci utca 18, Budapest, Magyarország', 1052),
+('Üllői út 131, Budapest, Magyarország', 1091),
+('Árpád fejedelem útja 26-28, Budapest, Magyarország', 1023),
+('Nagytétényi út 37-43, Budapest, Magyarország', 1223),
+('Bocskai út 77-79, Budaörs, Magyarország', 1113),
+('Szentendrei út 24, Pomáz, Magyarország', 2011);
 
 -- 14 népszerű autó adatainak beszúrása
 INSERT INTO `car` (`car_price`, `car_active`, `car_description`, `car_type`, `seats`, `number_of_doors`, `insurance_id`, `car_model`, `car_regnumber`, `price_per_hour`, `price_per_day`, `car_condition`, `mileage`, `car_year`, `fuel_type`, `transmission_type`, `car_brand`, `location_id`) VALUES

@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 CREATE TABLE IF NOT EXISTS `location` (
     `location_id` int AUTO_INCREMENT NOT NULL,
     `location` varchar(250) NOT NULL,
+    `zip_code` int not null,
     PRIMARY KEY (`location_id`)
 );
 
