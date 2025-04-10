@@ -31,9 +31,6 @@
             this.lblEndDate = new System.Windows.Forms.Label();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.lblPickupLocation = new System.Windows.Forms.Label();
-            this.txtPickupLocation = new System.Windows.Forms.TextBox();
-            this.lblDropoffLocation = new System.Windows.Forms.Label();
-            this.txtDropoffLocation = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblPaymentStatus = new System.Windows.Forms.Label();
@@ -52,6 +49,7 @@
             this.txtInvoiceAddress = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.cmbLocation = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPaymentAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTaxAmount)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +70,7 @@
             this.cmbCustomer.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbCustomer.FormattingEnabled = true;
             this.cmbCustomer.Location = new System.Drawing.Point(121, 13);
-            this.cmbCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbCustomer.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCustomer.Name = "cmbCustomer";
             this.cmbCustomer.Size = new System.Drawing.Size(237, 23);
             this.cmbCustomer.TabIndex = 1;
@@ -93,7 +91,7 @@
             this.cmbCar.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbCar.FormattingEnabled = true;
             this.cmbCar.Location = new System.Drawing.Point(121, 46);
-            this.cmbCar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbCar.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCar.Name = "cmbCar";
             this.cmbCar.Size = new System.Drawing.Size(238, 23);
             this.cmbCar.TabIndex = 3;
@@ -115,7 +113,7 @@
             this.dtpStartDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(121, 78);
-            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(151, 23);
             this.dtpStartDate.TabIndex = 5;
@@ -137,7 +135,7 @@
             this.dtpEndDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEndDate.Location = new System.Drawing.Point(121, 111);
-            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(151, 23);
             this.dtpEndDate.TabIndex = 7;
@@ -149,44 +147,15 @@
             this.lblPickupLocation.Location = new System.Drawing.Point(15, 146);
             this.lblPickupLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPickupLocation.Name = "lblPickupLocation";
-            this.lblPickupLocation.Size = new System.Drawing.Size(78, 15);
+            this.lblPickupLocation.Size = new System.Drawing.Size(116, 15);
             this.lblPickupLocation.TabIndex = 8;
-            this.lblPickupLocation.Text = "Felvétel helye";
-            // 
-            // txtPickupLocation
-            // 
-            this.txtPickupLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtPickupLocation.Location = new System.Drawing.Point(121, 143);
-            this.txtPickupLocation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtPickupLocation.Name = "txtPickupLocation";
-            this.txtPickupLocation.Size = new System.Drawing.Size(407, 23);
-            this.txtPickupLocation.TabIndex = 9;
-            // 
-            // lblDropoffLocation
-            // 
-            this.lblDropoffLocation.AutoSize = true;
-            this.lblDropoffLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblDropoffLocation.Location = new System.Drawing.Point(15, 179);
-            this.lblDropoffLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblDropoffLocation.Name = "lblDropoffLocation";
-            this.lblDropoffLocation.Size = new System.Drawing.Size(74, 15);
-            this.lblDropoffLocation.TabIndex = 10;
-            this.lblDropoffLocation.Text = "Leadás helye";
-            // 
-            // txtDropoffLocation
-            // 
-            this.txtDropoffLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDropoffLocation.Location = new System.Drawing.Point(121, 176);
-            this.txtDropoffLocation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtDropoffLocation.Name = "txtDropoffLocation";
-            this.txtDropoffLocation.Size = new System.Drawing.Size(407, 23);
-            this.txtDropoffLocation.TabIndex = 11;
+            this.lblPickupLocation.Text = "Felvétel/leadás helye";
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblStatus.Location = new System.Drawing.Point(296, 249);
+            this.lblStatus.Location = new System.Drawing.Point(296, 223);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(45, 15);
@@ -203,8 +172,8 @@
             "teljesítve",
             "lemondva",
             "meghosszabbítva"});
-            this.cmbStatus.Location = new System.Drawing.Point(398, 246);
-            this.cmbStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbStatus.Location = new System.Drawing.Point(398, 220);
+            this.cmbStatus.Margin = new System.Windows.Forms.Padding(2);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(130, 23);
             this.cmbStatus.TabIndex = 13;
@@ -213,7 +182,7 @@
             // 
             this.lblPaymentStatus.AutoSize = true;
             this.lblPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblPaymentStatus.Location = new System.Drawing.Point(296, 282);
+            this.lblPaymentStatus.Location = new System.Drawing.Point(296, 256);
             this.lblPaymentStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPaymentStatus.Name = "lblPaymentStatus";
             this.lblPaymentStatus.Size = new System.Drawing.Size(84, 15);
@@ -230,8 +199,8 @@
             "sikertelen",
             "visszatérítve",
             "részben fizetve"});
-            this.cmbPaymentStatus.Location = new System.Drawing.Point(398, 279);
-            this.cmbPaymentStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbPaymentStatus.Location = new System.Drawing.Point(398, 253);
+            this.cmbPaymentStatus.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPaymentStatus.Name = "cmbPaymentStatus";
             this.cmbPaymentStatus.Size = new System.Drawing.Size(130, 23);
             this.cmbPaymentStatus.TabIndex = 15;
@@ -240,7 +209,7 @@
             // 
             this.lblDiscount.AutoSize = true;
             this.lblDiscount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblDiscount.Location = new System.Drawing.Point(312, 211);
+            this.lblDiscount.Location = new System.Drawing.Point(312, 185);
             this.lblDiscount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(94, 15);
@@ -250,8 +219,8 @@
             // txtDiscount
             // 
             this.txtDiscount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDiscount.Location = new System.Drawing.Point(414, 208);
-            this.txtDiscount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDiscount.Location = new System.Drawing.Point(414, 182);
+            this.txtDiscount.Margin = new System.Windows.Forms.Padding(2);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(114, 23);
             this.txtDiscount.TabIndex = 17;
@@ -272,7 +241,7 @@
             this.chkExtended.AutoSize = true;
             this.chkExtended.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkExtended.Location = new System.Drawing.Point(499, 111);
-            this.chkExtended.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkExtended.Margin = new System.Windows.Forms.Padding(2);
             this.chkExtended.Name = "chkExtended";
             this.chkExtended.Size = new System.Drawing.Size(15, 14);
             this.chkExtended.TabIndex = 19;
@@ -282,7 +251,7 @@
             // 
             this.lblPaymentAmount.AutoSize = true;
             this.lblPaymentAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblPaymentAmount.Location = new System.Drawing.Point(15, 246);
+            this.lblPaymentAmount.Location = new System.Drawing.Point(15, 220);
             this.lblPaymentAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPaymentAmount.Name = "lblPaymentAmount";
             this.lblPaymentAmount.Size = new System.Drawing.Size(86, 15);
@@ -293,8 +262,8 @@
             // 
             this.numPaymentAmount.DecimalPlaces = 2;
             this.numPaymentAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numPaymentAmount.Location = new System.Drawing.Point(121, 246);
-            this.numPaymentAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numPaymentAmount.Location = new System.Drawing.Point(121, 220);
+            this.numPaymentAmount.Margin = new System.Windows.Forms.Padding(2);
             this.numPaymentAmount.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -308,7 +277,7 @@
             // 
             this.lblTaxAmount.AutoSize = true;
             this.lblTaxAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTaxAmount.Location = new System.Drawing.Point(15, 279);
+            this.lblTaxAmount.Location = new System.Drawing.Point(15, 253);
             this.lblTaxAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTaxAmount.Name = "lblTaxAmount";
             this.lblTaxAmount.Size = new System.Drawing.Size(73, 15);
@@ -319,8 +288,8 @@
             // 
             this.numTaxAmount.DecimalPlaces = 2;
             this.numTaxAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numTaxAmount.Location = new System.Drawing.Point(121, 279);
-            this.numTaxAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numTaxAmount.Location = new System.Drawing.Point(121, 253);
+            this.numTaxAmount.Margin = new System.Windows.Forms.Padding(2);
             this.numTaxAmount.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -334,7 +303,7 @@
             // 
             this.lblPaymentMethod.AutoSize = true;
             this.lblPaymentMethod.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblPaymentMethod.Location = new System.Drawing.Point(15, 211);
+            this.lblPaymentMethod.Location = new System.Drawing.Point(15, 185);
             this.lblPaymentMethod.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPaymentMethod.Name = "lblPaymentMethod";
             this.lblPaymentMethod.Size = new System.Drawing.Size(73, 15);
@@ -351,8 +320,8 @@
             "banki átutalás",
             "készpénz",
             "Bitcoin"});
-            this.cmbPaymentMethod.Location = new System.Drawing.Point(121, 208);
-            this.cmbPaymentMethod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbPaymentMethod.Location = new System.Drawing.Point(121, 182);
+            this.cmbPaymentMethod.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
             this.cmbPaymentMethod.Size = new System.Drawing.Size(151, 23);
             this.cmbPaymentMethod.TabIndex = 25;
@@ -361,7 +330,7 @@
             // 
             this.lblInvoiceAddress.AutoSize = true;
             this.lblInvoiceAddress.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblInvoiceAddress.Location = new System.Drawing.Point(17, 314);
+            this.lblInvoiceAddress.Location = new System.Drawing.Point(17, 288);
             this.lblInvoiceAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInvoiceAddress.Name = "lblInvoiceAddress";
             this.lblInvoiceAddress.Size = new System.Drawing.Size(86, 15);
@@ -371,8 +340,8 @@
             // txtInvoiceAddress
             // 
             this.txtInvoiceAddress.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtInvoiceAddress.Location = new System.Drawing.Point(114, 314);
-            this.txtInvoiceAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtInvoiceAddress.Location = new System.Drawing.Point(114, 288);
+            this.txtInvoiceAddress.Margin = new System.Windows.Forms.Padding(2);
             this.txtInvoiceAddress.Multiline = true;
             this.txtInvoiceAddress.Name = "txtInvoiceAddress";
             this.txtInvoiceAddress.Size = new System.Drawing.Size(414, 50);
@@ -385,8 +354,8 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(187, 368);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Location = new System.Drawing.Point(187, 342);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 28);
             this.btnSave.TabIndex = 28;
@@ -401,8 +370,8 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(283, 368);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(283, 342);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 29;
@@ -410,11 +379,21 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // cmbLocation
+            // 
+            this.cmbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cmbLocation.FormattingEnabled = true;
+            this.cmbLocation.Location = new System.Drawing.Point(136, 143);
+            this.cmbLocation.Name = "cmbLocation";
+            this.cmbLocation.Size = new System.Drawing.Size(392, 23);
+            this.cmbLocation.TabIndex = 8;
+            // 
             // OrderEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 402);
+            this.ClientSize = new System.Drawing.Size(539, 377);
+            this.Controls.Add(this.cmbLocation);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtInvoiceAddress);
@@ -433,9 +412,6 @@
             this.Controls.Add(this.lblPaymentStatus);
             this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.txtDropoffLocation);
-            this.Controls.Add(this.lblDropoffLocation);
-            this.Controls.Add(this.txtPickupLocation);
             this.Controls.Add(this.lblPickupLocation);
             this.Controls.Add(this.dtpEndDate);
             this.Controls.Add(this.lblEndDate);
@@ -446,7 +422,7 @@
             this.Controls.Add(this.cmbCustomer);
             this.Controls.Add(this.lblCustomer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrderEditForm";
@@ -469,9 +445,6 @@
         private System.Windows.Forms.Label lblEndDate;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.Label lblPickupLocation;
-        private System.Windows.Forms.TextBox txtPickupLocation;
-        private System.Windows.Forms.Label lblDropoffLocation;
-        private System.Windows.Forms.TextBox txtDropoffLocation;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label lblPaymentStatus;
@@ -490,5 +463,6 @@
         private System.Windows.Forms.TextBox txtInvoiceAddress;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ComboBox cmbLocation;
     }
 }

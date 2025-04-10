@@ -1,86 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\nvmeouterssd\\cur\\CurRentCar\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|D:\\nvmeouterssd\\cur\\CurRentCar\\carrentaladmin\\carmanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\carmanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\databaseoptimizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\databaseoptimizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|D:\\nvmeouterssd\\cur\\CurRentCar\\carrentaladmin\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\commenteditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\commenteditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 3,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CommentEditForm.cs [Design]",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CommentEditForm.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\CommentEditForm.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CommentEditForm.cs [Design]",
-              "RelativeToolTip": "CarRentalAdmin\\CommentEditForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T09:09:25.576Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Database.cs",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\Database.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\Database.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\Database.cs",
-              "RelativeToolTip": "CarRentalAdmin\\Database.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAcwBEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T08:55:03.105Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DatabaseOptimizer.cs",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\DatabaseOptimizer.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\DatabaseOptimizer.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\DatabaseOptimizer.cs",
-              "RelativeToolTip": "CarRentalAdmin\\DatabaseOptimizer.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAIwG8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T08:54:39.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CarManageForm.cs [Design]",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarManageForm.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\CarManageForm.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarManageForm.cs [Design]",
-              "RelativeToolTip": "CarRentalAdmin\\CarManageForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T20:15:04.011Z",
-              "EditorCaption": " [Design]"
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

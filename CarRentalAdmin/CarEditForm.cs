@@ -25,6 +25,7 @@ namespace CarRentalAdmin
         {
             // Biztosítási opciók betöltése
             LoadInsuranceOptions();
+            LoadLocations();
 
             if (carId > 0)
             {
@@ -42,13 +43,40 @@ namespace CarRentalAdmin
                 cmbCondition.SelectedIndex = 0;
                 cmbFuelType.SelectedIndex = 0;
                 cmbTransmission.SelectedIndex = 0;
+                cmbLocation.SelectedIndex = 0;
                 btnRemoveImage.Visible = false;
                 lstImages.Visible = false;
                 picCarImage.Visible = false;
                 lblImages.Visible = false;
             }
         }
+        private void LoadLocations()
+        {
+            try
+            {
+                string query = "SELECT location FROM location";
+                DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
 
+                cmbLocation.DisplayMember = "Text";
+                cmbLocation.ValueMember = "Value";
+
+                cmbLocation.Items.Clear();
+                foreach (DataRow row in dt.Rows)
+                {
+                    cmbLocation.Items.Add(row["location"]);
+                }
+
+                if (cmbLocation.Items.Count > 0)
+                {
+                    cmbLocation.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading locations: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void LoadInsuranceOptions()
         {
             try
@@ -82,7 +110,9 @@ namespace CarRentalAdmin
         {
             try
             {
-                string query = "SELECT * FROM car WHERE car_id = " + carId;
+                string query = "SELECT c.*, l.location FROM car c " +
+                              "LEFT JOIN location l ON c.location_id = l.location_id " +
+                              "WHERE c.car_id = " + carId;
                 DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
 
                 if (dt.Rows.Count > 0)
@@ -93,12 +123,13 @@ namespace CarRentalAdmin
                     numYear.Value = Convert.ToDecimal(row["car_year"]);
                     cmbType.Text = AppResources.AllTypeEn.Zip(AppResources.AllType, (en, hu) => new { en, hu })
                         .FirstOrDefault(pair => pair.en == row["car_type"].ToString())?.hu ?? row["car_type"].ToString();
-                        //row["car_type"].ToString();
+                    //row["car_type"].ToString();
                     cmbCondition.Text = AppResources.AllConditionEn.Zip(AppResources.AllCondition, (en, hu) => new { en, hu })
                         .FirstOrDefault(pair => pair.en == row["car_condition"].ToString())?.hu ?? row["car_condition"].ToString();
-                        //row["car_condition"].ToString();
+                    //row["car_condition"].ToString();
                     numHourlyRate.Value = Convert.ToDecimal(row["price_per_hour"]);
                     numDailyRate.Value = Convert.ToDecimal(row["price_per_day"]);
+                    numBasePrice.Value = Convert.ToDecimal(row["car_price"]);
                     txtRegNumber.Text = row["car_regnumber"].ToString();
                     numSeats.Value = Convert.ToDecimal(row["seats"]);
                     numDoors.Value = Convert.ToDecimal(row["number_of_doors"]);
@@ -111,6 +142,20 @@ namespace CarRentalAdmin
                     //row["transmission_type"].ToString();
                     txtDescription.Text = row["car_description"].ToString();
                     chkActive.Checked = Convert.ToBoolean(row["car_active"]);
+
+                    // Location beállítása
+                    if (row["location"] != DBNull.Value)
+                    {
+                        string location = row["location"].ToString();
+                        for (int i = 0; i < cmbLocation.Items.Count; i++)
+                        {
+                            if (cmbLocation.Items[i].ToString() == location)
+                            {
+                                cmbLocation.SelectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
 
                     // megfelelő biztosítást kiválasztása
                     int insuranceId = Convert.ToInt32(row["insurance_id"]);
@@ -167,6 +212,50 @@ namespace CarRentalAdmin
             {
                 MessageBox.Show("Hiba a képek betöltésekor!" + ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int CreateOrGetLocation(string location)
+        {
+            try
+            {
+                // Check if location already exists
+                string checkQuery = "SELECT location_id FROM location WHERE location = @location";
+                Dictionary<string, object> checkParams = new Dictionary<string, object>
+                {
+                    { "@location", location }
+                };
+
+                DataTable dt = DatabaseOptimizer.ExecuteParameterizedQuery(checkQuery, checkParams);
+
+                if (dt.Rows.Count > 0)
+                {
+                    return Convert.ToInt32(dt.Rows[0]["location_id"]);
+                }
+
+                // Location doesn't exist, create a new one
+                string insertQuery = "INSERT INTO location (location) VALUES (@location)";
+                Dictionary<string, object> insertParams = new Dictionary<string, object>
+                {
+                    { "@location", location }
+                };
+
+                int rowsAffected = DatabaseOptimizer.ExecuteParameterizedNonQuery(insertQuery, insertParams);
+
+                if (rowsAffected > 0)
+                {
+                    string idQuery = "SELECT LAST_INSERT_ID()";
+                    object result = DatabaseOptimizer.ExecuteScalar(idQuery);
+                    return Convert.ToInt32(result);
+                }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hiba a helyadat létrehozásakor: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
             }
         }
 
@@ -240,14 +329,15 @@ namespace CarRentalAdmin
             if (string.IsNullOrEmpty(txtBrand.Text) || string.IsNullOrEmpty(txtModel.Text) ||
                 string.IsNullOrEmpty(txtRegNumber.Text) || cmbType.SelectedIndex < 0 ||
                 cmbCondition.SelectedIndex < 0 || cmbFuelType.SelectedIndex < 0 ||
-                cmbTransmission.SelectedIndex < 0 || cmbInsurance.SelectedIndex < 0)
+                cmbTransmission.SelectedIndex < 0 || cmbInsurance.SelectedIndex < 0 ||
+                cmbLocation.SelectedIndex < 0)
             {
                 MessageBox.Show($"Kérem töltse ki az összes kötelező mezőt", "Validation Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // hozzáadás vagy frissítás
+            // hozzáadás vagy frissítés
             if (carId > 0)
             {
                 UpdateCar();
@@ -266,12 +356,20 @@ namespace CarRentalAdmin
                 dynamic selectedInsurance = cmbInsurance.SelectedItem;
                 int insuranceId = Convert.ToInt32(selectedInsurance.Value);
 
+                // Get or create location
+                int locationId = CreateOrGetLocation(cmbLocation.Text);
+                if (locationId <= 0)
+                {
+                    MessageBox.Show("Failed to create location record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 //query
                 string query = "INSERT INTO car (car_brand, car_model, car_year, car_type, car_condition, " +
                                "price_per_hour, price_per_day, car_regnumber, seats, number_of_doors, " +
-                               "mileage, fuel_type, transmission_type, car_description, insurance_id, car_active, car_price) " +
+                               "mileage, fuel_type, transmission_type, car_description, insurance_id, car_active, car_price, location_id) " +
                                "VALUES (@brand, @model, @year, @type, @condition, @hourRate, @dayRate, @regNumber, " +
-                               "@seats, @doors, @mileage, @fuelType, @transmission, @description, @insurance, @active, @price)";
+                               "@seats, @doors, @mileage, @fuelType, @transmission, @description, @insurance, @active, @basePrice, @locationId)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -291,7 +389,8 @@ namespace CarRentalAdmin
                     { "@description", txtDescription.Text },
                     { "@insurance", insuranceId },
                     { "@active", chkActive.Checked ? 1 : 0 },
-                    { "@price", (int)numDailyRate.Value * 30 } // havi autó ára mint "car_price"
+                    { "@basePrice", (int)numBasePrice.Value },
+                    { "@locationId", locationId }
                 };
 
                 int rowsAffected = DatabaseOptimizer.ExecuteParameterizedNonQuery(query, parameters);
@@ -332,13 +431,22 @@ namespace CarRentalAdmin
                 dynamic selectedInsurance = cmbInsurance.SelectedItem;
                 int insuranceId = Convert.ToInt32(selectedInsurance.Value);
 
+                // helyadat /hozzáadás
+                int locationId = CreateOrGetLocation(cmbLocation.Text);
+                if (locationId <= 0)
+                {
+                    MessageBox.Show("Sikertelen helyadat frissítés", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 //query
                 string query = "UPDATE car SET car_brand = @brand, car_model = @model, car_year = @year, " +
                                "car_type = @type, car_condition = @condition, price_per_hour = @hourRate, " +
                                "price_per_day = @dayRate, car_regnumber = @regNumber, seats = @seats, " +
                                "number_of_doors = @doors, mileage = @mileage, fuel_type = @fuelType, " +
                                "transmission_type = @transmission, car_description = @description, " +
-                               "insurance_id = @insurance, car_active = @active, car_price = @price " +
+                               "insurance_id = @insurance, car_active = @active, car_price = @basePrice, " +
+                               "location_id = @locationId " +
                                "WHERE car_id = @id";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -359,7 +467,8 @@ namespace CarRentalAdmin
                     { "@description", txtDescription.Text },
                     { "@insurance", insuranceId },
                     { "@active", chkActive.Checked ? 1 : 0 },
-                    { "@price", (int)numDailyRate.Value * 30 },
+                    { "@basePrice", (int)numBasePrice.Value },
+                    { "@locationId", locationId },
                     { "@id", carId }
                 };
 

@@ -31,9 +31,12 @@ namespace CarRentalAdmin
             try
             {
                 string query = "SELECT c.car_id, c.car_brand, c.car_model, c.car_year, c.car_type, " +
-                               "c.car_condition, c.price_per_hour, c.price_per_day, c.car_regnumber, " +
-                               "c.seats, c.mileage, c.car_active " +
-                               "FROM car c WHERE 1=1";
+                               "c.car_condition, CAST(c.car_price AS DECIMAL(10,2)) as car_price, " +
+                               "c.price_per_day, c.price_per_hour, c.car_regnumber, " +
+                               "c.seats, c.mileage, c.car_active, loc.location " +
+                               "FROM car c " +
+                               "JOIN location loc ON c.location_id = loc.location_id " +
+                               "WHERE 1=1 ORDER BY c.car_id";
 
                 if (!string.IsNullOrEmpty(searchTerm))
                 {
@@ -63,16 +66,20 @@ namespace CarRentalAdmin
                     dgvCars.Columns["car_year"].HeaderText = AppResources.Year;
                     dgvCars.Columns["car_type"].HeaderText = AppResources.Type;
                     dgvCars.Columns["car_condition"].HeaderText = AppResources.Condition;
-                    dgvCars.Columns["price_per_hour"].HeaderText = AppResources.HourlyRate;
+                    dgvCars.Columns["car_price"].HeaderText = AppResources.BasePrice;
                     dgvCars.Columns["price_per_day"].HeaderText = AppResources.DailyRate;
+                    dgvCars.Columns["price_per_hour"].HeaderText = AppResources.HourlyRate;
                     dgvCars.Columns["car_regnumber"].HeaderText = AppResources.RegNumber;
                     dgvCars.Columns["seats"].HeaderText = AppResources.Seats;
                     dgvCars.Columns["mileage"].HeaderText = AppResources.Mileage[0];
                     dgvCars.Columns["car_active"].HeaderText = AppResources.Active;
+                    dgvCars.Columns["location"].HeaderText = AppResources.Location;
 
                     // formátum
-                    dgvCars.Columns["price_per_hour"].DefaultCellStyle.Format = "C2";
+                    dgvCars.Columns["car_price"].DefaultCellStyle.Format = "C2";
                     dgvCars.Columns["price_per_day"].DefaultCellStyle.Format = "C2";
+                    dgvCars.Columns["price_per_hour"].DefaultCellStyle.Format = "C2";
+                    OptimizeDataGridViewColumns();
                 }
 
                 // kiválasztás alaphelyzet
@@ -83,9 +90,21 @@ namespace CarRentalAdmin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading cars: " + ex.Message, "Error",
+                MessageBox.Show("Hiba " + ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void OptimizeDataGridViewColumns()
+        {
+            dgvCars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvCars.Columns["car_regnumber"].Visible = false;
+            dgvCars.Columns["seats"].Visible = false;
+            dgvCars.Columns["mileage"].Visible = false;
+            dgvCars.Columns["car_type"].Visible = false;
+            dgvCars.Columns["car_condition"].Visible = false;
+            dgvCars.ScrollBars = ScrollBars.Both;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -100,8 +119,8 @@ namespace CarRentalAdmin
 
         private void cmbCarCondition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(cmbCarCondition.SelectedIndex);
-            Console.WriteLine(AppResources.AllConditionEn[cmbCarCondition.SelectedIndex]);
+            //Console.WriteLine(cmbCarCondition.SelectedIndex);
+            //Console.WriteLine(AppResources.AllConditionEn[cmbCarCondition.SelectedIndex]);
             LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex]);
         }
 

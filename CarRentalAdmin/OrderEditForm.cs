@@ -26,6 +26,7 @@ namespace CarRentalAdmin
         {
             LoadCustomers();
             LoadAvailableCars();
+            LoadLocations();
 
             dtpStartDate.Value = DateTime.Now;
             dtpEndDate.Value = DateTime.Now.AddDays(3);
@@ -65,6 +66,34 @@ namespace CarRentalAdmin
                 if (cmbCustomer.Items.Count > 0)
                 {
                     cmbCustomer.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading customers: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadLocations()
+        {
+            try
+            {
+                string query = "SELECT location FROM location";
+                DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
+
+                cmbLocation.DisplayMember = "Text";
+                cmbLocation.ValueMember = "Value";
+
+                cmbLocation.Items.Clear();
+                foreach (DataRow row in dt.Rows)
+                {
+                    cmbLocation.Items.Add(row["location"]);
+                }
+
+                if (cmbLocation.Items.Count > 0)
+                {
+                    cmbLocation.SelectedIndex = 0;
                 }
             }
             catch (Exception ex)
@@ -157,11 +186,11 @@ namespace CarRentalAdmin
             try
             {
                 string query = "SELECT o.*, i.payment_id, i.payment_amount, i.tax_amount, " +
-                               "i.payment_method, i.invoice_address, l.pickup_location, l.dropoff_location " +
+                               "i.payment_method, i.invoice_address, l.location " +
                                "FROM orders o " +
                                "LEFT JOIN invoice i ON o.orders_id = i.orders_id " +
                                "LEFT JOIN location l ON o.location_id = l.location_id " +
-                               "WHERE o.orders_id = " + orderId;
+                               "WHERE o.orders_id = " + orderId;    
 
                 DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
 
@@ -194,8 +223,8 @@ namespace CarRentalAdmin
                     dtpStartDate.Value = Convert.ToDateTime(row["start_date"]);
                     dtpEndDate.Value = Convert.ToDateTime(row["end_date"]);
 
-                    txtPickupLocation.Text = row["pickup_location"].ToString();
-                    txtDropoffLocation.Text = row["dropoff_location"].ToString();
+                    //txtPickupLocation.Text = row["pickup_location"].ToString();
+                    //txtDropoffLocation.Text = row["dropoff_location"].ToString();
 
                     //cmb db en to hu linq
 
@@ -211,7 +240,6 @@ namespace CarRentalAdmin
                     //cmbPaymentStatus.Text = row["payment_status"].ToString();
                     cmbPaymentStatus.Text = AppResources.PaymentStatusen.Zip(AppResources.PaymentStatushu, (en, hu) => new { en, hu })
                         .FirstOrDefault(pair => pair.en == row["payment_status"].ToString())?.hu ?? row["payment_status"].ToString();
-                    
 
                     txtDiscount.Text = row["discount_code"].ToString();
                     chkExtended.Checked = Convert.ToBoolean(row["extended_rental"]);
@@ -244,7 +272,7 @@ namespace CarRentalAdmin
         {
             //beviteli adat validálás
             if (cmbCustomer.SelectedIndex < 0 || cmbCar.SelectedIndex < 0 ||
-                string.IsNullOrEmpty(txtPickupLocation.Text) || string.IsNullOrEmpty(txtDropoffLocation.Text) ||
+                string.IsNullOrEmpty(cmbLocation.Text) ||
                 cmbStatus.SelectedIndex < 0 || cmbPaymentStatus.SelectedIndex < 0 ||
                 cmbPaymentMethod.SelectedIndex < 0)
             {
@@ -282,7 +310,7 @@ namespace CarRentalAdmin
                 int carId = Convert.ToInt32(selectedCar.Value);
 
                 // helyadat meghatározása
-                int locationId = CreateOrGetLocation(txtPickupLocation.Text, txtDropoffLocation.Text);
+                int locationId = CreateOrGetLocation(cmbLocation.Text);
 
                 if (locationId <= 0)
                 {
@@ -350,7 +378,7 @@ namespace CarRentalAdmin
 
                 int userId = Convert.ToInt32(selectedCustomer.Value);
                 int carId = Convert.ToInt32(selectedCar.Value);
-                int locationId = CreateOrGetLocation(txtPickupLocation.Text, txtDropoffLocation.Text);
+                int locationId = CreateOrGetLocation(cmbLocation.Text);
 
                 if (locationId <= 0)
                 {
@@ -398,14 +426,14 @@ namespace CarRentalAdmin
                         CreateInvoice(orderId);
                     }
 
-                    MessageBox.Show("Order updated successfully.", "Success",
+                    MessageBox.Show("Rendelés sikeresen frissítve", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update order.", "Error",
+                    MessageBox.Show("Sikretelen rendelés frissítés", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -416,18 +444,17 @@ namespace CarRentalAdmin
             }
         }
 
-        private int CreateOrGetLocation(string pickupLocation, string dropoffLocation)
+        private int CreateOrGetLocation(string Location)
         {
             try
             {
                 //létezik e már?
                 string checkQuery = "SELECT location_id FROM location WHERE " +
-                                   "pickup_location = @pickup AND dropoff_location = @dropoff";
+                                   "location = @pickup";
 
                 Dictionary<string, object> checkParams = new Dictionary<string, object>
                 {
-                    { "@pickup", pickupLocation },
-                    { "@dropoff", dropoffLocation }
+                    { "@pickup", Location }
                 };
 
                 DataTable dt = DatabaseOptimizer.ExecuteParameterizedQuery(checkQuery, checkParams);
@@ -438,13 +465,12 @@ namespace CarRentalAdmin
                 }
 
                 //új létrehozása
-                string insertQuery = "INSERT INTO location (pickup_location, dropoff_location, longitude, latitude) " +
-                                    "VALUES (@pickup, @dropoff, 0, 0)"; // alapértelmezett hosszúság és szélleségki adat 0,0
+                string insertQuery = "INSERT INTO location (location) " +
+                                    "VALUES (@pickup)";
 
                 Dictionary<string, object> insertParams = new Dictionary<string, object>
                 {
-                    { "@pickup", pickupLocation },
-                    { "@dropoff", dropoffLocation }
+                    { "@pickup", Location }
                 };
 
                 int rowsAffected = DatabaseOptimizer.ExecuteParameterizedNonQuery(insertQuery, insertParams);

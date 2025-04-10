@@ -23,12 +23,8 @@ namespace CarRentalAdmin
             LoadOrders();
             btnEditOrder.Enabled = false;
             btnCancelOrder.Enabled = false;
-
-            // Hide order details
             HideOrderDetails();
         }
-
-        // Load orders
         private void LoadOrders(string searchTerm = "", string status = "All", DateTime? date = null)
         {
             try
@@ -36,7 +32,7 @@ namespace CarRentalAdmin
                 string query =
                     "SELECT o.orders_id, u.user_name, c.car_brand, c.car_model, c.car_regnumber, " +
                     "o.start_date, o.end_date, o.rental_status, o.payment_status, " +
-                    "loc.pickup_location, i.payment_amount " +
+                    "loc.location, i.payment_amount " +
                     "FROM orders o " +
                     "JOIN user u ON o.user_id = u.user_id " +
                     "JOIN car c ON o.car_id = c.car_id " +
@@ -66,7 +62,7 @@ namespace CarRentalAdmin
                 DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
                 dgvOrders.DataSource = dt;
 
-                // Customize column headers
+                // dgv fejléc nevek (en/hu "inprogress")
                 if (dgvOrders.Columns.Count > 0)
                 {
                     dgvOrders.Columns["orders_id"].HeaderText = "Rendelés ID";
@@ -78,19 +74,21 @@ namespace CarRentalAdmin
                     dgvOrders.Columns["end_date"].HeaderText = AppResources.EndDate;
                     dgvOrders.Columns["rental_status"].HeaderText = AppResources.Status;
                     dgvOrders.Columns["payment_status"].HeaderText = AppResources.PaymentStatus;
-                    dgvOrders.Columns["pickup_location"].HeaderText = AppResources.PickupLocation;
+                    dgvOrders.Columns["location"].HeaderText = AppResources.PickupLocation;
                     dgvOrders.Columns["payment_amount"].HeaderText = AppResources.PaymentAmount;
 
-                    // Format columns
+                    // formátumok
                     dgvOrders.Columns["start_date"].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm";
                     dgvOrders.Columns["end_date"].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm";
                     dgvOrders.Columns["payment_amount"].DefaultCellStyle.Format = "C2";
+                    dgvOrders.Columns["orders_id"].Width = 30;
+                    dgvOrders.Columns["location"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
 
-                // Hide details
+                // Részletek "visible false"
                 HideOrderDetails();
 
-                // Reset selection
+                // alaphelyzet
                 selectedOrderId = 0;
                 btnEditOrder.Enabled = false;
                 btnCancelOrder.Enabled = false;
@@ -159,11 +157,10 @@ namespace CarRentalAdmin
                 selectedOrderId = Convert.ToInt32(dgvOrders.Rows[e.RowIndex].Cells["orders_id"].Value);
                 btnEditOrder.Enabled = true;
 
-                // Only allow cancellation for pending or confirmed orders
+                // "Lemondás csak függőben lévő vagy visszaigazolt rendelések esetén engedélyezett"
                 string status = dgvOrders.Rows[e.RowIndex].Cells["rental_status"].Value.ToString();
                 btnCancelOrder.Enabled = (status == "pending" || status == "confirmed");
 
-                // Load order details
                 LoadOrderDetails(selectedOrderId);
             }
         }
@@ -172,13 +169,13 @@ namespace CarRentalAdmin
         {
             try
             {
-                // Query to get detailed information about the order
+                // megrendeléssel kapcsolatos "összes info lekérése"
                 string query =
                     "SELECT o.orders_id, o.start_date, o.end_date, o.rental_status, o.payment_status, " +
                     "o.discount_code, o.extended_rental, " +
                     "u.user_name, u.user_email, u.u_phone_number, " +
                     "c.car_brand, c.car_model, c.car_year, c.car_regnumber, c.price_per_hour, c.price_per_day, " +
-                    "loc.pickup_location, loc.dropoff_location, " +
+                    "loc.location, " +
                     "i.payment_id, i.payment_amount, i.tax_amount, i.payment_method, i.payment_date, i.invoice_address " +
                     "FROM orders o " +
                     "JOIN user u ON o.user_id = u.user_id " +
@@ -193,7 +190,7 @@ namespace CarRentalAdmin
                 {
                     DataRow row = dt.Rows[0];
 
-                    // Update label values and show them
+                    // label-ek "frissítése"
                     UpdateOrderDetailsDisplay(row);
                 }
                 else
@@ -211,10 +208,9 @@ namespace CarRentalAdmin
 
         private void UpdateOrderDetailsDisplay(DataRow row)
         {
-            //panel visible
             panelOrderDetails.Visible = true;
 
-            // Order information
+            // Rendelés info
             lblOrderIdValue.Text = row["orders_id"].ToString();
             lblOrderIdLabel.Visible = true;
             lblOrderIdValue.Visible = true;
@@ -231,7 +227,7 @@ namespace CarRentalAdmin
             lblEndDateLabel.Visible = true;
             lblEndDateValue.Visible = true;
 
-            // Customer information
+            // "rendelő" informáciüi
             lblUserValue.Text = row["user_name"].ToString();
             lblUserLabel.Visible = true;
             lblUserValue.Visible = true;
@@ -248,7 +244,7 @@ namespace CarRentalAdmin
             lblDiscountCodeLabel.Visible = true;
             lblDiscountCodeValue.Visible = true;
 
-            // Car information
+            // jármű info
             lblCarValue.Text = row["car_brand"].ToString() + " " + row["car_model"].ToString() + " (" + row["car_year"].ToString() + ")";
             lblCarLabel.Visible = true;
             lblCarValue.Visible = true;
@@ -257,21 +253,20 @@ namespace CarRentalAdmin
             lblRegNumberLabel.Visible = true;
             lblRegNumberValue.Visible = true;
 
-            // Location information
-            lblPickupLocationValue.Text = row["pickup_location"].ToString();
+            //helyadatok
+            lblPickupLocationValue.Text = row["location"].ToString();
             lblPickupLocationLabel.Visible = true;
             lblPickupLocationValue.Visible = true;
-
-            lblDropoffLocationValue.Text = row["dropoff_location"].ToString();
+            lblDropoffLocationValue.Text = row["location"].ToString();
             lblDropoffLocationLabel.Visible = true;
             lblDropoffLocationValue.Visible = true;
 
-            // Payment information
+            //fizetési info
             lblPaymentStatusValue.Text = row["payment_status"].ToString();
             lblPaymentStatusLabel.Visible = true;
             lblPaymentStatusValue.Visible = true;
 
-            // Payment details (only if payment exists)
+            // fizetés részletei
             if (row["payment_id"] != DBNull.Value)
             {
                 lblPaymentMethodValue.Text = row["payment_method"].ToString();
@@ -313,10 +308,9 @@ namespace CarRentalAdmin
 
         private void HideOrderDetails()
         {
-            // Hide  panel
+            // panel és label-ek elrejtése
             panelOrderDetails.Visible = false;
 
-            // Hide labels
             lblOrderIdLabel.Visible = false;
             lblOrderIdValue.Visible = false;
             lblStatusLabel.Visible = false;

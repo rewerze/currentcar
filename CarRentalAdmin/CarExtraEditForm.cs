@@ -34,12 +34,6 @@ namespace CarRentalAdmin
             {
                 // hozzáadás
                 this.Text = AppResources.AddExtras;
-
-                // alapértelmezett értékek
-                if (cmbName.Items.Count > 0)
-                {
-                    cmbName.SelectedIndex = 0;
-                }
                 numPrice.Value = 10;
             }
         }
@@ -57,7 +51,7 @@ namespace CarRentalAdmin
 
                     // név beállítás
                     string extraName = row["extra_name"].ToString();
-                    cmbName.Text = extraName;
+                    tbxName.Text = extraName;
 
                     // ár beállítása
                     numPrice.Value = Convert.ToDecimal(row["extra_price"]);
@@ -84,7 +78,7 @@ namespace CarRentalAdmin
         private void btnSave_Click(object sender, EventArgs e)
         {
             // bevitel validálása
-            if (string.IsNullOrEmpty(cmbName.Text))
+            if (string.IsNullOrEmpty(tbxName.Text))
             {
                 AppResources.ShowMessage(
                     "Kérem írja be az extra megnevezését!",
@@ -106,7 +100,7 @@ namespace CarRentalAdmin
 
                     Dictionary<string, object> parameters = new Dictionary<string, object>
                     {
-                        { "@name", cmbName.Text },
+                        { "@name", tbxName.Text },
                         { "@price", numPrice.Value },
                         { "@extraId", extraId }
                     };
@@ -140,7 +134,7 @@ namespace CarRentalAdmin
                     Dictionary<string, object> parameters = new Dictionary<string, object>
                     {
                         { "@carId", carId },
-                        { "@name", cmbName.Text },
+                        { "@name", tbxName.Text },
                         { "@price", numPrice.Value }
                     };
 

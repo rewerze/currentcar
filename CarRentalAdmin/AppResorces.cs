@@ -118,6 +118,8 @@ namespace CarRentalAdmin
         public static string ConfirmDeleteCar = "Biztosan törölni szeretné ezt az autót? Ezt a műveletet nem lehet visszavonni.";
         public static string CarDeleteSuccess = "Az autó sikeresen törölve.";
         public static string SelectCar = "Kérjük, válasszon ki egy autót.";
+        public static string BasePrice = "Alap díj";
+        public static string Location = "Helyadat";
 
         // Car extras management
         public static string CarExtrasManagement = "Autó extrák kezelése";

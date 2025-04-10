@@ -61,6 +61,10 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRemoveImage = new System.Windows.Forms.Button();
+            this.lblBasePrice = new System.Windows.Forms.Label();
+            this.numBasePrice = new System.Windows.Forms.NumericUpDown();
+            this.cmbLocation = new System.Windows.Forms.ComboBox();
+            this.lblPickupLocation = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHourlyRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDailyRate)).BeginInit();
@@ -68,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDoors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMileage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCarImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBasePrice)).BeginInit();
             this.SuspendLayout();
             // 
             // lblBrand
@@ -85,7 +90,7 @@
             // 
             this.txtBrand.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtBrand.Location = new System.Drawing.Point(112, 16);
-            this.txtBrand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBrand.Margin = new System.Windows.Forms.Padding(2);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Size = new System.Drawing.Size(151, 23);
             this.txtBrand.TabIndex = 1;
@@ -105,7 +110,7 @@
             // 
             this.txtModel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtModel.Location = new System.Drawing.Point(112, 45);
-            this.txtModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtModel.Margin = new System.Windows.Forms.Padding(2);
             this.txtModel.Name = "txtModel";
             this.txtModel.Size = new System.Drawing.Size(151, 23);
             this.txtModel.TabIndex = 3;
@@ -125,14 +130,14 @@
             // 
             this.numYear.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numYear.Location = new System.Drawing.Point(112, 73);
-            this.numYear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numYear.Margin = new System.Windows.Forms.Padding(2);
             this.numYear.Maximum = new decimal(new int[] {
             2030,
             0,
             0,
             0});
             this.numYear.Minimum = new decimal(new int[] {
-            1990,
+            1960,
             0,
             0,
             0});
@@ -170,7 +175,7 @@
             "pickup",
             "minibusz"});
             this.cmbType.Location = new System.Drawing.Point(112, 102);
-            this.cmbType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbType.Margin = new System.Windows.Forms.Padding(2);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(151, 23);
             this.cmbType.TabIndex = 7;
@@ -197,7 +202,7 @@
             "megfelelő",
             "gyenge"});
             this.cmbCondition.Location = new System.Drawing.Point(112, 130);
-            this.cmbCondition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbCondition.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCondition.Name = "cmbCondition";
             this.cmbCondition.Size = new System.Drawing.Size(151, 23);
             this.cmbCondition.TabIndex = 9;
@@ -206,7 +211,7 @@
             // 
             this.lblHourlyRate.AutoSize = true;
             this.lblHourlyRate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblHourlyRate.Location = new System.Drawing.Point(15, 158);
+            this.lblHourlyRate.Location = new System.Drawing.Point(15, 188);
             this.lblHourlyRate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHourlyRate.Name = "lblHourlyRate";
             this.lblHourlyRate.Size = new System.Drawing.Size(39, 15);
@@ -216,10 +221,10 @@
             // numHourlyRate
             // 
             this.numHourlyRate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numHourlyRate.Location = new System.Drawing.Point(112, 158);
-            this.numHourlyRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numHourlyRate.Location = new System.Drawing.Point(112, 186);
+            this.numHourlyRate.Margin = new System.Windows.Forms.Padding(2);
             this.numHourlyRate.Maximum = new decimal(new int[] {
-            1000,
+            30000,
             0,
             0,
             0});
@@ -241,7 +246,7 @@
             // 
             this.lblDailyRate.AutoSize = true;
             this.lblDailyRate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblDailyRate.Location = new System.Drawing.Point(15, 187);
+            this.lblDailyRate.Location = new System.Drawing.Point(15, 215);
             this.lblDailyRate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDailyRate.Name = "lblDailyRate";
             this.lblDailyRate.Size = new System.Drawing.Size(45, 15);
@@ -251,10 +256,10 @@
             // numDailyRate
             // 
             this.numDailyRate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numDailyRate.Location = new System.Drawing.Point(112, 187);
-            this.numDailyRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numDailyRate.Location = new System.Drawing.Point(112, 213);
+            this.numDailyRate.Margin = new System.Windows.Forms.Padding(2);
             this.numDailyRate.Maximum = new decimal(new int[] {
-            10000,
+            30000,
             0,
             0,
             0});
@@ -276,7 +281,7 @@
             // 
             this.lblRegNumber.AutoSize = true;
             this.lblRegNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblRegNumber.Location = new System.Drawing.Point(15, 215);
+            this.lblRegNumber.Location = new System.Drawing.Point(15, 242);
             this.lblRegNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRegNumber.Name = "lblRegNumber";
             this.lblRegNumber.Size = new System.Drawing.Size(61, 15);
@@ -286,8 +291,8 @@
             // txtRegNumber
             // 
             this.txtRegNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtRegNumber.Location = new System.Drawing.Point(112, 215);
-            this.txtRegNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRegNumber.Location = new System.Drawing.Point(112, 242);
+            this.txtRegNumber.Margin = new System.Windows.Forms.Padding(2);
             this.txtRegNumber.Name = "txtRegNumber";
             this.txtRegNumber.Size = new System.Drawing.Size(151, 23);
             this.txtRegNumber.TabIndex = 15;
@@ -296,7 +301,7 @@
             // 
             this.lblSeats.AutoSize = true;
             this.lblSeats.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblSeats.Location = new System.Drawing.Point(15, 244);
+            this.lblSeats.Location = new System.Drawing.Point(15, 271);
             this.lblSeats.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSeats.Name = "lblSeats";
             this.lblSeats.Size = new System.Drawing.Size(41, 15);
@@ -306,8 +311,8 @@
             // numSeats
             // 
             this.numSeats.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numSeats.Location = new System.Drawing.Point(112, 244);
-            this.numSeats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numSeats.Location = new System.Drawing.Point(112, 271);
+            this.numSeats.Margin = new System.Windows.Forms.Padding(2);
             this.numSeats.Maximum = new decimal(new int[] {
             20,
             0,
@@ -331,7 +336,7 @@
             // 
             this.lblDoors.AutoSize = true;
             this.lblDoors.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblDoors.Location = new System.Drawing.Point(15, 272);
+            this.lblDoors.Location = new System.Drawing.Point(15, 299);
             this.lblDoors.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDoors.Name = "lblDoors";
             this.lblDoors.Size = new System.Drawing.Size(35, 15);
@@ -341,8 +346,8 @@
             // numDoors
             // 
             this.numDoors.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numDoors.Location = new System.Drawing.Point(112, 272);
-            this.numDoors.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numDoors.Location = new System.Drawing.Point(112, 299);
+            this.numDoors.Margin = new System.Windows.Forms.Padding(2);
             this.numDoors.Maximum = new decimal(new int[] {
             10,
             0,
@@ -366,7 +371,7 @@
             // 
             this.lblMileage.AutoSize = true;
             this.lblMileage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblMileage.Location = new System.Drawing.Point(15, 301);
+            this.lblMileage.Location = new System.Drawing.Point(15, 328);
             this.lblMileage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMileage.Name = "lblMileage";
             this.lblMileage.Size = new System.Drawing.Size(101, 15);
@@ -376,8 +381,8 @@
             // numMileage
             // 
             this.numMileage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numMileage.Location = new System.Drawing.Point(120, 299);
-            this.numMileage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numMileage.Location = new System.Drawing.Point(120, 326);
+            this.numMileage.Margin = new System.Windows.Forms.Padding(2);
             this.numMileage.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -409,7 +414,7 @@
             "hibrid",
             "gáz"});
             this.cmbFuelType.Location = new System.Drawing.Point(393, 11);
-            this.cmbFuelType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbFuelType.Margin = new System.Windows.Forms.Padding(2);
             this.cmbFuelType.Name = "cmbFuelType";
             this.cmbFuelType.Size = new System.Drawing.Size(151, 23);
             this.cmbFuelType.TabIndex = 23;
@@ -435,7 +440,7 @@
             "félautomata",
             "CVT"});
             this.cmbTransmission.Location = new System.Drawing.Point(370, 42);
-            this.cmbTransmission.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbTransmission.Margin = new System.Windows.Forms.Padding(2);
             this.cmbTransmission.Name = "cmbTransmission";
             this.cmbTransmission.Size = new System.Drawing.Size(151, 23);
             this.cmbTransmission.TabIndex = 25;
@@ -455,7 +460,7 @@
             // 
             this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtDescription.Location = new System.Drawing.Point(360, 73);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(226, 82);
@@ -477,7 +482,7 @@
             this.cmbInsurance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbInsurance.FormattingEnabled = true;
             this.cmbInsurance.Location = new System.Drawing.Point(360, 162);
-            this.cmbInsurance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbInsurance.Margin = new System.Windows.Forms.Padding(2);
             this.cmbInsurance.Name = "cmbInsurance";
             this.cmbInsurance.Size = new System.Drawing.Size(151, 23);
             this.cmbInsurance.TabIndex = 29;
@@ -500,7 +505,7 @@
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkActive.Location = new System.Drawing.Point(360, 191);
-            this.chkActive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkActive.Margin = new System.Windows.Forms.Padding(2);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(15, 14);
             this.chkActive.TabIndex = 31;
@@ -521,7 +526,7 @@
             // 
             this.btnAddImage.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnAddImage.Location = new System.Drawing.Point(360, 215);
-            this.btnAddImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddImage.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddImage.Name = "btnAddImage";
             this.btnAddImage.Size = new System.Drawing.Size(113, 24);
             this.btnAddImage.TabIndex = 33;
@@ -536,7 +541,7 @@
             this.lstImages.FormattingEnabled = true;
             this.lstImages.ItemHeight = 15;
             this.lstImages.Location = new System.Drawing.Point(360, 248);
-            this.lstImages.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstImages.Margin = new System.Windows.Forms.Padding(2);
             this.lstImages.Name = "lstImages";
             this.lstImages.Size = new System.Drawing.Size(226, 94);
             this.lstImages.TabIndex = 34;
@@ -546,12 +551,13 @@
             // 
             this.picCarImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picCarImage.Location = new System.Drawing.Point(219, 242);
-            this.picCarImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCarImage.Margin = new System.Windows.Forms.Padding(2);
             this.picCarImage.Name = "picCarImage";
             this.picCarImage.Size = new System.Drawing.Size(136, 114);
             this.picCarImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picCarImage.TabIndex = 35;
             this.picCarImage.TabStop = false;
+            this.picCarImage.Visible = false;
             // 
             // btnSave
             // 
@@ -560,8 +566,8 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(219, 382);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Location = new System.Drawing.Point(217, 417);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 28);
             this.btnSave.TabIndex = 36;
@@ -576,8 +582,8 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(316, 382);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(314, 417);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 37;
@@ -589,7 +595,7 @@
             // 
             this.btnRemoveImage.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnRemoveImage.Location = new System.Drawing.Point(477, 215);
-            this.btnRemoveImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRemoveImage.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemoveImage.Name = "btnRemoveImage";
             this.btnRemoveImage.Size = new System.Drawing.Size(109, 24);
             this.btnRemoveImage.TabIndex = 38;
@@ -597,11 +603,68 @@
             this.btnRemoveImage.UseVisualStyleBackColor = true;
             this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
             // 
+            // lblBasePrice
+            // 
+            this.lblBasePrice.AutoSize = true;
+            this.lblBasePrice.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblBasePrice.Location = new System.Drawing.Point(15, 162);
+            this.lblBasePrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBasePrice.Name = "lblBasePrice";
+            this.lblBasePrice.Size = new System.Drawing.Size(47, 15);
+            this.lblBasePrice.TabIndex = 38;
+            this.lblBasePrice.Text = "Alap díj";
+            // 
+            // numBasePrice
+            // 
+            this.numBasePrice.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numBasePrice.Location = new System.Drawing.Point(112, 158);
+            this.numBasePrice.Margin = new System.Windows.Forms.Padding(2);
+            this.numBasePrice.Maximum = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
+            this.numBasePrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numBasePrice.Name = "numBasePrice";
+            this.numBasePrice.Size = new System.Drawing.Size(90, 23);
+            this.numBasePrice.TabIndex = 39;
+            this.numBasePrice.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // cmbLocation
+            // 
+            this.cmbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cmbLocation.FormattingEnabled = true;
+            this.cmbLocation.Location = new System.Drawing.Point(138, 361);
+            this.cmbLocation.Name = "cmbLocation";
+            this.cmbLocation.Size = new System.Drawing.Size(392, 23);
+            this.cmbLocation.TabIndex = 40;
+            // 
+            // lblPickupLocation
+            // 
+            this.lblPickupLocation.AutoSize = true;
+            this.lblPickupLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblPickupLocation.Location = new System.Drawing.Point(17, 364);
+            this.lblPickupLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPickupLocation.Name = "lblPickupLocation";
+            this.lblPickupLocation.Size = new System.Drawing.Size(116, 15);
+            this.lblPickupLocation.TabIndex = 41;
+            this.lblPickupLocation.Text = "Felvétel/leadás helye";
+            // 
             // CarEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 422);
+            this.ClientSize = new System.Drawing.Size(600, 456);
+            this.Controls.Add(this.cmbLocation);
+            this.Controls.Add(this.lblPickupLocation);
             this.Controls.Add(this.btnRemoveImage);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -641,8 +704,10 @@
             this.Controls.Add(this.lblModel);
             this.Controls.Add(this.txtBrand);
             this.Controls.Add(this.lblBrand);
+            this.Controls.Add(this.numBasePrice);
+            this.Controls.Add(this.lblBasePrice);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CarEditForm";
@@ -656,6 +721,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDoors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMileage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCarImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBasePrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -700,5 +766,9 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnRemoveImage;
+        private System.Windows.Forms.Label lblBasePrice;
+        private System.Windows.Forms.NumericUpDown numBasePrice;
+        private System.Windows.Forms.ComboBox cmbLocation;
+        private System.Windows.Forms.Label lblPickupLocation;
     }
 }
