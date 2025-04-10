@@ -11,7 +11,7 @@ function FAQ() {
                         <summary className="display-5">Fizetés után, mi a teendőm?
                             <hr className="w-100" />
                         </summary>
-                        <p>Fizetés után el kell menned a kijelölt depóba (ezt az autó adatlapján megtalálod) és fizetési módszertől függően az ott dolgozó munkatársunknál elintézi a papírmunkákat.</p>
+                        <p>Fizetés után el kell menned a kijelölt depóba (ezt az autó adatlapján megtalálod) és fizetési módszertől függően az ott dolgozó munkatársunk elintézi a papírmunkákat.</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
@@ -19,7 +19,7 @@ function FAQ() {
                         <summary className="display-5">Milyen dokumentumokra van szükségem a bérléshez?
                             <hr className="w-100" />
                         </summary>
-                        <p>Ahhoz, hogy autót bérelhessen nálunk, szükséges, hogy legyen jogosítványa és meglegyen az elérhetősége. Minden egyéb követelényt <a href="/kovetelmenyek">itt</a> tud megtekinteni!</p>
+                        <p>Ahhoz, hogy autót bérelhessen nálunk, szükséges, hogy legyen jogosítványa és meglegyen az elérhetősége. Minden egyéb követelményt <a href="/kovetelmenyek">itt</a> tud megtekinteni!</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
@@ -27,7 +27,7 @@ function FAQ() {
                         <summary className="display-5">Hogyan történik a bérlés folyamata?
                             <hr className="w-100" />
                         </summary>
-                        <p>A bérléshez elsősorban be kell jelentkeznie, majd a szükséges dokumentumok adja meg a profilján és ezután már szabadon bérelhet bármilyen autót amit talál nálunk!</p>
+                        <p>A bérléshez elsősorban be kell jelentkeznie, majd a szükséges dokumentumokat megadni a profilján és ezután már szabadon bérelhet bármilyen autót amit talál nálunk!</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
@@ -43,15 +43,15 @@ function FAQ() {
                         <summary className="display-5">Milyen módon tudom fizetni a bérlést?
                             <hr className="w-100" />
                         </summary>
-                        <p>Online és helyszínen egyaránt ki tudod fizetni az autó árát kézpénzben vagy kártyával!</p>
+                        <p>Online és helyszínen egyaránt ki tudod fizetni az autó árát készpénzben vagy kártyával!</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
                     <details>
-                        <summary className="display-5">Mik a bérlés időtartama és költségei?
+                        <summary className="display-5">Mik a bérlés időtartamai és költségei?
                             <hr className="w-100" />
                         </summary>
-                        <p>Alapvetőn a bérlés napokra van mérve, van egy napi ár ki írva, nagyobban meg 1heti ár.</p>
+                        <p>A bérlés időtartalma a bérbeadó adja meg, hogy meddig lehet (ezt megtalálja az auó adatlapján), eddig az időpontig, bármeddig kibérelhető az autót aminek elsősorban az alapárát kell kifizetni, majd után felszámolunk önnek egy óra majd egy napi díjjat amit autótól függően szintén eltér.</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
@@ -59,7 +59,7 @@ function FAQ() {
                         <summary className="display-5">Mi történik, ha késlekedem a visszavitelkor?
                             <hr className="w-100" />
                         </summary>
-                        <p>Amennyivel az emberünk túllépi a vissza hozási időt óránként az óránkénti ár 2x-esét kell fizetni!</p>
+                        <p>Amennyiben az bérlő túllépi a vissza hozási időt óránként az óránkénti ár 2x-esét kell fizetni!</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">

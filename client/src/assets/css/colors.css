@@ -66,7 +66,7 @@ body {
     background-color: #ECDFCC;
 }
 
-table {
+table, tbody, thead, tr, td, th {
     background-color: #fef8f1 !important;
 }
 

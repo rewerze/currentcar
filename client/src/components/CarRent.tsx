@@ -7,7 +7,7 @@ function CarRent() {
                     <div className="card">
                         <div className="card-body">
                             <h2 className="text-center">Jelentkezz be!</h2>
-                            <p>Fontos számunkra, hogy minden felhasználó biztonságosan érezze magát az oldalon és ahhoz hogy ezt biztosítsuk, mindenkinek kötelező létrhoznia egy saját profilt!</p>
+                            <p>Fontos számunkra, hogy minden felhasználó biztonságosan érezze magát az oldalon és ahhoz hogy ezt biztosítsuk, mindenkinek kötelező létrehoznia egy saját profilt!</p>
                         </div>
                         <div className="d-flex justify-content-center p-2">
                             <a href="/register" className="btn btn-primary w-100 mt-3">Profil létrehozása</a>
@@ -25,7 +25,7 @@ function CarRent() {
                     <div className="card">
                         <div className="card-body">
                             <h2 className="text-center">Nézz körbe!</h2>                            
-                            <p>Amint minden követelménynek megfelelt és be van jelentkezve, nézzen körbe az "Összes autó" menüpontban és vállasszon magának egy járművet!</p>
+                            <p>Amint minden követelménynek megfelelt és be van jelentkezve, nézzen körbe az "Összes autó" menüpontban és válasszon magának egy járművet!</p>
                         </div>
                             <div className="d-flex justify-content-center p-2">
                                 <a href="/osszesauto" className="btn btn-primary w-100 mt-3">Autóink</a>

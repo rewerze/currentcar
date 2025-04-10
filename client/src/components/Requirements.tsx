@@ -28,7 +28,7 @@ function Requirements() {
 
     useEffect(() => {
         if (!user && !loading) {
-            navigate("/")
+            navigate("/login")
         }
     }, [user, loading])
 
