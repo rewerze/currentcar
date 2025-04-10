@@ -336,7 +336,7 @@ function AllCar() {
                 onChange={handleSearchChange}
               />
               <button
-                className="btn btn-danger"
+                className="btn btn-danger reset-search"
                 onClick={() => {
                   setFilters({
                     search: "",

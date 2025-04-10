@@ -507,4 +507,8 @@
     .notif-card-content p {
         max-width: 55%;
     }
+
+    .invoice-container iframe {
+        height: 990px !important;
+    }
 }
