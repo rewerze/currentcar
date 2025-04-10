@@ -224,7 +224,7 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
       ) VALUES (?, ?, 'unread', NOW())`,
       [
         userId,
-        `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked. Invoice can be accessed at ${process.env.FRONTEND_URL}/invoice/${orderId}`,
+        `Your car rental for ${carDetails[0].car_brand} ${carDetails[0].car_model} has been successfully booked. Invoice can be accessed <a href="${process.env.FRONTEND_URL}/invoice/${orderId}">here</a>`,
       ]
     );
 

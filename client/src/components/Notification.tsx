@@ -64,7 +64,7 @@ function Notification() {
                         <div className="col-md-8">
                             <div className="notif-message">
                                 <h2>{title}</h2>
-                                <p>{description}</p>
+                                <p dangerouslySetInnerHTML={{ __html: description }}></p>
                                 <a className="btn btn-primary" href="#top">Vissza</a>
                             </div>
                         </div>

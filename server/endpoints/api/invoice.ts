@@ -3,15 +3,15 @@ import { AuthenticatedRequest } from "../../interfaces/User";
 import db from "../../db/connection";
 
 export const getInvoice = async (
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<void> => {
-    try {
-        const { orderId } = req.params;
-        const userId = (req as AuthenticatedRequest).user.user_id;
+  try {
+    const { orderId } = req.params;
+    const userId = (req as AuthenticatedRequest).user.user_id;
 
-        const order = await db.query(
-            `SELECT o.*, c.car_brand, c.car_model, c.car_regnumber, 
+    const order = await db.query(
+      `SELECT o.*, c.car_brand, c.car_model, c.car_regnumber, 
                 u.user_name, u.user_email, u.u_phone_number,
                 l.location,
                 COALESCE(po.amount, i.payment_amount) as total_amount,
@@ -27,33 +27,41 @@ export const getInvoice = async (
          WHERE o.orders_id = ? AND (o.user_id = ? OR ? IN (
            SELECT user_id FROM car_user WHERE car_id = o.car_id
          ))`,
-            [orderId, userId, userId]
-        );
+      [orderId, userId, userId]
+    );
 
-        if (!order || !Array.isArray(order) || order.length === 0) {
-            res.status(404).json({ error: "Invoice not found or access denied" });
-            return;
-        }
+    if (!order || !Array.isArray(order) || order.length === 0) {
+      res.status(404).json({ error: "Invoice not found or access denied" });
+      return;
+    }
 
-        const invoiceData = (order[0] as any);
+    const invoiceData = order[0] as any;
 
-        const totalAmount = Math.abs(Number(invoiceData.total_amount) || 0);
-        const taxAmount = Math.abs(Number(invoiceData.tax_amount) || 0);
-        const insuranceFee = Math.abs(Number(invoiceData.insurance_fee) || 0);
+    const totalAmount = Math.abs(Number(invoiceData.total_amount) || 0);
+    const taxAmount = Math.abs(Number(invoiceData.tax_amount) || 0);
+    const insuranceFee = Math.abs(Number(invoiceData.insurance_fee) || 0);
 
-        const baseRentalAmount = totalAmount - taxAmount - insuranceFee;
+    const baseRentalAmount = totalAmount - taxAmount - insuranceFee;
 
-        const invoiceNumber = `INV-${orderId}-${Date.now().toString().substr(-6)}`;
+    const invoiceNumber = `INV-${orderId}-${Date.now().toString().substr(-6)}`;
 
-        const startDate = new Date(invoiceData.start_date);
-        const endDate = new Date(invoiceData.end_date);
-        const days = Math.max(1, Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)));
+    const startDate = new Date(invoiceData.start_date);
+    const endDate = new Date(invoiceData.end_date);
+    const days = Math.max(
+      1,
+      Math.ceil(
+        Math.abs(endDate.getTime() - startDate.getTime()) /
+          (1000 * 60 * 60 * 24)
+      )
+    );
 
-        const displayDates = [startDate, endDate].sort((a, b) => a.getTime() - b.getTime());
-        const displayStartDate = displayDates[0];
-        const displayEndDate = displayDates[1];
+    const displayDates = [startDate, endDate].sort(
+      (a, b) => a.getTime() - b.getTime()
+    );
+    const displayStartDate = displayDates[0];
+    const displayEndDate = displayDates[1];
 
-        const htmlInvoice = `
+    const htmlInvoice = `
         <!DOCTYPE html>
         <html>
         <head>
@@ -133,7 +141,7 @@ export const getInvoice = async (
                 <h3>Bill To:</h3>
                 <p>Name: ${invoiceData.user_name}</p>
                 <p>Email: ${invoiceData.user_email}</p>
-                <p>Phone: ${invoiceData.u_phone_number || 'N/A'}</p>
+                <p>Phone: ${invoiceData.u_phone_number || "N/A"}</p>
               </div>
               <div>
                 <h3>Rental Details:</h3>
@@ -155,21 +163,33 @@ export const getInvoice = async (
               <tbody>
                 <tr>
                   <td>Car Rental</td>
-                  <td>${invoiceData.car_brand} ${invoiceData.car_model} (${invoiceData.car_regnumber})</td>
+                  <td>${invoiceData.car_brand} ${invoiceData.car_model} (${
+      invoiceData.car_regnumber
+    })</td>
                   <td>${baseRentalAmount.toFixed(2)} HUF</td>
                 </tr>
-                ${invoiceData.insurance_provider ? `
+                ${
+                  invoiceData.insurance_provider
+                    ? `
                 <tr>
                   <td>Insurance</td>
-                  <td>${invoiceData.insurance_provider} - ${invoiceData.coverage_details}</td>
+                  <td>${invoiceData.insurance_provider} - ${
+                        invoiceData.coverage_details
+                      }</td>
                   <td>${insuranceFee.toFixed(2)} HUF</td>
-                </tr>` : ''}
-                ${taxAmount > 0 ? `
+                </tr>`
+                    : ""
+                }
+                ${
+                  taxAmount > 0
+                    ? `
                 <tr>
                   <td>Tax</td>
                   <td></td>
                   <td>${taxAmount.toFixed(2)} HUF</td>
-                </tr>` : ''}
+                </tr>`
+                    : ""
+                }
                 <tr class="total-row">
                   <td colspan="2">Total</td>
                   <td>${totalAmount.toFixed(2)} HUF</td>
@@ -183,17 +203,13 @@ export const getInvoice = async (
           </div>
           
           <script>
-            // Simple function to trigger PDF download using browser's print functionality
             function generatePDF() {
 
-              
-              // Print with a different name
               const originalTitle = document.title;
               document.title = 'Invoice_${invoiceNumber}.pdf';
               
               window.print();
               
-              // Restore elements
               buttons.forEach(btn => btn.style.display = 'block');
               document.title = originalTitle;
               document.head.removeChild(style);
@@ -203,11 +219,10 @@ export const getInvoice = async (
         </html>
       `;
 
-        res.setHeader('Content-Type', 'text/html');
-        res.send(htmlInvoice);
-
-    } catch (error) {
-        console.error("Error generating invoice:", error);
-        res.status(500).json({ error: "Failed to generate invoice" });
-    }
+    res.setHeader("Content-Type", "text/html");
+    res.send(htmlInvoice);
+  } catch (error) {
+    console.error("Error generating invoice:", error);
+    res.status(500).json({ error: "Failed to generate invoice" });
+  }
 };

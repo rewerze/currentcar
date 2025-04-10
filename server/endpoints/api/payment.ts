@@ -295,9 +295,9 @@ export const captureOrder = async (
             order.start_date
           ).toLocaleDateString()} to ${new Date(
             order.end_date
-          ).toLocaleDateString()} has been confirmed. Invoice can be accessed at ${
+          ).toLocaleDateString()} has been confirmed. Invoice can be accessed <a href="${
             process.env.FRONTEND_URL
-          }/invoice/${orderId}`,
+          }/invoice/${orderId}">here</a>`,
           "unread",
         ]
       );
