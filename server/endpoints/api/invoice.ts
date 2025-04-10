@@ -122,6 +122,20 @@ export const getInvoice = async (
               font-size: 16px;
               margin-top: 20px;
             }
+
+            h2{
+              color: darkgray;
+            }
+
+            .company-top {
+              margin-top: 3rem !important;
+            }
+
+            .company {
+              padding: 0px !important;
+              color: darkgray;
+            }
+
             @media print {
               .print-button {
                 display: none;
@@ -132,7 +146,7 @@ export const getInvoice = async (
         <body>
         <div class="invoice-container">
           <div class="invoice-header">
-            <!-- header remains the same -->
+            <h2>Currentcar rendelés számla #${orderId}</h2>
           </div>
           
           <div class="invoice-body">
@@ -196,6 +210,11 @@ export const getInvoice = async (
                 </tr>
               </tbody>
             </table>
+
+            <p class="company company-top"><b>Eladó részletei: CurRentCar Magyarország</b><p>
+            <p class="company">Cég azonosító:<p>
+            <p class="company">Adószám:<p>
+            <p class="company">Cím: Budapest, Üteg u. 15, 1139<p>
           </div>
             
             <button class="print-button" onclick="window.print()">Print Invoice</button>

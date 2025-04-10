@@ -17,7 +17,6 @@ import Contact from "./components/Contact.tsx";
 import AboutUs from "./components/AboutUs.tsx";
 import CarRent from "./components/CarRent.tsx";
 import FAQ from "./components/FAQ.tsx";
-import Security from "./components/Security.tsx";
 import Requirements from "./components/Requirements.tsx";
 import EditProfile from "./components/EditProfile.tsx";
 import { LanguageProvider } from "./contexts/LanguageContext.tsx";
@@ -90,22 +89,13 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/berles" element={<CarRent />} />{" "}
               {/*  AUTÓ BÉRLÉS */}
               <Route path="/gyik" element={<FAQ />} /> {/*  GYAKORI KÉRDÉSEK */}
-              <Route path="/biztonsag" element={<Security />} />{" "}
-              {/*  BIZTONSÁG */}
               <Route path="/kovetelmenyek" element={<Requirements />} />{" "}
               {/*  KÖVETELMENYEK */}
               <Route path="/profil/modositas" element={<EditProfile />} />{" "}
               {/*  FELAHSZNÁLÓI PROFIL MÓDOSÍTÁS */}
               <Route path="/profil/ertesitesek" element={<Notification />} />{" "}
-              <Route
-                path="/profil/profilkep"
-                element={<ProfilePicture />}
-              />{" "}
-              <Route
-                path="/invoice/:id"
-                element={<Invoice />}
-              />{" "}
-              {/*  PROFILKÉP MÓDOSÍTÁS */}
+              <Route path="/profil/profilkep" element={<ProfilePicture />} />{" "} {/*  PROFILKÉP MÓDOSÍTÁS */}
+              <Route path="/invoice/:id" element={<Invoice />} />{" "}
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />

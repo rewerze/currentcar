@@ -167,7 +167,7 @@ function App() {
   return (
     <>
       {/* ############################
-    #           GOOGLE MAP         #
+    #           DEPÓ HELYEK         #
     ############################ */}
       <main>
         <section id="kezdes">

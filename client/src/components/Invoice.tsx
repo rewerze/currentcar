@@ -43,7 +43,7 @@ function Invoice() {
                         srcDoc={invoiceHtml}
                         style={{
                             width: "100%",
-                            height: "800px",
+                            height: "830px",
                             border: "none",
                             overflow: "auto"
                         }}

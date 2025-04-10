@@ -27,7 +27,7 @@ function Profile() {
   const { notifications } = useNotifications();
   const [notificationCount, setNotificationCount] = useState<number>(0);
   const [rentHistory, setRentHistory] = useState<RentHistory[]>([]);
-  const [activeTab, setActiveTab] = useState<'rented' | 'uploaded' | 'history'>('uploaded');
+  const [activeTab, setActiveTab] = useState<'rented' | 'uploaded' | 'history'>('rented');
 
   useEffect(() => {
     const fetchRentHistory = async () => {
