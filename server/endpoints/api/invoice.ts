@@ -66,9 +66,9 @@ export const getInvoice = async (
               padding: 20px;
             }
             .invoice-container {
+              background-color: white !important;
               max-width: 800px;
               margin: 0 auto;
-              border: 1px solid #eee;
               padding: 20px;
             }
             .invoice-header {
@@ -76,7 +76,7 @@ export const getInvoice = async (
               justify-content: space-between;
               margin-bottom: 20px;
               padding-bottom: 20px;
-              border-bottom: 1px solid #eee;
+              border-bottom: 1px solid lightgray;
             }
             .invoice-body {
               margin-bottom: 30px;
@@ -86,22 +86,27 @@ export const getInvoice = async (
               font-weight: bold;
               margin-top: 30px;
               padding-top: 10px;
-              border-top: 1px solid #eee;
+              border-top: 1px solid lightgray;
             }
             table {
               width: 100%;
               border-collapse: collapse;
             }
+
+            table th {
+              border-top: 1px solid gray; 
+              border-bottom: 1px solid gray; 
+            }
+
             table th, table td {
               padding: 10px;
               text-align: left;
-              border-bottom: 1px solid #eee;
             }
             .total-row td {
               font-weight: bold;
             }
             .print-button {
-              background: #4CAF50;
+              background: #198754;
               color: white;
               border: none;
               padding: 10px 20px;
@@ -180,14 +185,7 @@ export const getInvoice = async (
           <script>
             // Simple function to trigger PDF download using browser's print functionality
             function generatePDF() {
-              // Add a stylesheet for printing
-              const style = document.createElement('style');
-              style.textContent = '@page { size: auto; margin: 0mm; }';
-              document.head.appendChild(style);
-              
-              // Hide the buttons
-              const buttons = document.querySelectorAll('.print-button');
-              buttons.forEach(btn => btn.style.display = 'none');
+
               
               // Print with a different name
               const originalTitle = document.title;

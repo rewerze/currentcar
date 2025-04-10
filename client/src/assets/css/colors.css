@@ -145,3 +145,7 @@ input::placeholder, select, textarea::placeholder {
 .pagination {
     gap: 3px;
 }
+
+.invoice-body iframe{
+    background-color: white !important;
+}

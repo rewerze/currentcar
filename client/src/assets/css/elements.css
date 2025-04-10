@@ -798,3 +798,12 @@ details {
     padding-right: 12rem;
     padding-left: 12rem;
 }
+
+.history p {
+    white-space: wrap !important;
+    margin-bottom: 0px !important;
+}
+
+.history.profile-car-card-body {
+    max-height: 31rem !important;
+}

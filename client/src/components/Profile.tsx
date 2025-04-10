@@ -334,8 +334,8 @@ function Profile() {
                     rentHistory.length > 0 ? (
                       <div className="profile-car">
                         {rentHistory.map((rental, index) => (
-                          <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${rental.car_id}`)}>
-                            <div className="profile-car-card-body bg-dark">
+                          <div key={index} className="profile-car-card history" onClick={() => navigate(`/adatlap/${rental.car_id}`)}>
+                            <div className="profile-car-card-body bg-dark history">
                               <img
                                 src={
                                   rental.car_id
@@ -348,13 +348,13 @@ function Profile() {
                               <h3 className="text-center">
                                 {rental.car_brand} {rental.car_model}
                               </h3>
-                              <p>
+                              <p className="m-0">
                                 <b>{t('rentalDates', 'Profile')}:</b> {new Date(rental.start_date).toLocaleDateString()} - {new Date(rental.end_date).toLocaleDateString()}
                               </p>
-                              <p>
+                              <p className="m-0">
                                 <b>{t('status', 'Profile')}:</b> <span className="badge bg-info">{rental.rental_status}</span>
                               </p>
-                              <p>
+                              <p className="m-0">
                                 <b>{t('payment', 'Profile')}:</b> <span className={`badge ${rental.payment_status === 'paid' ? 'bg-success' : 'bg-warning'}`}>{rental.payment_status}</span>
                               </p>
                               <div className="profile-car-btn">

@@ -1,6 +1,7 @@
 @media only screen and (max-width: 1375px) {
     .profile-car {
-        justify-content: center;
+        justify-content: start;
+        gap: 0.5rem;
     }
 
     #miert_a_currentcar .row {
@@ -19,6 +20,10 @@
     .big-table td {
         padding-left: 7rem;
         padding-right: 7rem;
+    }
+
+    .history.profile-car-card {
+        width: 32% !important;
     }
 }
 
@@ -71,6 +76,11 @@
     .profile-car {
         gap: 5px;
         width: 90%;
+        justify-content: center;
+    }
+
+    .history.profile-car-card {
+        width: 45% !important;
     }
 
     .car-rent {
@@ -394,6 +404,10 @@
 }
 
 @media only screen and (max-width: 576px) {
+    .history.profile-car-card {
+        width: 100% !important;
+    }
+
     .profile-tab-content {
         justify-content: center;
     }
