@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent, useRef } from "react";
 import carDefaultImage from "../assets/img/nepszeru_auto.png";
 import { FilterState } from "./interfaces/FilterState";
 import { CarInfo as Car } from "./interfaces/Car";
@@ -28,9 +28,28 @@ function AllCar() {
   }, [loadedNamespaces, loadNamespace]);
 
   const [cars, setCars] = useState<Car[]>([]);
+  // Store all available options from initial load
+  const [allOptions, setAllOptions] = useState<Record<string, string[]>>({
+    car_brand: [],
+    car_type: [],
+    car_condition: [],
+    transmission_type: [],
+    fuel_type: [],
+    car_year: [],
+  });
+  // Store dynamically filtered options based on selected filters
+  const [filteredOptions, setFilteredOptions] = useState<Record<string, string[]>>({
+    car_brand: [],
+    car_type: [],
+    car_condition: [],
+    transmission_type: [],
+    fuel_type: [],
+    car_year: [],
+  });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  // Store all cars data for client-side filtering
+  const allCarsRef = useRef<Car[]>([]);
 
   const [pagination, setPagination] = useState<PaginationData>({
     total: 0,
@@ -86,13 +105,35 @@ function AllCar() {
     return value;
   };
 
-  const fetchCars = async (page = 1) => {
+  // This function gets all available unique options from the initial data load
+  const extractUniqueOptions = (data: Car[]) => {
+    const options: Record<string, string[]> = {
+      car_brand: [],
+      car_type: [],
+      car_condition: [],
+      transmission_type: [],
+      fuel_type: [],
+      car_year: [],
+    };
+
+    Object.keys(options).forEach(field => {
+      const fieldOptions = [...new Set(
+        data
+          .map((car) => car[field as keyof Car])
+          .filter((value) => value !== undefined && value !== null)
+          .map((value) => String(value))
+      )];
+      options[field as keyof typeof options] = fieldOptions;
+    });
+
+    return options;
+  };
+
+  const fetchCars = async (page = 1, isInitialLoad = false) => {
     try {
       setLoading(true);
 
-
       const queryParams = new URLSearchParams();
-
 
       queryParams.append("page", page.toString());
       queryParams.append("limit", pagination.limit.toString());
@@ -128,6 +169,12 @@ function AllCar() {
 
       setCars(result.data);
       setPagination(result.pagination);
+
+      // On initial load, store all possible filter options
+      if (isInitialLoad && result.data.length > 0) {
+        setAllOptions(extractUniqueOptions(result.data));
+      }
+
       setLoading(false);
     } catch (error) {
       setError((error as Error).message);
@@ -135,6 +182,80 @@ function AllCar() {
     }
   };
 
+  // Function to update available options based on current filter selection
+  const updateFilteredOptions = (currentFilters: FilterState) => {
+    // Skip if we don't have all cars data yet
+    if (allCarsRef.current.length === 0) return;
+    
+    // Start with all cars
+    let filteredCars = [...allCarsRef.current];
+    
+    // Apply each active filter
+    if (currentFilters.brand !== "Összes" && currentFilters.brand !== "All") {
+      filteredCars = filteredCars.filter(car => car.car_brand === currentFilters.brand);
+    }
+    
+    if (currentFilters.type !== "Összes" && currentFilters.type !== "All") {
+      filteredCars = filteredCars.filter(car => car.car_type === currentFilters.type);
+    }
+    
+    if (currentFilters.condition !== "Összes" && currentFilters.condition !== "All") {
+      filteredCars = filteredCars.filter(car => car.car_condition === currentFilters.condition);
+    }
+    
+    if (currentFilters.transmission !== "Összes" && currentFilters.transmission !== "All") {
+      filteredCars = filteredCars.filter(car => car.transmission_type === currentFilters.transmission);
+    }
+    
+    if (currentFilters.fuel !== "Összes" && currentFilters.fuel !== "All") {
+      filteredCars = filteredCars.filter(car => car.fuel_type === currentFilters.fuel);
+    }
+    
+    if (currentFilters.year !== "Összes" && currentFilters.year !== "All") {
+      filteredCars = filteredCars.filter(car => String(car.car_year) === currentFilters.year);
+    }
+    
+    // Extract available options from the filtered cars
+    setFilteredOptions(extractUniqueOptions(filteredCars));
+  };
+
+  // Initial load to get all available options
+  useEffect(() => {
+    // On component mount, fetch all cars to get complete option lists
+    const fetchAllOptions = async () => {
+      try {
+        const response = await fetch(buildApiUrl("/cars/search?limit=1000"), {
+          credentials: "include",
+        });
+        
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        
+        const result: ApiResponse = await response.json();
+        
+        // Store all cars for client-side filtering
+        allCarsRef.current = result.data;
+        
+        // Store all possible filter options
+        if (result.data.length > 0) {
+          const options = extractUniqueOptions(result.data);
+          setAllOptions(options);
+          setFilteredOptions(options); // Initially, filtered options are the same as all options
+        }
+        
+        // Proceed with normal fetch for the first page with filters
+        fetchCars(1);
+      } catch (error) {
+        setError((error as Error).message);
+        setLoading(false);
+      }
+    };
+    
+    fetchAllOptions();
+  }, []);
+
+  // This effect handles filter changes
   useEffect(() => {
     fetchCars(1);
   }, [filters]);
@@ -146,47 +267,76 @@ function AllCar() {
 
   const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
+    setFilters((prevFilters) => {
+      const newFilters = {
+        ...prevFilters,
+        [name]: value,
+      };
+      
+      // Update available options based on the new filter selection
+      updateFilteredOptions(newFilters);
+      
+      return newFilters;
+    });
   };
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      search: e.target.value,
-    }));
+    setFilters((prevFilters) => {
+      const newFilters = {
+        ...prevFilters,
+        search: e.target.value,
+      };
+      
+      // We don't update filtered options based on search text
+      // since search is handled by the server and not used for client-side filtering
+      
+      return newFilters;
+    });
   };
 
   const formatPrice = (price: string | number): string => {
     return Number(price).toLocaleString("hu-HU") + " Ft";
   };
 
-  const getUniqueOptions = (field: keyof Car): string[] => {
-    if (!cars.length) return [];
-    const options = [
-      ...new Set(
-        cars
-          .map((car) => car[field])
-          .filter((value) => value !== undefined && value !== null)
-          .map((value) => String(value))
-      ),
-    ];
-    return options;
+  // Get options from the filtered list if available, otherwise fall back to all options
+  const getOptions = (field: keyof typeof allOptions): string[] => {
+    // If a filter is applied, return the filtered options for other dropdowns
+    // except for the current one that's being changed
+    
+    // Map the field name to the corresponding filter key
+    const filterFieldMap: Record<string, keyof FilterState> = {
+      car_brand: 'brand',
+      car_type: 'type',
+      car_condition: 'condition',
+      transmission_type: 'transmission',
+      fuel_type: 'fuel',
+      car_year: 'year'
+    };
+    
+    const filterKey = filterFieldMap[field];
+    
+    // For the current filter being changed, show all options
+    // For example, if user has selected a Brand and is now looking at Fuel options,
+    // show only fuels available for that brand
+    if (filterKey && filters[filterKey] === "Összes" || filters[filterKey] === "All") {
+      // For filters that are "All", show filtered options based on other selections
+      return filteredOptions[field] || [];
+    } else if (filterKey) {
+      // For the specific filter being changed (like brand), always show all options
+      // This allows changing from one brand to another directly
+      return allOptions[field] || [];
+    }
+    
+    return allOptions[field] || [];
   };
-
 
   const Pagination = () => {
     const { totalPages, currentPage } = pagination;
 
-
     if (totalPages <= 1) return null;
-
 
     let startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 4);
-
 
     if (endPage - startPage < 4) {
       startPage = Math.max(1, endPage - 4);
@@ -281,10 +431,11 @@ function AllCar() {
                 value={filters.search}
                 onChange={handleSearchChange}
               />
-              <button
+                              <button
                 className="btn btn-danger"
                 onClick={() => {
-                  setFilters({
+                  // Reset all filters
+                  const resetFilters = {
                     search: "",
                     brand: "Összes",
                     type: "Összes",
@@ -292,7 +443,12 @@ function AllCar() {
                     transmission: "Összes",
                     fuel: "Összes",
                     year: "Összes",
-                  });
+                  };
+                  
+                  setFilters(resetFilters);
+                  
+                  // Reset filtered options to all options
+                  setFilteredOptions({...allOptions});
                 }}
               >
                 {t("clear", "AllCar")}
@@ -311,7 +467,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getUniqueOptions("car_brand").map((brand, index) => (
+                  {getOptions("car_brand").map((brand, index) => (
                     <option key={index} value={brand}>
                       {brand}
                     </option>
@@ -328,7 +484,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getUniqueOptions("car_type").map((type, index) => (
+                  {getOptions("car_type").map((type, index) => (
                     <option key={index} value={type}>
                       {t(type, "AllCar")}
                     </option>
@@ -345,7 +501,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getUniqueOptions("car_condition").map((condition, index) => (
+                  {getOptions("car_condition").map((condition, index) => (
                     <option key={index} value={condition}>
                       {t(condition, "AllCar")}
                     </option>
@@ -367,7 +523,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getUniqueOptions("transmission_type").map(
+                  {getOptions("transmission_type").map(
                     (transmission, index) => (
                       <option key={index} value={transmission}>
                         {t(transmission, "AllCar")}
@@ -386,7 +542,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getUniqueOptions("fuel_type").map((fuel, index) => (
+                  {getOptions("fuel_type").map((fuel, index) => (
                     <option key={index} value={fuel}>
                       {t(fuel, "AllCar")}
                     </option>
@@ -403,7 +559,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getUniqueOptions("car_year").map((year, index) => (
+                  {getOptions("car_year").map((year, index) => (
                     <option key={index} value={year}>
                       {year}
                     </option>
