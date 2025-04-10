@@ -18,16 +18,16 @@ function App() {
   const [popularCars, setPopularCars] = useState<CarInfo[]>([]);
   const [averagePrice, setAveragePrice] = useState<number>();
   const [depoLocations, setDepoLocations] = useState<
-    { location_id: number; location: string; postcode: number }[]
+    { location_id: number; location: string; zip_code: number }[]
   >([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredDepoLocations, setFilteredDepoLocations] = useState<
-    { location_id: number; location: string; postcode: number }[]
+    { location_id: number; location: string; zip_code: number }[]
   >([]);
   const [closestDepo, setClosestDepo] = useState<{
     location_id: number;
     location: string;
-    postcode: number;
+    zip_code: number;
   } | null>(null);
 
   useEffect(() => {
@@ -86,10 +86,10 @@ function App() {
   }, []);
 
   const calculatePostcodeDistance = (
-    postcode1: number,
-    postcode2: number
+    zip_code1: number,
+    zip_code2: number
   ): number => {
-    return Math.abs(postcode1 - postcode2);
+    return Math.abs(zip_code1 - zip_code2);
   };
 
   useEffect(() => {
@@ -105,12 +105,12 @@ function App() {
     const isValidNumber = !isNaN(searchNumberValue);
 
     const exactMatches = depoLocations.filter((depo) => {
-      const postcodeStr =
-        depo.postcode !== undefined && depo.postcode !== null
-          ? depo.postcode.toString()
+      const zip_codeStr =
+        depo.zip_code !== undefined && depo.zip_code !== null
+          ? depo.zip_code.toString()
           : "";
 
-      return postcodeStr.includes(searchValue);
+      return zip_codeStr.includes(searchValue);
     });
 
     if (exactMatches.length > 0) {
@@ -120,14 +120,14 @@ function App() {
       let closest: SetStateAction<{
         location_id: number;
         location: string;
-        postcode: number;
+        zip_code: number;
       } | null> = null;
       let minDistance = Number.MAX_SAFE_INTEGER;
 
       depoLocations.forEach((depo) => {
-        if (depo.postcode !== undefined && depo.postcode !== null) {
+        if (depo.zip_code !== undefined && depo.zip_code !== null) {
           const distance = calculatePostcodeDistance(
-            depo.postcode,
+            depo.zip_code,
             searchNumberValue
           );
           if (distance < minDistance) {
@@ -148,7 +148,7 @@ function App() {
                 closest as {
                   location_id: number;
                   location: string;
-                  postcode: number;
+                  zip_code: number;
                 }
               )?.location_id
           ),

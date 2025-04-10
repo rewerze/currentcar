@@ -36,6 +36,6 @@ export default {
     "💰 Extra discounts are available for longer rentals – the longer you rent, the better the deal!",
   pricingDeposit:
     "🛡️ For some cars, a deposit may be required, which you’ll get back at the end of the rental, provided everything goes smoothly. We make sure all important information is clearly displayed during the rental process.",
-  searchByPostcode: "Search by postcode",
+  searchByPostcode: "Search by zip_code",
   depoLocations: "Depo Locations",
 };
