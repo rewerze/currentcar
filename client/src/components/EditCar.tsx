@@ -167,7 +167,23 @@ function EditCar() {
 
             {/* Árak */}
             <div className="car-edit">
-              <div className="w-50">
+              
+            <div className="w-100">
+                <label htmlFor="base_price" className="form-label">
+                  Napi ár
+                </label>
+                <input
+                  type="number"
+                  name="base_price"
+                  id="base_price"
+                  className="form-control"
+                  // placeholder={t('daily_price', 'EditCar')}
+                  // value={formData.price_per_day}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="w-100">
                 <label htmlFor="price_per_hour" className="form-label">
                   {t('hourly_price', 'EditCar')}
                 </label>
@@ -182,7 +198,7 @@ function EditCar() {
                 />
               </div>
 
-              <div className="w-50">
+              <div className="w-100">
                 <label htmlFor="price_per_day" className="form-label">
                   {t('daily_price', 'EditCar')}
                 </label>
@@ -200,7 +216,7 @@ function EditCar() {
 
             {/* MEDDIG + EXTRA */}
             <div className="car-edit mt-1">
-              <div className="w-50">
+              <div className="w-100">
                 <label htmlFor="available_until" className="form-label">
                   {t('until_when', 'EditCar')}
                 </label>
@@ -211,21 +227,6 @@ function EditCar() {
                   id="available_until"
                   className="form-control"
                   value={formData.available_until}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="w-50">
-                <label htmlFor="extras" className="form-label">
-                  {t('extras', 'EditCar')}
-                </label>
-                <input
-                  type="text"
-                  name="extras"
-                  id="extras"
-                  className="form-control"
-                  placeholder={t('examples', 'EditCar')}
-                  value={formData.extras}
                   onChange={handleChange}
                 />
               </div>
