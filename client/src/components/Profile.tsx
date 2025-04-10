@@ -289,6 +289,8 @@ function Profile() {
             {/* AUTÓK */}
             <div className="profile-tab-content">
               <div className="profile-car">
+
+                {/* UPLOADED */}
                 {activeTab === 'uploaded' ? (
                   uploadedCars.length > 0 ? (
                     uploadedCars.map((car, index) => (
@@ -329,6 +331,7 @@ function Profile() {
                       <p>{t('noUploadedCars', 'Profile') || "You haven't uploaded any cars yet."}</p>
                     </div>
                   )
+                  // HISTORY
                 )
                   : activeTab === 'history' ? (
                     rentHistory.length > 0 ? (
@@ -375,6 +378,8 @@ function Profile() {
                       </div>
                     )
                   ) : (
+
+                    // RENTED
                     rentedCars.length > 0 ? (
                       rentedCars.map((car, index) => (
                         <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
@@ -398,6 +403,14 @@ function Profile() {
                                 onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/${car.car_id}`) }}
                               >
                                 {t('viewDetails', 'Profile') || "View Details"}
+                              </button>
+                            </div>
+                            <div className="profile-car-btn">
+                              <button
+                                className="btn badge bg-danger w-100 mt-2"
+                                onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/${car.car_id}`) }}
+                              >
+                                {t('cancelCar', 'Profile') || "Cancel car"}
                               </button>
                             </div>
                           </div>
