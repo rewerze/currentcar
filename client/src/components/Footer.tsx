@@ -21,16 +21,15 @@ function Footer() {
                 <div className="col-3">
                     <p><b>{t('links', 'Footer')}</b></p>
                     <a href="/">{t('homepage', 'Footer')}</a>
-                    <a href="/osszesauto">{t('allCars', 'Footer')}</a>
                     <a href="/kapcsolat">{t('contact', 'Footer')}</a>
                     <a href="/rolunk">{t('aboutUs', 'Footer')}</a>
+                    <a href="/gyik">{t('faq', 'Footer')}</a>
                 </div>
                 <div className="col-3">
                     <p><b>{t('ourServices', 'Footer')}</b></p>
                     <a href="/berles">{t('carRental', 'Footer')}</a>
                     <a href="/feladas">{t('carListing', 'Footer')}</a>
                     <a href="/osszesauto">{t('allcar', 'Footer')}</a>
-                    <a href="/gyik">{t('faq', 'Footer')}</a>
                 </div>
                 <div className="col-3">
                     <p><b>{t('contactUs', 'Footer')}</b></p>
