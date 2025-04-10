@@ -51,7 +51,7 @@ function FAQ() {
                         <summary className="display-5">Mik a bérlés időtartamai és költségei?
                             <hr className="w-100" />
                         </summary>
-                        <p>A bérlés időtartalma a bérbeadó adja meg, hogy meddig lehet (ezt megtalálja az auó adatlapján), eddig az időpontig, bármeddig kibérelhető az autót aminek elsősorban az alapárát kell kifizetni, majd után felszámolunk önnek egy óra majd egy napi díjjat amit autótól függően szintén eltér.</p>
+                        <p>A bérlés lehetséges időtartamát a bérbeadó adja meg, (ezt megtalálja az autó adatlapján). Eddig az időpontig bármeddig kibérelhető az autó, aminek elsősorban az alapárát kell kifizetni, majd ezután felszámolunk egy óradíjat, majd egy napidíjat, ami autótól függően szintén eltér.</p>
                     </details>
                 </div>
                 <div className="mx-5 mt-5">
