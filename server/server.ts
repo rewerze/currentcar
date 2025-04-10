@@ -180,11 +180,13 @@ app.use((req: Request, res: Response) => {
 
 app.use(multerErrorHandler);
 
-cron.schedule("*/30 * * * *", async () => {
-  console.log("Checking for expired cars...");
-  await updateExpiredOrders();
-  await deactivateExpiredAvailability();
-});
+if (process.env.NODE_ENV !== "test") {
+  cron.schedule("*/30 * * * *", async () => {
+    console.log("Checking for expired cars...");
+    await updateExpiredOrders();
+    await deactivateExpiredAvailability();
+  });
+}
 
 export const updateExpiredOrders = async () => {
   try {
@@ -225,7 +227,8 @@ export const deactivateExpiredAvailability = async () => {
     console.error("Error deactivating expired availability:", error);
   }
 };
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}

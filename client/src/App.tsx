@@ -6,7 +6,7 @@ import depo from "./assets/img/miert_a_currentcar.png";
 import nepszeru from "./assets/img/nepszeru_auto.png";
 import profil from "./assets/img/profile.jpg";
 import { useLanguage } from "./contexts/LanguageContext";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { buildApiUrl } from "./lib/utils";
 import { CarInfo } from "./components/interfaces/Car";
@@ -260,11 +260,10 @@ function App() {
                       <img
                         src={
                           car.car_id
-                            ? `${
-                                import.meta.env.PROD
-                                  ? "/api"
-                                  : "http://localhost:3000/api"
-                              }/getCarImage?car_id=${car.car_id}`
+                            ? `${import.meta.env.PROD
+                              ? "/api"
+                              : "http://localhost:3000/api"
+                            }/getCarImage?car_id=${car.car_id}`
                             : nepszeru
                         }
                         onError={(e) => {
