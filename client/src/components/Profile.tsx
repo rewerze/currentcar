@@ -17,6 +17,7 @@ import axios from "axios";
 import { buildApiUrl } from "@/lib/utils";
 import { toast } from "sonner";
 import { RentHistory } from "./interfaces/Orders";
+import SecurityDelete from "./SecurityDelete";
 
 function Profile() {
   const { user, loading } = useUser();
@@ -28,6 +29,15 @@ function Profile() {
   const [notificationCount, setNotificationCount] = useState<number>(0);
   const [rentHistory, setRentHistory] = useState<RentHistory[]>([]);
   const [activeTab, setActiveTab] = useState<'rented' | 'uploaded' | 'history'>('rented');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDelete = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchRentHistory = async () => {
@@ -44,7 +54,7 @@ function Profile() {
     fetchRentHistory();
   }, []);
 
-  const handleDelete = () => {
+  const handleConfirmDelete = () => {
     axios(buildApiUrl("/deleteProfile"), {
       withCredentials: true,
       method: "POST",
@@ -247,6 +257,12 @@ function Profile() {
                     <b className="text-black">{t("delete_profile", "Profile")}</b>
                   </a>
                 </div>
+
+                <SecurityDelete
+                  isOpen={isModalOpen}
+                  onClose={handleCloseModal}
+                  onConfirm={handleConfirmDelete}
+                />
 
                 <div>
                   <a href="/profil/ertesitesek" className="btn btn-info w-100">
