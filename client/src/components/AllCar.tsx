@@ -28,7 +28,6 @@ function AllCar() {
   }, [loadedNamespaces, loadNamespace]);
 
   const [cars, setCars] = useState<Car[]>([]);
-  // Store all available options from initial load
   const [allOptions, setAllOptions] = useState<Record<string, string[]>>({
     car_brand: [],
     car_type: [],
@@ -37,7 +36,6 @@ function AllCar() {
     fuel_type: [],
     car_year: [],
   });
-  // Store dynamically filtered options based on selected filters
   const [filteredOptions, setFilteredOptions] = useState<Record<string, string[]>>({
     car_brand: [],
     car_type: [],
@@ -48,7 +46,6 @@ function AllCar() {
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // Store all cars data for client-side filtering
   const allCarsRef = useRef<Car[]>([]);
 
   const [pagination, setPagination] = useState<PaginationData>({
@@ -105,7 +102,6 @@ function AllCar() {
     return value;
   };
 
-  // This function gets all available unique options from the initial data load
   const extractUniqueOptions = (data: Car[]) => {
     const options: Record<string, string[]> = {
       car_brand: [],
@@ -170,7 +166,6 @@ function AllCar() {
       setCars(result.data);
       setPagination(result.pagination);
 
-      // On initial load, store all possible filter options
       if (isInitialLoad && result.data.length > 0) {
         setAllOptions(extractUniqueOptions(result.data));
       }
@@ -182,15 +177,11 @@ function AllCar() {
     }
   };
 
-  // Function to update available options based on current filter selection
   const updateFilteredOptions = (currentFilters: FilterState) => {
-    // Skip if we don't have all cars data yet
     if (allCarsRef.current.length === 0) return;
     
-    // Start with all cars
     let filteredCars = [...allCarsRef.current];
     
-    // Apply each active filter
     if (currentFilters.brand !== "Összes" && currentFilters.brand !== "All") {
       filteredCars = filteredCars.filter(car => car.car_brand === currentFilters.brand);
     }
@@ -215,13 +206,10 @@ function AllCar() {
       filteredCars = filteredCars.filter(car => String(car.car_year) === currentFilters.year);
     }
     
-    // Extract available options from the filtered cars
     setFilteredOptions(extractUniqueOptions(filteredCars));
   };
 
-  // Initial load to get all available options
   useEffect(() => {
-    // On component mount, fetch all cars to get complete option lists
     const fetchAllOptions = async () => {
       try {
         const response = await fetch(buildApiUrl("/cars/search?limit=1000"), {
@@ -234,17 +222,13 @@ function AllCar() {
         
         const result: ApiResponse = await response.json();
         
-        // Store all cars for client-side filtering
         allCarsRef.current = result.data;
         
-        // Store all possible filter options
         if (result.data.length > 0) {
           const options = extractUniqueOptions(result.data);
           setAllOptions(options);
-          setFilteredOptions(options); // Initially, filtered options are the same as all options
+          setFilteredOptions(options);
         }
-        
-        // Proceed with normal fetch for the first page with filters
         fetchCars(1);
       } catch (error) {
         setError((error as Error).message);
@@ -255,7 +239,6 @@ function AllCar() {
     fetchAllOptions();
   }, []);
 
-  // This effect handles filter changes
   useEffect(() => {
     fetchCars(1);
   }, [filters]);
@@ -273,7 +256,6 @@ function AllCar() {
         [name]: value,
       };
       
-      // Update available options based on the new filter selection
       updateFilteredOptions(newFilters);
       
       return newFilters;
@@ -287,9 +269,6 @@ function AllCar() {
         search: e.target.value,
       };
       
-      // We don't update filtered options based on search text
-      // since search is handled by the server and not used for client-side filtering
-      
       return newFilters;
     });
   };
@@ -298,12 +277,7 @@ function AllCar() {
     return Number(price).toLocaleString("hu-HU") + " Ft";
   };
 
-  // Get options from the filtered list if available, otherwise fall back to all options
   const getOptions = (field: keyof typeof allOptions): string[] => {
-    // If a filter is applied, return the filtered options for other dropdowns
-    // except for the current one that's being changed
-    
-    // Map the field name to the corresponding filter key
     const filterFieldMap: Record<string, keyof FilterState> = {
       car_brand: 'brand',
       car_type: 'type',
@@ -315,15 +289,9 @@ function AllCar() {
     
     const filterKey = filterFieldMap[field];
     
-    // For the current filter being changed, show all options
-    // For example, if user has selected a Brand and is now looking at Fuel options,
-    // show only fuels available for that brand
     if (filterKey && filters[filterKey] === "Összes" || filters[filterKey] === "All") {
-      // For filters that are "All", show filtered options based on other selections
       return filteredOptions[field] || [];
     } else if (filterKey) {
-      // For the specific filter being changed (like brand), always show all options
-      // This allows changing from one brand to another directly
       return allOptions[field] || [];
     }
     
@@ -434,7 +402,6 @@ function AllCar() {
                               <button
                 className="btn btn-danger"
                 onClick={() => {
-                  // Reset all filters
                   const resetFilters = {
                     search: "",
                     brand: "Összes",
@@ -447,7 +414,6 @@ function AllCar() {
                   
                   setFilters(resetFilters);
                   
-                  // Reset filtered options to all options
                   setFilteredOptions({...allOptions});
                 }}
               >
