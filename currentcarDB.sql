@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `car` (
     `car_id` int AUTO_INCREMENT NOT NULL UNIQUE,
     `car_price` varchar(255) NOT NULL,
     `car_active` boolean NOT NULL DEFAULT '1',
+    `location_id` int not null DEFAULT 1,
     `car_description` varchar(250) NOT NULL,
     `car_type` enum('sedan', 'suv', 'hatchback', 'convertible', 'coupe', 'wagon', 'pickup', 'minivan') NOT NULL,
     `seats` int NOT NULL,
@@ -62,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `car_availability` (
 CREATE TABLE IF NOT EXISTS `car_extras` (
     `extra_id` int AUTO_INCREMENT NOT NULL UNIQUE,
     `car_id` int NOT NULL,
-    `extra_name` enum('baby seat', '') NOT NULL,
+    `extra_name` text NOT NULL,
     `extra_price` decimal(10,2) NOT NULL,
     PRIMARY KEY (`extra_id`)
 );
@@ -174,3 +175,4 @@ ALTER TABLE invoice ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`in
 ALTER TABLE car ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`insurance_id`);
 ALTER TABLE payment_orders ADD FOREIGN KEY (user_id) REFERENCES `user`(user_id);
 ALTER TABLE payment_orders ADD FOREIGN KEY (car_id) REFERENCES `car`(car_id);
+ALTER TABLE car ADD FOREIGN KEY (location_id) REFERENCES `location`(location_id);
