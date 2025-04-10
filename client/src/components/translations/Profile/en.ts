@@ -25,6 +25,5 @@ const translations = {
   noRentHistory: "You have no rental history.",
   rentHistory: "Rental History",
   rentalDates: "Rental Dates",
-  cancelCar: "Cancel the rent",
 };
 export default translations;
