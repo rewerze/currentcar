@@ -35,7 +35,7 @@ function EditCar() {
     fuel_type: "",
     transmission_type: "",
     car_brand: "",
-    available_until: "",
+    available_to: "",
     extras: "",
   });
 
@@ -83,7 +83,7 @@ function EditCar() {
           fuel_type: data.fuel_type || "",
           transmission_type: data.transmission_type || "",
           car_brand: data.car_brand || "",
-          available_until: data.available_until || "",
+          available_to: data.available_to || "",
           extras: data.extras || "",
         });
       } catch (error) {
@@ -124,7 +124,7 @@ function EditCar() {
       car_description: formData.car_description,
       price_per_hour: formData.price_per_hour,
       price_per_day: formData.price_per_day,
-      available_until: formData.available_until,
+      available_to: formData.available_to,
       extras: formData.extras,
     };
 
@@ -174,7 +174,7 @@ function EditCar() {
             <div className="car-edit">
               <div className="w-100">
                 <label htmlFor="base_price" className="form-label">
-                  Napi ár
+                  Alap ár
                 </label>
                 <input
                   type="number"
@@ -182,7 +182,7 @@ function EditCar() {
                   id="base_price"
                   className="form-control"
                   // placeholder={t('daily_price', 'EditCar')}
-                  // value={formData.price_per_day}
+                  value={formData.car_price}
                   onChange={handleChange}
                 />
               </div>
@@ -221,18 +221,19 @@ function EditCar() {
             {/* MEDDIG + EXTRA */}
             <div className="car-edit mt-1">
               <div className="w-100">
-                <label htmlFor="available_until" className="form-label">
+                <label htmlFor="available_to" className="form-label">
                   {t("until_when", "EditCar")}
                 </label>
                 <input
                   type="date"
-                  name="available_until"
+                  name="available_to"
                   max="9999-12-31"
-                  id="available_until"
+                  id="available_to"
                   className="form-control"
-                  value={formData.available_until}
+                  value={new Date(formData.available_to).toISOString().split('T')[0]}
                   onChange={handleChange}
                 />
+                {/* {console.log(new Date(formData.available_to).toLocaleDateString())} */}
               </div>
             </div>
 
