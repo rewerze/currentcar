@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `user` (
     `user_id` int AUTO_INCREMENT NOT NULL UNIQUE,
-    `user_email` varchar(50) NOT NULL,
-    `user_name` varchar(35) NOT NULL,
+    `user_email` varchar(50) NOT NULL UNIQUE,
+    `user_name` varchar(35) NOT NULL UNIQUE,
     `password` varchar(70) NOT NULL,
     `born_at` DATETIME DEFAULT NULL,
     `created_at` datetime NOT NULL,
