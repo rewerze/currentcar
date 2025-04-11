@@ -59,6 +59,7 @@ function Password() {
                                 placeholder="Mi legyen az új jelszava?"
                                 required
                             />
+                            <p className="m-0"><b className="text-danger">A jelszavad tartalmazzon a következő feltételek mindegyikéből legalább egyet:</b> nagybetű, szám, speciális karakter. Példa jelszó: Almafa123!</p>
                         </div>
 
                         {/* JELSZÓ ISMÉTLÉSE */}

@@ -57,11 +57,13 @@ const translations = {
   value_for_money: "Value for Money",
   signIn: "You have to sign in to rent this car!",
   rented: "This car has already been rented!",
-  purchaseError: "There was an error while purchasing. Please refresh the page, and try again!",
+  purchaseError:
+    "There was an error while purchasing. Please refresh the page, and try again!",
   availableUntil: "Available until",
   cantRentOwn: "You can't rent you own car.",
   successfullyPurchased: "successfully rented for the following days:",
   rentFailed: "<b>Failed to rent the car.</b> The following error happened:",
+  basePrice: "Base price",
 };
 
 export default translations;

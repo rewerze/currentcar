@@ -391,6 +391,10 @@ function CarData() {
                     <td>{car.car_description}</td>
                   </tr>
                   <tr>
+                    <th>{t("basePrice", "CarDetail")}:</th>
+                    <td>{car.car_price} HUF</td>
+                  </tr>
+                  <tr>
                     <th>{t("pricePerHour", "CarDetail")}:</th>
                     <td>{car.price_per_hour} HUF</td>
                   </tr>

@@ -48,6 +48,7 @@ function Reg() {
               <h1>{t('register', 'auth')}</h1>
               <hr />
 
+              <p className="text-center">{t('requirement', 'auth')}</p>
               {/* FELHASZNÁLÓNÉV */}
               <div className="form-content mt-2">
                 <label htmlFor="name" className="form-label">{t('username', 'auth')}:</label>
@@ -76,6 +77,7 @@ function Reg() {
                   placeholder={t('whats_your_password', 'auth')}
                   required
                 />
+                <p className="m-0"><b className="text-danger">A jelszavad tartalmazzon a következő feltételek mindegyikéből legalább egyet:</b> nagybetű, szám, speciális karakter. Példa jelszó: Almafa123!</p>
               </div>
 
               {/* JELSZÓ ISMÉTLÉSE */}
