@@ -11,22 +11,22 @@ export const getInvoice = async (
     const userId = (req as AuthenticatedRequest).user.user_id;
 
     const order = await db.query(
-      `SELECT o.*, c.car_brand, c.car_model, c.car_regnumber, 
-                u.user_name, u.user_email, u.u_phone_number,
-                l.location,
-                COALESCE(po.amount, i.payment_amount) as total_amount,
-                i.tax_amount,
-                ins.insurance_provider, ins.coverage_details, ins.insurance_fee
-         FROM orders o
-         JOIN car c ON o.car_id = c.car_id
-         JOIN user u ON o.user_id = u.user_id
-         JOIN location l ON o.location_id = l.location_id
-         LEFT JOIN payment_orders po ON o.car_id = po.car_id AND o.user_id = po.user_id
-         LEFT JOIN invoice i ON o.orders_id = i.orders_id
-         LEFT JOIN insurance ins ON c.insurance_id = ins.insurance_id
-         WHERE o.orders_id = ? AND (o.user_id = ? OR ? IN (
-           SELECT user_id FROM car_user WHERE car_id = o.car_id
-         ))`,
+      `SELECT o.*, c.car_brand, c.car_model, c.car_regnumber, c.car_price,
+       u.user_name, u.user_email, u.u_phone_number,
+       l.location,
+       COALESCE(po.amount, i.payment_amount) + CAST(c.car_price AS DECIMAL(10,2)) as total_amount,
+       i.tax_amount,
+       ins.insurance_provider, ins.coverage_details, ins.insurance_fee
+FROM orders o
+JOIN car c ON o.car_id = c.car_id
+JOIN user u ON o.user_id = u.user_id
+JOIN location l ON o.location_id = l.location_id
+LEFT JOIN payment_orders po ON o.car_id = po.car_id AND o.user_id = po.user_id
+LEFT JOIN invoice i ON o.orders_id = i.orders_id
+LEFT JOIN insurance ins ON c.insurance_id = ins.insurance_id
+WHERE o.orders_id = ? AND (o.user_id = ? OR ? IN (
+  SELECT user_id FROM car_user WHERE car_id = o.car_id
+))`,
       [orderId, userId, userId]
     );
 
@@ -36,6 +36,10 @@ export const getInvoice = async (
     }
 
     const invoiceData = order[0] as any;
+
+    console.log(`Total amount: ${invoiceData.total_amount}`);
+    console.log(`Tax amount: ${invoiceData.tax_amount}`);
+    console.log(`Insurance fee: ${invoiceData.insurance_fee}`);
 
     const totalAmount = Math.abs(Number(invoiceData.total_amount) || 0);
     const taxAmount = Math.abs(Number(invoiceData.tax_amount) || 0);
@@ -51,7 +55,7 @@ export const getInvoice = async (
       1,
       Math.ceil(
         Math.abs(endDate.getTime() - startDate.getTime()) /
-          (1000 * 60 * 60 * 24)
+        (1000 * 60 * 60 * 24)
       )
     );
 
@@ -177,33 +181,29 @@ export const getInvoice = async (
               <tbody>
                 <tr>
                   <td>Car Rental</td>
-                  <td>${invoiceData.car_brand} ${invoiceData.car_model} (${
-      invoiceData.car_regnumber
-    })</td>
+                  <td>${invoiceData.car_brand} ${invoiceData.car_model} (${invoiceData.car_regnumber
+      })</td>
                   <td>${baseRentalAmount.toFixed(2)} HUF</td>
                 </tr>
-                ${
-                  invoiceData.insurance_provider
-                    ? `
+                ${invoiceData.insurance_provider
+        ? `
                 <tr>
                   <td>Insurance</td>
-                  <td>${invoiceData.insurance_provider} - ${
-                        invoiceData.coverage_details
-                      }</td>
+                  <td>${invoiceData.insurance_provider} - ${invoiceData.coverage_details
+        }</td>
                   <td>${insuranceFee.toFixed(2)} HUF</td>
                 </tr>`
-                    : ""
-                }
-                ${
-                  taxAmount > 0
-                    ? `
+        : ""
+      }
+                ${taxAmount > 0
+        ? `
                 <tr>
                   <td>Tax</td>
                   <td></td>
                   <td>${taxAmount.toFixed(2)} HUF</td>
                 </tr>`
-                    : ""
-                }
+        : ""
+      }
                 <tr class="total-row">
                   <td colspan="2">Total</td>
                   <td>${totalAmount.toFixed(2)} HUF</td>

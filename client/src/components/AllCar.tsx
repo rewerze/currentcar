@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent, useRef } from "react";
 import carDefaultImage from "../assets/img/nepszeru_auto.png";
 import { FilterState } from "./interfaces/FilterState";
 import { CarInfo as Car } from "./interfaces/Car";
@@ -28,16 +28,23 @@ function AllCar() {
   }, [loadedNamespaces, loadNamespace]);
 
   const [cars, setCars] = useState<Car[]>([]);
-  const [allOptions, setAllOptions] = useState<Record<string, string[]>>({
-    car_brand: [],
-    car_type: [],
-    car_condition: [],
-    transmission_type: [],
-    fuel_type: [],
-    car_year: [],
-  });
   const [loading, setLoading] = useState<boolean>(true);
+  const [brandOptions, setBrandOptions] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (cars.length > 0 && brandOptions.length === 0) {
+      const uniqueBrands = [
+        ...new Set(
+          cars
+            .map((car) => car.car_brand)
+            .filter((value) => value !== undefined && value !== null)
+            .map((value) => String(value))
+        ),
+      ];
+      setBrandOptions(uniqueBrands);
+    }
+  }, [cars]);
 
   const [pagination, setPagination] = useState<PaginationData>({
     total: 0,
@@ -93,35 +100,13 @@ function AllCar() {
     return value;
   };
 
-  // This function gets all available unique options from the initial data load
-  const extractUniqueOptions = (data: Car[]) => {
-    const options: Record<string, string[]> = {
-      car_brand: [],
-      car_type: [],
-      car_condition: [],
-      transmission_type: [],
-      fuel_type: [],
-      car_year: [],
-    };
-
-    Object.keys(options).forEach(field => {
-      const fieldOptions = [...new Set(
-        data
-          .map((car) => car[field as keyof Car])
-          .filter((value) => value !== undefined && value !== null)
-          .map((value) => String(value))
-      )];
-      options[field as keyof typeof options] = fieldOptions;
-    });
-
-    return options;
-  };
-
-  const fetchCars = async (page = 1, isInitialLoad = false) => {
+  const fetchCars = async (page = 1) => {
     try {
       setLoading(true);
 
+
       const queryParams = new URLSearchParams();
+
 
       queryParams.append("page", page.toString());
       queryParams.append("limit", pagination.limit.toString());
@@ -157,12 +142,6 @@ function AllCar() {
 
       setCars(result.data);
       setPagination(result.pagination);
-
-      // On initial load, store all possible filter options
-      if (isInitialLoad && result.data.length > 0) {
-        setAllOptions(extractUniqueOptions(result.data));
-      }
-
       setLoading(false);
     } catch (error) {
       setError((error as Error).message);
@@ -170,38 +149,6 @@ function AllCar() {
     }
   };
 
-  // Initial load to get all available options
-  useEffect(() => {
-    // On component mount, fetch all cars to get complete option lists
-    const fetchAllOptions = async () => {
-      try {
-        const response = await fetch(buildApiUrl("/cars/search?limit=1000"), {
-          credentials: "include",
-        });
-        
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        
-        const result: ApiResponse = await response.json();
-        
-        // Store all possible filter options
-        if (result.data.length > 0) {
-          setAllOptions(extractUniqueOptions(result.data));
-        }
-        
-        // Proceed with normal fetch for the first page with filters
-        fetchCars(1);
-      } catch (error) {
-        setError((error as Error).message);
-        setLoading(false);
-      }
-    };
-    
-    fetchAllOptions();
-  }, []);
-
-  // This effect handles filter changes
   useEffect(() => {
     fetchCars(1);
   }, [filters]);
@@ -230,17 +177,41 @@ function AllCar() {
     return Number(price).toLocaleString("hu-HU") + " Ft";
   };
 
-  const getOptions = (field: keyof typeof allOptions): string[] => {
-    return allOptions[field] || [];
+  const getUniqueOptions = (field: keyof Car): string[] => {
+    if (!cars.length) {
+      if (field === 'car_brand' && brandOptions.length > 0) {
+        return brandOptions;
+      }
+      return [];
+    }
+    
+    if (field === 'car_brand' && brandOptions.length > 0) {
+      return brandOptions;
+    }
+    
+    const options = [
+      ...new Set(
+        cars
+          .map((car) => car[field])
+          .filter((value) => value !== undefined && value !== null)
+          .map((value) => String(value))
+      ),
+    ];
+    
+    return options;
   };
+
 
   const Pagination = () => {
     const { totalPages, currentPage } = pagination;
 
+
     if (totalPages <= 1) return null;
+
 
     let startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 4);
+
 
     if (endPage - startPage < 4) {
       startPage = Math.max(1, endPage - 4);
@@ -336,7 +307,7 @@ function AllCar() {
                 onChange={handleSearchChange}
               />
               <button
-                className="btn btn-danger reset-search"
+                className="btn btn-danger"
                 onClick={() => {
                   setFilters({
                     search: "",
@@ -365,7 +336,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getOptions("car_brand").map((brand, index) => (
+                  {getUniqueOptions("car_brand").map((brand, index) => (
                     <option key={index} value={brand}>
                       {brand}
                     </option>
@@ -382,7 +353,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getOptions("car_type").map((type, index) => (
+                  {getUniqueOptions("car_type").map((type, index) => (
                     <option key={index} value={type}>
                       {t(type, "AllCar")}
                     </option>
@@ -399,7 +370,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getOptions("car_condition").map((condition, index) => (
+                  {getUniqueOptions("car_condition").map((condition, index) => (
                     <option key={index} value={condition}>
                       {t(condition, "AllCar")}
                     </option>
@@ -421,7 +392,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getOptions("transmission_type").map(
+                  {getUniqueOptions("transmission_type").map(
                     (transmission, index) => (
                       <option key={index} value={transmission}>
                         {t(transmission, "AllCar")}
@@ -440,7 +411,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getOptions("fuel_type").map((fuel, index) => (
+                  {getUniqueOptions("fuel_type").map((fuel, index) => (
                     <option key={index} value={fuel}>
                       {t(fuel, "AllCar")}
                     </option>
@@ -457,7 +428,7 @@ function AllCar() {
                   onChange={handleFilterChange}
                 >
                   <option>{t("all", "AllCar")}</option>
-                  {getOptions("car_year").map((year, index) => (
+                  {getUniqueOptions("car_year").map((year, index) => (
                     <option key={index} value={year}>
                       {year}
                     </option>

@@ -418,10 +418,10 @@ function CarData() {
                 className="btn btn-success"
                 onClick={onPurchase}
                 disabled={
-                  !!(
+                  (user == null ? true : !!(
                     car.car_active != true ||
                     (car.car_owner && car.car_owner == user?.user_id)
-                  )
+                  ))
                 }
               >
                 {car.car_owner && car.car_owner == user?.user_id
@@ -430,6 +430,7 @@ function CarData() {
                   ? t("purchase", "CarDetail")
                   : t("rented", "CarDetail")}
               </button>
+              
             </div>
           </div>
         </div>
