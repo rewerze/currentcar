@@ -925,3 +925,10 @@ details {
     transform: scaleX(1.05);
     font-weight: 600;
 }
+
+.deletedcar-text {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(224, 0, 0);
+}
