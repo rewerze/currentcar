@@ -25,6 +25,7 @@ const translations = {
   noRentHistory: "Nincsen bérlési előzményed.",
   rentHistory: "Autóbérlési előzmények",
   rentalDates: "Bérlés időpontja",
+  deletedCar: "Autó törölve",
 };
 
 export default translations;
