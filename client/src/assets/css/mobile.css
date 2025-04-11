@@ -415,7 +415,7 @@
 
 @media only screen and (max-width: 576px) {
     .history.profile-car-card {
-        width: 100% !important;
+        width: 85% !important;
     }
 
     .profile-tab-content {
