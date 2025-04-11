@@ -149,3 +149,8 @@ input::placeholder, select, textarea::placeholder {
 .invoice-body iframe{
     background-color: white !important;
 }
+
+.deletedcar .profile-car-card-body {
+    border: 5px solid rgb(130, 130, 130);
+    background-color: #a7a7a7 !important;
+}
