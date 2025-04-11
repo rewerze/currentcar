@@ -83,6 +83,11 @@ function Profile() {
       .then((response) => {
         if (response.status === 200) {
           toast.success(t("carDeleted", "Profile") || "Car deleted successfully");
+          setUploadedCars((prev) => 
+            prev.map((car) => 
+              car.car_id === id ? { ...car, deletedcar: true } : car
+            )
+          );
         } else {
           toast.error("Failed to delete car");
         }
@@ -308,7 +313,7 @@ function Profile() {
                 {activeTab === 'uploaded' ? (
                   uploadedCars.length > 0 ? (
                     uploadedCars.map((car, index) => (
-                      <div key={index} className={`profile-car-card ${Number(car.car_active) === 0 ? 'deletedcar' : ''}`}  onClick={() => Number(car.car_active) === 1 && navigate(`/adatlap/${car.car_id}`)}>
+                      <div key={index} className={`profile-car-card ${(Number(car.car_active) === 0 || (car as any).deletedcar) ? 'deletedcar' : ''}`}  onClick={() => Number(car.car_active) === 1 && navigate(`/adatlap/${car.car_id}`)}>
                         <div className="profile-car-card-body bg-dark">
                           <p className="deletedcar-text"></p>
                           <img
