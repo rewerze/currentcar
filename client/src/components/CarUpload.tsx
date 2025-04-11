@@ -423,7 +423,7 @@ const CarUpload: React.FC = () => {
                             {/* DESCRIPTION */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className="upload-data">
-                                    <label htmlFor="car_description">{t('description', 'CarUpload')}</label>
+                                    <label htmlFor="car_description">{t('description', 'CarUpload')}<span className='text-danger'>*</span></label>
                                     <textarea
                                         id="car_description"
                                         name="car_description"
