@@ -310,6 +310,7 @@ function Profile() {
                     uploadedCars.map((car, index) => (
                       <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
                         <div className="profile-car-card-body bg-dark">
+                          <p className="deletedcar-text"></p>
                           <img
                             src={
                               car.car_id
