@@ -86,7 +86,8 @@ export const uploadCar = async (
       const [carResult] = await connection.query<ResultSetHeader>(
         `INSERT INTO car (
               car_brand, 
-              car_model, 
+              car_model,
+              car_active,
               car_condition, 
               car_year, 
               car_type, 
@@ -102,10 +103,11 @@ export const uploadCar = async (
               car_price,
               mileage,
               location_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           brand,
           model,
+          0,
           condition,
           year,
           carType,
