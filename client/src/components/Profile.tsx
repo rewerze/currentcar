@@ -315,7 +315,7 @@ function Profile() {
                     uploadedCars.map((car, index) => (
                       <div key={index} className={`profile-car-card ${(Number(car.car_active) === 0 || (car as any).deletedcar) ? 'deletedcar' : ''}`}  onClick={() => Number(car.car_active) === 1 && navigate(`/adatlap/${car.car_id}`)}>
                         <div className="profile-car-card-body bg-dark">
-                          <p className="deletedcar-text text-center text-danger">{(Number(car.car_active) === 0 || (car as any).deletedcar) ? t('deletedCar', 'Profile') : ''}</p>
+                          <p className="deletedcar-text">{(Number(car.car_active) === 0 || (car as any).deletedcar) ? t('deletedCar', 'Profile') : ''}</p>
                           <img
                             src={
                               car.car_id

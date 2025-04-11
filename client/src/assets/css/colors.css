@@ -151,6 +151,6 @@ input::placeholder, select, textarea::placeholder {
 }
 
 .deletedcar .profile-car-card-body {
-    border: 5px solid rgb(130, 130, 130);
-    background-color: #a7a7a7 !important;
+    border: 5px solid #050505;
+    background-color: #454350 !important;
 }
