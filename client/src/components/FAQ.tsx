@@ -70,6 +70,14 @@ function FAQ() {
                         <p>Nem. Fontos számunkra, hogy ha az eredeti tulajdonos szeretné vissza az autóját, akkor ne egy távolabbi helyre kelljen elutaznia érte.</p>
                     </details>
                 </div>
+                <div className="mx-5 mt-5">
+                    <details>
+                        <summary className="display-5">Hány százalékát kapom meg a bérbeadott autómért?
+                            <hr className="w-100" />
+                        </summary>
+                        <p>Az összeget az autó bérlés visszahozásáig tároljuk, majd a végösszeg 70%-át átutaljuk vagy készpénzben átveheti.</p>
+                    </details>
+                </div>
             </main>
         </>
     )
