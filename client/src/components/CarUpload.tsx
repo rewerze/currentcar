@@ -439,7 +439,7 @@ const CarUpload: React.FC = () => {
                             {/* PRICES */}
                             <div className='upload-price'>
                                 <h2 className='mt-5'>{t('pricing', 'CarUpload')}</h2>
-                                <button className="btn btn-primary" onClick={() => setPriceModalOpen(true)}>Ajánlott ártábla megtekintése</button>
+                                <button type="button" className="btn btn-primary" onClick={() => setPriceModalOpen(true)}>Ajánlott ártábla megtekintése</button>
                             </div>
                             <PriceTableModal isOpen={isPriceModalOpen} onClose={() => setPriceModalOpen(false)} />
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">

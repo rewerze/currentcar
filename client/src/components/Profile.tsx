@@ -308,7 +308,7 @@ function Profile() {
                 {activeTab === 'uploaded' ? (
                   uploadedCars.length > 0 ? (
                     uploadedCars.map((car, index) => (
-                      <div key={index} className="profile-car-card" onClick={() => navigate(`/adatlap/${car.car_id}`)}>
+                      <div key={index} className={`profile-car-card ${Number(car.car_active) === 0 ? 'deletedcar' : ''}`}  onClick={() => Number(car.car_active) === 1 && navigate(`/adatlap/${car.car_id}`)}>
                         <div className="profile-car-card-body bg-dark">
                           <img
                             src={
@@ -326,13 +326,13 @@ function Profile() {
                           <div className="profile-car-btn">
                             <button
                               className="btn badge bg-primary"
-                              onClick={(e) => { e.stopPropagation(); navigate(`/adatlap/edit/${car.car_id}`) }}
+                              onClick={(e) => { e.stopPropagation(); Number(car.car_active) === 1 && navigate(`/adatlap/edit/${car.car_id}`) }}
                             >
                               <img src={edit_icon} title="Módosíás" />
                             </button>
                             <button
                               className="btn badge bg-danger"
-                              onClick={(e) => { e.stopPropagation(); deleteCar(car.car_id) }}
+                              onClick={(e) => { e.stopPropagation(); Number(car.car_active) === 1 && deleteCar(car.car_id) }}
                             >
                               <img src={delete_icon} title="Törlés" />
                             </button>
