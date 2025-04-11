@@ -9,6 +9,7 @@ import {
 import { AuthenticatedRequest } from "../../interfaces/User";
 import { Car } from "../../interfaces/Car";
 import db from "../../db/connection";
+import { RowDataPacket } from "mysql2";
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
@@ -292,6 +293,35 @@ export const captureOrder = async (
             process.env.FRONTEND_URL
           }/invoice/${orderId}">here</a>`,
           "unread",
+        ]
+      );
+
+      
+    const [queryResult] = await db.query<RowDataPacket[]>(
+      `SELECT * FROM car_user WHERE car_id = ?`,
+      [car_id]
+    );
+
+    const [carDetails]: any = await db.query(
+      `SELECT c.*, i.insurance_fee, i.insurance_id
+       FROM car c
+       JOIN insurance i ON c.insurance_id = i.insurance_id
+       WHERE c.car_id = ?`,
+      [car_id]
+    );
+
+    console.log(queryResult)
+
+      await db.query(
+        `INSERT INTO notifications (
+          user_id,
+          message,
+          status,
+          created_at
+        ) VALUES (?, ?, 'unread', NOW())`,
+        [
+          ((queryResult as RowDataPacket).user_id || (queryResult as RowDataPacket[])[0].user_id),
+          `Your car has been successfully rented out to a customer. The rental is for a ${(carDetails.car_brand || carDetails[0].car_brand)} ${(carDetails.car_model || carDetails[0].car_model)}.`,
         ]
       );
 

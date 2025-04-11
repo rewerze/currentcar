@@ -195,7 +195,7 @@ export const updateExpiredOrders = async () => {
           SET car_active = 1
           WHERE car_id IN (
               SELECT car_id FROM orders 
-              WHERE end_date < NOW() AND rental_status = 'completed'
+              WHERE end_date < NOW() AND (rental_status = 'completed' OR rental_status = 'confirmed')
           )
       `);
     console.log(
