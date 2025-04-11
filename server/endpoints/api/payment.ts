@@ -72,13 +72,6 @@ export const CreatePayment = async (
 
     const user = (req as AuthenticatedRequest).user;
 
-    const requirements = [
-      user.driver_license_expiry != null && user.driver_license_number != null,
-      user.user_email != null && Number(user.u_phone_number) !== 0,
-      user.born_at != null &&
-        new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
-    ];
-
     if (
       ![
         user?.driver_license_expiry != null &&

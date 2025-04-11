@@ -11,12 +11,10 @@ export const carsSearchHandler = async (
   res: Response
 ): Promise<void> => {
   try {
-    // Pagination parameters
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 12;
     const offset = (page - 1) * limit;
 
-    // Base query
     let query = "SELECT * FROM car WHERE car_active = 1";
     let countQuery = "SELECT COUNT(*) as total FROM car WHERE car_active = 1";
     const params: any[] = [];
@@ -53,11 +51,9 @@ export const carsSearchHandler = async (
       }
     });
 
-    // Add pagination to the query
     query += " LIMIT ? OFFSET ?";
     params.push(limit, offset);
 
-    // Execute both queries
     const [rows, countResult] = await Promise.all([
       db.query<Car>(query, params),
       db.query<{ total: number }>(countQuery, countParams),
@@ -66,7 +62,6 @@ export const carsSearchHandler = async (
     const total = countResult[0]?.total || 0;
     const totalPages = Math.ceil(total / limit);
 
-    // Return paginated results with metadata
     res.json({
       data: rows,
       pagination: {

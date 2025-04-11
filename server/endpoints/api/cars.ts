@@ -483,7 +483,6 @@ export const editCar = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Add car_id for WHERE clause
     updateValues.push(car_id);
 
     const updateQuery = `

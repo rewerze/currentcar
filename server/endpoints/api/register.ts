@@ -5,6 +5,12 @@ import db from "../../db/connection";
 import mysql from "mysql2";
 import { User } from "../../interfaces/User";
 
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+function isValidPassword(password: string): boolean {
+  return PASSWORD_REGEX.test(password);
+}
+
 export const registerHandler = async (
   req: Request,
   res: Response
@@ -26,6 +32,11 @@ export const registerHandler = async (
       res.status(400).json({ error: "Email or username is already taken" });
       return;
     }
+
+    if(!isValidPassword(password)) {
+      res.status(400).json({ error: "A jelszónak legalább 8 karakter hosszúnak kell lennie, és tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert." });
+      return;
+    } 
 
     const hashedPassword = await bcrypt.hash(password, 10);
 

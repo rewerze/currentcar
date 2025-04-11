@@ -4,11 +4,6 @@ import { jest } from "@jest/globals";
 import { NextFunction, Request, Response } from "express";
 import { describe, beforeEach, afterEach, it, expect } from "@jest/globals";
 import { app } from "../server";
-import { RowDataPacket } from "mysql2";
-import { Car } from "../interfaces/Car";
-
-type MockResult<T> = [T[], any];
-type MockUpdateResult = { affectedRows: number };
 
 const mockDbQuery = jest.fn() as jest.MockedFunction<typeof db.query>;
 (db.query as any) = mockDbQuery;
