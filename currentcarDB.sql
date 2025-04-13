@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `user` (
     `user_id` int AUTO_INCREMENT NOT NULL UNIQUE,
-    `user_email` varchar(50) NOT NULL UNIQUE,
-    `user_name` varchar(35) NOT NULL UNIQUE,
+    `user_email` varchar(50) NOT NULL,
+    `user_name` varchar(35) NOT NULL,
     `password` varchar(70) NOT NULL,
     `born_at` DATETIME DEFAULT NULL,
     `created_at` datetime NOT NULL,
@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS `car` (
     `fuel_type` enum('petrol', 'diesel', 'electric', 'hybrid', 'gas') NOT NULL,
     `transmission_type` enum('automatic', 'manual', 'semi-automatic', 'CVT') NOT NULL,
     `car_brand` varchar(20) NOT NULL,
+    `verified` boolean NOT NULL DEFAULT '0',
+    `rented` boolean NOT NULL DEFAULT '0',
     PRIMARY KEY (`car_id`)
 );
 
