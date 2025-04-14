@@ -154,3 +154,8 @@ input::placeholder, select, textarea::placeholder {
     border: 5px solid #050505;
     background-color: #454350 !important;
 }
+
+.notif-message a:not(.btn) {
+    color: rgb(204, 187, 34);
+    font-weight: 500;
+}

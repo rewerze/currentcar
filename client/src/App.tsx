@@ -188,36 +188,38 @@ function App() {
                 </small>
               </div>
               <div className="col-lg mt-3">
-                <table className="big-table w-50">
-                  <thead>
-                    <tr>
-                      <th>{t("depoLocations", "MainPage")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {depoLocations.length > 0 ? (
-                      filteredDepoLocations.length > 0 ? (
-                        filteredDepoLocations.map((depo) => (
-                          <tr key={depo.location_id}>
-                            <td>{depo.location}</td>
+                <div className="table-responsive">
+                  <table className="big-table w-50">
+                    <thead>
+                      <tr>
+                        <th>{t("depoLocations", "MainPage")}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {depoLocations.length > 0 ? (
+                        filteredDepoLocations.length > 0 ? (
+                          filteredDepoLocations.map((depo) => (
+                            <tr key={depo.location_id}>
+                              <td>{depo.location}</td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={2} className="text-center">
+                              No matching depots found
+                            </td>
                           </tr>
-                        ))
+                        )
                       ) : (
                         <tr>
                           <td colSpan={2} className="text-center">
-                            No matching depots found
+                            Loading depot locations...
                           </td>
                         </tr>
-                      )
-                    ) : (
-                      <tr>
-                        <td colSpan={2} className="text-center">
-                          Loading depot locations...
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

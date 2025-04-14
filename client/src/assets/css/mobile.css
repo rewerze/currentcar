@@ -109,14 +109,17 @@
     }
 
     .notif-card-content p {
-        max-width: 80%;
+        max-width: 50%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .notif-message {
         margin-top: 5rem;
     }
 
-    .notif-message a {
+    .notif-message a.btn {
         visibility: visible;
     }
 
@@ -227,7 +230,7 @@
         height: auto;
     }
 
-    input not(input[type="radio"]){
+    input:not(input[type="radio"]){
         width: 100% !important;
     }
 
@@ -318,9 +321,7 @@
     }
 
     .star-range input[type="range"] {
-
         --s: 33px;
-
     }
 
     .icon-left a,
@@ -359,6 +360,15 @@
     .contact-img {
         max-height: 100vh !important;
         width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 910px) {
+    .notif-card-content p {
+        max-width: 40%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -505,10 +515,32 @@
     }
 
     .notif-card-content p {
-        max-width: 55%;
+        max-width: 25%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .invoice-container iframe {
         height: 990px !important;
+    }
+
+    .big-table {
+        margin: auto;
+        overflow-y: scroll;
+    }
+
+    .big-table td {
+        width: 100% !important;
+    }
+
+}
+
+@media only screen and (max-width: 390px) {
+    .notif-card-content p {
+        max-width: 20%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
