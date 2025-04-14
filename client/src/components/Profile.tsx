@@ -35,6 +35,10 @@ function Profile() {
     setIsModalOpen(true);
   };
 
+  const isCarActive = (car: CarInfo) => {
+    return (Number(car.car_active) === 1 && !(car as any).deletedcar) && !car.rented && car.verified
+  }
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -83,8 +87,8 @@ function Profile() {
       .then((response) => {
         if (response.status === 200) {
           toast.success(t("carDeleted", "Profile") || "Car deleted successfully");
-          setUploadedCars((prev) => 
-            prev.map((car) => 
+          setUploadedCars((prev) =>
+            prev.map((car) =>
               car.car_id === id ? { ...car, deletedcar: true } : car
             )
           );
@@ -313,7 +317,7 @@ function Profile() {
                 {activeTab === 'uploaded' ? (
                   uploadedCars.length > 0 ? (
                     uploadedCars.map((car, index) => (
-                      <div key={index} className={`profile-car-card`}  onClick={() => (Number(car.car_active) === 1 && !(car as any).deletedcar) && navigate(`/adatlap/${car.car_id}`)}>
+                      <div key={index} className={`profile-car-card`} onClick={() => isCarActive(car) && navigate(`/adatlap/${car.car_id}`)}>
                         <div className="profile-car-card-body bg-dark">
                           <img
                             src={
@@ -328,16 +332,16 @@ function Profile() {
                             {car.car_brand} {car.car_model}
                           </h3>
                           <p>{car.car_description}</p>
-                          <div className={`profile-car-btn` }>
+                          <div className={`profile-car-btn`}>
                             <button
-                              className={`btn badge bg-primary ${(Number(car.car_active) === 0 || (car as any).deletedcar) ? 'disabled' : ''}`}
-                              onClick={(e) => { e.stopPropagation(); (Number(car.car_active) === 1 || !(car as any).deletedcar) && navigate(`/adatlap/edit/${car.car_id}`) }}
+                              className={`btn badge bg-primary ${!(isCarActive(car)) ? 'disabled' : ''}`}
+                              onClick={(e) => { e.stopPropagation(); isCarActive(car) && navigate(`/adatlap/edit/${car.car_id}`) }}
                             >
                               <img src={edit_icon} title="Módosíás" />
                             </button>
                             <button
-                              className={`btn badge bg-danger ${(Number(car.car_active) === 0 || (car as any).deletedcar) ? 'disabled' : ''}`}
-                              onClick={(e) => { e.stopPropagation(); (Number(car.car_active) === 1 || !(car as any).deletedcar) && deleteCar(car.car_id) }}
+                              className={`btn badge bg-danger ${!isCarActive(car) ? 'disabled' : ''}`}
+                              onClick={(e) => { e.stopPropagation(); isCarActive(car) && deleteCar(car.car_id) }}
                             >
                               <img src={delete_icon} title="Törlés" />
                             </button>

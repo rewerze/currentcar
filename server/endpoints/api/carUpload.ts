@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs";
-import { check, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import db from "../../db/connection";
 import { Car } from "../../interfaces/Car";
 import { AuthenticatedRequest } from "../../interfaces/User";
-import { getLocationByName } from "./location";
 
 export const uploadCar = async (
   req: Request,

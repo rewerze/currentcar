@@ -15,8 +15,8 @@ export const carsSearchHandler = async (
     const limit = parseInt(req.query.limit as string) || 12;
     const offset = (page - 1) * limit;
 
-    let query = "SELECT * FROM car WHERE car_active = 1";
-    let countQuery = "SELECT COUNT(*) as total FROM car WHERE car_active = 1";
+    let query = "SELECT * FROM car WHERE car_active = 1 AND rented = 0 AND verified = 1";
+    let countQuery = "SELECT COUNT(*) as total FROM car WHERE car_active = 1 AND rented = 0 AND verified = 1";
     const params: any[] = [];
     const countParams: any[] = [];
 

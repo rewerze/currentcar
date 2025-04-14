@@ -31,4 +31,6 @@ export interface CarInfo {
   extras?: string;
   depo?: string;
   location_id: string;
+  verified: boolean;
+  rented: boolean;
 }

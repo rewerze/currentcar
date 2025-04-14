@@ -160,9 +160,9 @@ function CarData() {
         if (error instanceof AxiosError) {
           toast.error(
             (error.response?.data as { error?: string })?.error ||
-              error.message ||
-              (t("purchaseError", "CarDetail") as string) ||
-              ""
+            error.message ||
+            (t("purchaseError", "CarDetail") as string) ||
+            ""
           );
         } else {
           toast.error("An unknown error occurred.");
@@ -277,11 +277,10 @@ function CarData() {
                       key={index}
                     >
                       <img
-                        src={`${
-                          import.meta.env.PROD
-                            ? "/api"
-                            : "http://localhost:3000/api"
-                        }/uploads/${image}`}
+                        src={`${import.meta.env.PROD
+                          ? "/api"
+                          : "http://localhost:3000/api"
+                          }/uploads/${image}`}
                         alt={`${car.car_brand} ${car.car_model} - ${index + 1}`}
                         className="d-block w-100 car-data-img"
                         onError={(e) => {
@@ -296,11 +295,10 @@ function CarData() {
                       <img
                         src={
                           car.car_id
-                            ? `${
-                                import.meta.env.PROD
-                                  ? "/api"
-                                  : "http://localhost:3000/api"
-                              }/getCarImage?car_id=${car.car_id}`
+                            ? `${import.meta.env.PROD
+                              ? "/api"
+                              : "http://localhost:3000/api"
+                            }/getCarImage?car_id=${car.car_id}`
                             : carImage
                         }
                         alt={`${car.car_brand} ${car.car_model}`}
@@ -419,18 +417,18 @@ function CarData() {
                 onClick={onPurchase}
                 disabled={
                   (user == null ? true : !!(
-                    car.car_active != true ||
+                    car.car_active != true || car.rented != true || car.verified != false ||
                     (car.car_owner && car.car_owner == user?.user_id)
                   ))
                 }
               >
                 {car.car_owner && car.car_owner == user?.user_id
                   ? t("cantRentOwn", "CarDetail")
-                  : car.car_active
-                  ? t("purchase", "CarDetail")
-                  : t("rented", "CarDetail")}
+                  : car.car_active && !car.rented && car.verified
+                    ? t("purchase", "CarDetail")
+                    : t("rented", "CarDetail")}
               </button>
-              
+
             </div>
           </div>
         </div>
@@ -453,11 +451,10 @@ function CarData() {
                     <img
                       src={
                         isLoggedIn
-                          ? `${
-                              import.meta.env.PROD
-                                ? "/api/uploads/profile-pictures/"
-                                : "http://localhost:3000/api/uploads/profile-pictures/"
-                            }${user?.profile_picture}`
+                          ? `${import.meta.env.PROD
+                            ? "/api/uploads/profile-pictures/"
+                            : "http://localhost:3000/api/uploads/profile-pictures/"
+                          }${user?.profile_picture}`
                           : profile
                       }
                       onError={(e) => {
@@ -536,11 +533,10 @@ function CarData() {
                         <img
                           src={
                             comment.profile_picture
-                              ? `${
-                                  import.meta.env.PROD
-                                    ? "/api/uploads/profile-pictures/"
-                                    : "http://localhost:3000/api/uploads/profile-pictures/"
-                                }${comment.profile_picture}`
+                              ? `${import.meta.env.PROD
+                                ? "/api/uploads/profile-pictures/"
+                                : "http://localhost:3000/api/uploads/profile-pictures/"
+                              }${comment.profile_picture}`
                               : profile
                           }
                           alt=""

@@ -29,4 +29,6 @@ export interface Car {
   car_owner: number;
   images: string;
   location_id: string;
+  verified: boolean;
+  rented: boolean;
 }

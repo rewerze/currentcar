@@ -76,11 +76,11 @@ export const CreatePayment = async (
     if (
       ![
         user?.driver_license_expiry != null &&
-          user?.driver_license_number != null,
+        user?.driver_license_number != null,
         user?.user_email != null && Number(user?.u_phone_number) !== 0,
         user?.born_at != null &&
-          new Date().getFullYear() - new Date(user?.born_at).getFullYear() >=
-            17,
+        new Date().getFullYear() - new Date(user?.born_at).getFullYear() >=
+        17,
       ].every(Boolean)
     ) {
       res.status(400).json({
@@ -112,7 +112,7 @@ export const CreatePayment = async (
 
     const car = cars[0];
 
-    if (!car.car_active) {
+    if (!car.car_active || car.rented || !car.verified) {
       res.status(400).json({ error: "Car is not available for rent" });
       return;
     }
@@ -277,7 +277,7 @@ export const captureOrder = async (
         ]
       );
 
-      await db.query("UPDATE car SET car_active = 0 WHERE car_id = ?", [
+      await db.query("UPDATE car SET rented = 1 WHERE car_id = ?", [
         car_id,
       ]);
 
@@ -289,28 +289,27 @@ export const captureOrder = async (
             order.start_date
           ).toLocaleDateString()} to ${new Date(
             order.end_date
-          ).toLocaleDateString()} has been confirmed. Invoice can be accessed <a href="${
-            process.env.FRONTEND_URL
+          ).toLocaleDateString()} has been confirmed. Invoice can be accessed <a href="${process.env.FRONTEND_URL
           }/invoice/${orderId}">here</a>`,
           "unread",
         ]
       );
 
-      
-    const [queryResult] = await db.query<RowDataPacket[]>(
-      `SELECT * FROM car_user WHERE car_id = ?`,
-      [car_id]
-    );
 
-    const [carDetails]: any = await db.query(
-      `SELECT c.*, i.insurance_fee, i.insurance_id
+      const [queryResult] = await db.query<RowDataPacket[]>(
+        `SELECT * FROM car_user WHERE car_id = ?`,
+        [car_id]
+      );
+
+      const [carDetails]: any = await db.query(
+        `SELECT c.*, i.insurance_fee, i.insurance_id
        FROM car c
        JOIN insurance i ON c.insurance_id = i.insurance_id
        WHERE c.car_id = ?`,
-      [car_id]
-    );
+        [car_id]
+      );
 
-    console.log(queryResult)
+      console.log(queryResult)
 
       await db.query(
         `INSERT INTO notifications (

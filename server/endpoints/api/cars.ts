@@ -89,16 +89,16 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
     user.driver_license_expiry != null && user.driver_license_number != null,
     user.user_email != null && Number(user.u_phone_number) !== 0,
     user.born_at != null &&
-      new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
+    new Date().getFullYear() - new Date(user.born_at).getFullYear() >= 17,
   ];
 
   if (
     ![
       user?.driver_license_expiry != null &&
-        user?.driver_license_number != null,
+      user?.driver_license_number != null,
       user?.user_email != null && Number(user?.u_phone_number) !== 0,
       user?.born_at != null &&
-        new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
+      new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
     ].every(Boolean)
   ) {
     res.status(400).json({
@@ -211,7 +211,7 @@ export const rentCar = async (req: Request, res: Response): Promise<void> => {
       ]
     );
 
-    await connection.query("UPDATE car SET car_active = 0 WHERE car_id = ?", [
+    await connection.query("UPDATE car SET rented = 1 WHERE car_id = ?", [
       car_id,
     ]);
 
@@ -394,7 +394,6 @@ export const editCar = async (req: Request, res: Response): Promise<void> => {
       }
     }
 
-    // Prepare update query
     const updateFields: string[] = [];
     const updateValues: any[] = [];
 
