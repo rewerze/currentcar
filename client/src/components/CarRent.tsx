@@ -1,5 +1,16 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect } from "react";
+
 function CarRent() {
-    return(
+    const { t, loadNamespace, loadedNamespaces } = useLanguage();
+
+    useEffect(() => {
+        if (!loadedNamespaces.includes("CarRent")) {
+            loadNamespace("CarRent");
+        }
+    }, [loadedNamespaces, loadNamespace]);
+
+    return (
         <>
             <main className="nav-gap">
                 <h1 className="text-center">Autó bérlés folyamata</h1>
@@ -18,18 +29,18 @@ function CarRent() {
                             <h2 className="text-center">Módosítsd az adataidat!</h2>
                             <p>Az oldalon meg kell felelnie minden felhasználónak néhány követelménynek. Ezeket a fontos adatokat a profilján belül az "Adatok módosítása" gombra kattintva beállíthatja!</p>
                         </div>
-                            <div className="d-flex justify-content-center p-2">
-                                <a href="/kovetelmenyek" className="btn btn-primary w-100 mt-3">Követelmények</a>
-                            </div>
+                        <div className="d-flex justify-content-center p-2">
+                            <a href="/kovetelmenyek" className="btn btn-primary w-100 mt-3">Követelmények</a>
+                        </div>
                     </div>
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Nézz körbe!</h2>                            
+                            <h2 className="text-center">Nézz körbe!</h2>
                             <p>Amint minden követelménynek megfelelt és be van jelentkezve, nézzen körbe az "Összes autó" menüpontban és válasszon magának egy járművet!</p>
                         </div>
-                            <div className="d-flex justify-content-center p-2">
-                                <a href="/osszesauto" className="btn btn-primary w-100 mt-3">Autóink</a>
-                            </div>
+                        <div className="d-flex justify-content-center p-2">
+                            <a href="/osszesauto" className="btn btn-primary w-100 mt-3">Autóink</a>
+                        </div>
                     </div>
                 </div>
             </main>
