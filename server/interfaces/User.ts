@@ -17,6 +17,7 @@ export interface User {
   driver_license_number: string;
   driver_license_expiry: Date;
   profile_picture: string;
+  user_iban: string;
 }
 
 export interface AuthenticatedRequest extends Request {

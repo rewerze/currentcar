@@ -4,7 +4,7 @@ import { validationResult } from "express-validator";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import db from "../../db/connection";
 import { Car } from "../../interfaces/Car";
-import { AuthenticatedRequest } from "../../interfaces/User";
+import { AuthenticatedRequest, User } from "../../interfaces/User";
 
 export const uploadCar = async (
   req: Request,
@@ -12,6 +12,23 @@ export const uploadCar = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    const user: User = (req as AuthenticatedRequest).user;
+    if (
+      ![
+        user?.driver_license_expiry != null &&
+        user?.driver_license_number != null,
+        user?.user_email != null && Number(user?.u_phone_number) !== 0,
+        user?.user_iban != null && user?.user_iban != undefined,
+        user?.born_at != null &&
+        new Date().getFullYear() - new Date(user?.born_at).getFullYear() >= 17,
+      ].every(Boolean)
+    ) {
+      res.status(400).json({
+        error: `User profile is incomplete or invalid for car rental`,
+      });
+      return;
+    }
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       if (req.files && Array.isArray(req.files)) {
