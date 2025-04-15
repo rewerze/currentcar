@@ -117,6 +117,18 @@ export const CreatePayment = async (
       return;
     }
 
+    const availabilityRows = await db.query<RowDataPacket[]>(
+      "SELECT * FROM car_availability WHERE car_id = ? AND available_from <= ? AND available_to >= ?",
+      [car_id, start_date, end_date]
+    );
+
+    if (availabilityRows.length === 0) {
+      res
+        .status(400)
+        .json({ error: "Car is not available for the requested dates" });
+      return;
+    }
+
     const amount = calculateTotalAmount(car, start_date, end_date);
 
     await db.query(`

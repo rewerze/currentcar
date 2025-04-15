@@ -325,9 +325,12 @@ function Profile() {
                             ) : (
                               (car.car_active && !car.verified) ?
                                 <p className="deletedcar-text">Várakozás</p>
-                                : (car.car_active && car.verified) ?
-                                  <p className="deletedcar-text">Aktív</p>
-                                  : null
+                                : (car.car_active && car.rented) ?
+                                  <p className="deletedcar-text">Kibérelve</p>
+                                  :
+                                  (car.car_active && car.verified) ?
+                                    <p className="deletedcar-text">Aktív</p>
+                                    : null
                             )
                           }
                           <img
@@ -343,9 +346,9 @@ function Profile() {
                             {car.car_brand} {car.car_model}
                           </h3>
                           <p>{car.car_description}</p>
-                            {
-                              car.car_active == true && (
-                                <div className={`profile-car-btn`}>
+                          {
+                            car.car_active == true && (
+                              <div className={`profile-car-btn`}>
                                 <button
                                   className={`btn badge bg-primary ${!(isCarActive(car)) ? 'disabled' : ''}`}
                                   onClick={(e) => { e.stopPropagation(); isCarActive(car) && navigate(`/adatlap/edit/${car.car_id}`) }}
@@ -359,8 +362,8 @@ function Profile() {
                                   <img src={delete_icon} title="Törlés" />
                                 </button>
                               </div>
-                              )
-                            }
+                            )
+                          }
                         </div>
                       </div>
                     ))
