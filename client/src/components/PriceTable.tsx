@@ -1,7 +1,16 @@
 import { useEffect } from "react";
 import "../assets/css/modal.css";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function PriceTableModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
+    const { t, loadNamespace, loadedNamespaces } = useLanguage();
+
+    useEffect(() => {
+        if (!loadedNamespaces.includes("PriceTable")) {
+            loadNamespace("PriceTable");
+        }
+    }, [loadedNamespaces, loadNamespace]);
+
     useEffect(() => {
         const handleEsc = (event: KeyboardEvent) => {
             if (event.key === "Escape") onClose();

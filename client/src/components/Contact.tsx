@@ -2,8 +2,18 @@ import mail from "../assets/img/mail.svg";
 import phone from "../assets/img/phone.svg";
 import contact from "../assets/img/contact.png";
 import location from "../assets/img/location.svg";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect } from "react";
 
 function Contact() {
+    const { t, loadNamespace, loadedNamespaces } = useLanguage();
+
+    useEffect(() => {
+        if (!loadedNamespaces.includes("Contact")) {
+            loadNamespace("Contact");
+        }
+    }, [loadedNamespaces, loadNamespace]);
+
     return (
         <main className="nav-gap">
             <div className="row contact">

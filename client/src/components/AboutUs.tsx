@@ -1,4 +1,14 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect } from "react";
+
 function AboutUs() {
+    const { t, loadNamespace, loadedNamespaces } = useLanguage();
+
+    useEffect(() => {
+        if (!loadedNamespaces.includes("AboutUs")) {
+            loadNamespace("AboutUs");
+        }
+    }, [loadedNamespaces, loadNamespace]);
 
     return (
         <main className="nav-gap">
