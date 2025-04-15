@@ -13,39 +13,45 @@ function CarRent() {
     return (
         <>
             <main className="nav-gap">
-                <h1 className="text-center">Autó bérlés folyamata</h1>
+                <h1 className="text-center">{t("title", "CarRent")}</h1>
                 <div className="car-rent">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Jelentkezz be!</h2>
-                            <p>Fontos számunkra, hogy minden felhasználó biztonságosan érezze magát az oldalon és ahhoz hogy ezt biztosítsuk, mindenkinek kötelező létrehoznia egy saját profilt!</p>
+                            <h2 className="text-center">{t("stepOneTitle", "CarRent")}</h2>
+                            <p>{t("stepOneDescription", "CarRent")}</p>
                         </div>
                         <div className="d-flex justify-content-center p-2">
-                            <a href="/register" className="btn btn-primary w-100 mt-3">Profil létrehozása</a>
+                            <a href="/register" className="btn btn-primary w-100 mt-3">
+                                {t("stepOneButton", "CarRent")}
+                            </a>
                         </div>
                     </div>
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Módosítsd az adataidat!</h2>
-                            <p>Az oldalon meg kell felelnie minden felhasználónak néhány követelménynek. Ezeket a fontos adatokat a profilján belül az "Adatok módosítása" gombra kattintva beállíthatja!</p>
+                            <h2 className="text-center">{t("stepTwoTitle", "CarRent")}</h2>
+                            <p>{t("stepTwoDescription", "CarRent")}</p>
                         </div>
                         <div className="d-flex justify-content-center p-2">
-                            <a href="/kovetelmenyek" className="btn btn-primary w-100 mt-3">Követelmények</a>
+                            <a href="/kovetelmenyek" className="btn btn-primary w-100 mt-3">
+                                {t("stepTwoButton", "CarRent")}
+                            </a>
                         </div>
                     </div>
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Nézz körbe!</h2>
-                            <p>Amint minden követelménynek megfelelt és be van jelentkezve, nézzen körbe az "Összes autó" menüpontban és válasszon magának egy járművet!</p>
+                            <h2 className="text-center">{t("stepThreeTitle", "CarRent")}</h2>
+                            <p>{t("stepThreeDescription", "CarRent")}</p>
                         </div>
                         <div className="d-flex justify-content-center p-2">
-                            <a href="/osszesauto" className="btn btn-primary w-100 mt-3">Autóink</a>
+                            <a href="/osszesauto" className="btn btn-primary w-100 mt-3">
+                                {t("stepThreeButton", "CarRent")}
+                            </a>
                         </div>
                     </div>
                 </div>
             </main>
         </>
-    )
+    );
 }
 
 export default CarRent;

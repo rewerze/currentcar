@@ -1,6 +1,7 @@
 import { CarCondition } from "../../enums/Car";
 
 const translations = {
+  viewPrices: "Recommended car prices",
   properties: "Properties",
   carBrand: "Brand",
   carModel: "Model",

@@ -18,9 +18,9 @@ function Contact() {
         <main className="nav-gap">
             <div className="row contact">
                 <div className="col-md contact-text">
-                    <h1 className="text-center">Kapcsolat</h1>
+                    <h1 className="text-center">{t('contact', 'Contact')}</h1>
                     <p className="mt-5 text-center">
-                        Ha bárhol hibát talál az oldalon, kérjük jelezze nekünk az alábbi elérhetőségek valamelyikén:
+                        {t('text', 'Contact')}
                     </p>
                     <table className="contact-table">
                         <tbody>

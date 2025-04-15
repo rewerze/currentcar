@@ -1,6 +1,7 @@
 import { CarCondition } from "../../enums/Car";
 
 const translations = {
+  viewPrices: "Ajánlott autó árak",
   properties: "Tulajdonságai",
   carBrand: "Márka",
   carModel: "Modell",

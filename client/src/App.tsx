@@ -183,9 +183,6 @@ function App() {
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
-                <small className="text-muted mt-1 d-block">
-                  {t("searchByPostcode", "MainPage")}
-                </small>
               </div>
               <div className="col-lg mt-3">
                 <div className="table-responsive">

@@ -12,25 +12,23 @@ function AboutUs() {
 
     return (
         <main className="nav-gap">
-            <h1 className="text-center">Rólunk</h1>
-            <p className="text-center mt-3 mb-5 fs-4">
-                A CurRentCar weboldal és alkamlamazás fejlesztői, akik igyekeznek az oldal tökéletes működésében!
-            </p>
+            <h1 className="text-center">{t("title", "AboutUs")}</h1>
+            <p className="text-center mt-3 mb-5 fs-4">{t("text", "AboutUs")}</p>
             <div className="row aboutus-team">
                 <div className="about-card">
-                    <h2 className="text-center">Kósa Márk</h2>
+                    <h2 className="text-center">Kósa Márk Milán</h2>
                     <p className="text-center"><b>Web · Backend</b></p>
-                    <p className="about-bio">placeholder</p>
+                    <p className="about-bio">{t("kmDesc", "AboutUs")}</p>
                 </div>
                 <div className="about-card">
                     <h2 className="text-center">Suhajda Zsolt Péter</h2>
                     <p className="text-center"><b>Web · Frontend</b></p>
-                    <p className="about-bio">placeholder</p>
+                    <p className="about-bio">{t("szsDesc", "AboutUs")}</p>
                 </div>
                 <div className="about-card">
                     <h2 className="text-center">Dávid Benedek</h2>
-                    <p className="text-center"><b>Asztali alkalmazás</b></p>
-                    <p className="about-bio">placeholder</p>
+                    <p className="text-center"><b>{t("dbJob", "AboutUs")}</b></p>
+                    <p className="about-bio">{t("dbDesc", "AboutUs")}</p>
                 </div>
             </div>
         </main>
