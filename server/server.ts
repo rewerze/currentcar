@@ -199,8 +199,7 @@ export const updateExpiredOrders = async () => {
           )
       `);
     console.log(
-      `Reactivated ${
-        (result as RowDataPacket).affectedRows
+      `Reactivated ${(result as RowDataPacket).affectedRows
       } cars after rental expiry.`
     );
   } catch (error) {
@@ -219,8 +218,7 @@ export const deactivateExpiredAvailability = async () => {
           )
       `);
     console.log(
-      `Deactivated ${
-        (result as RowDataPacket).affectedRows
+      `Deactivated ${(result as RowDataPacket).affectedRows
       } cars due to availability expiration.`
     );
   } catch (error) {
