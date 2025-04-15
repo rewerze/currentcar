@@ -188,6 +188,11 @@ function EditProfile() {
               id="driver_license_expiry"
               max="9999-12-31"
               onChange={handleChange}
+              value={
+                formData.driver_license_expiry
+                  ? new Date(formData.driver_license_expiry).toISOString().split("T")[0]
+                  : ""
+            }
               className="form-control"
             />
 
