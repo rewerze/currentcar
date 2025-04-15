@@ -65,7 +65,7 @@ const CarUpload: React.FC = () => {
         car_description: '',
         image: '',
         car_id: 0,
-        car_price: '',
+        car_price: '0',
         car_active: false,
         insurance_id: 0,
         mileage: 0,
@@ -107,7 +107,7 @@ const CarUpload: React.FC = () => {
     const transmissionTypes = [
         { value: TransmissionType.AUTOMATIC, label: 'automatic' },
         { value: TransmissionType.MANUAL, label: 'manual' },
-        { value: TransmissionType.SEMI_AUTOMATIC, label: 'semi_automatic' },
+        { value: TransmissionType.SEMI_AUTOMATIC, label: 'semiAutomatic' },
         { value: TransmissionType.CVT, label: 'cvt' }
     ];
 
@@ -362,7 +362,7 @@ const CarUpload: React.FC = () => {
                             </div>
 
 
-                            {/* SEAT + DOORS + HOUR + DAILY */}
+                            {/* SEAT + DOORS */}
                             <div className="d-flex justify-content-center gap-3 mt-3 upload-form">
                                 <div className='upload-data'>
                                     <label htmlFor="seats">{t('seats', 'CarUpload')}<span className='text-danger'>*</span></label>

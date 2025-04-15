@@ -754,11 +754,11 @@ details {
 
 .price-table th, .price-table td {
     text-align: center;
-    padding: 1rem;
+    width: 5rem ;
 }
 
 .price-table {
-    width: 70%;
+    width: 100%;
 }
 
 .price-page {
@@ -927,4 +927,25 @@ details {
     text-align: center;
     font-weight: 700;
     color: rgb(224, 0, 0);
+}
+
+.notverified-text {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(224, 134, 0);
+}
+
+.rented-text {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(0, 134, 224);
+}
+
+.active-text {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(20, 117, 11);
 }

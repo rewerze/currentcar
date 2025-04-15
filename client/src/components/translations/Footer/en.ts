@@ -1,7 +1,7 @@
 export default {
     "copyright": "© 2025 CurRentCar, Inc.<br>All rights reserved.",
     "links": "Links",
-    "homepage": "Homepage",
+    "homepage": "Home page",
     "allCars": "All cars",
     "contact": "Contact",
     "aboutUs": "About us",

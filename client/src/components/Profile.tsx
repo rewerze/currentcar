@@ -321,15 +321,15 @@ function Profile() {
                         <div className="profile-car-card-body bg-dark">
                           {
                             !car.car_active ? (
-                              <p className="deletedcar-text">Törölve</p>
+                              <p className="deletedcar-text">{t('deletedCar', 'Profile')}</p>
                             ) : (
                               (car.car_active && !car.verified) ?
-                                <p className="deletedcar-text">Várakozás</p>
+                                <p className="notverified-text">{t('notVerifiedCar', 'Profile')}</p>
                                 : (car.car_active && car.rented) ?
-                                  <p className="deletedcar-text">Kibérelve</p>
+                                  <p className="rented-text">{t('rentedCar', 'Profile')}</p>
                                   :
                                   (car.car_active && car.verified) ?
-                                    <p className="deletedcar-text">Aktív</p>
+                                    <p className="active-text">{t('activeCar', 'Profile')}</p>
                                     : null
                             )
                           }
@@ -353,13 +353,13 @@ function Profile() {
                                   className={`btn badge bg-primary ${!(isCarActive(car)) ? 'disabled' : ''}`}
                                   onClick={(e) => { e.stopPropagation(); isCarActive(car) && navigate(`/adatlap/edit/${car.car_id}`) }}
                                 >
-                                  <img src={edit_icon} title="Módosíás" />
+                                  <img src={edit_icon} title={t('modBtn', 'Profile')} />
                                 </button>
                                 <button
                                   className={`btn badge bg-danger ${!isCarActive(car) ? 'disabled' : ''}`}
                                   onClick={(e) => { e.stopPropagation(); isCarActive(car) && deleteCar(car.car_id) }}
                                 >
-                                  <img src={delete_icon} title="Törlés" />
+                                  <img src={delete_icon} title={t('delBtn', 'Profile')} />
                                 </button>
                               </div>
                             )

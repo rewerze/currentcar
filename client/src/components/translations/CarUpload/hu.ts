@@ -37,7 +37,7 @@ const translations = {
   gas: "gáz",
   automatic: "automata",
   manual: "manuális",
-  "semi-automatic": "félautomata",
+  semiAutomatic: "félautomata",
   CVT: "fokozatmentes",
   purchaseSuccess: "Sikeres vásárlás!",
   fillAllFields: "Töltsd ki az összes mezőt!",
@@ -52,7 +52,7 @@ const translations = {
   recommendedSizes: "(ajánlott arányok: 16:9, fekvő képek)",
   pricing: 'Árazás',
   location: 'Helyszín adatok',
-  fieldsRequired: "A <span className='text-danger'>*</span> jelölésü mezők kitöltése kötelező!"
+  fieldsRequired: "A <span class='text-danger'>*</span> jelölésü mezők kitöltése kötelező!"
 };
 
 export default translations;

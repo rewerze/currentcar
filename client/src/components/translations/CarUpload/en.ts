@@ -37,7 +37,7 @@ const translations = {
   gas: "Gas",
   automatic: "Automatic",
   manual: "Manual",
-  "semi-automatic": "Semi-automatic",
+  semiAutomatic: "Semi-Automatic",
   CVT: "CVT (Continuously Variable Transmission)",
   purchaseSuccess: "Successful Purchase!",
   fillAllFields: "Fill out all the fields!",
@@ -52,7 +52,7 @@ const translations = {
   recommendedSizes: "(recommended sizes: 16:9, landscape images)",
   pricing: "Pricing",
   location: "Location data",
-  fieldsRequired: "The fields marked with <span className='text-danger'>*</span> are mandatory!"
+  fieldsRequired: "The fields marked with <span class='text-danger'>*</span> are mandatory!"
 };
 
 export default translations;
