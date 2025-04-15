@@ -54,14 +54,12 @@ namespace CarRentalAdmin
                 string query = "SELECT user_id, user_name, user_email FROM user WHERE user_active = 1";
                 DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
 
-                // Setup combobox
                 cmbUser.DisplayMember = "Text";
                 cmbUser.ValueMember = "Value";
 
-                // Clear existing items
-                cmbUser.Items.Clear();
 
-                // Add users to combo
+                cmbUser.Items.Clear();
+                //felhasználó hozáadása cmb
                 foreach (DataRow row in dt.Rows)
                 {
                     string text = $"{row["user_name"]} ({row["user_email"]})";
@@ -72,7 +70,6 @@ namespace CarRentalAdmin
                     cmbUser.Items.Add(item);
                 }
 
-                // Select first item if available
                 if (cmbUser.Items.Count > 0)
                 {
                     cmbUser.SelectedIndex = 0;

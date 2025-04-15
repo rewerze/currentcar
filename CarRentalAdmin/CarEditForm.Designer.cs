@@ -65,6 +65,10 @@
             this.numBasePrice = new System.Windows.Forms.NumericUpDown();
             this.cmbLocation = new System.Windows.Forms.ComboBox();
             this.lblPickupLocation = new System.Windows.Forms.Label();
+            this.lblVerified = new System.Windows.Forms.Label();
+            this.chkVerified = new System.Windows.Forms.CheckBox();
+            this.lblRented = new System.Windows.Forms.Label();
+            this.chkRented = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHourlyRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDailyRate)).BeginInit();
@@ -224,7 +228,7 @@
             this.numHourlyRate.Location = new System.Drawing.Point(112, 186);
             this.numHourlyRate.Margin = new System.Windows.Forms.Padding(2);
             this.numHourlyRate.Maximum = new decimal(new int[] {
-            30000,
+            1600000,
             0,
             0,
             0});
@@ -259,7 +263,7 @@
             this.numDailyRate.Location = new System.Drawing.Point(112, 213);
             this.numDailyRate.Margin = new System.Windows.Forms.Padding(2);
             this.numDailyRate.Maximum = new decimal(new int[] {
-            30000,
+            1300000,
             0,
             0,
             0});
@@ -336,7 +340,7 @@
             // 
             this.lblDoors.AutoSize = true;
             this.lblDoors.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblDoors.Location = new System.Drawing.Point(15, 299);
+            this.lblDoors.Location = new System.Drawing.Point(15, 302);
             this.lblDoors.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDoors.Name = "lblDoors";
             this.lblDoors.Size = new System.Drawing.Size(35, 15);
@@ -371,7 +375,7 @@
             // 
             this.lblMileage.AutoSize = true;
             this.lblMileage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblMileage.Location = new System.Drawing.Point(15, 328);
+            this.lblMileage.Location = new System.Drawing.Point(15, 334);
             this.lblMileage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMileage.Name = "lblMileage";
             this.lblMileage.Size = new System.Drawing.Size(101, 15);
@@ -381,7 +385,7 @@
             // numMileage
             // 
             this.numMileage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numMileage.Location = new System.Drawing.Point(120, 326);
+            this.numMileage.Location = new System.Drawing.Point(136, 332);
             this.numMileage.Margin = new System.Windows.Forms.Padding(2);
             this.numMileage.Maximum = new decimal(new int[] {
             1000000,
@@ -413,7 +417,7 @@
             "elektromos",
             "hibrid",
             "gáz"});
-            this.cmbFuelType.Location = new System.Drawing.Point(393, 11);
+            this.cmbFuelType.Location = new System.Drawing.Point(393, 13);
             this.cmbFuelType.Margin = new System.Windows.Forms.Padding(2);
             this.cmbFuelType.Name = "cmbFuelType";
             this.cmbFuelType.Size = new System.Drawing.Size(151, 23);
@@ -484,14 +488,14 @@
             this.cmbInsurance.Location = new System.Drawing.Point(360, 162);
             this.cmbInsurance.Margin = new System.Windows.Forms.Padding(2);
             this.cmbInsurance.Name = "cmbInsurance";
-            this.cmbInsurance.Size = new System.Drawing.Size(151, 23);
+            this.cmbInsurance.Size = new System.Drawing.Size(226, 23);
             this.cmbInsurance.TabIndex = 29;
             // 
             // lblActive
             // 
             this.lblActive.AutoSize = true;
             this.lblActive.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblActive.Location = new System.Drawing.Point(285, 191);
+            this.lblActive.Location = new System.Drawing.Point(367, 194);
             this.lblActive.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblActive.Name = "lblActive";
             this.lblActive.Size = new System.Drawing.Size(34, 15);
@@ -504,7 +508,7 @@
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkActive.Location = new System.Drawing.Point(360, 191);
+            this.chkActive.Location = new System.Drawing.Point(468, 194);
             this.chkActive.Margin = new System.Windows.Forms.Padding(2);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(15, 14);
@@ -515,7 +519,7 @@
             // 
             this.lblImages.AutoSize = true;
             this.lblImages.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblImages.Location = new System.Drawing.Point(285, 215);
+            this.lblImages.Location = new System.Drawing.Point(547, 394);
             this.lblImages.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblImages.Name = "lblImages";
             this.lblImages.Size = new System.Drawing.Size(39, 15);
@@ -525,7 +529,7 @@
             // btnAddImage
             // 
             this.btnAddImage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnAddImage.Location = new System.Drawing.Point(360, 215);
+            this.btnAddImage.Location = new System.Drawing.Point(370, 420);
             this.btnAddImage.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddImage.Name = "btnAddImage";
             this.btnAddImage.Size = new System.Drawing.Size(113, 24);
@@ -540,24 +544,23 @@
             this.lstImages.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lstImages.FormattingEnabled = true;
             this.lstImages.ItemHeight = 15;
-            this.lstImages.Location = new System.Drawing.Point(360, 248);
+            this.lstImages.Location = new System.Drawing.Point(370, 448);
             this.lstImages.Margin = new System.Windows.Forms.Padding(2);
             this.lstImages.Name = "lstImages";
-            this.lstImages.Size = new System.Drawing.Size(226, 94);
+            this.lstImages.Size = new System.Drawing.Size(226, 79);
             this.lstImages.TabIndex = 34;
             this.lstImages.SelectedIndexChanged += new System.EventHandler(this.lstImages_SelectedIndexChanged);
             // 
             // picCarImage
             // 
             this.picCarImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picCarImage.Location = new System.Drawing.Point(219, 242);
+            this.picCarImage.Location = new System.Drawing.Point(85, 405);
             this.picCarImage.Margin = new System.Windows.Forms.Padding(2);
             this.picCarImage.Name = "picCarImage";
-            this.picCarImage.Size = new System.Drawing.Size(136, 114);
+            this.picCarImage.Size = new System.Drawing.Size(281, 122);
             this.picCarImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picCarImage.TabIndex = 35;
             this.picCarImage.TabStop = false;
-            this.picCarImage.Visible = false;
             // 
             // btnSave
             // 
@@ -566,7 +569,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(217, 417);
+            this.btnSave.Location = new System.Drawing.Point(225, 544);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 28);
@@ -582,7 +585,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(314, 417);
+            this.btnCancel.Location = new System.Drawing.Point(320, 544);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
@@ -594,7 +597,7 @@
             // btnRemoveImage
             // 
             this.btnRemoveImage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnRemoveImage.Location = new System.Drawing.Point(477, 215);
+            this.btnRemoveImage.Location = new System.Drawing.Point(487, 420);
             this.btnRemoveImage.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemoveImage.Name = "btnRemoveImage";
             this.btnRemoveImage.Size = new System.Drawing.Size(109, 24);
@@ -620,7 +623,7 @@
             this.numBasePrice.Location = new System.Drawing.Point(112, 158);
             this.numBasePrice.Margin = new System.Windows.Forms.Padding(2);
             this.numBasePrice.Maximum = new decimal(new int[] {
-            50000,
+            5000000,
             0,
             0,
             0});
@@ -642,7 +645,7 @@
             // 
             this.cmbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbLocation.FormattingEnabled = true;
-            this.cmbLocation.Location = new System.Drawing.Point(138, 361);
+            this.cmbLocation.Location = new System.Drawing.Point(136, 372);
             this.cmbLocation.Name = "cmbLocation";
             this.cmbLocation.Size = new System.Drawing.Size(392, 23);
             this.cmbLocation.TabIndex = 40;
@@ -651,18 +654,62 @@
             // 
             this.lblPickupLocation.AutoSize = true;
             this.lblPickupLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblPickupLocation.Location = new System.Drawing.Point(17, 364);
+            this.lblPickupLocation.Location = new System.Drawing.Point(15, 375);
             this.lblPickupLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPickupLocation.Name = "lblPickupLocation";
             this.lblPickupLocation.Size = new System.Drawing.Size(116, 15);
             this.lblPickupLocation.TabIndex = 41;
             this.lblPickupLocation.Text = "Felvétel/leadás helye";
             // 
+            // lblVerified
+            // 
+            this.lblVerified.AutoSize = true;
+            this.lblVerified.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblVerified.Location = new System.Drawing.Point(367, 299);
+            this.lblVerified.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblVerified.Name = "lblVerified";
+            this.lblVerified.Size = new System.Drawing.Size(63, 15);
+            this.lblVerified.TabIndex = 42;
+            this.lblVerified.Text = "Ellenőrzött";
+            // 
+            // chkVerified
+            // 
+            this.chkVerified.AutoSize = true;
+            this.chkVerified.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkVerified.Location = new System.Drawing.Point(468, 302);
+            this.chkVerified.Margin = new System.Windows.Forms.Padding(2);
+            this.chkVerified.Name = "chkVerified";
+            this.chkVerified.Size = new System.Drawing.Size(15, 14);
+            this.chkVerified.TabIndex = 43;
+            this.chkVerified.UseVisualStyleBackColor = true;
+            // 
+            // lblRented
+            // 
+            this.lblRented.AutoSize = true;
+            this.lblRented.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblRented.Location = new System.Drawing.Point(367, 242);
+            this.lblRented.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRented.Name = "lblRented";
+            this.lblRented.Size = new System.Drawing.Size(45, 15);
+            this.lblRented.TabIndex = 44;
+            this.lblRented.Text = "Kiadott";
+            // 
+            // chkRented
+            // 
+            this.chkRented.AutoSize = true;
+            this.chkRented.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkRented.Location = new System.Drawing.Point(468, 242);
+            this.chkRented.Margin = new System.Windows.Forms.Padding(2);
+            this.chkRented.Name = "chkRented";
+            this.chkRented.Size = new System.Drawing.Size(15, 14);
+            this.chkRented.TabIndex = 45;
+            this.chkRented.UseVisualStyleBackColor = true;
+            // 
             // CarEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 456);
+            this.ClientSize = new System.Drawing.Size(600, 583);
             this.Controls.Add(this.cmbLocation);
             this.Controls.Add(this.lblPickupLocation);
             this.Controls.Add(this.btnRemoveImage);
@@ -706,6 +753,10 @@
             this.Controls.Add(this.lblBrand);
             this.Controls.Add(this.numBasePrice);
             this.Controls.Add(this.lblBasePrice);
+            this.Controls.Add(this.chkRented);
+            this.Controls.Add(this.lblRented);
+            this.Controls.Add(this.chkVerified);
+            this.Controls.Add(this.lblVerified);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
@@ -770,5 +821,9 @@
         private System.Windows.Forms.NumericUpDown numBasePrice;
         private System.Windows.Forms.ComboBox cmbLocation;
         private System.Windows.Forms.Label lblPickupLocation;
+        private System.Windows.Forms.Label lblVerified;
+        private System.Windows.Forms.CheckBox chkVerified;
+        private System.Windows.Forms.Label lblRented;
+        private System.Windows.Forms.CheckBox chkRented;
     }
 }

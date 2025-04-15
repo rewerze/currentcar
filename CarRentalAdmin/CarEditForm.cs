@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,6 +49,8 @@ namespace CarRentalAdmin
                 lstImages.Visible = false;
                 picCarImage.Visible = false;
                 lblImages.Visible = false;
+                chkVerified.Checked = false;
+                chkRented.Checked = false;
             }
         }
         private void LoadLocations()
@@ -111,8 +114,8 @@ namespace CarRentalAdmin
             try
             {
                 string query = "SELECT c.*, l.location FROM car c " +
-                              "LEFT JOIN location l ON c.location_id = l.location_id " +
-                              "WHERE c.car_id = " + carId;
+                               "LEFT JOIN location l ON c.location_id = l.location_id " +
+                               "WHERE c.car_id = " + carId;
                 DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
 
                 if (dt.Rows.Count > 0)
@@ -123,10 +126,8 @@ namespace CarRentalAdmin
                     numYear.Value = Convert.ToDecimal(row["car_year"]);
                     cmbType.Text = AppResources.AllTypeEn.Zip(AppResources.AllType, (en, hu) => new { en, hu })
                         .FirstOrDefault(pair => pair.en == row["car_type"].ToString())?.hu ?? row["car_type"].ToString();
-                    //row["car_type"].ToString();
                     cmbCondition.Text = AppResources.AllConditionEn.Zip(AppResources.AllCondition, (en, hu) => new { en, hu })
                         .FirstOrDefault(pair => pair.en == row["car_condition"].ToString())?.hu ?? row["car_condition"].ToString();
-                    //row["car_condition"].ToString();
                     numHourlyRate.Value = Convert.ToDecimal(row["price_per_hour"]);
                     numDailyRate.Value = Convert.ToDecimal(row["price_per_day"]);
                     numBasePrice.Value = Convert.ToDecimal(row["car_price"]);
@@ -136,12 +137,12 @@ namespace CarRentalAdmin
                     numMileage.Value = Convert.ToDecimal(row["mileage"]);
                     cmbFuelType.Text = AppResources.Fuelen.Zip(AppResources.Fuelhu, (en, hu) => new { en, hu })
                         .FirstOrDefault(pair => pair.en == row["fuel_type"].ToString())?.hu ?? row["fuel_type"].ToString();
-                    //row["fuel_type"].ToString();
                     cmbTransmission.Text = AppResources.Transmissionen.Zip(AppResources.Transmissionhu, (en, hu) => new { en, hu })
                         .FirstOrDefault(pair => pair.en == row["transmission_type"].ToString())?.hu ?? row["transmission_type"].ToString();
-                    //row["transmission_type"].ToString();
                     txtDescription.Text = row["car_description"].ToString();
                     chkActive.Checked = Convert.ToBoolean(row["car_active"]);
+                    chkVerified.Checked = Convert.ToBoolean(row["verified"]);
+                    chkRented.Checked = Convert.ToBoolean(row["rented"]);
 
                     // Location beállítása
                     if (row["location"] != DBNull.Value)
@@ -168,7 +169,11 @@ namespace CarRentalAdmin
                             break;
                         }
                     }
-
+                    if (chkRented.Checked) 
+                    {
+                        chkActive.Enabled = false;
+                        chkVerified.Enabled = false;
+                    }
                     // képbetöltés
                     LoadCarImages();
                 }
@@ -219,7 +224,6 @@ namespace CarRentalAdmin
         {
             try
             {
-                // Check if location already exists
                 string checkQuery = "SELECT location_id FROM location WHERE location = @location";
                 Dictionary<string, object> checkParams = new Dictionary<string, object>
                 {
@@ -233,7 +237,6 @@ namespace CarRentalAdmin
                     return Convert.ToInt32(dt.Rows[0]["location_id"]);
                 }
 
-                // Location doesn't exist, create a new one
                 string insertQuery = "INSERT INTO location (location) VALUES (@location)";
                 Dictionary<string, object> insertParams = new Dictionary<string, object>
                 {
@@ -310,7 +313,16 @@ namespace CarRentalAdmin
             {
                 try
                 {
-                    picCarImage.Image = Image.FromFile(carImagePaths[selectedIndex]);
+                    using (WebClient webClient = new WebClient())
+                    {
+                        byte[] imageData = webClient.DownloadData("http://localhost:3000/api/uploads/" + lstImages.Text);
+                        using (var ms = new MemoryStream(imageData))
+                        {
+                            Image image = Image.FromStream(ms);
+
+                            picCarImage.Image = image;
+                        }
+                    } 
                 }
                 catch
                 {
@@ -356,20 +368,22 @@ namespace CarRentalAdmin
                 dynamic selectedInsurance = cmbInsurance.SelectedItem;
                 int insuranceId = Convert.ToInt32(selectedInsurance.Value);
 
-                // Get or create location
+                // helyadat
                 int locationId = CreateOrGetLocation(cmbLocation.Text);
                 if (locationId <= 0)
                 {
-                    MessageBox.Show("Failed to create location record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sikertelen helyadat megadása", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                //query
+                //
                 string query = "INSERT INTO car (car_brand, car_model, car_year, car_type, car_condition, " +
                                "price_per_hour, price_per_day, car_regnumber, seats, number_of_doors, " +
-                               "mileage, fuel_type, transmission_type, car_description, insurance_id, car_active, car_price, location_id) " +
+                               "mileage, fuel_type, transmission_type, car_description, insurance_id, car_active, car_price, location_id, " +
+                               "verified, rented) " +
                                "VALUES (@brand, @model, @year, @type, @condition, @hourRate, @dayRate, @regNumber, " +
-                               "@seats, @doors, @mileage, @fuelType, @transmission, @description, @insurance, @active, @basePrice, @locationId)";
+                               "@seats, @doors, @mileage, @fuelType, @transmission, @description, @insurance, @active, @basePrice, @locationId, " +
+                               "@verified, @rented)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -390,7 +404,9 @@ namespace CarRentalAdmin
                     { "@insurance", insuranceId },
                     { "@active", chkActive.Checked ? 1 : 0 },
                     { "@basePrice", (int)numBasePrice.Value },
-                    { "@locationId", locationId }
+                    { "@locationId", locationId },
+                    { "@verified", chkVerified.Checked ? 1 : 0 },
+                    { "@rented", chkRented.Checked ? 1 : 0 }
                 };
 
                 int rowsAffected = DatabaseOptimizer.ExecuteParameterizedNonQuery(query, parameters);
@@ -446,7 +462,7 @@ namespace CarRentalAdmin
                                "number_of_doors = @doors, mileage = @mileage, fuel_type = @fuelType, " +
                                "transmission_type = @transmission, car_description = @description, " +
                                "insurance_id = @insurance, car_active = @active, car_price = @basePrice, " +
-                               "location_id = @locationId " +
+                               "location_id = @locationId, verified = @verified, rented = @rented " +
                                "WHERE car_id = @id";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -469,6 +485,8 @@ namespace CarRentalAdmin
                     { "@active", chkActive.Checked ? 1 : 0 },
                     { "@basePrice", (int)numBasePrice.Value },
                     { "@locationId", locationId },
+                    { "@verified", chkVerified.Checked ? 1 : 0 },
+                    { "@rented", chkRented.Checked ? 1 : 0 },
                     { "@id", carId }
                 };
 

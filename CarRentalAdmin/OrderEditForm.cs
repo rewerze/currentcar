@@ -154,7 +154,7 @@ namespace CarRentalAdmin
                     TimeSpan duration = dtpEndDate.Value - dtpStartDate.Value;
                     decimal amount = CalculateAmount(selectedCar, duration);
                     numPaymentAmount.Value = amount;
-                    numTaxAmount.Value = amount * 0.15m; // 15% áfa
+                    numTaxAmount.Value = amount * 0.27m; // 27% áfa
                 }
             }
             catch (Exception ex)

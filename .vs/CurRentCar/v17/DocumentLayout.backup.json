@@ -3,31 +3,11 @@
   "WorkspaceRootPath": "D:\\nvmeouterssd\\cur\\CurRentCar\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|D:\\nvmeouterssd\\cur\\CurRentCar\\carrentaladmin\\careditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\careditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\careditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\carmanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\carmanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\ordermanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\ordermanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\ordermanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\ordermanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|D:\\nvmeouterssd\\cur\\CurRentCar\\carrentaladmin\\ordereditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\ordereditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\carmanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\carmanageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|D:\\nvmeouterssd\\cur\\CurRentCar\\carrentaladmin\\careditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|d:\\nvmeouterssd\\cur\\currentcar\\carrentaladmin\\careditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{A00A948D-79AA-4985-BCBB-2C73C2547280}|CarRentalAdmin\\CurRentCar.csproj|solutionrelative:carrentaladmin\\careditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -38,70 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OrderManageForm.cs",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\OrderManageForm.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\OrderManageForm.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\OrderManageForm.cs",
-              "RelativeToolTip": "CarRentalAdmin\\OrderManageForm.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAjwA8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T10:15:45.303Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OrderManageForm.cs [Design]",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\OrderManageForm.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\OrderManageForm.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\OrderManageForm.cs [Design]",
-              "RelativeToolTip": "CarRentalAdmin\\OrderManageForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T10:15:27.482Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CarManageForm.cs",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarManageForm.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\CarManageForm.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarManageForm.cs",
-              "RelativeToolTip": "CarRentalAdmin\\CarManageForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGYAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T10:14:07.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CarManageForm.cs [Design]",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarManageForm.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\CarManageForm.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarManageForm.cs [Design]",
-              "RelativeToolTip": "CarRentalAdmin\\CarManageForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T10:14:05.204Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OrderEditForm.cs [Design]",
-              "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\OrderEditForm.cs",
-              "RelativeDocumentMoniker": "CarRentalAdmin\\OrderEditForm.cs",
-              "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\OrderEditForm.cs [Design]",
-              "RelativeToolTip": "CarRentalAdmin\\OrderEditForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T09:23:44.242Z",
-              "EditorCaption": " [Design]"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -110,21 +28,21 @@
               "RelativeDocumentMoniker": "CarRentalAdmin\\CarEditForm.cs",
               "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarEditForm.cs",
               "RelativeToolTip": "CarRentalAdmin\\CarEditForm.cs",
-              "ViewState": "AgIAAJ0BAAAAAAAAAAAmwLEBAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAASwKsAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T09:26:32.598Z",
+              "WhenOpened": "2025-04-15T09:21:14.429Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "CarEditForm.cs [Design]",
               "DocumentMoniker": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarEditForm.cs",
               "RelativeDocumentMoniker": "CarRentalAdmin\\CarEditForm.cs",
               "ToolTip": "D:\\nvmeouterssd\\cur\\CurRentCar\\CarRentalAdmin\\CarEditForm.cs [Design]",
               "RelativeToolTip": "CarRentalAdmin\\CarEditForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T08:37:17.117Z",
+              "WhenOpened": "2025-04-15T09:21:04.679Z",
               "EditorCaption": " [Design]"
             }
           ]

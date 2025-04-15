@@ -105,7 +105,6 @@ namespace CarRentalAdmin
             CarExtraEditForm addForm = new CarExtraEditForm(carId);
             if (addForm.ShowDialog() == DialogResult.OK)
             {
-                //extra lista refresh
                 LoadCarExtras();
             }
         }
@@ -123,7 +122,6 @@ namespace CarRentalAdmin
             CarExtraEditForm editForm = new CarExtraEditForm(carId, selectedExtraId);
             if (editForm.ShowDialog() == DialogResult.OK)
             {
-                // extra lista refresh
                 LoadCarExtras();
             }
         }
@@ -153,8 +151,6 @@ namespace CarRentalAdmin
                         AppResources.ShowMessage(
                             AppResources.ExtraDeleteSuccess,
                             AppResources.SuccessTitle);
-
-                        // extra lista refresh
                         LoadCarExtras();
                     }
                     else

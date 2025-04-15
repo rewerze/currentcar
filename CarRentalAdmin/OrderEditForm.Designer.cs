@@ -265,7 +265,7 @@
             this.numPaymentAmount.Location = new System.Drawing.Point(121, 220);
             this.numPaymentAmount.Margin = new System.Windows.Forms.Padding(2);
             this.numPaymentAmount.Maximum = new decimal(new int[] {
-            100000,
+            1000000,
             0,
             0,
             0});
@@ -291,7 +291,7 @@
             this.numTaxAmount.Location = new System.Drawing.Point(121, 253);
             this.numTaxAmount.Margin = new System.Windows.Forms.Padding(2);
             this.numTaxAmount.Maximum = new decimal(new int[] {
-            100000,
+            1000000,
             0,
             0,
             0});

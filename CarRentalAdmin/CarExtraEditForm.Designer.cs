@@ -65,7 +65,7 @@
             this.numPrice.Location = new System.Drawing.Point(90, 51);
             this.numPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numPrice.Maximum = new decimal(new int[] {
-            1000,
+            1000000,
             0,
             0,
             0});

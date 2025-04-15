@@ -17,6 +17,11 @@ namespace CarRentalAdmin
         }
         private void CarManageForm_Load(object sender, EventArgs e)
         {
+            // alap értékek
+            cmbCarType.SelectedIndex = 0;
+            cmbCarCondition.SelectedIndex = 0;
+            chkShowUnverified.Checked = false;
+
             LoadCars();
 
             // gombok disabled
@@ -26,17 +31,17 @@ namespace CarRentalAdmin
         }
 
         // autók betöltése adatbázisból
-        private void LoadCars(string searchTerm = "", string carType = "All Types", string condition = "All Conditions")
+        private void LoadCars(string searchTerm = "", string carType = "All Types", string condition = "All Conditions", bool showOnlyUnverified = false)
         {
             try
             {
                 string query = "SELECT c.car_id, c.car_brand, c.car_model, c.car_year, c.car_type, " +
-                               "c.car_condition, CAST(c.car_price AS DECIMAL(10,2)) as car_price, " +
-                               "c.price_per_day, c.price_per_hour, c.car_regnumber, " +
-                               "c.seats, c.mileage, c.car_active, loc.location " +
-                               "FROM car c " +
-                               "JOIN location loc ON c.location_id = loc.location_id " +
-                               "WHERE 1=1 ORDER BY c.car_id";
+                              "c.car_condition, CAST(c.car_price AS DECIMAL(10,2)) as car_price, " +
+                              "c.price_per_day, c.price_per_hour, c.car_regnumber, " +
+                              "c.seats, c.mileage, c.car_active, loc.location, c.verified, c.rented " +
+                              "FROM car c " +
+                              "JOIN location loc ON c.location_id = loc.location_id " +
+                              "WHERE 1=1";
 
                 if (!string.IsNullOrEmpty(searchTerm))
                 {
@@ -53,6 +58,13 @@ namespace CarRentalAdmin
                 {
                     query += " AND c.car_condition = '" + condition + "'";
                 }
+
+                if (showOnlyUnverified)
+                {
+                    query += " AND c.verified = 0";
+                }
+
+                query += " ORDER BY c.car_id";
 
                 DataTable dt = DatabaseOptimizer.ExecuteQuery(query);
                 dgvCars.DataSource = dt;
@@ -74,6 +86,8 @@ namespace CarRentalAdmin
                     dgvCars.Columns["mileage"].HeaderText = AppResources.Mileage[0];
                     dgvCars.Columns["car_active"].HeaderText = AppResources.Active;
                     dgvCars.Columns["location"].HeaderText = AppResources.Location;
+                    dgvCars.Columns["verified"].HeaderText = "Ellenőrzött";
+                    dgvCars.Columns["rented"].HeaderText = "Kiadott";
 
                     // formátum
                     dgvCars.Columns["car_price"].DefaultCellStyle.Format = "C2";
@@ -81,6 +95,9 @@ namespace CarRentalAdmin
                     dgvCars.Columns["price_per_hour"].DefaultCellStyle.Format = "C2";
                     OptimizeDataGridViewColumns();
                 }
+
+                // nincs "validálva"
+                ColorUnverifiedRows();
 
                 // kiválasztás alaphelyzet
                 selectedCarId = 0;
@@ -94,6 +111,30 @@ namespace CarRentalAdmin
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void ColorUnverifiedRows()
+        {
+            foreach (DataGridViewRow row in dgvCars.Rows)
+            {
+                if (row.Cells["verified"] != null && row.Cells["verified"].Value != DBNull.Value)
+                {
+                    bool isVerified = Convert.ToBoolean(row.Cells["verified"].Value);
+                    if (!isVerified)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightYellow;
+                    }
+                }
+
+                if (row.Cells["rented"] != null && row.Cells["rented"].Value != DBNull.Value)
+                {
+                    bool isRented = Convert.ToBoolean(row.Cells["rented"].Value);
+                    if (isRented)
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+                        row.DefaultCellStyle.Font = new Font(dgvCars.Font, FontStyle.Bold);
+                    }
+                }
+            }
+        }
 
         private void OptimizeDataGridViewColumns()
         {
@@ -104,24 +145,31 @@ namespace CarRentalAdmin
             dgvCars.Columns["mileage"].Visible = false;
             dgvCars.Columns["car_type"].Visible = false;
             dgvCars.Columns["car_condition"].Visible = false;
+            dgvCars.Columns["verified"].Width = 70;
+            dgvCars.Columns["rented"].Width = 70;
+
             dgvCars.ScrollBars = ScrollBars.Both;
+        }
+        private void chkShowUnverified_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex], chkShowUnverified.Checked);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex]);
+            LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex], chkShowUnverified.Checked);
         }
 
         private void cmbCarType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex]);
+            LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex], chkShowUnverified.Checked);
         }
 
         private void cmbCarCondition_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Console.WriteLine(cmbCarCondition.SelectedIndex);
             //Console.WriteLine(AppResources.AllConditionEn[cmbCarCondition.SelectedIndex]);
-            LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex]);
+            LoadCars(txtSearch.Text, AppResources.AllTypeEn[cmbCarType.SelectedIndex], AppResources.AllConditionEn[cmbCarCondition.SelectedIndex], chkShowUnverified.Checked);
         }
 
         private void dgvCars_CellClick(object sender, DataGridViewCellEventArgs e)

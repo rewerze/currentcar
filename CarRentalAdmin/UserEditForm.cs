@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -33,7 +34,7 @@ namespace CarRentalAdmin
                 lblPassword.Text = AppResources.PasswordKeepCurrent;
                 btnBrowse.Visible = true;
                 lblProfilePicture.Visible = false;
-                picProfilePicture.Visible = false;
+                picProfilePicture.Visible = true;
             }
             else
             {
@@ -43,7 +44,7 @@ namespace CarRentalAdmin
                 dtpLicenseExpiry.Value = DateTime.Now.AddYears(5);
                 btnBrowse.Visible = false;
                 lblProfilePicture.Visible = false;
-                picProfilePicture.Visible = false;
+                picProfilePicture.Visible = true;
             }
         }
 
@@ -80,13 +81,19 @@ namespace CarRentalAdmin
 
                     //Console.WriteLine("User data loaded successfully for ID: " + userId);
 
-                    if (!string.IsNullOrEmpty(profilePicturePath) && File.Exists(profilePicturePath))
+                    if (!string.IsNullOrEmpty(profilePicturePath))
                     {
                         try
                         {
-                            using (var img = Image.FromFile(profilePicturePath))
+                            using (WebClient webClient = new WebClient())
                             {
-                                picProfilePicture.Image = new Bitmap(img);
+                                byte[] imageData = webClient.DownloadData("http://localhost:3000/api/uploads/profile-pictures/" + profilePicturePath);
+                                using (var ms = new MemoryStream(imageData))
+                                {
+                                    Image image = Image.FromStream(ms);
+
+                                    picProfilePicture.Image = image;
+                                }
                             }
                         }
                         catch (Exception ex)
