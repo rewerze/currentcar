@@ -106,7 +106,7 @@ export const uploadCar = async (
         [
           brand,
           model,
-          0,
+          1,
           condition,
           year,
           carType,

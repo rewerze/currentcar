@@ -417,7 +417,7 @@ function CarData() {
                 onClick={onPurchase}
                 disabled={
                   (user == null ? true : !!(
-                    car.car_active != true || car.rented != true || car.verified != false ||
+                    car.car_active != true || car.rented == true || car.verified == false ||
                     (car.car_owner && car.car_owner == user?.user_id)
                   ))
                 }

@@ -317,8 +317,19 @@ function Profile() {
                 {activeTab === 'uploaded' ? (
                   uploadedCars.length > 0 ? (
                     uploadedCars.map((car, index) => (
-                      <div key={index} className={`profile-car-card`} onClick={() => isCarActive(car) && navigate(`/adatlap/${car.car_id}`)}>
+                      <div key={index} className={`profile-car-card ${!car.car_active && 'deletedcar'}`} onClick={() => isCarActive(car) && navigate(`/adatlap/${car.car_id}`)}>
                         <div className="profile-car-card-body bg-dark">
+                          {
+                            !car.car_active ? (
+                              <p className="deletedcar-text">Törölve</p>
+                            ) : (
+                              (car.car_active && !car.verified) ?
+                                <p className="deletedcar-text">Várakozás</p>
+                                : (car.car_active && car.verified) ?
+                                  <p className="deletedcar-text">Aktív</p>
+                                  : null
+                            )
+                          }
                           <img
                             src={
                               car.car_id
@@ -332,20 +343,24 @@ function Profile() {
                             {car.car_brand} {car.car_model}
                           </h3>
                           <p>{car.car_description}</p>
-                          <div className={`profile-car-btn`}>
-                            <button
-                              className={`btn badge bg-primary ${!(isCarActive(car)) ? 'disabled' : ''}`}
-                              onClick={(e) => { e.stopPropagation(); isCarActive(car) && navigate(`/adatlap/edit/${car.car_id}`) }}
-                            >
-                              <img src={edit_icon} title="Módosíás" />
-                            </button>
-                            <button
-                              className={`btn badge bg-danger ${!isCarActive(car) ? 'disabled' : ''}`}
-                              onClick={(e) => { e.stopPropagation(); isCarActive(car) && deleteCar(car.car_id) }}
-                            >
-                              <img src={delete_icon} title="Törlés" />
-                            </button>
-                          </div>
+                            {
+                              car.car_active == true && (
+                                <div className={`profile-car-btn`}>
+                                <button
+                                  className={`btn badge bg-primary ${!(isCarActive(car)) ? 'disabled' : ''}`}
+                                  onClick={(e) => { e.stopPropagation(); isCarActive(car) && navigate(`/adatlap/edit/${car.car_id}`) }}
+                                >
+                                  <img src={edit_icon} title="Módosíás" />
+                                </button>
+                                <button
+                                  className={`btn badge bg-danger ${!isCarActive(car) ? 'disabled' : ''}`}
+                                  onClick={(e) => { e.stopPropagation(); isCarActive(car) && deleteCar(car.car_id) }}
+                                >
+                                  <img src={delete_icon} title="Törlés" />
+                                </button>
+                              </div>
+                              )
+                            }
                         </div>
                       </div>
                     ))

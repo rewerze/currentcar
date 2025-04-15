@@ -3,6 +3,12 @@ import bcrypt from "bcrypt";
 import db from "../../db/connection";
 import { AuthenticatedRequest, User } from "../../interfaces/User";
 
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+function isValidPassword(password: string): boolean {
+  return PASSWORD_REGEX.test(password);
+}
+
 export const resetPasswordHandler = async (
   req: Request,
   res: Response
@@ -31,6 +37,11 @@ export const resetPasswordHandler = async (
     res.status(400).json({ error: "A két jelszó nem egyezik!" });
     return;
   }
+
+  if(!isValidPassword(newPassword)) {
+    res.status(400).json({ error: "A jelszónak legalább 8 karakter hosszúnak kell lennie, és tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert." });
+    return;
+  } 
 
   try {
     const userEmail = (req as AuthenticatedRequest).user?.user_email;
