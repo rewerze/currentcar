@@ -34,11 +34,11 @@ namespace CarRentalAdmin
             if (orderId > 0)
             {
                 LoadOrderData();
-                this.Text = "Edit Order";
+                this.Text = "Rendelés szerkesztése";
             }
             else
             {
-                this.Text = "Add New Order";
+                this.Text = "Rendelés hozzáadása";
                 //alapértelmezett értékek
                 cmbStatus.SelectedIndex = 0;
                 cmbPaymentStatus.SelectedIndex = 0;
