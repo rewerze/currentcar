@@ -62,7 +62,7 @@ function SecurityCarDelete({
               {t("decline", "Security")}
             </button>
             <button className="btn btn-danger w-50" onClick={handleSubmit}>
-              {t("accept", "Security")}
+              {t("acceptcar", "Security")}
             </button>
           </div>
         </div>

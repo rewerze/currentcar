@@ -3,4 +3,5 @@ export default {
   confirmDeleteCar: "Are you sure you want to delete this car?",
   decline: "No, i don't want to.",
   accept: "Yes, delete my account.",
+  acceptcar: "Yes, delete this car."
 };
