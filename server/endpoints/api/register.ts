@@ -34,7 +34,7 @@ export const registerHandler = async (
     }
 
     if(!isValidPassword(password)) {
-      res.status(400).json({ error: "A jelszónak legalább 8 karakter hosszúnak kell lennie, és tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert." });
+      res.status(400).json({ error: "A jelszónak legalább 8 karakter hosszúnak kell lennie, csak az angol ábécé karaktereit használhatja, és tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert." });
       return;
     } 
 
