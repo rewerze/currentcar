@@ -29,7 +29,7 @@ const translations = {
   notVerifiedCar: "Hitelesítésre vár",
   rentedCar: "Kibérelve",
   activeCar: "Aktív",
-  modBtn: "Módosítás",
+  modBtn: "Szerkesztés",
   delBtn: "Törlés",
 };
 
