@@ -107,6 +107,7 @@ function ProfilePicture() {
 
       fetchUser()
       toast.success("Profilkép sikeresen feltöltve!");
+      navigate("/profile");
     } catch (error) {
       console.error("Hiba a feltöltés során:", error);
       toast.error("Hiba történt a feltöltés során");
